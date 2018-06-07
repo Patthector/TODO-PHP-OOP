@@ -16,12 +16,12 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 	# READ TODO
 	if(!empty($_GET["id"])){
 		# this section of the code is getting an ID as possible todo's ID
-		# and retriving from the database. 
+		# and retriving from the database.
 		# If that action is impossible cuz the ID is invalid or any other ERR!
 		# the user will be sent to 'myTodos.php' with an err feedback.
 		$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-		$todo = Todo::getTodo($id); 
-		$collections = Collection::getCollections(); 
+		$todo = Todo::getTodo($id);
+		$collections = Collection::getCollections();
 		if($todo){# if we have a todo, set the title heading with the TODO's name
 			$title_heading = $todo["name"];
 		} else{
@@ -53,17 +53,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				$message = "Unable to delete TODO";
 			}
 		} else{
-			$message = "Unable to delete TODO";			
+			$message = "Unable to delete TODO";
 		}
 		header("Location:/TODO-PHP-OOP/views/mytodos.php?msg=" . $message);exit;
 	}
 	else if(!empty($_POST["edit"])){
 
 		$id = filter_input(INPUT_POST, "edit", FILTER_SANITIZE_NUMBER_INT);
-		$level = $_POST["level"];		
+		$level = $_POST["level"];
 		$description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
 		$collection = filter_input(INPUT_POST, "collection", FILTER_SANITIZE_NUMBER_INT);
-		
+
 		if(!empty($_POST["tags"])){
 			$tags = filter_input(INPUT_POST, "tags", FILTER_SANITIZE_STRING);
 			$tags = explode(" ", $tags);
@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			#							 OR=> keep going with the TODO creation
 			if(empty($name)){
 				$message = "A TITLE must be given";
-			} else{ 
+			} else{
 				$id = Todo::updateTodo( $id,$name, $description, $collection, $tags, 1, $level);
 				header("Location: /TODO-PHP-OOP [with JS]/views/todo.php?id=" . $id);exit;
 			}
@@ -88,6 +88,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 }
 
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/header.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/basic-header.php";
 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/todo.php";
 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/footer.php";

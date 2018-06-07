@@ -1,15 +1,14 @@
 
-<main role="main" class="inner cover">
     <!-- EDITE MODE BUTTON --> <!-- remember to add this in its own template -->
     <button class = "btn btn-danger" id = "todo_edit_mode">EDIT MODE</button>
-    <div>
+    <div class = "todo__todo_container">
         <form action = "" method="post" class = "editMode_on" id = "editModeForm" style = "display: none;">
             <input type = "hidden" name = "edit" <?php echo "value=" . $todo["id"];  ?> />
             <input type = "submit" value = "SAVE" class = "btn btn-sm btn-success" />
             <button id = "button_form_cancel" class = "btn btn-sm btn-default">CANCEL</button>
             <div class = "form-group">
                 <div class = "form-control">
-                    <input type = "text" class = "form-control" id = "edit_mode_todo_title" name = "name" 
+                    <input type = "text" class = "form-control" id = "edit_mode_todo_title" name = "name"
                     <?php
                     echo "value = '" . $title_heading . "'";
                     ?>
@@ -17,7 +16,7 @@
                 </div>
                 <div class = "form-control">
                     <select name = "level">
-                        <?php 
+                        <?php
                         foreach(array(1,2,3,4,5) as $i){
                             if(!empty($level) && $i == $level){
                                 echo "<option value = $i selected>Level $i</option>";
@@ -31,14 +30,14 @@
 
                 <div class = "form-control">
                     <select name = "collection">
-                        <?php 
+                        <?php
                         foreach ( $collections as $collection ) {
 
                             if( $collection["id"] == $todo["id_collection"] ){
                                 echo "<option value=" . $collection["id"] . " selected>" . $collection["name"] . "</option>";
                             } else{
                                 echo "<option value=" . $collection["id"] . ">" . $collection["name"] . "</option>";
-                            }                            
+                            }
                         }
                         ?>
                     </select>
@@ -54,12 +53,15 @@
 
             </div>
         </form>
-    </div>
 
 	<!-- MESSAGE-STATUS -->
 	<?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/message.php"; ?>
-    	<h1 class="cover-heading editMode_off" id = "todo_title"><?php if( !empty($title_heading) ) { echo $title_heading; } ?></h1>
-
+    	<div class = "todo__todo_title_container">
+        <div class = "todo__pill_category">
+          <span class = "todo__pill_category_item">Library <a href = "#" class = "todo__pill_category-link">Name</a></span>
+        </div>
+        <h1 class="editMode_off" id = "todo_title"><span>-level-</span><?php if( !empty($title_heading) ) { echo $title_heading; } ?></h1>
+      </div>
     	<?php
     	if(!empty($todo)){ # we are trying to READ a TODO
     		$collection = Collection::getCollection($todo["id_collection"]); # get the COLLECTION of the TODO
@@ -89,4 +91,5 @@
 	    			<a class = \"btn btn-sm btn-primary\" href = \"./createtodo.php\"> Create TODO </a>
 	    		</div>";
     	}
-    	
+      ?>
+    </div>

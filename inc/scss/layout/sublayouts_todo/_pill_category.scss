@@ -1,0 +1,21 @@
+
+.todo__pill_category{
+  text-align:right;
+  padding-top: 18px;
+  padding-right: 24px;
+
+  &_item{
+    border: .1px solid $sapphire;
+    border-radius: 24px;
+    padding: 6px 3px 6px 9px;
+    text-transform: uppercase;
+    color:$white;
+    background-color: $sapphire;
+  }
+  &-link{
+    color:$black;
+    background-color:$gallery;
+    padding: 3px 8px 3px 6px;
+    border-radius: 0 24px 24px 0;
+  }
+}

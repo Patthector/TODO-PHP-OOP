@@ -1,0 +1,6 @@
+
+.todo__todo_container{
+  position:relative;
+  border-radius: 10px 10px 0 0;
+  @include todo__container-shadow;
+}

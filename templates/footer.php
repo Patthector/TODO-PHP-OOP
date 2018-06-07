@@ -1,3 +1,4 @@
+</div>
 </main>
 
       <footer class="mastfoot mt-auto">
@@ -5,7 +6,7 @@
           <p>All Rights Reserved.  <a href="https://getbootstrap.com/">by Pattor</a>, <?php echo date("Y");?>.</p>
         </div>
       </footer>
-    
+
 
 
     <!-- Bootstrap core JavaScript

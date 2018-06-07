@@ -141,3 +141,7 @@
 // @usage - `@include invisible`
 
 @mixin invisible { visibility: hidden; }
+
+@mixin todo__container-shadow{
+  box-shadow: 0px 0px 12px $alto;
+}

@@ -184,7 +184,7 @@ input[type="checkbox"], input[type="radio"] {
 @viewport {
   width: device-width; }
 html {
-  background-color: #fff;
+  background-color: #ededed;
   box-sizing: border-box;
   height: 100%; }
 
@@ -193,7 +193,7 @@ html {
 
 body {
   -webkit-font-smoothing: antialiased;
-  color: #484c55;
+  color: #808080;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   min-height: 100%;
   overflow-x: hidden;
@@ -201,7 +201,7 @@ body {
 
 a {
   background: transparent;
-  color: #c69;
+  color: #303f9f;
   text-decoration: none;
   transition: color .2s; }
 
@@ -217,6 +217,35 @@ h5,
 h6 {
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-weight: normal; }
+
+.todo__main-background {
+  background-color: #ededed; }
+
+.todo__todo_container {
+  position: relative;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0px 0px 12px #cfcfcf; }
+
+.todo__pill_category {
+  text-align: right;
+  padding-top: 18px;
+  padding-right: 24px; }
+  .todo__pill_category_item {
+    border: 0.1px solid #303f9f;
+    border-radius: 24px;
+    padding: 6px 3px 6px 9px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #303f9f; }
+  .todo__pill_category-link {
+    color: #000;
+    background-color: #ededed;
+    padding: 3px 8px 3px 6px;
+    border-radius: 0 24px 24px 0; }
+
+.todo__todo_title_container {
+  background-color: #fff;
+  border-radius: 10px 10px 0 0; }
 
 @media print {
   *:before, *:after {
