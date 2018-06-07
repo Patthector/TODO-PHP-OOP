@@ -14,7 +14,7 @@
 	<link href =" <?php echo "/TODO-PHP-OOP [with JS]/vendor/css/bootstrap.min.css"; ?>" rel="stylesheet" crossorigin="anonymous">
 	<link href = "<?php echo "/TODO-PHP-OOP [with JS]/inc/css/styles.css"; ?>" rel="stylesheet" crossorigin="anonymous">
 
-	<!-- Favicons 
+	<!-- Favicons
 	<link rel="apple-touch-icon" href="/docs/4.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 	<link rel="icon" href="/docs/4.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 	<link rel="icon" href="/docs/4.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -51,7 +51,7 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
-          <h3 class="masthead-brand"><a href ="/TODO-PHP-OOP [with JS]/">Stick it!</a></h3>
+          <h3 class="masthead-brand"><a href ="/TODO-PHP-OOP [with JS]/"><?php include "../inc/logo.html"; ?></a></h3>
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link" href="/TODO-PHP-OOP [with JS]/views/mytodos.php">My TODO's</a>
             <a class="nav-link" href="#">Log out</a>
