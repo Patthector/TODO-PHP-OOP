@@ -4,56 +4,52 @@
 // descriptive colors
 // =============
 
-$hopbush:                   #c69;
-$bouquet:                   #b37399;
-$venus:                     #998099;
-$patina:                    #699;
-$nebula:                    #d2e1dd;
 $white:                     #fff;
-$dawn-pink:                 #f2ece4;
-$wafer:                     #e1d7d2;
-$iron:                      #dadbdf;
-$regent-grey:               #808c99;
-$pale-sky:                  #6b717f;
-$midnight-blue:             #036;
+$sapphire:                  #303f9f;
+$cornflower-blue:           #4285f4;
+$tomato:                    #ff4444;
 $black:                     #000;
+
+// gray tones
+//===========
+$gallery:                   #ededed;
+$alto:                      #cfcfcf;
+$gray:                      #808080;
+
+// night efect
+//============
+$tundora:                   #444444;
+$mine-shaft:                #333333;
+$dark-night:                #212121;
+$cod-gray:                  #1a1a1a;
 
 // main color palette
 // =============
-$color-primary:             $hopbush;
-$color-secondary:           $bouquet;
-$color-accent:              $patina;
-$color-shadow:              rgba($black, .125);
-$color-note:                #666;
+$color-primary:             $sapphire;
+$color-secondary:           $cornflower-blue;
+$color-contrast:            $tomato;
+
 
 // Common colors
-$color-background:          $white;
-$color-background-shade:    $iron;
-$color-background-invert:   $hopbush;
-$color-text:                darken($pale-sky, 15);
-$color-text-weak:           $regent-grey;
-$color-text-strong:         $midnight-blue;
-$color-text-heading:        $regent-grey;
-$color-text-invert:         rgba($color-background, .75);
-$color-text-strong-invert:  $color-background;
+$color-background:          $gallery;
+$color-background-invert:   $tundora;
+$color-text:                $gray;
+$color-text-weak:           $gallery;
+$color-text-strong:         $dark-night;
+$color-text-heading:        $sapphire;
+$color-text-contrast-heading:$white;
+
+
 
 // Links
-$color-link:                $color-primary;
-$color-link-hover:          $midnight-blue;
-$color-link-visited:        $bouquet;
+//======
+$color-link:                $sapphire;
 
-// Code
-$color-code:                #333;
-$color-code-background:     #f3f3f3;
-$color-pre:                 #d4d4d4;
-$color-pre-background:      #333;
 
-// Selections
-$color-selection:           #b3d4fc;
-
-// Messages
-$color-message:             #f4ecbb;
-$color-success:             #2cde2c;
-$color-warning:             #cf8600;
-$color-important:           #d00;
-$color-notice:              #66b;
+// Level of Importance
+//=====================
+$level-1:                   $gallery;
+$level-2:                   #007e33;
+$level-3:                   #ff8800;
+$level-4:                   $tomato;
+$level-5:                   #9933cc;

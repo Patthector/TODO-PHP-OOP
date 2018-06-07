@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 }
 
 
-include "templates/header.php";
+include "templates/basic-header.php";
 ?>
 
   <main role="main" class="inner cover">
@@ -39,6 +39,6 @@ include "templates/header.php";
       <a href="views/createtodo.php" class="btn btn-lg btn-secondary"> New TODO</a>
     </p>
 
-<?php 
+<?php
 
 include "templates/footer.php";

@@ -48,10 +48,9 @@
 
   <body class="text-center">
 
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
-          <h3 class="masthead-brand"><a href ="/TODO-PHP-OOP [with JS]/"><?php include "../inc/logo.html"; ?></a></h3>
+          <h3 class="masthead-brand"><a href ="/TODO-PHP-OOP [with JS]/"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/logo.html"; ?></a></h3>
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link" href="/TODO-PHP-OOP [with JS]/views/mytodos.php">My TODO's</a>
             <a class="nav-link" href="#">Log out</a>

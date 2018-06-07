@@ -5,7 +5,7 @@
           <p>All Rights Reserved.  <a href="https://getbootstrap.com/">by Pattor</a>, <?php echo date("Y");?>.</p>
         </div>
       </footer>
-    </div>
+    
 
 
     <!-- Bootstrap core JavaScript
