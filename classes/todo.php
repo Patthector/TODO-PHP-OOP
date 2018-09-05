@@ -1,7 +1,7 @@
 <?php
 
-# This is TODO object, which has the next 
-# properties: 
+# This is TODO object, which has the next
+# properties:
 #------------
 # todo_name
 # todo_body
@@ -17,14 +17,14 @@
 # updateTodo($id, $name = null, $description = null, $id_collection = null)
 
 /**
- * 
+ *
  */
-class Todo 
+class Todo
 {
 	private $name;
 	private $description;
 	private $id_collection;
-	
+
 	function __construct($name, $description = null, $id_collection = null)
 	{
 		$this->name = $name;
@@ -44,7 +44,7 @@ class Todo
 	public function getIdCollection(){
 		# if the value is not set I dont want to return anything
 		if(is_null($this->id_collection))return;
-		else{ 
+		else{
 			return $this->id_collection;
 		}
 	}
@@ -57,20 +57,20 @@ class Todo
 		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php");
 		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/tag.php";
 		$name = strtolower($name);
-			
-		$sql = "INSERT INTO todo_app_todos VALUES(NULL, ?, ?, CURRENT_TIMESTAMP(), NULL, ?, ?, ?)";		
+
+		$sql = "INSERT INTO todo_app_todos VALUES(NULL, ?, ?, CURRENT_TIMESTAMP(), NULL, ?, ?, ?)";
 
 		try{
 			$db->query("SET FOREIGN_KEY_CHECKS=0");
 			$results = $db->prepare( $sql );
 			$results->bindParam( 1, $name, PDO::PARAM_STR);
 			$results->bindParam( 2, $description, PDO::PARAM_STR);
-			$results->bindParam( 3, $id_collection, PDO::PARAM_INT );			
+			$results->bindParam( 3, $id_collection, PDO::PARAM_INT );
 			$results->bindParam( 4, $id_user, PDO::PARAM_INT );
 			$results->bindParam( 5, $level, PDO::PARAM_INT );
 
 			$results->execute();
-			$db->query("SET FOREIGN_KEY_CHECKS=1");		
+			$db->query("SET FOREIGN_KEY_CHECKS=1");
 
 		} catch ( Exception $e ){
 			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
@@ -81,11 +81,12 @@ class Todo
 		#
 		# $tags which is an array
 		# iterate for the array and in each tag check the next possibilities
-		
-		$id_todo = self::getTodoByName( $name )["id"];
-		Tag::addingTodoTagRelationship( $id_todo, $tags );
 
-		return $id_todo;	
+		$id_todo = self::getTodoByName( $name )[0]["id"];
+		if(!empty($tags)){var_dump($tags);
+				Tag::addingTodoTagRelationship( $id_todo, $tags );
+		}
+		return $id_todo;
 	}
 
 	public static function getTodo($id){
@@ -117,18 +118,17 @@ class Todo
 		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
 		$name = strtolower($name);
 
-		$sql = "SELECT * FROM todo_app_todos WHERE name = ?";
+		$sql = "SELECT * FROM todo_app_todos WHERE name LIKE ?";
 
 		try{
 			$result = $db->prepare($sql);
-			$result->bindParam(1, $name, PDO::PARAM_STR);
+			$result->bindValue(1, "%".$name."%", PDO::PARAM_STR);
 			$result->execute();
 		}catch (Exception $e){
 			echo "Bad query in '" . __METHOD__ . "', " . $e->getMessage();
 			return false;
 		}
-
-		return $result->fetch(PDO::FETCH_ASSOC);
+		return $result->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public static function getTodosByFatherId( $id ){
@@ -141,7 +141,7 @@ class Todo
 			$result->bindParam(1, $id, PDO::PARAM_INT);
 			$result->execute();
 
-		} catch(Exception $e){
+		} catch(Exception $e){ 
 			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
 			return false;
 		}
@@ -154,7 +154,7 @@ class Todo
 		require_once($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/classes/tag.php");
 
 		# get the $id_tag for a couple of checks
-		$ids_tag = Tag::getIdTagByIdTodo( $id );		
+		$ids_tag = Tag::getIdTagByIdTodo( $id );
 		# Then delete the todo_tag relationship
 		Tag::deleteTodoTagRelation( $id );
 
@@ -169,7 +169,7 @@ class Todo
 		}catch (Exception $e){
 			echo "Bad query in '" . __METHOD__ . "', " . $e->getMessage();
 			return false;
-		}		
+		}
 
 		# check if the tag is still present in TABLE todo_app_todo_tag
 		# ---> if it's that means the tag has a relationship with another TODO and cannot be deleted BUT
@@ -180,10 +180,29 @@ class Todo
 
 				Tag::deleteTagById( $tag["id_tag"] );
 			}
-		}	
-		
+		}
+
 		return true;
-	}	
+	}
+
+	public static function moveTodo($id_todo, $id_collection){
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+
+		$sql = "UPDATE todo_app_todos SET id_collection = ? WHERE id = ?";
+
+		try{
+			$db->query("SET FOREIGN_KEY_CHECKS=0");
+			$result = $db->prepare($sql);
+			$result->bindParam(1, $id_collection, PDO::PARAM_INT);
+			$result->bindParam(2, $id_todo, PDO::PARAM_INT);
+			$result->execute();
+			$db->query("SET FOREIGN_KEY_CHECKS=1");
+		}catch (Exception $e){
+			echo "Bad query in '" . __METHOD__ . "', " . $e->getMessage();
+			return false;
+		}
+		return true;
+	}
 
 	public static function updateTodo( $id, $name = null, $description = null, $id_collection = null, $tags = null, $id_user = null, $level )
 	{
@@ -194,11 +213,11 @@ class Todo
 		//TODOS
 		$todo = self::getTodo( $id );
 		$updateTodo = array(
-						"id"=>$id, 
-						"name"=>$name, 
-						"description"=>$description, 
-						"created_date"=>NULL, 
-						"updated_date"=>NULL, 
+						"id"=>$id,
+						"name"=>$name,
+						"description"=>$description,
+						"created_date"=>NULL,
+						"updated_date"=>NULL,
 						"id_collection"=>$id_collection,
 						"id_user"=>$id_user,
 						"level"=>$level,
@@ -216,27 +235,27 @@ class Todo
 			$arrayTag[] = Tag::getTag( $t["id_tag"] )["name"];#get the tag_name using the $id_tag
 		}
 
-		$tagsComparation = compareArrays($tags, $arrayTag);#compare the $tags array given by the user with the array $arrayTag retrived by the DB
-		if( !$tagsComparation ){# if the comparation faild, this means the tags field was changed
+		$tagsComparation = compareArrays($tags, $arrayTag);#compare the $tags array given by the user with the array $arrayTag retrived from the DB
+		if( !$tagsComparation ){# if the comparation field, this means the tags field was changed
 			Tag::updateTag( $id, $tags );
 		}
-		
-		$sql = "UPDATE todo_app_todos SET name = ?, description = ?, updated_date = CURRENT_TIMESTAMP(), id_collection = ? , level = ? WHERE id = ?";		
+
+		$sql = "UPDATE todo_app_todos SET name = ?, description = ?, updated_date = CURRENT_TIMESTAMP(), id_collection = ? , level = ? WHERE id = ?";
 
 		try{
 			$results = $db->prepare($sql);
 			$results->bindValue(1, $updateTodo["name"], PDO::PARAM_STR);
 			$results->bindValue(2, $updateTodo["description"], PDO::PARAM_STR);
-			$results->bindValue(3, $updateTodo["id_collection"], PDO::PARAM_INT);	
+			$results->bindValue(3, $updateTodo["id_collection"], PDO::PARAM_INT);
 			$results->bindValue(4, $updateTodo["level"], PDO::PARAM_INT);
 			$results->bindValue(5, $updateTodo["id"], PDO::PARAM_INT);
-			$results->execute();		
+			$results->execute();
 
 		} catch (Exception $e){
 			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
 			return false;
 		}
-		return $id;	
+		return $id;
 	}
 
 }

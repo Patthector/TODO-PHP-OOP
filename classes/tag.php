@@ -1,11 +1,11 @@
 <?php
 /**
- * 
+ *
  */
 class Tag
 {
 	private $name;
-	
+
 	function __construct($name)
 	{
 		$this->name = $name;
@@ -14,8 +14,7 @@ class Tag
 	function getName(){
 		return $this->name;
 	}
-
-	public function addTag( $tag ){
+	public static function addTag( $tag ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
 		$tag = strtolower( $tag );
 
@@ -28,7 +27,7 @@ class Tag
 
 		} catch( Exception $e){
 			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
-			return false; 
+			return false;
 		}
 		return true;
 	}
@@ -38,9 +37,8 @@ class Tag
 		# 1-check if "tags[i]" exists on the todo_app_tags TABLE
 		#   ----> if does, retrive the ID
 		#   ----> if does NOT, add it on th TABLE
-		
+
 		foreach($tags as $t){
-			
 			$existTag = self::existTag( $t );
 			if( $existTag ){ # TRUE => the TAG exist
 				$id_tag = $existTag["id"];
@@ -48,8 +46,9 @@ class Tag
 			} else{ # the TAG does exist
 				#then added on TABLE tag
 				self::addTag( $t );
-				$id_tag = self::getTagByName( $t )["id"];
-			}				
+				$id_tag = self::getLastTag( )["id"];
+				var_dump($id_tag);
+			}
 			# add the pair id_todo-id_tag to the table "todo_tag"
 			$sql = "INSERT INTO todo_app_todo_tag ( id_tag, id_todo ) VALUES (?,?)";
 
@@ -89,7 +88,7 @@ class Tag
 
 	public static function getTag( $id ){
 		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
-		
+
 		$sql = "SELECT * FROM todo_app_tags WHERE id = ?";
 
 		try{
@@ -104,22 +103,38 @@ class Tag
 		return $result->fetch(PDO::FETCH_ASSOC);
 	}
 
+	public static function getLastTag( )
+	{
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		$sql =	"SELECT * FROM todo_app_tags ORDER BY  id DESC LIMIT 1";
+
+		try{
+			$result = $db->prepare($sql);
+			$result->execute();
+		}catch (Exception $e){
+			echo "Bad query in '" . __METHOD__ . "', " . $e->getMessage();
+			return false;
+		}
+		return $result->fetch(PDO::FETCH_ASSOC);
+
+	}
+
 	public static function getTagByName( $name ){
 		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
 		$name = strtolower($name);
 
-		$sql = "SELECT * FROM todo_app_tags WHERE name = ?";
+		$sql = "SELECT * FROM todo_app_tags WHERE name LIKE ?";
 
 		try{
 			$result = $db->prepare($sql);
-			$result->bindParam(1, $name, PDO::PARAM_STR);
+			$result->bindValue(1, "%" . $name . "%", PDO::PARAM_STR);
 			$result->execute();
 		}catch (Exception $e){
 			echo "Bad query in '" . __METHOD__ . "', " . $e->getMessage();
 			return false;
 		}
 
-		return $result->fetch(PDO::FETCH_ASSOC);
+		return $result->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public static function deleteTagById( $id ){
@@ -166,7 +181,7 @@ class Tag
 
 	public static function getIdTagByIdTodo($id_todo){
 		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
-		
+
 		$sql = "SELECT id_tag FROM todo_app_todo_tag WHERE id_todo = ? ";
 
 		try{
@@ -214,7 +229,7 @@ class Tag
 		# 2- Add the relation TODO_TAG on the TABLE todo_tag
 
 		# get the $id_tag for a couple of checks
-		$ids_tag = Tag::getIdTagByIdTodo( $id_todo );		
+		$ids_tag = Tag::getIdTagByIdTodo( $id_todo );
 		# Then delete the todo_tag relationship
 		Tag::deleteTodoTagRelation( $id_todo );
 

@@ -17,32 +17,37 @@
 # getCollection($id)
 # updateCollection($id, $name = null, $description = null, 		  	subCollectionList[]=null)
 # deleteCollection($id)
-# 
+#
 
 /**
- * 
+ *
  */
 class Collection
 {
 	private $name;
 	private $description;
 	private $todoList = array();
-	private $fatherCollection_id;	
-	
+	private $fatherCollection_id;
+
 	function __construct( $name, $description = null, $fatherCollection_id = null )
 	{
 		$this->name = $name;
 		$this->description = $description;
-		$this->fatherCollection_id = $fatherCollection_id;
+		if(empty($fatherCollection_id)){
+			$this->fatherCollection_id = 1;//the collection UNKONWN is the main father/collection
+		}else {
+			$this->fatherCollection_id = $fatherCollection_id;
+		}
+
 	}
 
-	public function getName( $name ){
+	public function getName( ){
 		return $this->name;
 	}
-	public function getDescription( $description ){
+	public function getDescription( ){
 		return $this->description;
 	}
-	public function getfatherCollection_id( $fatherCollection_id ){
+	public function getfatherCollection_id( ){
 		return $this->fatherCollection_id;
 	}
 
@@ -55,7 +60,7 @@ class Collection
 		# JSON approch needs to be check #
 		#--------------------------------#
 		$sql = "INSERT INTO todo_app_collections VALUES (NULL, ?, ?, 1, CURRENT_TIMESTAMP(), ?, NULL)";
-		
+
 		try{
 			$result = $db->prepare( $sql );
 			$result-> bindParam( 1, $name, PDO::PARAM_STR );
@@ -111,7 +116,7 @@ class Collection
 
 		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php");
 
-		$sql = "SELECT * FROM todo_app_collections ORDER BY name ASC"; 
+		$sql = "SELECT * FROM todo_app_collections ORDER BY name ASC";
 		try{
 			$collections = $db->prepare( $sql );
 			$collections->execute();
@@ -127,7 +132,7 @@ class Collection
 
 		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php");
 
-		$sql = "SELECT * FROM todo_app_collections WHERE id_fatherCollection = ?"; 
+		$sql = "SELECT * FROM todo_app_collections WHERE id_fatherCollection = ?";
 		try{
 			$subCollections = $db->prepare( $sql );
 			$subCollections->bindParam( 1, $id, PDO::PARAM_INT );
@@ -139,14 +144,30 @@ class Collection
 		}
 		return $subCollections->fetchAll(PDO::FETCH_ASSOC);
 	}
+	public static function moveCollection($id, $id_collection){
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
 
+		$sql = "UPDATE todo_app_collections SET id_fatherCollection = ?
+				WHERE id = ?";
+
+		try{
+			$result = $db->prepare($sql);
+			$result->bindValue(1, $id_collection, PDO::PARAM_INT);
+			$result->bindValue(2, $id, PDO::PARAM_INT);
+			$result->execute();
+		} catch (Exception $e){
+			echo "Bad query in the " . __METHOD__ . ", " . $e->getMessage();
+			return false;
+		}
+		return true;
+	}
 	public static function updateCollection($id, $name = null, $description = null, $fatherCollection_id = null ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
-		
+
 		$old_collection = self::getCollection( $id );
 		$new_collection = self::generationCollectionSchema( $id, $name, $description, $fatherCollection_id );
 
-		$sql = "UPDATE todo_app_collections SET name = ?, description = ?, id_fatherCollection = ? 
+		$sql = "UPDATE todo_app_collections SET name = ?, description = ?, id_fatherCollection = ?
 				WHERE id = ?";
 
 		try{
@@ -166,7 +187,7 @@ class Collection
 	public static function unlinkFatherCollection( $father_id ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
 
-		$sql = "UPDATE todo_app_collections SET id_fatherCollection = 1 
+		$sql = "UPDATE todo_app_collections SET id_fatherCollection = 1
 				WHERE id_fatherCollection = ?";
 
 		try{
@@ -184,14 +205,14 @@ class Collection
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
 		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/todo.php";
 
-		# Update the value of the subcategories "fatherCollection_id" to NULL 
+		# Update the value of the subcategories "fatherCollection_id" to NULL
 		# Delete the TODOs
 		# Delete the category
 		#____________________________________________________________________
 
 		# 1- Unlink Subcollections
 		self::unlinkFatherCollection( $id );
-		
+
 		echo "////////////";
 		# 2- Delete TODOs
 		$todos = Todo::getTodosByFatherId( $id );
@@ -215,7 +236,7 @@ class Collection
 
 	public static function getFullPath( $id, $path = null){
 
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";	
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
 		# This function will generate a full path of a particular Collection
 		# example-----------------------------------------------------------
 		# Main Collection/Second Collection/Third Collection/The Collection
@@ -232,7 +253,7 @@ class Collection
 		}
 
 		# retrive the collection from the DB base on the ID
-		$sql = "SELECT * FROM todo_app_collections WHERE id = ?";
+		$sql = "SELECT id,name,id_fatherCollection FROM todo_app_collections WHERE id = ?";
 		try{
 			$result = $db->prepare( $sql );
 			$result->bindParam(1, $id, PDO::PARAM_INT);
@@ -257,9 +278,9 @@ class Collection
 		# NULL elements on the Table when updated and the value are not provided.
 
 		$old_collection = self::getCollection( $id );
-		$new_collection = array( 
-			"name" => $name, 
-			"description" => $description, 
+		$new_collection = array(
+			"name" => $name,
+			"description" => $description,
 			"id_fatherCollection" => $fatherCollection_id );
 
 		foreach( $new_collection as $key=>$value){

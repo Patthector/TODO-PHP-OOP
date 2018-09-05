@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 } else if($_SERVER["REQUEST_METHOD"] == "POST"){
 #this is a POST request
 # |
-# --->the FORM was submitted and the user wants to storage the Library		
+# --->the FORM was submitted and the user wants to storage the Library
 	if(!empty($_POST["description"])){
 		$description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
 	}
@@ -34,20 +34,19 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 		#							 OR=> keep going with the TODO creation
 		if(empty($name)){
 			$message = "A TITLE must be given";
-		} else{ 
+		} else{
 			$new_collection = new Collection( $name, $description, $collection );
-			$id = $new_collection->addCollection( 
-										$new_collection->getName( $name ), 
-										$new_collection->getDescription( $description ), 
-										$new_collection->getfatherCollection_id( $collection ), 
+			$id = $new_collection->addCollection(
+										$new_collection->getName( $name ),
+										$new_collection->getDescription( $description ),
+										$new_collection->getfatherCollection_id( $collection ),
 										1);
 			header("Location: /TODO-PHP-OOP [with JS]/views/library.php?id=" . $id);
 		}
 	}
-	
+
 }
 
 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/header.php";
 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/libraryform.php";
 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/footer.php";
-
