@@ -1,0 +1,98 @@
+.todo__general-container{
+  @include todo__center-flex;
+  position: relative;
+  margin-left: 264px;
+  margin-right: 264px;
+  margin-top: 90px;//66+24
+  background-color:$white;
+  box-shadow:0 0 5px $gray;
+  padding-left:24px;
+  padding-right:24px;
+  border-radius: 12px;
+
+  .todo__todo-body{
+    @include separator;
+  }
+  .todo__todo-title {
+      h2{
+      font-family: $font-secondary;
+      color:$sapphire;
+      margin-bottom: 6px;
+    }
+  }
+
+  .todo__todo-description-container{
+    background-color:$gallery;
+    margin-left: -24px;
+    margin-right: -24px;
+    p{
+      margin-left: 24px;
+      margin-right:24px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 0;
+      color:$black;
+    }
+  }
+}
+
+.top-right-absolute{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.todo__item-category-name{
+  margin:12px;
+  span{
+    background-color: $sapphire;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    color:$white;
+    font-family: $font-secondary;
+    padding: 3px 6px;
+    text-transform: uppercase;
+  }
+  a{
+    color:$black;
+    background-color: $gallery;
+    font-family: $font-secondary;
+    padding: 2px 4px;
+    text-transform: uppercase;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border:1px solid $sapphire;
+    margin-left:-5px;
+  }
+}
+///TAGS
+.todo__library-tags{
+  .todo__library-tags-list{
+    @include todo__inline-flex;
+    flex-wrap: wrap;
+    @include reset-list;
+    @include separator;
+  }
+  li a{
+    font-family:$font-secondary;
+    color: $sapphire;
+    font-weight: bold;
+    padding: 6px;
+  }
+}
+
+//GENERAL FOOTER ITEM
+.todo__library-footer{
+  @include todo__blue-gradient;
+  margin-left:-24px;
+  margin-right:-24px;
+  @include todo__inline-flex;
+
+  p{
+    color:$white;
+    margin-bottom: 6px;
+    margin-top:6px;
+    span{
+      font-family: $font-primary-bold;
+    }
+  }
+}// end GENERAL FOOTER ITEM

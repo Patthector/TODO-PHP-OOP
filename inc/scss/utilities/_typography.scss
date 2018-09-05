@@ -50,7 +50,7 @@ $font-family-sans-fallback:   'Arial', sans-serif;
 // $font-family-sans - {list}
 // @requires - `$font-family-sans-fallback`
 
-$font-family-sans:            'Helvetica Neue', 'Helvetica', $font-family-sans-fallback;
+$font-family-sans:            'rajdhani-regular','Helvetica Neue', 'Helvetica', $font-family-sans-fallback;
 
 // $font-family-serif
 //
@@ -84,3 +84,6 @@ $font-family-display:         $font-family-sans;
 // @requires - `$font-family-sans`
 
 $font-family-default:         $font-family-sans;
+$font-primary:                "rajdhani-regular";
+$font-primary-bold:                "rajdhani-bold";
+$font-secondary:              'fjallaone-regular';

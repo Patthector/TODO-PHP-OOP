@@ -1,0 +1,102 @@
+.empty-front-page{
+  background-color: $gallery;
+  box-shadow: inset  0 0 5px $gray;
+  @include clean-fluid;
+  margin-top:-21px;//due to the header shadow
+  padding-top: 24px;
+  padding-bottom:48px;
+  @include todo__center-flex;
+  @include separator;
+  align-items: center;
+
+  h2.empty-front-page--heading{
+    color:$sapphire;
+    font-family:"fjallaone-regular";
+    font-size:36px;
+    margin-bottom: 12px;
+    margin-top: 18px;
+  }
+  p.welcome-message{
+    font-size:20px;
+    span{
+      @include todo__high-sapphire;
+      i{
+        color:$tomato;
+        font-style: normal;
+      }
+    }
+  }
+
+  .container-buttons{
+    @include todo__inline-flex;
+    margin-left:10%;
+    margin-right:10%;
+    .left, .right{
+      @include todo__center-flex;
+      align-items: center;
+      border:1.5px dashed rgba($alto,.7);
+      border-color:rgba($gray,.7);
+      width:40%;
+      //
+      transition:box-shadow .5s,background-color 1s;
+      p{
+        margin-left:12px;
+        margin-right:12px;
+        text-align:center;
+        color:$black;
+      }
+    }
+    .left:hover,.right:hover{
+      box-shadow: inset 2px -2px 5px rgba($gray,.6),inset -2px 2px 5px rgba($gray,.6);
+      background-color:rgba($alto,.3);
+      cursor:pointer;
+      h2{
+        color:rgba($cornflower-blue,.8);
+        text-shadow: 0px 4px 2px rgba($alto,.3), 0px 0px 0px $black, 0px 5px 4px rgba($alto,.3);
+      }
+    }
+    .left{
+      margin-right:5%;
+    }
+    .right{
+      margin-left:5%;
+    }
+    .button-heading{
+      font-family:"fjallaone-regular";
+      font-size:48px;
+      text-transform: uppercase;
+      color:rgba($alto,.8);
+      text-shadow: 0px 5px 2px $gallery, 0px 0px 0px $black, 0px 5px 2px $gallery;
+      margin-top:12px;
+      margin-bottom: 12px;
+      //
+      transition:color 1s, text-shadow 1s;
+    }
+  }
+}
+//QUESITON SECTION
+
+.container-question{
+  @include todo__center-flex;
+  align-items:center;
+  position: relative;
+  div{
+    padding-left:6px;
+    margin-right:6px;
+      svg{
+      width:24px;
+      height:24px;
+      color:$tomato;
+      padding:2px;
+      border:1.5px solid $tomato;
+      border-radius:100%;
+    }
+  }
+  p{
+    font-size:20px;
+    a{
+      text-decoration: underline;;
+    }
+  }
+
+}

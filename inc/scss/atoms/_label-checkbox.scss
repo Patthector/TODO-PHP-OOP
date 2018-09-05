@@ -1,0 +1,73 @@
+/* Customize the label (the container) */
+.checkbox-container{
+  display: block;
+  position: relative;
+  padding: 6px 6px 6px 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: $sapphire;
+  font-size: 16px;
+  //for the letter style
+  margin: 0 3px;
+  border: 1px solid #303f9f;
+  border-radius: 24px;
+  font-family: "fjallaone-regular";
+}
+
+/* Hide the browser's default checkbox */
+.collection_delete_checker {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 25%;
+  left: 6px;
+  height: 16px;
+  width: 16px;
+  background-color: #eee;
+  border: 1px solid $alto;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.label--selected .checkmark {
+  background-color: #2196F3 !important;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.label--selected .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.label--selected .checkmark:after {
+  left: 30%;
+  top:0;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

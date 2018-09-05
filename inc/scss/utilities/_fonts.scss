@@ -18,3 +18,25 @@
     }
   }
 }
+
+//FONTS
+/*remember change these to the generic form above*/
+@font-face {
+  font-family: "fjallaone-regular";
+  src: url('../fonts/fjallaone-regular.ttf') format('truetype'),
+       url('../fonts/fjallaone-regular.woff') format('woff'),
+       url('../fonts/fjallaone-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family:"rajdhani-regular";
+  src: url('../fonts/rajdhani-regular.ttf') format('truetype'),
+       url('../fonts/rajdhani-regular.woff') format('woff'),
+       url('../fonts/rajdhani-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family:"rajdhani-bold";
+  font-weight: "bold";
+  src: url('../fonts/rajdhani-bold.ttf') format('truetype'),
+       url('../fonts/rajdhani-bold.woff') format('woff'),
+       url('../fonts/rajdhani-bold.woff2') format('woff2');
+}

@@ -1,0 +1,182 @@
+.todo__form{
+background-color:$white;
+//JUMBOTRON
+  .jumbotron_container{
+    background-color:$sapphire;
+    @include todo__inline-flex;
+    @include clean-fluid;
+    margin-top:-24px;
+    padding-left:264px;
+    padding-right:264px;
+    padding-top: 24px;
+    padding-bottom: 84px;
+    box-shadow: inset 0px 4px 8px #2c325d;
+
+    h1{
+      width:50%;
+      margin: 0;
+      font-family:"fjallaone-regular";
+      text-transform: uppercase;
+      color: $white;
+      font-size: 56px;
+      letter-spacing: 3px;
+      text-align:right;
+      align-self: flex-start;
+    }
+    .guidelines_container{
+      width:50%;
+      ul{
+        @include reset-list;
+        border-left:1px solid $alto;
+        margin-left:24px;
+        padding-left:24px;
+        li{
+          font-family:$font-primary;
+          font-size:16px;
+          color:$alto;
+          &:nth-child(n+1){
+            margin-top:6px;
+          }
+        }
+      }
+    }
+  }
+//FORM
+  .todo_container{
+    background-color:$white;
+    margin: -60px 264px 24px 264px;
+    box-shadow: 0 0 4px $gray;
+    padding-left: 132px;
+    padding-right: 132px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    .todo__input-form{
+      background-color:$gallery;
+      @include todo__white-form-gradient;
+      box-shadow:inset 1px -1px 5px rgba($gray,.8);
+      border-radius:12px;
+    }
+    hr{margin:0;}
+    .form-subheading{
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: $sapphire;
+      padding-top: 24px;
+      font-family:$font-primary-bold;
+
+    }
+
+    .todo__form-separator{
+      margin-bottom: 12px;
+    }
+
+    label{
+      margin-bottom: 0;
+      text-transform: uppercase;
+      color:$tundora;
+      font-family:$font-primary-bold;
+    }
+
+    .todo__form-main-category-message {
+      margin: 3px 24px 12px;
+    }
+    .todo-message{
+      margin-top:24px;
+      margin-bottom:24px;
+      margin-left: 0;
+      border-left:1px solid $alto;
+      p{margin:0;}
+    }
+    .todo__tags-container{
+      position: relative;
+      display: none;
+      ul{
+        @include reset-list;
+        padding-top: 12px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        .selected{//when the elements are ready the be deleted
+          color:$tomato;
+          font-weight: bold;
+        }
+      }
+    }
+    .top-center-absolute{
+      position: absolute;
+      top: -24px;
+      right: 0;
+      @include todo__inline-flex;
+      button{
+        margin: 0 3px;
+      }
+    }
+    .todo__tag-item{
+      @include todo__high-sapphire;
+      padding: 3px 6px;
+      font-size: 12px;
+      cursor:pointer;
+    }
+    .todo__tags-input{
+      position: relative;
+      input{
+        display: inline-block;
+        width: 70%;
+      }
+    }
+    #todo__tag-alert{
+      //padding: 3px;
+
+    }
+    .disable{
+      color:$alto;
+      border-color:$alto;
+      cursor: not-allowed;
+    }
+    .todo__btn-tag{
+      font-size: 11px;
+      font-family: $font-primary;
+      padding: 3px;
+      &--add{
+        background-color:$white;
+        border:1px solid $sapphire;
+        padding: 6px;
+        color: $sapphire;
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        font-family: $font-primary-bold;
+        transition: color .3s, background-color .3s;
+      }
+      &--add:hover{
+        color:$white;
+        background-color: $sapphire;
+      }
+    }
+
+    .left{
+        text-align: right;
+    }
+
+    .todo__btn-form{
+      color:$white;
+      font-family:$font-secondary;
+      text-transform: uppercase;
+      text-align: center;
+      font-size:24px;
+      padding: 6px 72px;
+      border-radius: 0;
+
+      &--blue{
+        background-color: $sapphire;
+      }
+      &--dark{
+        background-color:$tundora;
+      }
+    }
+
+  }
+}

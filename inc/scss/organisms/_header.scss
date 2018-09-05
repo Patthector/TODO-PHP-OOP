@@ -1,0 +1,43 @@
+.header__blue-gradient{
+  @include clean-fluid;
+  @include todo__blue-gradient;
+  @include separator;
+  box-shadow:-1px 3px 4px $gray;
+}
+.header__menu{
+  @include todo__inline-flex;
+  padding:24px 0 16px 0;
+}
+.header__logo{
+  margin: 0 12px;
+  svg{
+    width: 300px;
+    height: 70px;
+  }
+}
+.header__menu-item{
+  align-self:flex-end;
+  font-family: "fjallaone-regular";
+  font-size:24px;
+  a{
+    color:$white;
+    text-decoration: underline;
+    transition: color 1s;
+  }
+  a:hover{
+    color:$alto;
+  }
+}
+
+.white-header{
+  box-shadow:-1px 3px 4px $alto;
+  @include todo__white-gradient;
+  .header__menu-item{
+    a{
+      color:$sapphire;
+    }
+    a:hover{
+      color:$tomato;
+    }
+  }
+}

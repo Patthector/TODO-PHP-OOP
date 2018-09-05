@@ -1,0 +1,118 @@
+.todo__action-menu-container{
+  position: relative;
+  &--aux{
+    position: absolute;
+    top: 0;
+    right: 48px;
+    @include todo__center-flex;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    box-shadow: 0px 0px 8px $gray;
+  }
+  .todo__action-menu{
+    @include todo__inline-flex;
+    @include reset-list;
+  }
+  .todo__btn-collection,.todo__btn-todo{
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    svg{
+      width: 24px;
+      height: 24px;
+      margin-bottom: -6px;
+      color:$sapphire;
+      transition: color 1s;
+    }
+    span{
+      display: block;
+      text-transform: uppercase;
+      color:$sapphire;
+      font-family: $font-secondary;
+      font-size:12px;
+      transition: color 1s;
+    }
+    &:hover{
+      svg{
+        color:$tomato;
+      }
+      span{
+        color:$tomato;
+      }
+    }
+    &--selected{
+      background-color: $white;
+      border:none;
+      width: 100%;
+      padding: 6px;
+      transition: color 1.5s;
+      svg{
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin:auto;
+        color:$tomato;
+        transition: color .6s;
+      }
+      span{
+        font-family:$font-secondary;
+        text-transform: uppercase;
+        font-size: 12px;
+        color:$tomato;
+        transition: color .6s;
+      }
+      &:hover{
+        background-color: $tomato;
+        svg{
+          color:$white;
+        }
+        span{
+          color:$white;
+        }
+      }
+    }
+    &--disabled{
+      cursor:not-allowed;
+      svg{
+        color:$alto;
+      }
+      span{
+        color:$alto;
+      }
+    }
+  }
+  //BUTTON CANCEL
+  .todo__btn-cancel{
+    display: none;
+    color:$white !important;
+    font-family:$font-secondary;
+    background-color: rgba($tomato,.85);
+    transition: background-color 1s;
+    border:2.5px solid rgba($tomato,1);
+    font-size: 16px;
+    letter-spacing: 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    &:hover{
+      background-color:rgba($tomato,1);
+      color: $white !important;
+    }
+  }
+  //BUTTON CLEAR
+
+  .todo__btn-clear{
+    display: none;//inline-block
+    background-color:$gallery;
+    color:$sapphire;
+    padding: 3px 6px;
+    font-weight: bold;
+    border:1px solid $sapphire;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    transition: background-color 1s;
+    &:hover{
+      color:$white;
+      background-color:$sapphire;
+    }
+  }
+}

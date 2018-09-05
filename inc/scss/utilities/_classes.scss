@@ -1,0 +1,22 @@
+.padding-list-off{
+  padding-left:0;
+}
+.todo__btn-sm{
+  font-size: 11px;
+  padding: 1px 3px;
+}
+.todo__btn-tomato{
+  background-color: $tomato;
+  color: $white;
+}
+.todo__btn-outline-tomato{
+  background-color: $white;
+  color: $tomato;
+  border:1px solid $tomato;
+}
+.border-bottom-left-radius{
+  border-bottom-left-radius: 24px;
+}
+.border-bottom-right-radius{
+  border-bottom-right-radius: 24px;
+}

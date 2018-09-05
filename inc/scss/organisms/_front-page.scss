@@ -1,0 +1,100 @@
+.front-page{
+  background-color: $white;
+  @include clean-fluid;
+  @include todo__center-flex;
+  @include separator;
+}
+.front-page__first-block,.front-page__second-block{
+  @include todo__inline-flex;
+  @include separator;
+}
+//////FIRST-BLOCK
+.front-page__first-block{
+  @include master-margin;
+  .left, .right{
+    @include todo__center-flex;
+  }
+  .left{
+    padding-left: 132px;
+  }
+  .right{
+    align-items:center;
+  }
+  .introduction-list{
+    list-style: none;
+    padding-left: 12px;
+    li{
+      position: relative;
+      p{
+        font-size:18px;
+      }
+    }
+  }
+  span.red-dot{
+    position: absolute;
+    top:-2px;
+    left:-12px;
+  }
+}
+////SECOND-BLOCK
+.front-page__second-block{
+  background-color:$gallery;
+  box-shadow: inset  0 0 5px $gray;
+  padding: 0 264px 24px 264px;
+  color:$black;
+  @include clean-fluid;
+  .left{
+    padding-right: 60px;
+  }
+  .right{
+    padding-left: 60px;
+  }
+}
+.front-page__heading-3{
+  font-family: "fjallaone-regular";
+  color:$cornflower-blue;
+  font-size:24px;
+}
+//CREATE LIBRARY -- CREATE TODO
+.front-page__button-library,
+.front-page__button-todo{
+  font-family:"fjallaone-regular";
+  font-size:48px;
+  text-transform: uppercase;
+  text-align: center;
+  margin:0.43em 0 0.23em;
+  & a{
+    color:rgba($cornflower-blue,0.9);
+    text-shadow: 0px 5px 2px $gallery, 0px 0px 0px $black, 0px 5px 2px $gallery;
+    transition: color .5s;
+    &:hover{
+      color:rgba($sapphire,0.8);
+      text-decoration: none;
+
+    }
+  }
+}
+//this is a simple class that could be and extended class
+.high-sapphire{//blue and capitalized
+  @include todo__high-sapphire;
+}
+.front-page__list-description{
+  list-style: none;
+  li{
+    margin:12px 0;
+  }
+  @extend .padding-list-off;
+}
+////THIRD-BLOCK----------
+.front-page__third-block{
+  text-align: center;
+  @include master-margin;
+  @include separator;
+  h3{
+    font-family:"fjallaone-regular";
+    color:$cornflower-blue;
+    font-size:36px;
+    margin-top:12px;
+    margin-bottom: 12px;
+  }
+}

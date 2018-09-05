@@ -1,0 +1,43 @@
+.todo__delete-message,
+.todo__move-message{
+  display: none;
+}
+.todo__modal{
+  &-danger{
+    background-color: $tomato;
+  }
+  &-info{
+    background-color: $sapphire;
+  }
+  h4{
+    margin-top:0px;
+    margin-bottom:0px;
+    font-family:$font-secondary;
+    color:$white;
+  }
+
+}
+.todo__modal-footer{
+  @include todo__inline-flex;
+  label{
+    margin: 0;
+  }
+  .todo__btn-modal{
+    border-radius:0;
+    padding: 6px 24px;
+    color:$white;
+    text-transform: uppercase;
+    font-family: $font-secondary;
+    margin-left: 6px;
+    margin-right: 6px;
+    &--danger{
+      background-color:$tomato;
+    }
+    &--default{
+      background-color:$tundora;
+    }
+    &--info{
+      background-color: $sapphire;
+    }
+  }
+}
