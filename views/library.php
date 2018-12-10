@@ -45,6 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 					case "selectElements":
 						$select_elements_on = true;
 						include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+						include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
 				}
 			} else{
 				$state = "readCollection";
@@ -78,6 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 	}
+	
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -155,19 +157,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$title_heading = $collection["name"];
 			$state = "readCollection";
 			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
-		} else{//moveElements
+		}
+		else if($state == "moveElements"){//****moveElements****
 			$array_post = $_POST;
+			$id_fatherCollection = filter_input(INPUT_POST, "fatherCollection", FILTER_SANITIZE_NUMBER_INT);
 			foreach($array_post as $key=>$item){
-				if( !($key == "action") && !($key == "id") ){
+				if( !($key == "action") && !($key == "id") && !($key == "fatherCollection") ){
 					$cleanKey = preg_replace("/[0-9]+/","", htmlentities($key));//EITHER todo OR subcollection
 
 					if($cleanKey == "todo"){
 						$id_item = filter_input(INPUT_POST, $key, FILTER_SANITIZE_NUMBER_INT);
 
-						//Todo::deleteTodo($id_item);
+						Todo::moveTodo($id_item, $id_fatherCollection);
 					} else{// => SUBCOLLECTION
 						$id_item = filter_input(INPUT_POST, $key, FILTER_SANITIZE_NUMBER_INT);
-						//Collection::deleteCollection($id_item);
+						Collection::moveCollection($id_item, $id_fatherCollection);
 					}
 				}
 			}

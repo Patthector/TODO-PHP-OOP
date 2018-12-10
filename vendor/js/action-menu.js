@@ -70,7 +70,6 @@ $( document ).ready(function() {
   function selectingCollectionElements(e){
     $(".todo__btn-clear").css("display","block").attr("href", window.location.href);
     //console.log(e.target.id);
-
     if(e.target.tagName === "BUTTON"){
       if(e.target.id === "collection-delete"){//DELETING
         $("#todo_collection-button-delete").addClass("collection-delete-elements--selected");
@@ -78,14 +77,14 @@ $( document ).ready(function() {
         $("#todo_collection-button-delete").remove();
         var parent = $(e.target).parent().parent();
         $( ".dropdown-menu" ).removeClass("show");
-        $( parent ).append("<button id = \"todo__collection-button-delete\" class = \"todo__btn-collection--selected\">"+ innerVal +"</button>");
+        $( parent ).append("<button id = \"todo__collection-button-delete\" class = \"todo__btn-collection--selected\" data-toggle=\"modal\" data-target=\"#delete-todo-modal\">"+ innerVal +"</button>");
       }else{//MOVING
         $("#todo_collection-button-move").addClass("collection-move-elements--selected");
         var innerVal = $("#todo_collection-button-move").html();
         $("#todo_collection-button-move").remove();
         var parent = $(e.target).parent().parent();
         $( ".dropdown-menu" ).removeClass("show");
-        $( parent ).append("<button id = \"todo__collection-button-move\" class = \"todo__btn-collection--selected\">"+ innerVal +"</button>");
+        $( parent ).append("<button id = \"todo__collection-button-move\" class = \"todo__btn-collection--selected\" data-toggle=\"modal\" data-target=\"#move-todo-modal\">"+ innerVal +"</button>");
       }
     }
     // 1-Add the styles to all the elements to be clicked
@@ -101,6 +100,8 @@ $( document ).ready(function() {
 			method : "GET",
 			success : function(data){
         $(".first-container").remove();
+        $("#move-todo-modal").remove();
+        $("#delete-todo-modal").remove();
         $("main").append(data);
 			}
 		});
@@ -108,14 +109,21 @@ $( document ).ready(function() {
     //2-FEEDBACK to the user encourage them to make the action
   }
   // AJAX DELETING ELEMENTS
-  function actionCollectionElements(a, id){
+  function actionCollectionElements(a, id, fatherCollection = null){
     var id = $(".todo__collection-header-title").attr("id");
-    if(id === "#todo_collection-button-move"){
+    if(fatherCollection !== null){// => we are movingElements
+      var action = "moveElements";
+      var data = {"action":action,"id": id, "fatherCollection":fatherCollection};
+    }else{//=> we are deleteingElements
+      var action = "deleteElements";
+      var data = {"action":action,"id": id};
+    }
+    /*if(id === "#todo_collection-button-move"){
       var action = "moveElements";
     }else{//#todo_collection-button-delete
       var action = "deleteElements";
     }
-    var data = {"action":action,"id": id};
+    var data = {"action":action,"id": id};*/
     for(var i = 0; i<a.length; i++){
       data[a[i]["name"]] = a[i]["value"];
     }
@@ -129,19 +137,24 @@ $( document ).ready(function() {
 			data : data,
 			method : "POST",
 			success : function(data){
-        console.log(data);
         $(".first-container").remove();
 				$("main").append(data);
 			}
 		});
   }
+
   //this class is added once the "selected items" is trigger. If it's clicked that means that
   //the user has selected some elements and wants to deleted.
-  $(document).on("click", ".todo__btn-collection--selected", function(e){
-    console.log(e.target); exit;
+  $(document).on("click", "#todo__modal-btn-submit", function(e){
+
     if(e.target.tagName === "BUTTON"){
       var formVal = $("#delete-form").serializeArray();
-      actionCollectionElements(formVal, e.target.id);
+      if( $(e.target).text() == "Move" ){// => moving selectedElements
+        var fatherCollection = $("#todo__modal-move-select").val();//this is the ID of the selected collection
+        actionCollectionElements(formVal, e.target.id, fatherCollection);
+      }else{
+        actionCollectionElements(formVal, e.target.id);
+      }
     }
   });
 
