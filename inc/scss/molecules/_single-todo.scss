@@ -10,7 +10,7 @@
   padding-right:24px;
   border-radius: 12px;
 
-  .todo__todo-body{
+  .todo__todo-body{ 
     @include separator;
   }
   .todo__todo-title {

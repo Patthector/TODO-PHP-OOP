@@ -15,7 +15,7 @@ class Tag
 		return $this->name;
 	}
 	public static function addTag( $tag ){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		$tag = strtolower( $tag );
 
 		$sql = "INSERT INTO todo_app_tags (name) VALUES (?)";
@@ -33,7 +33,7 @@ class Tag
 	}
 
 	public static function addingTodoTagRelationship( $id_todo, $tags ){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		# 1-check if "tags[i]" exists on the todo_app_tags TABLE
 		#   ----> if does, retrive the ID
 		#   ----> if does NOT, add it on th TABLE
@@ -69,7 +69,7 @@ class Tag
 	}
 
 	public function existTag( $tag ){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		$tag  = strtolower( $tag );
 
 		$sql = "SELECT * FROM todo_app_tags WHERE name = LOWER(?)";
@@ -87,7 +87,7 @@ class Tag
 	}
 
 	public static function getTag( $id ){
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 
 		$sql = "SELECT * FROM todo_app_tags WHERE id = ?";
 
@@ -105,7 +105,7 @@ class Tag
 
 	public static function getLastTag( )
 	{
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 		$sql =	"SELECT * FROM todo_app_tags ORDER BY  id DESC LIMIT 1";
 
 		try{
@@ -120,7 +120,7 @@ class Tag
 	}
 
 	public static function getTagByName( $name ){
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 		$name = strtolower($name);
 
 		$sql = "SELECT * FROM todo_app_tags WHERE name LIKE ?";
@@ -138,7 +138,7 @@ class Tag
 	}
 
 	public static function deleteTagById( $id ){
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 
 		$sql = "DELETE FROM todo_app_tags WHERE id = ?";
 
@@ -157,7 +157,7 @@ class Tag
 	}
 
 	public static function deleteTodoTagRelation($id_todo){
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 
 		$sql = "DELETE FROM todo_app_todo_tag WHERE id_todo = ?";
 
@@ -180,7 +180,7 @@ class Tag
 	#-------------------
 
 	public static function getIdTagByIdTodo($id_todo){
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 
 		$sql = "SELECT id_tag FROM todo_app_todo_tag WHERE id_todo = ? ";
 
@@ -199,7 +199,7 @@ class Tag
 
 	# this function will check if after the deletion of todo_tag relationship the tag still remains in the TABLE 	"todo_app_todo_tag".
 	public static function idTagExists($id){
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 
 		$sql = "SELECT * FROM todo_app_todo_tag WHERE id_tag = (?)";
 
@@ -216,7 +216,7 @@ class Tag
 	}
 
 	public static function updateTag( $id_todo, $tags ){
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 
 		# WORKING WITH OLD TAGS
 		#------------------------------------------------------------

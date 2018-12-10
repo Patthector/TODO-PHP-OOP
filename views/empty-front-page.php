@@ -13,6 +13,7 @@
   </div>
 </div>
 <div class = "container-question">
-  <div class = "question-mark-svg"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/question-mark.svg";?></div>
+  <div class = "question-mark-svg"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/question-mark.svg";?></div>
   <p> If you have any question in how to procede in this application; visit the <a href = "#">help section</a> for more information.</p>
 </div>
+ 

@@ -1,9 +1,9 @@
 <?php
 # Includes
 # ---------
-require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/todo.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/collection.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/library.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/collection.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/library.php";
 
 # Variables
 # ---------
@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 						$tags = $todo["tags"];
 						$action = filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
 						$state = "editTodo";
-						include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/todoform.php";
+						include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
 						break;
 				}
 			} else{//VIEW MODE
@@ -52,13 +52,13 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 						$msg = trim(filter_input(INPUT_GET, "msg", FILTER_SANITIZE_STRING));
 					} else{
 						$message = "TODO NOT FOUND";
-						header("Location: /TODO-PHP-OOP [with JS]/views/mytodos.php?msg=" . $message);exit;
+						header("Location: /TODO-PHP-OOP/views/mytodos.php?msg=" . $message);exit;
 					}*/
 
 					//INCLUDE THE FILES
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/header.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/todo.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/footer.php";
+					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todo.php";
+					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 			}
 		}
 	}
@@ -73,9 +73,9 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 		$state = "createTodo";
 
 		//INCLUDE THE FILES
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/header.php";
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/todoform.php";
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/footer.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 	}
 }
 ////////////////
@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		} else{
 			$message = "Unable to delete TODO. Invalid \"ID\"";
 		}
-		header("Location:/TODO-PHP-OOP [with JS]?msg=" . $message);
+		header("Location:/TODO-PHP-OOP?msg=" . $message);
 	}
 	////////////////
 	//MOVE TODO//
@@ -114,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$msg = "Unable to moved TODO";
 		}
 
-		header("Location:/TODO-PHP-OOP [with JS]/views/todo.php?id=". $id_todo ."&msg=" . $msg);exit;
+		header("Location:/TODO-PHP-OOP/views/todo.php?id=". $id_todo ."&msg=" . $msg);exit;
 	}
 	////////////////
 	//EDIT TODO//
@@ -143,7 +143,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				$msg = "&msg=Unable to edit TODO";
 			}
 		}
-		header("Location:/TODO-PHP-OOP [with JS]/views/todo.php?id=" . $id . "&msg=todo%20succesfully%20edited");exit;
+		header("Location:/TODO-PHP-OOP/views/todo.php?id=" . $id . "&msg=todo%20succesfully%20edited");exit;
 	}
 	////////////////
 	//CREATE TODO//
@@ -171,7 +171,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				$message = "A TITLE must be given";
 			} else{
 				$id = Todo::addTodo( $name, $description, $library, $tags, 1, $level);
-				header("Location: /TODO-PHP-OOP [with JS]/views/todo.php?id=" . $id ."&todo%20successfully%20added");
+				header("Location: /TODO-PHP-OOP/views/todo.php?id=" . $id ."&todo%20successfully%20added");
 			}
 		}
 	}

@@ -3,8 +3,8 @@
 # TODO FORM LOGIC #
 #-----------------#
 
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/collection.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/todo.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/collection.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
 
 $title_page = "Create TODO | Make It Stick";
 $name = $message = $description = $library = $tags = "";
@@ -41,12 +41,12 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 			$message = "A TITLE must be given";
 		} else{
 			$id = Todo::addTodo( $name, $description, $library, $tags, 1, $level);
-			header("Location: /TODO-PHP-OOP [with JS]/views/todo.php?id=" . $id);
+			header("Location: /TODO-PHP-OOP/views/todo.php?id=" . $id);
 		}
 	}
 
 }
 
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/white-header.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/todoform.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/footer.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/white-header.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";

@@ -53,7 +53,7 @@ class Collection
 
 	public function addCollection( $name, $description = null, $fatherCollection_id = null, $user = 1 ){
 
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		# this method could be use to add either a new collection or subcollection, if a subcollection is added $fatherCollection_id will be filled.
 
 		#--------------------------------#
@@ -78,7 +78,7 @@ class Collection
 	}
 
 	public static function getCollection($id){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
 		$sql = "SELECT * FROM todo_app_collections WHERE id = ?";
 
@@ -95,7 +95,7 @@ class Collection
 	}
 
 	public function getCollectionByName( $name ){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		$name = strtolower( $name );
 
 		$sql = "SELECT id FROM todo_app_collections WHERE LOWER(name) = ?";
@@ -114,7 +114,7 @@ class Collection
 
 	public static function getCollections($limit = null, $offset = null){
 
-		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
 
 		$sql = "SELECT * FROM todo_app_collections ORDER BY name ASC";
 		try{
@@ -130,7 +130,7 @@ class Collection
 
 	public static function getSubcollections( $id ){
 
-		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
 
 		$sql = "SELECT * FROM todo_app_collections WHERE id_fatherCollection = ?";
 		try{
@@ -145,7 +145,7 @@ class Collection
 		return $subCollections->fetchAll(PDO::FETCH_ASSOC);
 	}
 	public static function moveCollection($id, $id_collection){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
 		$sql = "UPDATE todo_app_collections SET id_fatherCollection = ?
 				WHERE id = ?";
@@ -162,7 +162,7 @@ class Collection
 		return true;
 	}
 	public static function updateCollection($id, $name = null, $description = null, $fatherCollection_id = null ){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
 		$old_collection = self::getCollection( $id );
 		$new_collection = self::generationCollectionSchema( $id, $name, $description, $fatherCollection_id );
@@ -185,7 +185,7 @@ class Collection
 	}
 
 	public static function unlinkFatherCollection( $father_id ){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
 		$sql = "UPDATE todo_app_collections SET id_fatherCollection = 1
 				WHERE id_fatherCollection = ?";
@@ -202,8 +202,8 @@ class Collection
 	}
 
 	public static function deleteCollection( $id ){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
-		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/todo.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
+		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
 
 		# Update the value of the subcategories "fatherCollection_id" to NULL
 		# Delete the TODOs
@@ -236,7 +236,7 @@ class Collection
 
 	public static function getFullPath( $id, $path = null){
 
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		# This function will generate a full path of a particular Collection
 		# example-----------------------------------------------------------
 		# Main Collection/Second Collection/Third Collection/The Collection

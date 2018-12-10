@@ -62,19 +62,21 @@
         transition: color .6s;
       }
       &:hover{
-        background-color: $tomato;
+        //background-color: $tomato;
         svg{
-          color:$white;
+          //color:$white;
+          text-shadow:1px 1px 2px $gray;
         }
         span{
-          color:$white;
+          //color:$white;
         }
       }
     }
     &--disabled{
       cursor:not-allowed;
+      pointer-events: none;
       svg{
-        color:$alto;
+        color:$alto;        
       }
       span{
         color:$alto;
@@ -94,8 +96,9 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     &:hover{
-      background-color:rgba($tomato,1);
-      color: $white !important;
+      //background-color:rgba($tomato,1);
+      //color: $white !important;
+      text-shadow:1px 1px 2px $gray;
     }
   }
   //BUTTON CLEAR
@@ -111,8 +114,9 @@
     border-bottom-right-radius: 24px;
     transition: background-color 1s;
     &:hover{
-      color:$white;
-      background-color:$sapphire;
+      //color:$white;
+      //background-color:$sapphire;
+      text-shadow:1px 1px 2px $gray;
     }
   }
 }

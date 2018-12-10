@@ -71,7 +71,7 @@
 			</div>
 			<div class = "row todo__form-separator todo__form-container-buttons">
 				<div class = "col left">
-					<a class = "btn todo__btn-form todo__btn-form--dark" href = "./views/mytodos.php">Cancel</a>
+					<a class = "btn todo__btn-form todo__btn-form--dark" href = "./mytodos.php">Cancel</a>
 				</div>
 				<div class = "col">
 					<input type = "hidden" value = "createCollection" name = "action" />

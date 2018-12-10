@@ -11,9 +11,9 @@
 
 	<!-- Bootstrap core CSS -->
 
-	<link href =" <?php echo "/TODO-PHP-OOP [with JS]/vendor/css/bootstrap.min.css"; ?>" rel="stylesheet" crossorigin="anonymous">
-	<link href = "<?php echo "/TODO-PHP-OOP [with JS]/inc/css/styles.css"; ?>" rel="stylesheet" crossorigin="anonymous">
-  <link href = "<?php echo "/TODO-PHP-OOP [with JS]/inc/css/styles.css.map"; ?>" rel="stylesheet" crossorigin="anonymous">
+	<link href =" <?php echo "/TODO-PHP-OOP/vendor/css/bootstrap.min.css"; ?>" rel="stylesheet" crossorigin="anonymous">
+	<link href = "<?php echo "/TODO-PHP-OOP/inc/css/styles.css"; ?>" rel="stylesheet" crossorigin="anonymous">
+  <link href = "<?php echo "/TODO-PHP-OOP/inc/css/styles.css.map"; ?>" rel="stylesheet" crossorigin="anonymous">
   </head>
 
   <body>
@@ -31,20 +31,20 @@
       ">
         <ul class=" navbar-nav header__menu">
           <li class="header__menu-item">
-            <a class="" href="/views/mytodos.php">myTODOs</a>
+            <a class="" href="/TODO-PHP-OOP/views/mytodos.php">myTODOs</a>
           </li>
           <li class="header__logo">
-            <a id = "logo-svg" class="h1" href="/TODO-PHP-OOP [with JS]">
+            <a id = "logo-svg" class="h1" href="/TODO-PHP-OOP">
               <?php
               if(isset($state)){
                 if($state == "createTodo" || $state == "createCollection" || $state == "editTodo" || $state == "editCollection"){
-                   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/blue-logo.html";
+                   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/blue-logo.html";
                 } else if($state == "readTodo" || $state == "readCollection"){
-                   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/white-logo.html";
+                   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/white-logo.html";
                 }
               }
               else{
-                include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/white-logo.html";
+                include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/white-logo.html";
               }
                ?></a>
           </li>

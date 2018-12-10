@@ -11,7 +11,7 @@
 .todo__collection-header-path{
   margin: 12px;
 }
-.todo__collection-header-path-list{
+.todo__collection-header-path-list{ 
   @include reset-list;
   @include todo__inline-flex;
 }
@@ -33,6 +33,9 @@
   font-size:36px;
   margin-top: 24px;
   margin-bottom: 0px;
+  &--link,&--link:hover,&--link:visited,&--link:focus{
+    color:$white;
+  }
 }
 .todo__collection-header-description{
   color:$gallery;
@@ -67,6 +70,9 @@
   font-size:18px;
   margin-top: 0px;
   margin-bottom: 0;
+  a,:hover,a:visited, a:focus{
+    color:black;
+  }
 }
 .todo__collection-body-todo-container{
   margin-bottom: 24px;

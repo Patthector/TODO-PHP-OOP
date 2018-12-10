@@ -9,7 +9,7 @@
       </ul>
     </div>
     <div class = "right w-50">
-      <?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/todo-wireframe.php"; ?>
+      <?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/todo-wireframe.php"; ?>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
   <div class = "front-page__third-block">
     <h3 class = "front-page__example-heading">#example</h3>
     <div class = "front-page__example-svg">
-      <?php include $_SERVER['DOCUMENT_ROOT'] . "/TODO-PHP-OOP [with JS]/inc/todo-library-example.php"; ?>
+      <?php include $_SERVER['DOCUMENT_ROOT'] . "/TODO-PHP-OOP/inc/todo-library-example.php"; ?>
     </div>
   </div>
 </div>

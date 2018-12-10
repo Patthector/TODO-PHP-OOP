@@ -1,6 +1,6 @@
 <?php
   //view,
-      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/single-todo.php";
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-todo.php";
 
 
  ?>

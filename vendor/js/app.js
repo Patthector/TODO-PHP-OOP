@@ -75,11 +75,11 @@ $( document ).ready(function() {
 	});
 
 	function createTodoClicked(){
-		window.location = "http://localhost/TODO-PHP-OOP%20%5bwith%20JS%5d/views/todo.php";
+		window.location = "http://localhost/TODO-PHP-OOP/views/todo.php";
 
 	}
 	function createLibraryClicked(){
-		window.location = "http://localhost/TODO-PHP-OOP%20%5bwith%20JS%5d/views/library.php";
+		window.location = "http://localhost/TODO-PHP-OOP/views/library.php";
 	}
 
 });

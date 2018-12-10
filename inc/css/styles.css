@@ -278,19 +278,21 @@ html, body {
   display: block;
   position: relative;
   padding: 6px 6px 6px 25px;
-  margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   color: #303f9f;
   font-size: 16px;
-  margin: 0 3px;
-  border: 1px solid #303f9f;
-  border-radius: 24px;
-  font-family: "fjallaone-regular"; }
+  margin: 0 3px; }
+  .checkbox-container--subcollection {
+    border: 1px solid #303f9f;
+    border-radius: 24px;
+    font-family: "fjallaone-regular"; }
+  .checkbox-container--todo {
+    margin-left: -24px;
+    margin-right: -6px; }
 
 /* Hide the browser's default checkbox */
 .collection_delete_checker {
@@ -305,16 +307,18 @@ html, body {
   left: 6px;
   height: 16px;
   width: 16px;
-  background-color: #eee;
-  border: 1px solid #cfcfcf; }
+  background-color: #ededed;
+  border-radius: 3px; }
+  .checkmark--todo {
+    top: 10%; }
 
 /* On mouse-over, add a grey background color */
 .checkbox-container:hover .checkmark {
-  background-color: #ccc; }
+  background-color: #ededed; }
 
 /* When the checkbox is checked, add a blue background */
 .label--selected .checkmark {
-  background-color: #2196F3 !important; }
+  background-color: rgba(48, 63, 159, 0.8) !important; }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
@@ -328,15 +332,22 @@ html, body {
 
 /* Style the checkmark/indicator */
 .label--selected .checkmark:after {
-  left: 30%;
-  top: 0;
+  left: 35%;
+  top: 10%;
   width: 5px;
   height: 10px;
   border: solid white;
-  border-width: 0 3px 3px 0;
+  border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg); }
+
+.todo__main-heading {
+  text-align: center;
+  color: #303f9f;
+  font-family: "fjallaone-regular";
+  font-size: 36px;
+  margin-bottom: -50px; }
 
 .todo__todo_title_container {
   background-color: #fff;
@@ -497,19 +508,17 @@ html, body {
         font-size: 12px;
         color: #dc3545;
         transition: color .6s; }
-      .todo__action-menu-container .todo__btn-collection--selected:hover, .todo__action-menu-container .todo__btn-todo--selected:hover {
-        background-color: #dc3545; }
-        .todo__action-menu-container .todo__btn-collection--selected:hover svg, .todo__action-menu-container .todo__btn-todo--selected:hover svg {
-          color: #fff; }
-        .todo__action-menu-container .todo__btn-collection--selected:hover span, .todo__action-menu-container .todo__btn-todo--selected:hover span {
-          color: #fff; }
+      .todo__action-menu-container .todo__btn-collection--selected:hover svg, .todo__action-menu-container .todo__btn-todo--selected:hover svg {
+        text-shadow: 1px 1px 2px #808080; }
     .todo__action-menu-container .todo__btn-collection--disabled, .todo__action-menu-container .todo__btn-todo--disabled {
-      cursor: not-allowed; }
+      cursor: not-allowed;
+      pointer-events: none; }
       .todo__action-menu-container .todo__btn-collection--disabled svg, .todo__action-menu-container .todo__btn-todo--disabled svg {
         color: #cfcfcf; }
       .todo__action-menu-container .todo__btn-collection--disabled span, .todo__action-menu-container .todo__btn-todo--disabled span {
         color: #cfcfcf; }
   .todo__action-menu-container .todo__btn-cancel {
+    display: none;
     color: #fff !important;
     font-family: "fjallaone-regular";
     background-color: rgba(220, 53, 69, 0.85);
@@ -520,8 +529,7 @@ html, body {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
     .todo__action-menu-container .todo__btn-cancel:hover {
-      background-color: #dc3545;
-      color: #fff !important; }
+      text-shadow: 1px 1px 2px #808080; }
   .todo__action-menu-container .todo__btn-clear {
     display: none;
     background-color: #ededed;
@@ -533,8 +541,7 @@ html, body {
     border-bottom-right-radius: 24px;
     transition: background-color 1s; }
     .todo__action-menu-container .todo__btn-clear:hover {
-      color: #fff;
-      background-color: #303f9f; }
+      text-shadow: 1px 1px 2px #808080; }
 
 .todo__delete-message,
 .todo__move-message {
@@ -612,6 +619,8 @@ html, body {
   font-size: 36px;
   margin-top: 24px;
   margin-bottom: 0px; }
+  .todo__collection-header-title--link, .todo__collection-header-title--link:hover, .todo__collection-header-title--link:visited, .todo__collection-header-title--link:focus {
+    color: #fff; }
 
 .todo__collection-header-description {
   color: #ededed;
@@ -649,6 +658,8 @@ html, body {
   font-size: 18px;
   margin-top: 0px;
   margin-bottom: 0; }
+  .todo__todo-title-collection a, .todo__todo-title-collection :hover, .todo__todo-title-collection a:visited, .todo__todo-title-collection a:focus {
+    color: black; }
 
 .todo__collection-body-todo-container {
   margin-bottom: 24px; }
@@ -1076,6 +1087,83 @@ footer {
         background-color: #303f9f; }
       .todo__form .todo_container .todo__btn-form--dark {
         background-color: #444444; }
+
+.todo__container-level-bar {
+  background-color: rgba(237, 237, 237, 0.5);
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-top: -24px;
+  padding-bottom: 8px;
+  font-family: "fjallaone-regular";
+  border-bottom-left-radius: 75px;
+  border-bottom-right-radius: 75px;
+  box-shadow: 0px 4px 8px rgba(128, 128, 128, 0.5); }
+  .todo__container-level-bar--header {
+    padding-top: 1px;
+    text-align: center; }
+    .todo__container-level-bar--header--heading {
+      font-family: "fjallaone-regular";
+      font-size: 20px;
+      color: #212121;
+      margin: 0;
+      padding: 10px 0; }
+  .todo__container-level-bar--body {
+    width: 80%;
+    margin-left: 10%; }
+    .todo__container-level-bar--body ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      justify-content: space-around; }
+    .todo__container-level-bar--body li {
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #000; }
+
+.todo__search-bar-container {
+  margin: 48px 10% 0px 10%; }
+
+.todo__btn-search-bar,
+.todo__btn-search-bar:link,
+.todo__btn-search-bar:visited,
+.todo__btn-search-bar:hover,
+.todo__btn-search-bar:active {
+  background-color: #ededed !important;
+  color: #303f9f !important;
+  font-family: "fjallaone-regular";
+  text-transform: uppercase;
+  border-color: #ededed;
+  box-shadow: 0 0px 4px #808080;
+  font-size: 18px; }
+
+.todo__btn-search-bar--inverse,
+.todo__btn-search-bar--inverse:link,
+.todo__btn-search-bar--inverse:visited,
+.todo__btn-search-bar--inverse:hover,
+.todo__btn-search-bar--inverse:active {
+  background-color: #303f9f !important;
+  border-color: #303f9f !important;
+  color: white;
+  box-shadow: 0 0px 4px #212121;
+  font-family: "fjallaone-regular";
+  text-transform: uppercase;
+  font-size: 18px; }
+  .todo__btn-search-bar--inverse span,
+  .todo__btn-search-bar--inverse:link span,
+  .todo__btn-search-bar--inverse:visited span,
+  .todo__btn-search-bar--inverse:hover span,
+  .todo__btn-search-bar--inverse:active span {
+    color: #dc3545; }
+
+.todo__input-form {
+  background-color: #ededed;
+  box-shadow: inset 1px -1px 4px rgba(128, 128, 128, 0.6);
+  border-radius: 12px; }
 
 @media print {
   *:before, *:after {

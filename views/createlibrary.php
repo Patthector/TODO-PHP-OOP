@@ -4,8 +4,8 @@
 # LIBRARY FORM LOGIC #
 #--------------------#
 
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/collection.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/todo.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/collection.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
 
 $title_page = "Create Library | Make It Stick";
 $name = $message = $description = $collection = $tags = "";
@@ -41,12 +41,12 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 										$new_collection->getDescription( $description ),
 										$new_collection->getfatherCollection_id( $collection ),
 										1);
-			header("Location: /TODO-PHP-OOP [with JS]/views/library.php?id=" . $id);
+			header("Location: /TODO-PHP-OOP/views/library.php?id=" . $id);
 		}
 	}
 
 }
 
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/header.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/libraryform.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/footer.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";

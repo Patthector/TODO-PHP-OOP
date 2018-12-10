@@ -1,0 +1,38 @@
+.todo__search-bar-container{
+  margin:48px 10% 0px 10%;
+}
+
+.todo__btn-search-bar,
+.todo__btn-search-bar:link,
+.todo__btn-search-bar:visited,
+.todo__btn-search-bar:hover,
+.todo__btn-search-bar:active{
+  background-color: rgba($gallery,1) !important;
+  color:$sapphire !important;
+  font-family: $font-secondary;
+  text-transform: uppercase;
+  border-color: $gallery;
+  box-shadow: 0 0px 4px $gray;
+  //FONT
+  font-size:18px;
+}
+.todo__btn-search-bar--inverse,
+.todo__btn-search-bar--inverse:link,
+.todo__btn-search-bar--inverse:visited,
+.todo__btn-search-bar--inverse:hover,
+.todo__btn-search-bar--inverse:active{
+  background-color: $sapphire !important;
+  border-color:$sapphire !important;
+  color:white;
+  span{color:$tomato;}
+  box-shadow: 0 0px 4px $dark-night;
+  font-family: $font-secondary;
+  text-transform: uppercase;
+  font-size:18px;
+}
+.todo__input-form{
+  background-color:rgba($gallery,1);
+  //@include todo__white-form-gradient;
+  box-shadow:inset 1px -1px 4px rgba($gray,.6);
+  border-radius:12px;
+}

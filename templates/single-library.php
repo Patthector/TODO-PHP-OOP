@@ -40,18 +40,17 @@
             echo "<li style = \"margin:auto\">There are not subcategories available. Do you want to create a <a href = \"../views/library.php?coll=$id\"><b>new subcategory?</b></a></li>";
           } else{
             foreach($subcollections as $subcollection){
-              if(isset($delete_elements_on) && $delete_elements_on){
+              if(isset($select_elements_on) && $select_elements_on){
                 //"$delete_elements_on" is a variable that will be set to true via AJAx request to indicate the ACTION
                 //delete elements has been selected
                 //=>
-                //we will show the checkbox element next to the name of the subcategories
+                //we will show the checkbox element next to the name of the subcategories  ******
                 echo "<li>
-                        <label class=\"checkbox-container\" for = 'delete-subcollection-" . $subcollection["id"] ."'>
-                          <span class=\"checkmark\"></span>
+                        <label class=\"checkbox-container checkbox-container--subcollection\" for = 'delete-subcollection-" . $subcollection["id"] ."'>
+                        <span class=\"checkmark\"></span>
                             ". $subcollection["name"] ."
                         </label>
                       </li>";
-                  //<input type=\"checkbox\" checked=\"checked\" />
               } else{
                 echo "<li><a class = \"todo__collection-body-subcategory-list-item\" href = \"./library.php?id=" . $subcollection["id"] . "\">
                 ". $subcollection["name"] ."</a></li>";
@@ -69,35 +68,38 @@
           echo "<p style = \"text-align:center\">There are not todos available. Do you want to create a <a href = \"../views/todo.php\"><b>new todo?</b></a></p>";
         } else{
           foreach( $todosCollection as $todo){
-            if(isset($delete_elements_on) && $delete_elements_on){
-              echo "<label class = \"todo__collection-body-todo-container checkbox-container\" for = 'delete-todo-" . $todo["id"] ."'>
-                      <span class=\"checkmark\"></span>
+            if(isset($select_elements_on) && $select_elements_on){
+              echo "<label class = \" checkbox-container checkbox-container--todo todo__collection-body-todo-container\" for = 'delete-todo-" . $todo["id"] ."'>
+                      <span class=\"checkmark checkmark--todo\"></span>
                       <div class = \"todo__todo-title\">
                         <h4 class = \"todo__todo-title-collection\"><span>";
-                        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
+                        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
                         ?></span><?php if(isset($todo["name"]))echo ucfirst($todo["name"]);
               echo      "</h4>
                       </div>
                       <div class = \"todo__todo-description-container\">
                         <p class = \"todo__todo-description\">";
-                        if(isset($todo["description"])){
+                        if( isset( $todo["description"] ) && !empty( $todo["description"] ) ){
                           echo $todo["description"];
+                        }else{
+                          echo "There is not data available";
                         }
               echo    "</p>
-                      </div>
-                    </label>";
+                      </div></label>";
             } else{
                 echo "<div class = \"todo__collection-body-todo-container\">
                         <div class = \"todo__todo-title\">
                           <h4 class = \"todo__todo-title-collection\"><span>";
-                          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
+                          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
                           ?></span><?php if(isset($todo["name"]))echo ucfirst($todo["name"]);
                 echo      "</h4>
                         </div>
                         <div class = \"todo__todo-description-container\">
                           <p class = \"todo__todo-description\">";
-                          if(isset($todo["description"])){
+                          if( isset( $todo["description"] ) && !empty( $todo["description"] )){
                             echo $todo["description"];
+                          }else{
+                            echo "There is not data available";
                           }
                 echo    "</p>
                         </div>

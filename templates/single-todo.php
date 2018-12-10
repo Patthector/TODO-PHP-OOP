@@ -1,13 +1,14 @@
-<div id = "action-menu" class = "todo__action-menu-container">
+<!--<div id = "action-menu" class = "todo__action-menu-container">
   <ul class = "todo__action-menu">
-    <!--class = disabled -->
-    <li id = "todo_todo-button-edit" data-toggle="modal" data-target="#edit-todo-modal"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/edit-regular.svg"; ?><span>Edit</span></li>
-    <li data-toggle="modal" data-target="#move-todo-modal"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/exchange-alt-solid.svg"; ?><span>Move</span></li>
-    <li data-toggle="modal" data-target="#delete-todo-modal"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/trash-alt-solid.svg"; ?><span>Delete</span></li>
+
+    <li id = "todo_todo-button-edit" data-toggle="modal" data-target="#edit-todo-modal"><?php //include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/edit-regular.svg"; ?><span>Edit</span></li>
+    <li data-toggle="modal" data-target="#move-todo-modal"><?php //include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/exchange-alt-solid.svg"; ?><span>Move</span></li>
+    <li data-toggle="modal" data-target="#delete-todo-modal"><?php //include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/trash-alt-solid.svg"; ?><span>Delete</span></li>
   </ul>
-</div>
+</div>-->
 <?php
-  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/message.php";
+  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/action-menu.php";
+  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
 ?>
 <main role = "main">
 <div id = "todo_single-todo" class = "todo__general-container first-container">
@@ -24,7 +25,7 @@
         <span>Category</span>
         <?php if(isset($todo['id_collection'])){
           echo "<a href='";
-          echo $_SERVER['DOCUMENT_ROOT'] . "/TODO-PHP-OOP [with JS]/views/library.php?id=" . $todo["id_collection"] . "\"";
+          echo "/TODO-PHP-OOP/views/library.php?id=" . $todo["id_collection"] . "\"";
           echo "'>";
           if(isset($collection["name"])){
             echo $collection["name"];
@@ -36,7 +37,7 @@
     </div>
     <div class = "todo__todo-title">
       <h2 value = <?php echo $id;?> id = "todo_todo-name"><span><?php
-      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
       ?></span><?php if(isset($todo["name"]))echo $todo["name"]; ?></h2>
     </div>
     <div class = "todo__todo-description-container">
@@ -65,7 +66,7 @@
 </div>
 
 <?php
-//include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/update-todo-modal.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/delete-todo-modal.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/templates/move-todo-modal.php";
+//include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/update-todo-modal.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/delete-todo-modal.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
 ?>

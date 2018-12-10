@@ -54,8 +54,8 @@ class Todo
 	#---------------
 	public static function addTodo($name, $description = null, $id_collection = null, $tags = null, $id_user = 1, $level = null)
 	{
-		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php");
-		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/tag.php";
+		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
+		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/tag.php";
 		$name = strtolower($name);
 
 		$sql = "INSERT INTO todo_app_todos VALUES(NULL, ?, ?, CURRENT_TIMESTAMP(), NULL, ?, ?, ?)";
@@ -83,7 +83,7 @@ class Todo
 		# iterate for the array and in each tag check the next possibilities
 
 		$id_todo = self::getTodoByName( $name )[0]["id"];
-		if(!empty($tags)){var_dump($tags);
+		if(!empty($tags)){
 				Tag::addingTodoTagRelationship( $id_todo, $tags );
 		}
 		return $id_todo;
@@ -91,8 +91,8 @@ class Todo
 
 	public static function getTodo($id){
 
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
-		require_once($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/classes/tag.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
+		require_once($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/classes/tag.php");
 
 		$sql = "SELECT * FROM todo_app_todos
 				WHERE id = ?";
@@ -115,7 +115,7 @@ class Todo
 	}
 
 	public static function getTodoByName( $name ){
-		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
+		include($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
 		$name = strtolower($name);
 
 		$sql = "SELECT * FROM todo_app_todos WHERE name LIKE ?";
@@ -132,7 +132,7 @@ class Todo
 	}
 
 	public static function getTodosByFatherId( $id ){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
 		$sql = "SELECT * FROM todo_app_todos WHERE id_collection = ?";
 
@@ -141,7 +141,7 @@ class Todo
 			$result->bindParam(1, $id, PDO::PARAM_INT);
 			$result->execute();
 
-		} catch(Exception $e){ 
+		} catch(Exception $e){
 			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
 			return false;
 		}
@@ -150,8 +150,8 @@ class Todo
 
 	public static function deleteTodo($id){
 
-		require($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/inc/connection.php");
-		require_once($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP [with JS]/classes/tag.php");
+		require($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/inc/connection.php");
+		require_once($_SERVER['DOCUMENT_ROOT']. "/TODO-PHP-OOP/classes/tag.php");
 
 		# get the $id_tag for a couple of checks
 		$ids_tag = Tag::getIdTagByIdTodo( $id );
@@ -186,7 +186,7 @@ class Todo
 	}
 
 	public static function moveTodo($id_todo, $id_collection){
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
 		$sql = "UPDATE todo_app_todos SET id_collection = ? WHERE id = ?";
 
@@ -206,9 +206,9 @@ class Todo
 
 	public static function updateTodo( $id, $name = null, $description = null, $id_collection = null, $tags = null, $id_user = null, $level )
 	{
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/connection.php";
-		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/classes/tag.php";
-		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP [with JS]/inc/functions.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
+		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/tag.php";
+		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/functions.php";
 
 		//TODOS
 		$todo = self::getTodo( $id );
