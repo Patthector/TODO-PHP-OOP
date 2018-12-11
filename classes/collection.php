@@ -213,14 +213,11 @@ class Collection
 		# 1- Unlink Subcollections
 		self::unlinkFatherCollection( $id );
 
-		echo "////////////";
 		# 2- Delete TODOs
 		$todos = Todo::getTodosByFatherId( $id );
 		foreach( $todos as $t ){
 			Todo::deleteTodo( $t["id"] );
 		}
-		var_dump($todos);
-		echo "////////////";
 		# 3- Delete Collection
 		$sql = "DELETE FROM todo_app_collections WHERE id = ?";
 		try{

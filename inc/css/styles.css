@@ -349,6 +349,18 @@ html, body {
   font-size: 36px;
   margin-bottom: -50px; }
 
+div.todo__message {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 400px;
+  index: 2000;
+  background-color: #444444;
+  color: #ededed;
+  font-size: 18px;
+  font-weight: bold; }
+
 .todo__todo_title_container {
   background-color: #fff;
   border-radius: 10px 10px 0 0; }

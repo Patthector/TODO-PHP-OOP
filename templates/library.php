@@ -7,7 +7,6 @@
 <?php
   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
 //including the MODALS
-  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/delete-todo-modal.php";
   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/delete-collection-elements.php";
 ?>

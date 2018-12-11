@@ -46,11 +46,14 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 						$select_elements_on = true;
 						include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
 						include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
+						break;
+					case "reReadCollection":
+						$state = "readCollection";
+						include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+						include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
 				}
 			} else{
 				$state = "readCollection";
-				//this variable should be remove
-				//$delete_elements_on = true;
 				//INCLUDE THE FILES
 				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
 				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/library.php";
@@ -79,7 +82,6 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 	}
-	
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -89,14 +91,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 		if(!empty($id)){
 			if( Collection::deleteCollection($id) ){
-				$message = "Library deleted succesfully";
+				$msg = "Library deleted succesfully";
 			} else{
-				$message = "Unable to delete Library";
+				$msg = "Unable to delete Library";
 			}
 		} else{
-			$message = "Unable to delete Library";
+			$msg = "Unable to delete Library";
 		}
-		header("Location:/TODO-PHP-OOP?msg=" . $message);exit;
+		header("Location:/TODO-PHP-OOP");exit;
 	}
 	else if(!empty($_POST["moveCollection"])){
 
@@ -111,8 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		}else{
 			$msg = "Unable to moved TODO";
 		}
-
-		header("Location:/TODO-PHP-OOP/views/library.php?id=". $id ."&msg=" . $msg);exit;
+		header("Location:/TODO-PHP-OOP/views/library.php?id=". $id);exit;
 	}
 	else if(!empty($_POST["action"])){
 		$state = filter_input(INPUT_POST, "action", FILTER_SANITIZE_STRING);
@@ -131,15 +132,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			} else{
 				header("Location:./mytodos.php?msg=collection%20not%20found");exit;
 			}
-		} else if($state == "deleteElements"){
+		}
+		else if($state == "deleteElements"){
 			$array_post = $_POST;
 			foreach($array_post as $key=>$item){
 				if( !($key == "action") && !($key == "id") ){
 					$cleanKey = preg_replace("/[0-9]+/","", htmlentities($key));//EITHER todo OR subcollection
-
 					if($cleanKey == "todo"){
 						$id_item = filter_input(INPUT_POST, $key, FILTER_SANITIZE_NUMBER_INT);
-
 						Todo::deleteTodo($id_item);
 					} else{// => SUBCOLLECTION
 						$id_item = filter_input(INPUT_POST, $key, FILTER_SANITIZE_NUMBER_INT);
@@ -147,7 +147,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					}
 				}
 			}
-			//variables
 			$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 			$collection = Collection::getCollection($id);
 			$collections = Collection::getCollections();
@@ -156,7 +155,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$collection["todos"] = Todo::getTodosByFatherId( $id );//here we are adding all the todos associate with that collection
 			$title_heading = $collection["name"];
 			$state = "readCollection";
+			$msg = "Elements deleted successfully";
 			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
 		}
 		else if($state == "moveElements"){//****moveElements****
 			$array_post = $_POST;
@@ -184,7 +185,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$collection["todos"] = Todo::getTodosByFatherId( $id );//here we are adding all the todos associate with that collection
 			$title_heading = $collection["name"];
 			$state = "readCollection";
+			$msg = "Elements moved successfully";
 			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
 		}
 	}
 }

@@ -10,7 +10,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div><!--end-modal-header-->
+
       <div class="modal-body">
         <?php if(isset($state) && $state === "readTodo"){//READING TODO
           echo '<p>Select the Library where you are going to move this TODO: <b>' .$todo["name"]. '</b>.</p>';
@@ -22,7 +23,8 @@
         <form method = "POST" action =<?php if(isset($state) && $state === "readTodo"){ echo "todo.php";} else {echo "library.php";}?>>
           <div class = "form-group">
               <input type = "hidden" class = "form-control" name = "id" value = <?php if(isset($id)){echo $id;}else {echo 1;} ?>/>
-          </div>
+          </div><!--end-form-group-->
+
           <div class = "form-group">
             <select id = "todo__modal-move-select" class = "form-control" name = "collectionSelected" required>
               <option value=''>Select One Library</option>
@@ -40,25 +42,27 @@
               }
               ?>
             </select>
-          </div>
+          </div><!--end-form-group-->
+
           <input type = "hidden" name = <?php if(isset($state) && $state === "readTodo"){ echo "moveTodo";} else if(isset($state) && $state === "readCollection"){echo "moveCollection";}?>
                  value = <?php if(isset($state) && $state === "readTodo"){ echo "moveTodo";} else if(isset($state) && $state === "readCollection" ){echo "moveCollection";}?> />
           <input style = "display:none;" type = "submit" id = "move-todo-submit" />
         </form>
-      </div>
+      </div><!--end-modal-body-->
+
       <div class="modal-footer todo__modal-footer">
         <button class="btn todo__btn-modal todo__btn-modal--default" data-dismiss="modal">Cancel</button>
         <?php
           if(isset($state)){// if we have an $state variable we are on readTODO || readCollection
-            echo "<label class=\"btn todo__btn-modal todo__btn-modal--info\" for = \"move-todo-\">Move</label>";
+            echo "<label class=\"btn todo__btn-modal todo__btn-modal--info\" for = \"move-todo-submit\">Move</label>";
           }else{// we are selectingElements
-            echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--info\">Move</button";
+            echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--info\" data-dismiss=\"modal\">Move</button>";
           }
          ?>
-      </div>
-    </div>
-  </div>
-</div>
+      </div><!--end-modal-footer-->
+    </div><!--end-modal-content-->
+  </div><!--end-modal-dialog-->
+</div><!--modal-->
 
 
 <!--**********************DELETE MODAL*********************-->
@@ -89,10 +93,15 @@
         if(isset($state)){// if we have an $state variable we are on readTODO || readCollection
           echo "<label class=\"btn todo__btn-modal todo__btn-modal--danger\" for = \"delete-todo-submit\">Delete</label>";
         } else{// we are selectingElements
-          echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--danger\">Delete</button";
+          echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--danger\" data-dismiss=\"modal\">Delete</button";
         }
         ?>
       </div>
     </div>
   </div>
 </div>
+<form style = "display:none" name = "delete_todo" method = "POST" action = <?php if($state === "readTodo"){ echo "todo.php";} else if($state === "readCollection"){echo "library.php";}?>>
+  <input type = "hidden" value = <?php if(isset($id)){echo $id;}else {echo 1;} ?>
+    name = <?php if($state === "readTodo"){echo "deleteTodo";} else if($state === "readCollection"){echo "deleteCollection";} ?> />
+  <input type = "submit" id = "delete-todo-submit" />
+</form>

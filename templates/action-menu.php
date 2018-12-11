@@ -53,7 +53,7 @@
     <div id = "action-menu" class = "todo__action-menu-container">
       <div class = "todo__action-menu-container--aux">
         <a id = "todo__btn-menu--cancel" class = "btn todo__btn-cancel">CANCEL</a>
-          <ul class = "todo__action-menu">
+          <ul id = "todo__action-menu-list" class = "todo__action-menu">
             <!--EDIT BUTTON-->
             <li id = "todo_collection-button-edit" class = "border-bottom-left-radius todo__btn-collection">
               <?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/edit-regular.svg"; ?>
@@ -99,7 +99,7 @@
               }
             ?>
           </ul>
-          <button class = "btn btn-danger todo__btn-clear">Clear Selection</button>
+          <button id = "todo__action-menu-btn-clear" class = "btn btn-danger todo__btn-clear">Clear Selection</button>
         </div>
       </div>
 <?php

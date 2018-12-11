@@ -1,0 +1,12 @@
+div.todo__message{
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 400px;
+  index:2000;
+  background-color: $tundora;
+  color:$gallery;
+  font-size:18px;
+  font-weight: bold;
+}

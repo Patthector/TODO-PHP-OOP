@@ -91,8 +91,8 @@
                         <div class = \"todo__todo-title\">
                           <h4 class = \"todo__todo-title-collection\"><span>";
                           include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
-                          ?></span><?php if(isset($todo["name"]))echo ucfirst($todo["name"]);
-                echo      "</h4>
+                          ?></span><a href = "<?php echo "/TODO-PHP-OOP/views/todo.php?id=" . $todo["id"] ?>"><?php if(isset($todo["name"]))echo ucfirst($todo["name"]);
+                echo      "</a></h4>
                         </div>
                         <div class = \"todo__todo-description-container\">
                           <p class = \"todo__todo-description\">";
