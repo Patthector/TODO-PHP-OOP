@@ -62,7 +62,7 @@
             <!--MOVE BUTTON-->
             <?php
               //EITHER DROPDOWN OR THE SINGLE-BUTTON
-              if( isset($select_elements_on) && ($select_elements_on === true) ){
+              if( !empty($collection->get__select_elements()) && ($collection->get__select_elements() === true) ){
                 echo "<label id = \"todo_collection-button-move\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class = \"border-bottom-right-radius todo__btn-collection\">";
                          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/exchange-alt-solid.svg";
                 echo      "<span>Move</span>
@@ -81,7 +81,7 @@
 
               //--DELETE BUTTON--
               //EITHER DROPDOWN OR THE SINGLE-BUTTON
-              if( isset($select_elements_on) && ($select_elements_on) ){
+              if( !empty($collection->get__select_elements()) && ($collection->get__select_elements() === true) ){
                 echo "<label id = \"todo_collection-button-delete\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class = \"border-bottom-right-radius todo__btn-collection\">";
                          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/trash-alt-solid.svg";
                 echo      "<span>Delete</span>

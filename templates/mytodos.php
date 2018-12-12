@@ -1,7 +1,6 @@
 
 <main>
 	<!-- MESSAGE-STATUS -->
-	<?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php"; ?>
 	<div class = "full-container">
 		<h2 class = "todo__main-heading">myTODOs</h2>
 		<?php

@@ -1,13 +1,8 @@
 <!-- TODO FORM TEMPLATE -->
 
 <div class = "todo__form">
-	<?php
-	if(!empty($message)){
-		echo "<p>" . $message . "</p>";
-	}
-	?>
 	<div class = "jumbotron_container">
-		<h1>Create Library</h1>
+		<h1><?php echo $this->get__page_heading(); ?></h1>
 		<div class = "guidelines_container">
 			<ul>
 				<li>Give a meaningful descripiton for a later view</li>
@@ -25,8 +20,8 @@
 					<label for = "collection_name">Title</label>
 					<input type = "text" name = "name" id = "collection_name" class="form-control todo__input-form" placeholder="Default LIBRARY"
 			<?php
-			if(!empty($name)){
-				echo "value='" . $name ."'";
+			if(!empty($this->get__collection_name())){
+				echo "value='" . $this->get__collection_name() ."'";
 			}
 			?>
 			 />
@@ -35,7 +30,7 @@
 	 <div class = "row todo__form-separator">
 		 <div class = "col">
 			<label for = "collection_description">Description</label>
-			<textarea name = "description" id = "collection_description" class="form-control todo__input-form"><?php if(isset($description)) echo $description;?></textarea>
+			<textarea name = "description" id = "collection_description" class="form-control todo__input-form"><?php if( !empty($this->get__collection_description())) echo $this->get__collection_description();?></textarea>
 		</div>
 	</div>
 			<span class = "form-subheading">Additional Information</span>
@@ -47,7 +42,9 @@
 							<select id = "collection_library" name = "collection" class="form-control todo__input-form">
 								<option value = "">Main Library</option>
 								<?php
-								if(isset($fatherCollection)){
+								$collections = self::get__collection_full_list_collections();
+								if( !empty($this->get__collection_father_id()) ){
+									$fatherCollection = $this->get__collection_father_id();
 									foreach($collections as $c){
 										if($fatherCollection === $c["id"]){
 												echo "<option value='" . $c["id"] . "' selected>" . $c["name"] . "</option>";

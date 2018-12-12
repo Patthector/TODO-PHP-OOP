@@ -201,6 +201,23 @@ class Collection
 		return true;
 	}
 
+	public static function getTodosByFatherId( $id ){
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
+
+		$sql = "SELECT * FROM todo_app_todos WHERE id_collection = ?";
+
+		try{
+			$result = $db->prepare($sql);
+			$result->bindParam(1, $id, PDO::PARAM_INT);
+			$result->execute();
+
+		} catch(Exception $e){
+			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+			return false;
+		}
+		return $result->fetchAll(PDO::FETCH_ASSOC);
+	}
+
 	public static function deleteCollection( $id ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
@@ -214,7 +231,7 @@ class Collection
 		self::unlinkFatherCollection( $id );
 
 		# 2- Delete TODOs
-		$todos = Todo::getTodosByFatherId( $id );
+		$todos = self::getTodosByFatherId( $id );
 		foreach( $todos as $t ){
 			Todo::deleteTodo( $t["id"] );
 		}

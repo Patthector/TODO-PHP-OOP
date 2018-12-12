@@ -6,7 +6,7 @@
       echo "";
     } else if($state == "readTodo"){
       echo "footer-absolute";//niente
-    }
+    }else{echo "";}
   ?>
   ">
     <p class="coder-message">This application has been created by <a href = "#"  class = "high-sapphire">@patthector</a> as an example project. The objective of this project is to put in practice some konwlegde, as the following: Photoshop, Illustrator, PHP, OOP, mySQL. This app is free to use for everybody.</p>

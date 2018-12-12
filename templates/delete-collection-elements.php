@@ -1,6 +1,7 @@
 <form id = "delete-form" action = "library.php" method = "POST" style = "display:none">
 <?php
 //SUBCATEGORIES
+$subcollections = $collection->get__collection_subcollections();
 if(!(count($subcollections) == 0)){
   foreach($subcollections as $subcollection){
     echo "<input type = 'checkbox' name = 'subcollection";
@@ -13,7 +14,7 @@ if(!(count($subcollections) == 0)){
   }
 }
 //TODOS
-$todosCollection = $collection["todos"];
+$todosCollection = $collection->get__collection_todos();
 if(!(count($todosCollection) == 0)){
   foreach( $todosCollection as $todo){
     echo "<input type = 'checkbox' class = \"collection_delete_checker\"  name = 'todo";
@@ -26,6 +27,5 @@ if(!(count($todosCollection) == 0)){
   }
 }
 //<input type = "submit" id = "action-menu_collection" name = "submit"/>
-
  ?>
 </form>
