@@ -2,11 +2,44 @@
   </div>
   <footer class="mastfoot mt-auto dotted-border
   <?php
-    if($state == "createTodo" || $state == "createCollection" || $state == "editTodo" || $state == "editCollection" || $state == "readCollection"){
-      echo "";
-    } else if($state == "readTodo"){
-      echo "footer-absolute";//niente
-    }else{echo "";}
+  //var_dump($todo);exit;
+  if( isset( $todo ) ){
+    switch ( $todo::get__state()) {
+      case "createTodo":
+        echo "";
+        break;
+
+      case "editTodo":
+        echo "";
+        break;
+
+      case "readTodo":
+        echo "footer-absolute";
+        break;
+
+      default:
+        echo "";
+        break;
+    }
+  } else if( $collection ){
+    switch ( $collection::get__state()) {
+      case "createCollection":
+        echo "";
+        break;
+
+      case "editCollection":
+        echo "";
+        break;
+
+      case "readCollection":
+        echo "";
+        break;
+
+      default:
+        echo "";
+        break;
+    }
+  }
   ?>
   ">
     <p class="coder-message">This application has been created by <a href = "#"  class = "high-sapphire">@patthector</a> as an example project. The objective of this project is to put in practice some konwlegde, as the following: Photoshop, Illustrator, PHP, OOP, mySQL. This app is free to use for everybody.</p>
@@ -14,7 +47,6 @@
       <p>All Rights Reserved.  <a href="https://getbootstrap.com/">by Pattor</a>, <?php echo date("Y");?>.</p>
     </div>
   </footer>
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

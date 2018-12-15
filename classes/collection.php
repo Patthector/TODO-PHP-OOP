@@ -111,7 +111,22 @@ class Collection
 		}
 		return $result->fetch(PDO::FETCH_ASSOC);
 	}
+	public static function getCollections($limit = null, $offset = null){
 
+		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
+
+		$sql = "SELECT id FROM todo_app_collections ORDER BY name ASC";
+		try{
+			$collections = $db->prepare( $sql );
+			$collections->execute();
+
+		} catch(Exception $e){
+			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+			return false;
+		}
+		return $collections->fetchAll(PDO::FETCH_ASSOC);
+	}
+  /*
 	public static function getCollections($limit = null, $offset = null){
 
 		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
@@ -126,7 +141,7 @@ class Collection
 			return false;
 		}
 		return $collections->fetchAll(PDO::FETCH_ASSOC);
-	}
+	}*/
 
 	public static function getSubcollections( $id ){
 

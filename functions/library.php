@@ -4,7 +4,7 @@ class CollectionLogic extends Collection{
 
   private $page_title;
   private $page_heading;
-  private $msg;
+  private static $msg;
   private static $state;
   private $collection_id;
   private $collection_name;
@@ -18,77 +18,115 @@ class CollectionLogic extends Collection{
   //
   private $select_elements = false;
 
-  function __construct($collection_id){
-   $this->collection_id = self::getCollection( $collection_id )["id"];
+  function __construct( $collection_id, $get_full_library =  null ){
+
+   $aux = self::getCollection( $collection_id );
+   $this->set__collection_id( $aux["id"] );
 
    if( !empty( $this->collection_id ) ){ // => if we have collection, let's finish building it
-     $this->collection_name = self::getCollection( $this->get__collection_id() )["name"];
-     $this->collection_father_id = self::getCollection( $this->get__collection_id() )["id_fatherCollection"];
-     $this->collection_description = self::getCollection( $this->get__collection_id() )["description"];
-     $this->collection_created_date = self::getCollection( $this->get__collection_id() )["created_date"];
-     $this->collection_updated_date = self::getCollection( $this->get__collection_id() )["updated_date"];
-     $this->collection_subcollections = self::getSubcollections( $this->get__collection_id() );
-     $this->collection_path = self::getFullPath( $this->get__collection_id() );
-     $this->collection_todos = self::getTodosByFatherId( $this->get__collection_id() );
+     $this->collection_name = $aux["name"];
 
-     self::$collection_full_list_collections = self::getCollections();
-     $this->title_heading = $this->get__collection_name();
+     if( !empty( $get_full_library ) && $get_full_library ){
+       $this->set__collection_father_id( $aux["id_fatherCollection"] );
+       $this->set__collection_description( $aux["description"] );
+       $this->set__collection_created_date( $aux["created_date"] );
+       $this->set__collection_updated_date( $aux["updated_date"] );
+       $this->set__collection_subcollections( self::getSubcollections( $this->get__collection_id() ) );
+       $this->set__collection_path( self::getFullPath( $this->get__collection_id() ) );
+       $this->set__collection_todos( self::getTodosByFatherId( $this->get__collection_id() ) );
+       $this->set__title_heading( $this->get__collection_name() );
+     }
     }
   }
 
   //*******SETTERS & GETTERS*******
-  function get__collection_id(){
+  public function get__collection_id(){
     return $this->collection_id;
   }
-  function get__collection_father_id(){
+  public function get__collection_father_id(){
     return $this->collection_father_id;
   }
-  function get__collection_name(){
+  public function get__collection_name(){
     return $this->collection_name;
   }
-  function get__collection_description(){
+  public function get__collection_description(){
     return $this->collection_description;
   }
-  function get__collection_subcollections(){
+  public function get__collection_subcollections(){
     return $this->collection_subcollections;
   }
-  function get__collection_path(){
+  public function get__collection_path(){
     return $this->collection_path;
   }
-  function get__collection_todos(){
+  public function get__collection_todos(){
     return $this->collection_todos;
   }
-  function get__page_heading(){
+  public function get__page_heading(){
     return $this->page_heading;
   }
-  function get__select_elements(){
+  public function get__select_elements(){
     return $this->select_elements;
   }
-  function get__collection_created_date(){
+  public function get__collection_created_date(){
     return $this->collection_created_date;
   }
-  function get__collection_updated_date(){
+  public function get__collection_updated_date(){
     return $this->collection_updated_date;
   }
-  static function get__state(){
+  public static function get__state(){
     return self::$state;
   }
-  static function get__collection_full_list_collections(){
-    return self::$collection_full_list_collections;
+  public static function get__msg(){
+    return self::$msg;
   }
-
-  function set__page_title( $page_title ){
+  public static function get__full_list_collections(){
+    return parent::getCollections();
+  }
+//////////////////////////////////////////////////////
+  protected function set__collection_id( $collection_id ){
+    $this->collection_id = $collection_id;
+  }
+  protected function set__collection_father_id( $collection_father_id ){
+    $this->collection_father_id = $collection_father_id;
+  }
+  protected function set__collection_name( $collection_name ){
+    $this->collection_name = $collection_name;
+  }
+  protected function set__collection_description( $collection_description ){
+    $this->collection_description = $collection_description;
+  }
+  protected function set__collection_subcollections( $collection_subcollections ){
+    $this->collection_subcollections = $collection_subcollections;
+  }
+  protected function set__collection_path( $collection_path ){
+    $this->collection_path = $collection_path;
+  }
+  protected function set__collection_todos( $collection_todos ){
+    $this->collection_todos = $collection_todos;
+  }
+  protected function set__collection_created_date( $collection_created_date ){
+    $this->collection_created_date = $collection_created_date;
+  }
+  protected function set__collection_updated_date( $collection_updated_date ){
+    $this->collection_updated_date = $collection_updated_date;
+  }
+  protected function set__page_title( $page_title ){
     $this->page_title = $page_title;
   }
-  function set__page_heading( $page_heading ){
+  protected function set__page_heading( $page_heading ){
     $this->page_heading = $page_heading;
   }
-
-  function set__select_elements( $value ){
+  protected function set__title_heading( $title_heading ){
+    $this->title_heading = $title_heading;
+  }
+  protected function set__select_elements( $value ){
     $this->select_elements = $value;
   }
-  static function set__state( $state ){
+  public static function set__state( $state ){
     self::$state = $state;
+  }
+  public static function set__msg( $msg ){
+    self::$msg = $msg;
   }
 
   public static function collection_createCollection( $array_post ){
@@ -102,34 +140,57 @@ class CollectionLogic extends Collection{
                                      $collection->getDescription(),
                                      $collection->getfatherCollection_id());
     if(!empty($id)){
-      header("Location:./library.php?id=".$id);exit;
+      $msg = "Collection \"$name\" created successfully.";
+      header("Location:./library.php?id=$id&msg=$msg");exit;
     } else{
       $msg = "A problem has been encounter while creating this Collection!";
-      header("Location:./mytodos.php");exit;
+      header("Location:./mytodos.php?msg=$msg");exit;
     }
   }
+  public function collection_readCollection(  ){
+    $output = [];
+    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+    $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/library.php";
+    $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
+    return $output;
+  }
+  public static function collection_formCollection(  ){
+    $output = [];
+    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+		$output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
+		$output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
+    return $output;
+  }
 
-  public function readCollection( $action ){
+  public function collection_determineAction( $action ){
+    $output = [];
     switch($action){
       //---EDIT COLLECTION---
       case "editItem":
         $this->set__page_heading( "edit collection" );
         self::set__state( "editCollection" );
-        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
+        self::set__msg( "Update all the fields that you wish!" );
+        $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
+        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
         break;
       //---SELECT ELEMENTS---
       case "selectElements":
         $this->set__select_elements(true);
-        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
+        self::set__msg( "Select the elements you want to move/delete and the click in the menu icon to proceed with the action." );
+        $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
+        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
         break;
       //---REWIND COLLECTION
       case "reReadCollection":
         self::set__state( "readCollection" );
-        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
+        self::set__msg( "Don't worry. Everything is back to normal." );
+        $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
+        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
         break;
     }
+    return $output;
   }
 
   public function collection_deleteCollection( $collection_id ){
@@ -148,7 +209,9 @@ class CollectionLogic extends Collection{
 
   public function collection_moveCollection( $id_collection, $id_placer_collection, $collection_name ){
     if( !empty($id_collection) && !empty($id_placer_collection) ){
+
 			if(self::moveCollection($id_collection, $id_placer_collection)){
+
 				$msg = "This COLLECTION has been successfully moved to " . $name_collection;
 			}
 		}else{
@@ -159,7 +222,7 @@ class CollectionLogic extends Collection{
   }
 
   public function collection_deleteElements( $array_post ){
-
+    $output = [];
     foreach($array_post as $key=>$item){
       if( !($key == "action") && !($key == "id") ){
         $cleanKey = preg_replace("/[0-9]+/","", htmlentities($key));//EITHER todo OR subcollection
@@ -175,13 +238,13 @@ class CollectionLogic extends Collection{
     $this->set__page_heading( $this->get__collection_name() );
     self::set__state( "readCollection" );
     $msg = "Elements deleted successfully";
-    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
-    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-    return;
+    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+    $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
+    return $output;
   }
 
   public function collection_moveElements( $array_post, $id_fatherCollection ){
-
+    $output = [];
     foreach( $array_post as $key => $item ){
       if( !($key == "action") && !($key == "id") && !($key == "fatherCollection") ){
         $cleanKey = preg_replace("/[0-9]+/","", htmlentities($key));//EITHER todo OR subcollection
@@ -200,9 +263,9 @@ class CollectionLogic extends Collection{
     $this->set__page_heading( $this->get__collection_name() );
     self::set__state( "readCollection" );
     $msg = "Elements moved successfully";
-    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
-    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-    return;
+    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+    $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
+    return $output;
   }
 
   //******HELPERS*****/

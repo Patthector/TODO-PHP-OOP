@@ -20,13 +20,45 @@
     <div id = "main" class = "container-fluid todo__main-background">
       <header id="header" class="header__blue-gradient
       <?php
-        if($state == "createTodo" || $state == "createCollection" || $state == "editTodo" || $state == "editCollection"){
-          echo " white-header";
-        } else if($state == "readTodo" || $state == "readCollection"){
-          echo "";//niente
-        } else{
-          echo "";
+      if( isset( $todo ) ){
+        switch ( $todo::get__state()) {
+          case "createTodo":
+            echo "white-header";
+            break;
+
+          case "editTodo":
+            echo "white-header";
+            break;
+
+          case "readTodo":
+            echo "";
+            break;
+
+          default:
+            echo "";
+            break;
         }
+      } else if( isset( $collection ) ){
+        switch ( $collection::get__state()) {
+          case "createCollection":
+            echo "white-header";
+            break;
+
+          case "editCollection":
+            echo "white-header";
+            break;
+
+          case "readCollection":
+            echo "";
+            break;
+
+          default:
+            echo "";
+            break;
+        }
+      } else{
+        echo "";
+      }
       ?>
       ">
         <ul class=" navbar-nav header__menu">
@@ -34,19 +66,48 @@
             <a class="" href="/TODO-PHP-OOP/views/mytodos.php">myTODOs</a>
           </li>
           <li class="header__logo">
-            <a id = "logo-svg" class="h1" href="/TODO-PHP-OOP">
+            <a id = "logo-svg" class="h1" href="/TODO-PHP-OOP/index.php">
               <?php
-              if(isset($state)){
-                if($state == "createTodo" || $state == "createCollection" || $state == "editTodo" || $state == "editCollection"){
-                   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/blue-logo.html";
-                } else if($state == "readTodo" || $state == "readCollection"){
+              if( isset( $todo ) ){
+                switch ( $todo::get__state()) {
+                  case "createTodo":
+                    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/blue-logo.html";
+                    break;
+
+                  case "editTodo":
+                    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/blue-logo.html";
+                    break;
+
+                  case "readTodo":
                    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/white-logo.html";
+                    break;
+
+                  default:
+                    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/white-logo.html";
+                    break;
                 }
-              }
-              else{
+              } else if( isset( $collection ) ){
+                switch ( $collection::get__state()) {
+                  case "createCollection":
+                    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/blue-logo.html";
+                    break;
+
+                  case "editCollection":
+                    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/blue-logo.html";
+                    break;
+
+                  case "readCollection":
+                   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/white-logo.html";
+                    break;
+
+                  default:
+                    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/white-logo.html";
+                    break;
+                }
+              } else{
                 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/white-logo.html";
               }
-               ?></a>
+              ?></a>
           </li>
           <li class="header__menu-item">
             <a class="" href="#">Log out</a>

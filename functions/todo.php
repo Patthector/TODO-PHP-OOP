@@ -1,0 +1,202 @@
+<?php
+class TodoLogic extends Todo{
+
+  private $page_title;
+  private static $page_heading;
+  private $msg;
+  private static $state;
+  private $todo_id;
+  private $todo_father_id;
+  private $todo_name;
+  private $todo_descripiton;
+  private $todo_created_date;
+  private $todo_updated_date;
+  private $todo_tags;
+  private $todo_level;
+  private static $todo_full_list_collections;
+
+  function __construct( $todo_id ){
+
+    $aux = parent::getTodo( $todo_id );
+    $this->set__todo_id( $todo_id );
+
+    if( !empty( $this->get__todo_id() ) ){
+      $this->set__todo_name( $aux["name"] );
+      $this->set__todo_father_id( $aux["id_collection"] );
+      $this->set__todo_description( $aux["description"] );
+      $this->set__todo_created_date( $aux["created_date"] );
+      $this->set__todo_updated_date( $aux["updated_date"] );
+      $this->set__todo_level( $aux["level"] );
+      $this->set__todo_tags( $aux["tags"] );
+
+      self::$todo_full_list_collections = Collection::getCollections();
+    }
+  }
+
+  //*******SETTERS & GETTERS*******
+  public function get__todo_id(){
+    return $this->todo_id;
+  }
+  public function get__todo_father_id(){
+    return $this->todo_father_id;
+  }
+  public function get__todo_name(){
+    return $this->todo_name;
+  }
+  public function get__todo_description(){
+    return $this->todo_description;
+  }
+  public static function get__page_heading(){
+    return self::$page_heading;
+  }
+  public function get__select_elements(){
+    return $this->select_elements;
+  }
+  public function get__todo_created_date(){
+    return $this->todo_created_date;
+  }
+  public function get__todo_updated_date(){
+    return $this->todo_updated_date;
+  }
+  public function get__todo_level(){
+    return $this->todo_level;
+  }
+  public function get__todo_tags(){
+    return $this->todo_tags;
+  }
+  public static function get__state(){
+    return self::$state;
+  }
+////////////////////////////////////////////////
+  private function set__todo_id( $todo_id ){
+    $this->todo_id = $todo_id;
+  }
+  private function set__todo_name( $todo_name ){
+    $this->todo_name = $todo_name;
+  }
+  private function set__todo_description( $todo_description ){
+    $this->todo_description = $todo_description;
+  }
+  private function set__todo_father_id( $todo_father_id ){
+    $this->todo_father_id = $todo_father_id;
+  }
+  private function set__todo_level( $todo_level ){
+    $this->todo_level = $todo_level;
+  }
+  private function set__todo_tags( $todo_tags ){
+    $this->todo_tags = $todo_tags;
+  }
+  private function set__page_title( $page_title ){
+    $this->page_title = $page_title;
+  }
+  private static function set__page_heading( $page_heading ){
+    self::$page_heading = $page_heading;
+  }
+  public function set__todo_created_date( $todo_created_date ){
+    $this->todo_created_date = $todo_created_date;
+  }
+  public function set__todo_updated_date( $todo_updated_date ){
+    $this->todo_updated_date = $todo_updated_date;
+  }
+  private static function set__state( $state ){
+    self::$state = $state;
+  }
+
+  function readTodo_logic( $todo_id, $action=null ){
+
+    if( isset( $action ) && ($action === "editItem") ){//EDIT TODO
+      self::set__page_heading( "edit todo" );
+      self::set__state( "editTodo" );
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
+    }
+    else{
+      $this->set__page_heading( $this->get__todo_name() );
+      self::set__state( "readTodo" );
+    }
+
+    return;
+  }
+  static function createTodo_logic(  ){
+    self::set__page_heading( "create todo" );
+    self::set__state( "createTodo" );
+
+    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
+    return;
+  }
+  function deleteTodo_logic( $todo_id ){
+
+    if(!empty($todo_id)){
+			if( parent::deleteTodo($todo_id) ){
+				$msg = "TODO deleted succesfully";
+			} else{
+				$msg = "Unable to delete TODO";
+			}
+		} else{
+			$msg = "Unable to delete TODO. Invalid \"ID\"";
+		}
+		header("Location:/TODO-PHP-OOP/views/mytodos.php");
+    exit;
+  }
+  function moveTodo_logic( $todo_id, $collection_id ){
+
+    if( !empty($todo_id) && !empty($collection_id) ){
+      if(parent::moveTodo($todo_id, $collection_id)){
+        $name_collection = Collection::getCollection($collection_id)["name"];
+        $msg = "TODO has been successfully moved to " . $name_collection;
+      }
+    }else{
+      $msg = "Unable to moved TODO";
+    }
+    header("Location:/TODO-PHP-OOP/views/todo.php?id=". $id_todo );
+    exit;
+  }
+  function editTodo_logic( $array_post ){
+
+    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+		$level = filter_input(INPUT_POST, "level", FILTER_SANITIZE_STRING);
+		$description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
+		$collection = filter_input(INPUT_POST, "collection", FILTER_SANITIZE_NUMBER_INT);
+    if(!empty($array_post["tags"])){
+			$tags = filter_input(INPUT_POST, "tags", FILTER_SANITIZE_STRING);
+			$tags = explode(",", $tags);
+		} else{
+			$tags = NULL;
+		}
+
+    if( parent::updateTodo( $id,$name, $description, $collection, $tags, 1, $level)){
+      $msg = "&msg=TODO successfully edited";
+    } else{
+      $msg = "&msg=Unable to edit TODO";
+    }
+    header("Location:/TODO-PHP-OOP/views/todo.php?id=" . $id . "&msg=todo%20succesfully%20edited");
+    exit;
+  }
+  static function addTodo_logic( $array_post ){
+
+    $level = $_POST["level"];
+		if(!empty($_POST["description"])){
+			$description = trim(filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING));
+		}
+		if(!empty($_POST["library"])){//change for father_id
+			$library = filter_input(INPUT_POST, "library", FILTER_SANITIZE_NUMBER_INT);
+		}
+		if(!empty($_POST["tags"])){
+			$tags = trim( filter_input(INPUT_POST, "tags", FILTER_SANITIZE_STRING) );
+			$tags = explode(",", $tags);    //PATTOR-msg=> I changed this from " " to ", "
+		}
+		if(!empty($_POST["name"])){
+			$name = trim( filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING) );
+			if(empty($name)){
+				$msg = "A TITLE must be given";
+			} else{
+				$id = parent::addTodo( $name, $description, $library, $tags, 1, $level);
+				header("Location: /TODO-PHP-OOP/views/todo.php?id=" . $id );
+        exit;
+			}
+		}
+    return;
+  }
+
+}

@@ -7,7 +7,7 @@
 	}
 	?>
 	<div class = "jumbotron_container">
-		<h1><?php if(isset($todo_heading)){ echo $todo_heading;}?></h1>
+		<h1><?php if( !empty( TodoLogic::get__page_heading() )){ echo TodoLogic::get__page_heading();}?></h1>
 		<div class = "guidelines_container">
 			<ul>
 				<li>Include levels of importance to prioritaze your tasks</li>
@@ -26,8 +26,8 @@
 					<label for = "todo_name">Title</label>
 					<input type = "text" name = "name" id = "todo_name" class = "form-control todo__input-form" placeholder="Default TODO"
 					<?php
-					if(!empty($name)){
-						echo "value='" . $name ."'";
+					if( isset( $todo ) && !empty( $todo->get__todo_name() )){
+						echo "value='" . $todo->get__todo_name() ."'";
 					}
 					?>
 					/>
@@ -38,7 +38,7 @@
 						<option value = "">Select level</option>
 						<?php
 						foreach(array(1,2,3,4,5) as $i){
-							if(!empty($level) && $i == $level){//SELECTED
+							if( isset( $todo ) && !empty( $todo->get__todo_level() ) && $i == $todo->get__todo_level() ){//SELECTED
 								echo "<option value = $i selected>Level $i</option>";
 							} else{
 								echo "<option value = $i >";
@@ -52,7 +52,7 @@
 			<div class = "row todo__form-separator">
 				<div class = "col">
 					<label for = "todo_description">Description</label>
-					<textarea name = "description" id = "todo_description" class = "form-control todo__input-form"><?php if(isset($description)) echo trim($description);?></textarea>
+					<textarea name = "description" id = "todo_description" class = "form-control todo__input-form" placeholder = "Type a short description [optional]"><?php if( isset( $todo ) && !empty( $todo->get__todo_description() )) echo trim( $todo->get__todo_description() );?></textarea>
 				</div>
 			</div>
 					<span class = "form-subheading">Additional Information</span>
@@ -63,12 +63,14 @@
 									<label for = "todo_library">Library</label>
 									<select id = "todo_library" name = "library" class="form-control todo__input-form">
 										<?php
-										if(!isset($collection)){$collection = "Unknow";}
+									//	if(!isset($collection)){$collection = "Unknow";}
+									$collections = CollectionLogic::get__full_list_collections();
 										foreach($collections as $item){
-											if( $item["name"] === $collection ){
-												echo "<option value='" . $item["id"] . "' selected>" . $item["name"] . "</option>";
+											$item_collection = new CollectionLogic( $item["id"] );
+											if( isset( $todo ) && $todo->get__todo_father_id() === $item_collection->get__collection_id() ){
+												echo "<option value='" . $todo->get__todo_father_id() . "' selected>" . $todo->get__todo_father_name() . "</option>";
 											} else{
-												echo "<option value='" . $item["id"] . "'>" . $item["name"] . "</option>";
+												echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
 											}
 										}
 										?>

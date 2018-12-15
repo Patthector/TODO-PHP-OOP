@@ -2,7 +2,7 @@
 
 <div class = "todo__form">
 	<div class = "jumbotron_container">
-		<h1><?php echo $this->get__page_heading(); ?></h1>
+		<h1><?php if( isset( $collection)){echo $collection->get__page_heading();}else{ echo $library_heading;} ?></h1>
 		<div class = "guidelines_container">
 			<ul>
 				<li>Give a meaningful descripiton for a later view</li>
@@ -20,8 +20,8 @@
 					<label for = "collection_name">Title</label>
 					<input type = "text" name = "name" id = "collection_name" class="form-control todo__input-form" placeholder="Default LIBRARY"
 			<?php
-			if(!empty($this->get__collection_name())){
-				echo "value='" . $this->get__collection_name() ."'";
+			if( isset( $collection ) && !empty($collection->get__collection_name())){
+				echo "value='" . $collection->get__collection_name() ."'";
 			}
 			?>
 			 />
@@ -30,7 +30,7 @@
 	 <div class = "row todo__form-separator">
 		 <div class = "col">
 			<label for = "collection_description">Description</label>
-			<textarea name = "description" id = "collection_description" class="form-control todo__input-form"><?php if( !empty($this->get__collection_description())) echo $this->get__collection_description();?></textarea>
+			<textarea name = "description" id = "collection_description" class="form-control todo__input-form" placeholder = "Type a reminder"><?php if( isset( $collection ) && !empty($collection->get__collection_description())) echo $collection->get__collection_description();?></textarea>
 		</div>
 	</div>
 			<span class = "form-subheading">Additional Information</span>
@@ -42,19 +42,24 @@
 							<select id = "collection_library" name = "collection" class="form-control todo__input-form">
 								<option value = "">Main Library</option>
 								<?php
-								$collections = self::get__collection_full_list_collections();
-								if( !empty($this->get__collection_father_id()) ){
-									$fatherCollection = $this->get__collection_father_id();
-									foreach($collections as $c){
-										if($fatherCollection === $c["id"]){
-												echo "<option value='" . $c["id"] . "' selected>" . $c["name"] . "</option>";
+								$collections = CollectionLogic::get__full_list_collections();
+
+								if( isset( $collection ) && !empty($collection->get__collection_father_id()) ){
+
+									$fatherCollection = $collection->get__collection_father_id();
+
+									foreach($collections as $id){
+										$item_collection = new CollectionLogic( $id["id"] );
+										if( $fatherCollection === $item_collection->get__collection_id() ){
+												echo "<option value='" . $item_collection->get__collection_id() . "' selected>" . $item_collection->get__collection_name() . "</option>";
 										} else{
-											echo "<option value='" . $c["id"] . "'>" . $c["name"] . "</option>";
+											echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
 										}
 									}
 								} else{
-									foreach($collections as $c){
-										echo "<option value='" . $c["id"] . "'>" . $c["name"] . "</option>";
+									foreach( $collections as $id ){
+										$item_collection = new CollectionLogic( $id["id"] );
+										echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
 									}
 								}
 								?>

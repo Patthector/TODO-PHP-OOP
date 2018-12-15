@@ -6,8 +6,8 @@
         //$pathCollection = $collection["path"];
         $pathCollection = $collection->get__collection_path();
         for( $i = ( count($pathCollection) - 1); $i >=0; $i-- ){
-          if( $pathCollection[$i]["name"] == $collection->get__collection_name()){
-            echo "<li class=\"todo__collection-header-path-item todo__collection-header-path-item--selected\">" . $pathCollection[$i]["name"] . "</li>";
+          if( $pathCollection[$i]["name"] == $collection->get__collection_name() ){
+            echo "<li class=\"todo__collection-header-path-item todo__collection-header-path-item--selected\">" . $collection->get__collection_name() . "</li>";
           } else{
               echo "<li class=\"todo__collection-header-path-item\"><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >" . $pathCollection[$i]["name"] . "</a></li>";
           }
@@ -68,20 +68,21 @@
         if(count($todosCollection) == 0){
           echo "<p style = \"text-align:center\">There are not todos available. Do you want to create a <a href = \"../views/todo.php\"><b>new todo?</b></a></p>";
         } else{
-          foreach( $todosCollection as $todo){
+          foreach( $todosCollection as $item){
+            $item_todo = new TodoLogic( $item["id"] );
             if( !empty($collection->get__select_elements()) && $collection->get__select_elements()){
-              echo "<label class = \" checkbox-container checkbox-container--todo todo__collection-body-todo-container\" for = 'delete-todo-" . $todo["id"] ."'>
+              echo "<label class = \" checkbox-container checkbox-container--todo todo__collection-body-todo-container\" for = 'delete-todo-" . $item_todo->get__todo_id() ."'>
                       <span class=\"checkmark checkmark--todo\"></span>
                       <div class = \"todo__todo-title\">
                         <h4 class = \"todo__todo-title-collection\"><span>";
-                        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
-                        ?></span><?php if(isset($todo["name"]))echo ucfirst($todo["name"]);
+                        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$item_todo->get__todo_level().".svg";
+                        ?></span><?php echo ucfirst( $item_todo->get__todo_name() );
               echo      "</h4>
                       </div>
                       <div class = \"todo__todo-description-container\">
                         <p class = \"todo__todo-description\">";
-                        if( isset( $todo["description"] ) && !empty( $todo["description"] ) ){
-                          echo $todo["description"];
+                        if( !empty( $item_todo->get__todo_description()) ){
+                          echo $item_todo->get__todo_description();
                         }else{
                           echo "There is not data available";
                         }
@@ -91,14 +92,14 @@
                 echo "<div class = \"todo__collection-body-todo-container\">
                         <div class = \"todo__todo-title\">
                           <h4 class = \"todo__todo-title-collection\"><span>";
-                          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$todo["level"].".svg";
-                          ?></span><a href = "<?php echo "/TODO-PHP-OOP/views/todo.php?id=" . $todo["id"] ?>"><?php if(isset($todo["name"]))echo ucfirst($todo["name"]);
+                          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$item_todo->get__todo_level().".svg";
+                          ?></span><a href = "<?php echo "/TODO-PHP-OOP/views/todo.php?id=" . $item_todo->get__todo_id() ?>"><?php echo ucfirst( $item_todo->get__todo_name() );
                 echo      "</a></h4>
                         </div>
                         <div class = \"todo__todo-description-container\">
                           <p class = \"todo__todo-description\">";
-                          if( isset( $todo["description"] ) && !empty( $todo["description"] )){
-                            echo $todo["description"];
+                          if( !empty( $item_todo->get__todo_description() )){
+                            echo $item_todo->get__todo_description();
                           }else{
                             echo "There is not data available";
                           }

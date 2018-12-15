@@ -3,7 +3,7 @@
 # This is TODO object, which has the next
 # properties:
 #------------
-# todo_name
+# todo_name 
 # todo_body
 # created_date
 # updated_date
