@@ -147,6 +147,7 @@ class CollectionLogic extends Collection{
       header("Location:./mytodos.php?msg=$msg");exit;
     }
   }
+
   public function collection_readCollection(  ){
     $output = [];
     $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
@@ -154,6 +155,7 @@ class CollectionLogic extends Collection{
     $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
     return $output;
   }
+
   public static function collection_formCollection(  ){
     $output = [];
     $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";

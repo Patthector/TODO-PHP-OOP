@@ -1,7 +1,3 @@
-<?php //DO YOU REALLY NEED TO BE HERE???
-  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/action-menu.php";
-  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-?>
 <main role = "main">
 <div id = "todo_single-todo" class = "todo__general-container first-container">
   <?php
@@ -65,6 +61,6 @@
 
 <?php
 //include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/update-todo-modal.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/delete-todo-modal.php";
-include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
+//include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/delete-todo-modal.php";
+//include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
 ?>

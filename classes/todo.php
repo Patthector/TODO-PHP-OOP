@@ -3,7 +3,7 @@
 # This is TODO object, which has the next
 # properties:
 #------------
-# todo_name 
+# todo_name
 # todo_body
 # created_date
 # updated_date
@@ -106,10 +106,12 @@ class Todo
 		}
 
 		$result = $result->fetch(PDO::FETCH_ASSOC);
-		# in this section of the method getTodo() we will retrive the tags related with it and will storege them in an array with the associate key "tags"
-		$tags = Tag::getIdTagByIdTodo( $id );
-		foreach( $tags as $t ){
-			$result["tags"][] = Tag::getTag( $t["id_tag"] )["name"];
+		if ( $result ){
+			# in this section of the method getTodo() we will retrive the tags related with it and will storege them in an array with the associate key "tags"
+			$tags = Tag::getIdTagByIdTodo( $id );
+			foreach( $tags as $t ){
+				$result["tags"][] = Tag::getTag( $t["id_tag"] )["name"];
+			}
 		}
 		return $result;
 	}

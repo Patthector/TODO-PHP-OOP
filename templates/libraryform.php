@@ -45,7 +45,6 @@
 								$collections = CollectionLogic::get__full_list_collections();
 
 								if( isset( $collection ) && !empty($collection->get__collection_father_id()) ){
-
 									$fatherCollection = $collection->get__collection_father_id();
 
 									foreach($collections as $id){
@@ -59,7 +58,11 @@
 								} else{
 									foreach( $collections as $id ){
 										$item_collection = new CollectionLogic( $id["id"] );
-										echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
+										if( isset( $fatherCollection ) && ( $fatherCollection == $item_collection->get__collection_id() ) ){
+											echo "<option value='" . $item_collection->get__collection_id() . "' selected>" . $item_collection->get__collection_name() . "</option>";
+										} else{
+											echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
+										}
 									}
 								}
 								?>

@@ -1,11 +1,5 @@
 <!-- TODO FORM TEMPLATE -->
-
 <div class = "todo__form">
-	<?php
-	if(!empty($message)){
-		echo "<p>" . $message . "</p>";
-	}
-	?>
 	<div class = "jumbotron_container">
 		<h1><?php if( !empty( TodoLogic::get__page_heading() )){ echo TodoLogic::get__page_heading();}?></h1>
 		<div class = "guidelines_container">
@@ -24,7 +18,7 @@
 			<div class = "row todo__form-separator">
 				<div class = "col-9">
 					<label for = "todo_name">Title</label>
-					<input type = "text" name = "name" id = "todo_name" class = "form-control todo__input-form" placeholder="Default TODO"
+					<input type = "text" name = "name" id = "todo_name" class = "form-control todo__input-form" placeholder="Give a name to your TODO"
 					<?php
 					if( isset( $todo ) && !empty( $todo->get__todo_name() )){
 						echo "value='" . $todo->get__todo_name() ."'";
@@ -68,7 +62,7 @@
 										foreach($collections as $item){
 											$item_collection = new CollectionLogic( $item["id"] );
 											if( isset( $todo ) && $todo->get__todo_father_id() === $item_collection->get__collection_id() ){
-												echo "<option value='" . $todo->get__todo_father_id() . "' selected>" . $todo->get__todo_father_name() . "</option>";
+												echo "<option value='" . $todo->get__todo_father_id() . "' selected>" . $item_collection->get__collection_name() . "</option>";
 											} else{
 												echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
 											}
@@ -90,9 +84,11 @@
 									</div>
 									<ul id = "todo__tag-list">
 										<?php
-										if(isset($tags)){
-											foreach($tags as $t){
-												echo "<li class = \"todo__tag-item\">#". $t ."</li>";
+										if( isset( $todo ) && $todo->get__todo_tags() ){
+											$tags = $todo->get__todo_tags();
+
+											foreach($tags as $tag_name){
+												echo "<li class = \"todo__tag-item\">#". $tag_name ."</li>";
 											}
 										}
 										?>
@@ -108,16 +104,17 @@
 			<div class = "row todo__form-separator todo__form-container-buttons">
 				<div class = "col left">
 					<a class = "btn todo__btn-form todo__btn-form--dark" href = "
-						<?php if( isset($state) && $state == "editTodo" ){
-										echo "todo.php?id=$id";
-									 } else{
-										 echo "mytodos.php";
-									 }
+						<?php
+						if( isset( $todo ) && !empty( TodoLogic::get__state() ) && TodoLogic::get__state() == "editTodo" ){
+							echo "todo.php?id=$id";
+						 } else{
+							 echo "mytodos.php";
+						 }
 					 ?>
 					 ">Cancel</a>
 				</div>
 				<div class = "col">
-					<?php if(isset($state) && $state == "editTodo"){
+					<?php if( isset( $todo ) && !empty( TodoLogic::get__state() ) && TodoLogic::get__state() == "editTodo" ){
 								echo "<input type = \"hidden\" name = \"edit_todo\" value = $id />";
 						} else{
 									echo "<input type = \"hidden\" name = \"create_todo\" value = \"create_todo\" />";

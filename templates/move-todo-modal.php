@@ -14,13 +14,13 @@
 
       <div class="modal-body">
         <?php
-        if( isset( $this )){
-            if( !empty(self::get__state()) && ( self::get__state() === "readTodo" || self::get__state() === "readCollection" ) ){//READING TODO
-            echo '<p>Select the Library where you are going to move the next element: <b>' .$this->get__name(). '</b>.</p>';
-          }/*
+        if( isset( $todo )){
+            if( !empty(TodoLogic::get__state()) && ( TodoLogic::get__state() === "readTodo" ) ){//READING TODO
+            echo '<p>Select the Library where you are going to move the next element: <b>' .$todo->get__todo_name(). '</b>.</p>';
+          }
             else if( isset( $collection ) && !empty(CollectionLogic::get__state()) && CollectionLogic::get__state() === "readCollection" ){//READING COLLECTION
               echo '<p>Select the Library where you are going to move this Category: <b>' .$collection->get__collection_name(). '</b>.</p>';
-            }*/
+            }
             else{//SELECTING ELEMENTS
               echo '<p>Select the Library where you are going to move those elements.</p>';
             }
@@ -101,9 +101,9 @@
       </div>
       <div class="modal-body">
         <?php
-        if( !empty(TodoLogic::$state) && TodoLogic::$state === "readTodo" ){//=> we are readingTodo
+        if( !empty(TodoLogic::get__state()) && TodoLogic::get__state() === "readTodo" ){//=> we are readingTodo
           echo "<p>You are about to proceed with the next action <b>DELETE ".$todo->get__todo_name() ."</b>. Are you sure you want to delete this item?</p>";
-        } else if( !empty(CollectionLogic::$state) && CollectionLogic::$state === "readCollection" ){//=> we are readingCollection
+        } else if( !empty(CollectionLogic::get__state()) && CollectionLogic::get__state() === "readCollection" ){//=> we are readingCollection
           echo "<p>You are about to proceed with the next action <b>DELETE " .$collection->get__collection_name(). "</b>. Are you sure you want to delete this item?</p>";
         } else{//=> we are selecting elements
           echo "<p>You are about to proceed with the next action <b>DELETE ELEMENTS</b>. Are you sure you want to delete those elements?</p>";
@@ -111,12 +111,12 @@
         ?>
       </div>
       <div class="modal-footer todo__modal-footer">
-        <button class="btn todo__btn-modal todo__btn-modal--default" data-dismiss="modal">Cancel</button>
+        <button class="btn todo__btn-modal todo__btn-modal--default" data-dismiss="modal">No, cancel</button>
         <?php
-        if( !empty(CollectionLogic::get__state()) ){// if we have an $state variable we are on readTODO || readCollection
-          echo "<label class=\"btn todo__btn-modal todo__btn-modal--danger\" for = \"delete-todo-submit\">Delete</label>";
+        if( !empty( TodoLogic::get__state() ) || !empty( CollectionLogic::get__state() ) ){// if we have an $state variable we are on readTODO || readCollection
+          echo "<label class=\"btn todo__btn-modal todo__btn-modal--danger\" for = \"delete-todo-submit\">Yes, delete</label>";
         } else{// we are selectingElements
-          echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--danger\" data-dismiss=\"modal\">Delete</button";
+          echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--danger\" data-dismiss=\"modal\">Yes, delete</button";
         }
         ?>
       </div>

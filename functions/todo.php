@@ -18,16 +18,18 @@ class TodoLogic extends Todo{
   function __construct( $todo_id ){
 
     $aux = parent::getTodo( $todo_id );
-    $this->set__todo_id( $todo_id );
 
-    if( !empty( $this->get__todo_id() ) ){
+    if( !empty( $aux["id"] ) ){
+      $this->set__todo_id( $todo_id );
       $this->set__todo_name( $aux["name"] );
       $this->set__todo_father_id( $aux["id_collection"] );
       $this->set__todo_description( $aux["description"] );
       $this->set__todo_created_date( $aux["created_date"] );
       $this->set__todo_updated_date( $aux["updated_date"] );
       $this->set__todo_level( $aux["level"] );
-      $this->set__todo_tags( $aux["tags"] );
+      if( !empty( $aux["tags"] ) ){
+        $this->set__todo_tags( $aux["tags"] );
+      }
 
       self::$todo_full_list_collections = Collection::getCollections();
     }
@@ -103,57 +105,73 @@ class TodoLogic extends Todo{
   }
 
   function readTodo_logic( $todo_id, $action=null ){
-
+    $output = [];
     if( isset( $action ) && ($action === "editItem") ){//EDIT TODO
       self::set__page_heading( "edit todo" );
       self::set__state( "editTodo" );
-      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
+      $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
     }
     else{
-      $this->set__page_heading( $this->get__todo_name() );
+      self::set__page_heading( $this->get__todo_name() );
       self::set__state( "readTodo" );
+      $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+      $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todo.php";
+      $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
     }
 
-    return;
+    return $output;
   }
-  static function createTodo_logic(  ){
+
+  static function createTodo_logic(){
+    $output = [];
+    if( !empty( $action ) ){//EDIT TODO
+      self::set__page_heading( "edit todo" );
+      self::set__state( "editTodo" );
+    }
+    else{
     self::set__page_heading( "create todo" );
     self::set__state( "createTodo" );
+    }
 
-    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
-		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
-    return;
+    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+    $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
+    $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
+
+    return $output;
   }
-  function deleteTodo_logic( $todo_id ){
 
-    if(!empty($todo_id)){
-			if( parent::deleteTodo($todo_id) ){
-				$msg = "TODO deleted succesfully";
+  static function deleteTodo_logic( $todo_id ){
+
+    if(!empty( $todo_id )){
+			if( parent::deleteTodo( $todo_id ) ){
+				$msg = "TODO with ID: '$todo_id' was deleted succesfully!";
 			} else{
-				$msg = "Unable to delete TODO";
+				$msg = "Unable to delete TODO: # '$todo_id'!";
 			}
 		} else{
 			$msg = "Unable to delete TODO. Invalid \"ID\"";
 		}
-		header("Location:/TODO-PHP-OOP/views/mytodos.php");
+		header("Location:/TODO-PHP-OOP/views/mytodos.php?msg=$msg");
     exit;
   }
-  function moveTodo_logic( $todo_id, $collection_id ){
+
+  function moveTodo_logic( $todo_id, $todo_name, $collection_id ){
 
     if( !empty($todo_id) && !empty($collection_id) ){
       if(parent::moveTodo($todo_id, $collection_id)){
         $name_collection = Collection::getCollection($collection_id)["name"];
-        $msg = "TODO has been successfully moved to " . $name_collection;
+        $msg = "TODO: '$todo_name' has been successfully moved to COLLECTION: '$name_collection'" ;
       }
     }else{
       $msg = "Unable to moved TODO";
     }
-    header("Location:/TODO-PHP-OOP/views/todo.php?id=". $id_todo );
+    header("Location:/TODO-PHP-OOP/views/todo.php?id=$todo_id&msg=$msg" );
     exit;
   }
-  function editTodo_logic( $array_post ){
 
+  static function editTodo_logic( $array_post ){
+
+    $id = filter_input(INPUT_POST, "edit_todo", FILTER_SANITIZE_NUMBER_INT);
     $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
 		$level = filter_input(INPUT_POST, "level", FILTER_SANITIZE_STRING);
 		$description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
@@ -165,14 +183,15 @@ class TodoLogic extends Todo{
 			$tags = NULL;
 		}
 
-    if( parent::updateTodo( $id,$name, $description, $collection, $tags, 1, $level)){
-      $msg = "&msg=TODO successfully edited";
+    if( parent::updateTodo( $id, $name, $description, $collection, $tags, 1, $level) ){
+      $msg = "TODO: '$name', successfully edited!";
     } else{
-      $msg = "&msg=Unable to edit TODO";
+      $msg = "Unable to edit TODO: '$name'";
     }
-    header("Location:/TODO-PHP-OOP/views/todo.php?id=" . $id . "&msg=todo%20succesfully%20edited");
+    header("Location:/TODO-PHP-OOP/views/todo.php?id=$id&msg=$msg");
     exit;
   }
+
   static function addTodo_logic( $array_post ){
 
     $level = $_POST["level"];
@@ -192,7 +211,8 @@ class TodoLogic extends Todo{
 				$msg = "A TITLE must be given";
 			} else{
 				$id = parent::addTodo( $name, $description, $library, $tags, 1, $level);
-				header("Location: /TODO-PHP-OOP/views/todo.php?id=" . $id );
+        $msg = "TODO: '$name' was created successfully!";
+				header("Location: /TODO-PHP-OOP/views/todo.php?id=$id&msg=$msg" );
         exit;
 			}
 		}

@@ -25,16 +25,15 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 		if( !empty( $collection->get__collection_id() )){# if we have a collection, set the title heading with the Collection's name
 
 			if(!empty($_GET["action"])){
-
 				$action = filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
 				$files = $collection->collection_determineAction( $action );
 				foreach( $files as $file ){
 					include $file;
 				}
 			  exit;
-			} else{
+			}
+			else{
 				CollectionLogic::set__state( "readCollection" );
-				//INCLUDE THE FILES
 				$files = $collection->collection_readCollection();
 				foreach( $files as $file ){
 					include $file;
