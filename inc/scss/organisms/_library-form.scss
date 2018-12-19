@@ -20,7 +20,7 @@ background-color:$white;
       color: $white;
       font-size: 56px;
       letter-spacing: 3px;
-      text-align:right; 
+      text-align:right;
       align-self: flex-start;
     }
     .guidelines_container{
@@ -52,10 +52,10 @@ background-color:$white;
     padding-bottom: 12px;
 
     .todo__input-form{
-      background-color:$gallery;
-      @include todo__white-form-gradient;
-      box-shadow:inset 1px -1px 5px rgba($gray,.8);
-      border-radius:12px;
+      background-color:rgba( $gallery, .5 );
+      //@include todo__white-form-gradient;
+      box-shadow:inset 1px -1px 5px rgba($alto,.8);
+      //border-radius:12px;
     }
     hr{margin:0;}
     .form-subheading{

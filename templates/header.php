@@ -20,8 +20,8 @@
     <div id = "main" class = "container-fluid todo__main-background">
       <header id="header" class="header__blue-gradient
       <?php
-      if( isset( $todo ) ){
-        switch ( $todo::get__state()) {
+      if( class_exists( "TodoLogic" ) && !empty( TodoLogic::get__state() ) ){
+        switch ( TodoLogic::get__state()) {
           case "createTodo":
             echo "white-header";
             break;
@@ -38,8 +38,8 @@
             echo "";
             break;
         }
-      } else if( isset( $collection ) ){
-        switch ( $collection::get__state()) {
+      } else if( class_exists( "CollectionLogic" ) && !empty( CollectionLogic::get__state() ) ){
+        switch ( CollectionLogic::get__state()) {
           case "createCollection":
             echo "white-header";
             break;
@@ -68,8 +68,8 @@
           <li class="header__logo">
             <a id = "logo-svg" class="h1" href="/TODO-PHP-OOP/index.php">
               <?php
-              if( isset( $todo ) ){
-                switch ( $todo::get__state()) {
+              if( class_exists( "TodoLogic" ) && !empty( TodoLogic::get__state() ) ){
+                switch ( TodoLogic::get__state() ) {
                   case "createTodo":
                     include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/blue-logo.html";
                     break;
@@ -86,8 +86,8 @@
                     include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/white-logo.html";
                     break;
                 }
-              } else if( isset( $collection ) ){
-                switch ( $collection::get__state()) {
+              } else if( class_exists( "CollectionLogic" ) && !empty( CollectionLogic::get__state() ) ){
+                switch ( CollectionLogic::get__state() ) {
                   case "createCollection":
                     include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/blue-logo.html";
                     break;

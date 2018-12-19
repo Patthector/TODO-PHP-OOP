@@ -1,0 +1,36 @@
+.todo__mytodos-search--container{
+  ul{@include reset-list;}
+}
+.todo__main-heading--mytodos-search{
+  margin-bottom: 0;
+  color: $code-gray;
+  span{
+    color: $cornflower-blue;
+    text-decoration: underline;
+  }
+}
+.todo__mytodos-search--subheading{
+  font-size: 24px;
+  font-family: $font-secondary;
+  color:$code-gray;
+}
+.todo__mytodos-search--subheading-item{
+  font-size: 18px;
+  color: $tundora;
+  font-family:$font-secondary;
+  //text-decoration: underline;
+}
+.todo__mytodos-search--result-item{
+  a{color:$cornflower-blue;}
+  font-size: 18px;
+  font-family:$font-primary;
+  font-weight: bold;
+  margin-bottom: 3px;
+  margin-top: 6px;
+}
+.todo__mytodos-search--sublist-todo{
+  margin-left: 12px !important;
+}
+.todo__mytodos-search--container-buttons{
+  text-align: center;
+}

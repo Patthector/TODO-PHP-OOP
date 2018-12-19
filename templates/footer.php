@@ -3,8 +3,8 @@
   <footer class="mastfoot mt-auto dotted-border
   <?php
   //var_dump($todo);exit;
-  if( isset( $todo ) ){
-    switch ( $todo::get__state()) {
+  if( class_exists( "TodoLogic" ) && !empty( TodoLogic::get__state() ) ){
+    switch ( TodoLogic::get__state()) {
       case "createTodo":
         echo "";
         break;
@@ -21,8 +21,8 @@
         echo "";
         break;
     }
-  } else if( $collection ){
-    switch ( $collection::get__state()) {
+  } else if( class_exists( "CollectionLogic" ) && !empty( CollectionLogic::get__state() ) ){
+    switch ( CollectionLogic::get__state()) {
       case "createCollection":
         echo "";
         break;
@@ -54,8 +54,9 @@
     <script>window.jQuery || document.write('<script src="vendor/jquery.js"><\/script>')</script>
     <script src="/TODO-PHP-OOP/vendor/popper.js"></script>
     <script src="/TODO-PHP-OOP/vendor/js/bootstrap.min.js"></script>
+    <script src="/TODO-PHP-OOP/vendor/js/app.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/action-menu.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/tags.js"></script>
-    <script src="/TODO-PHP-OOP/vendor/js/app.js"></script>
+
   </body>
 </html>

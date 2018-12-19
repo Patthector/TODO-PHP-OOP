@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 			$fatherCollection = filter_input(INPUT_GET, "coll", FILTER_SANITIZE_NUMBER_INT);
 		}
 		$library_heading = "create library";
-		CollectionLogic::set__state( "createdCollection" );
+		CollectionLogic::set__state( "createCollection" );
 		$files = CollectionLogic::collection_formCollection();
 		foreach( $files as $file ){
 			include $file;

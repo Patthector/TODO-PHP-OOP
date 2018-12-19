@@ -264,7 +264,7 @@ class CollectionLogic extends Collection{
     //variables
     $this->set__page_heading( $this->get__collection_name() );
     self::set__state( "readCollection" );
-    $msg = "Elements moved successfully";
+    self::set__msg( "Elements moved successfully" );
     $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
     $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
     return $output;

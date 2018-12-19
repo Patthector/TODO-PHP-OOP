@@ -310,7 +310,7 @@ html, body {
   background-color: #ededed;
   border-radius: 3px; }
   .checkmark--todo {
-    top: 10%; }
+    top: 5%; }
 
 /* On mouse-over, add a grey background color */
 .checkbox-container:hover .checkmark {
@@ -464,7 +464,7 @@ div.todo__box-message {
   .todo__action-menu-container--aux {
     position: absolute;
     top: 0;
-    right: 48px;
+    right: 24px;
     display: flex;
     flex-flow: column wrap;
     align-content: center;
@@ -567,7 +567,18 @@ div.todo__box-message {
   margin-top: 0px;
   margin-bottom: 0px;
   font-family: "fjallaone-regular";
-  color: #fff; }
+  color: #fff;
+  font-size: 18px; }
+.todo__modal .todo__modal-body {
+  background-color: #ededed; }
+  .todo__modal .todo__modal-body p {
+    color: #212121;
+    font-size: 18px; }
+  .todo__modal .todo__modal-body span {
+    color: #4285f4;
+    font-style: italic;
+    text-transform: capitalize;
+    font-weight: bold; }
 
 .todo__modal-footer {
   display: flex;
@@ -577,20 +588,21 @@ div.todo__box-message {
   align-items: center; }
   .todo__modal-footer label {
     margin: 0; }
-  .todo__modal-footer .todo__btn-modal {
-    border-radius: 0;
-    padding: 6px 24px;
-    color: #fff;
-    text-transform: uppercase;
-    font-family: "fjallaone-regular";
-    margin-left: 6px;
-    margin-right: 6px; }
-    .todo__modal-footer .todo__btn-modal--danger {
-      background-color: #dc3545; }
-    .todo__modal-footer .todo__btn-modal--default {
-      background-color: #444444; }
-    .todo__modal-footer .todo__btn-modal--info {
-      background-color: #303f9f; }
+
+.todo__btn-modal {
+  border-radius: 0;
+  padding: 6px 24px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "fjallaone-regular";
+  margin-left: 6px;
+  margin-right: 6px; }
+  .todo__btn-modal--danger {
+    background-color: #dc3545; }
+  .todo__btn-modal--default {
+    background-color: #444444; }
+  .todo__btn-modal--info {
+    background-color: #303f9f; }
 
 .todo__collection-header {
   background-color: #3658bd;
@@ -993,14 +1005,8 @@ footer {
     padding-top: 12px;
     padding-bottom: 12px; }
     .todo__form .todo_container .todo__input-form {
-      background-color: #ededed;
-      background: #ededed;
-      background: -moz-linear-gradient(top, #ededed 0%, #fff 100%);
-      background: -webkit-linear-gradient(top, #ededed 0%, #fff 100%);
-      background: linear-gradient(to bottom, #ededed 0%, #fff 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ededed", endColorstr='#fff',GradientType=1 );
-      box-shadow: inset 1px -1px 5px rgba(128, 128, 128, 0.8);
-      border-radius: 12px; }
+      background-color: rgba(237, 237, 237, 0.5);
+      box-shadow: inset 1px -1px 5px rgba(207, 207, 207, 0.8); }
     .todo__form .todo_container hr {
       margin: 0; }
     .todo__form .todo_container .form-subheading {
@@ -1140,6 +1146,11 @@ footer {
 .todo__search-bar-container {
   margin: 48px 10% 0px 10%; }
 
+.todo__search-bar-input-container {
+  margin-bottom: 0; }
+  .todo__search-bar-input-container label {
+    margin-bottom: 0; }
+
 .todo__btn-search-bar,
 .todo__btn-search-bar:link,
 .todo__btn-search-bar:visited,
@@ -1172,10 +1183,47 @@ footer {
   .todo__btn-search-bar--inverse:active span {
     color: #dc3545; }
 
-.todo__input-form {
+.todo__input-search {
   background-color: #ededed;
   box-shadow: inset 1px -1px 4px rgba(128, 128, 128, 0.6);
   border-radius: 12px; }
+
+.todo__mytodos-search--container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.todo__main-heading--mytodos-search {
+  margin-bottom: 0;
+  color: #1a1a1a; }
+  .todo__main-heading--mytodos-search span {
+    color: #4285f4;
+    text-decoration: underline; }
+
+.todo__mytodos-search--subheading {
+  font-size: 24px;
+  font-family: "fjallaone-regular";
+  color: #1a1a1a; }
+
+.todo__mytodos-search--subheading-item {
+  font-size: 18px;
+  color: #444444;
+  font-family: "fjallaone-regular"; }
+
+.todo__mytodos-search--result-item {
+  font-size: 18px;
+  font-family: "rajdhani-regular";
+  font-weight: bold;
+  margin-bottom: 3px;
+  margin-top: 6px; }
+  .todo__mytodos-search--result-item a {
+    color: #4285f4; }
+
+.todo__mytodos-search--sublist-todo {
+  margin-left: 12px !important; }
+
+.todo__mytodos-search--container-buttons {
+  text-align: center; }
 
 @media print {
   *:before, *:after {

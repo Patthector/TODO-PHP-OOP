@@ -12,19 +12,19 @@
         </button>
       </div><!--end-modal-header-->
 
-      <div class="modal-body">
+      <div class="modal-body todo__modal-body">
         <?php
-        if( isset( $todo )){
-            if( !empty(TodoLogic::get__state()) && ( TodoLogic::get__state() === "readTodo" ) ){//READING TODO
-            echo '<p>Select the Library where you are going to move the next element: <b>' .$todo->get__todo_name(). '</b>.</p>';
-          }
-            else if( isset( $collection ) && !empty(CollectionLogic::get__state()) && CollectionLogic::get__state() === "readCollection" ){//READING COLLECTION
-              echo '<p>Select the Library where you are going to move this Category: <b>' .$collection->get__collection_name(). '</b>.</p>';
-            }
-            else{//SELECTING ELEMENTS
-              echo '<p>Select the Library where you are going to move those elements.</p>';
-            }
-          }?>
+        if( isset( $todo ) && !empty(TodoLogic::get__state()) && ( TodoLogic::get__state() === "readTodo" )){
+          //READING TODO
+          echo '<p>Select the Library where you are going to move the next TODO: <span>' .$todo->get__todo_name(). '</span>.</p>';
+        }
+        else if( isset( $collection ) && !empty(CollectionLogic::get__state()) && CollectionLogic::get__state() === "readCollection" ){//READING COLLECTION
+          echo '<p>Select the Library where you are going to move this Category: <span>' .$collection->get__collection_name(). '</span>.</p>';
+        }
+        else{//SELECTING ELEMENTS
+          echo '<p>Select the Library where you are going to move those elements.</p>';
+        }
+        ?>
         <form method = "POST" action =<?php if( isset( $todo ) && !empty(TodoLogic::get__state()) && TodoLogic::get__state() === "readTodo" ){ echo "todo.php";} else {echo "library.php";}?>>
           <div class = "form-group">
               <input type = "hidden" class = "form-control" name = "id" value =
@@ -41,7 +41,7 @@
           </div><!--end-form-group-->
 
           <div class = "form-group">
-            <select id = "todo__modal-move-select" class = "form-control" name = "collectionSelected" required>
+            <select id = "todo__modal-move-select" class = "form-control custom-select custom-select-lg" name = "collectionSelected" required>
               <option value=''>Select One Library</option>
               <?php
 
@@ -99,12 +99,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body todo__modal-body">
         <?php
         if( !empty(TodoLogic::get__state()) && TodoLogic::get__state() === "readTodo" ){//=> we are readingTodo
-          echo "<p>You are about to proceed with the next action <b>DELETE ".$todo->get__todo_name() ."</b>. Are you sure you want to delete this item?</p>";
+          echo "<p>You are about to proceed with the next action: <span>DELETE ".$todo->get__todo_name() ."</span>.<br/> Are you sure you want to delete this item?</p>";
         } else if( !empty(CollectionLogic::get__state()) && CollectionLogic::get__state() === "readCollection" ){//=> we are readingCollection
-          echo "<p>You are about to proceed with the next action <b>DELETE " .$collection->get__collection_name(). "</b>. Are you sure you want to delete this item?</p>";
+          echo "<p>You are about to proceed with the next action <span>DELETE " .$collection->get__collection_name(). "</span>. Are you sure you want to delete this item?</p>";
         } else{//=> we are selecting elements
           echo "<p>You are about to proceed with the next action <b>DELETE ELEMENTS</b>. Are you sure you want to delete those elements?</p>";
         }

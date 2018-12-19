@@ -18,6 +18,7 @@
 			<div class = "row todo__form-separator">
 				<div class = "col">
 					<label for = "collection_name">Title</label>
+					<!--.todo__input-form-->
 					<input type = "text" name = "name" id = "collection_name" class="form-control todo__input-form" placeholder="Default LIBRARY"
 			<?php
 			if( isset( $collection ) && !empty($collection->get__collection_name())){
@@ -30,6 +31,7 @@
 	 <div class = "row todo__form-separator">
 		 <div class = "col">
 			<label for = "collection_description">Description</label>
+			<!--.todo__input-form-->
 			<textarea name = "description" id = "collection_description" class="form-control todo__input-form" placeholder = "Type a reminder"><?php if( isset( $collection ) && !empty($collection->get__collection_description())) echo $collection->get__collection_description();?></textarea>
 		</div>
 	</div>
@@ -39,7 +41,7 @@
 					<div class = "row">
 						<div class = "col-4">
 							<label for = "collection_library">Library</label>
-							<select id = "collection_library" name = "collection" class="form-control todo__input-form">
+							<select id = "collection_library" name = "collection" class="form-control custom-select custom-select-m todo__input-form"><!--.todo__input-form-->
 								<option value = "">Main Library</option>
 								<?php
 								$collections = CollectionLogic::get__full_list_collections();

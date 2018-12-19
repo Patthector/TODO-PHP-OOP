@@ -27,8 +27,8 @@
 					/>
 				 </div>
 				<div class = "col-3">
-					<label for = "level_of_importance">Level of importance</label>
-					<select name = "level" id = "level_of_importance" class = "form-control todo__input-form">
+					<label for = "level_of_importance">Levels</label>
+					<select name = "level" id = "level_of_importance" class = "form-control custom-select custom-select-m todo__input-form">
 						<option value = "">Select level</option>
 						<?php
 						foreach(array(1,2,3,4,5) as $i){
@@ -55,7 +55,7 @@
 							<div class = "row">
 								<div class = "col">
 									<label for = "todo_library">Library</label>
-									<select id = "todo_library" name = "library" class="form-control todo__input-form">
+									<select id = "todo_library" name = "library" class="form-control custom-select custom-select-m todo__input-form">
 										<?php
 									//	if(!isset($collection)){$collection = "Unknow";}
 									$collections = CollectionLogic::get__full_list_collections();

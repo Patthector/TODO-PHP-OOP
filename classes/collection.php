@@ -321,6 +321,21 @@ class Collection
 		return $new_collection;
 	}
 
+	public static function searchCollectionByName( $name ){
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
+
+		$sql = "SELECT id, name, description FROM todo_app_collections WHERE name LIKE ?";
+		try{
+			$results = $db->prepare( $sql );
+			$results->bindValue(1, '%'.$name.'%', PDO::PARAM_STR);
+			$results->execute();
+		} catch (Exception $e){
+			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+			return false;
+		}
+		return $results->fetchAll( PDO::FETCH_ASSOC );
+}
+
 
 
 

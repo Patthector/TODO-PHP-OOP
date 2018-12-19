@@ -3,7 +3,7 @@
   &--aux{
     position: absolute;
     top: 0;
-    right: 48px;
+    right: 24px;
     @include todo__center-flex;
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
@@ -76,7 +76,7 @@
       cursor:not-allowed;
       pointer-events: none;
       svg{
-        color:$alto;        
+        color:$alto;
       }
       span{
         color:$alto;

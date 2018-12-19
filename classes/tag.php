@@ -248,4 +248,50 @@ class Tag
 		return true;
 	}
 
+	public static function getTodosByTagId( $tag_id ){
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
+
+		$sql = "SELECT id_todo FROM todo_app_todo_tag WHERE id_tag = ?";
+		try{
+			$results = $db->prepare( $sql );
+			$results->bindParam(1, $tag_id, PDO::PARAM_INT);
+			$results->execute();
+		} catch (Exception $e){
+			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+			return false;
+		}
+		//$row = [];
+		while( $row = $results->fetch( PDO::FETCH_ASSOC ) ){
+
+			$row["itself"] = Todo::getTodo( $row["id_todo"] );
+			$todos[] = $row;
+		}
+		//var_dump($todos);exit;
+		return $todos;
+		//return $results->fetchAll( PDO::FETCH_ASSOC );
+	}
+
+	public static function searchTagByName( $name ){
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
+
+		$sql = "SELECT id, name FROM todo_app_tags WHERE name LIKE ? OR name = ?";
+		try{
+			$results = $db->prepare( $sql );
+			$results->bindValue(1, '%'.$name.'%', PDO::PARAM_STR);
+			$results->bindValue(2, '%'.$name.'%', PDO::PARAM_STR);
+			$results->execute();
+		} catch (Exception $e){
+			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+			return false;
+		}
+
+		while( $row = $results->fetch( PDO::FETCH_ASSOC ) ){
+
+			$row["todos"] = self::getTodosByTagId( $row["id"] );
+			$todosByTags[] = $row;
+		}
+		if( isset( $todosByTags ) )return $todosByTags;
+		return false;
+	}
+
 }

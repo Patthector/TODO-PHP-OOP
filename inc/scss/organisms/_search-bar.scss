@@ -1,7 +1,12 @@
 .todo__search-bar-container{
   margin:48px 10% 0px 10%;
 }
-
+.todo__search-bar-input-container{
+  margin-bottom:0;
+  label{
+    margin-bottom: 0;
+  } 
+}
 .todo__btn-search-bar,
 .todo__btn-search-bar:link,
 .todo__btn-search-bar:visited,
@@ -30,7 +35,7 @@
   text-transform: uppercase;
   font-size:18px;
 }
-.todo__input-form{
+.todo__input-search{
   background-color:rgba($gallery,1);
   //@include todo__white-form-gradient;
   box-shadow:inset 1px -1px 4px rgba($gray,.6);

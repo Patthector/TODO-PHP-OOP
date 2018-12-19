@@ -14,30 +14,44 @@
     margin-bottom:0px;
     font-family:$font-secondary;
     color:$white;
+    font-size: 18px;
   }
- 
+  .todo__modal-body{
+    background-color:$gallery;
+    p{
+      color: $dark-night;
+      font-size: 18px;
+    }
+    span{
+      color:$cornflower-blue;
+      font-style: italic;
+      text-transform: capitalize;
+      font-weight: bold;
+    }
+  }
+
 }
 .todo__modal-footer{
   @include todo__inline-flex;
   label{
     margin: 0;
   }
-  .todo__btn-modal{
-    border-radius:0;
-    padding: 6px 24px;
-    color:$white;
-    text-transform: uppercase;
-    font-family: $font-secondary;
-    margin-left: 6px;
-    margin-right: 6px;
-    &--danger{
-      background-color:$tomato;
-    }
-    &--default{
-      background-color:$tundora;
-    }
-    &--info{
-      background-color: $sapphire;
-    }
+}
+.todo__btn-modal{
+  border-radius:0;
+  padding: 6px 24px;
+  color:$white;
+  text-transform: uppercase;
+  font-family: $font-secondary;
+  margin-left: 6px;
+  margin-right: 6px;
+  &--danger{
+    background-color:$tomato;
+  }
+  &--default{
+    background-color:$tundora;
+  }
+  &--info{
+    background-color: $sapphire;
   }
 }
