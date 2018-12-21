@@ -1,6 +1,3 @@
-<?php
-session_start();
- ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -113,7 +110,14 @@ session_start();
               ?></a>
           </li>
           <li class="header__menu-item">
-            <a class="" href="#">Log out</a>
+            <?php
+            if( isset( $_SESSION[ "user_id" ] ) ){
+              echo "<a id = \"todo__logout-button\" href=\"#\">Log out</a>";
+              //LOGOUT will trigger an AJAX request to call the registration GET method and log you out
+            } else{
+              echo "<a href=\"" ."views/registration.php". "\">Log in</a>";
+            }
+            ?>
           </li>
         </ul>
       </header>

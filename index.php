@@ -1,31 +1,16 @@
 <?php
 # variables
 # ---------
-
+session_start();
 $title_page = "Stick it | Home";
 
-if($_SERVER["REQUEST_METHOD"] == "GET"){
-	if(!empty($_GET["msg"])){
-		$m = trim(filter_input(INPUT_GET, "msg", FILTER_SANITIZE_STRING));
-		if(!empty($m)){
-			$message = $m;
-		} else{
-			header("Location: index.php");exit;
-		}
-	}
+if( isset( $_SESSION[ "user_id" ] ) ){// we are logged in
+	include "templates/header.php";
+	include "templates/empty-front-page.php";
+	include "templates/footer.php";
 }
-include "templates/header.php";
+else {// NOT user logged in
 
-	if(!empty($msg)){
-		include "/templates/message.php";
-	}
+	header("Location: views/registration.php");
 
-
-$test = 2;
-if($test == 1){
-	include "views/front-page.php";
-	include "templates/footer.php";
-} elseif($test == 2){
-	include "views/empty-front-page.php";
-	include "templates/footer.php";
 }

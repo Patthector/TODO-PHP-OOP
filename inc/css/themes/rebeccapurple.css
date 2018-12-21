@@ -1225,6 +1225,61 @@ footer {
 .todo__mytodos-search--container-buttons {
   text-align: center; }
 
+.todo__registration--container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px; }
+  .todo__registration--container label {
+    margin-bottom: 0;
+    color: #333333;
+    font-family: "rajdhani-bold"; }
+  .todo__registration--container p {
+    text-align: center;
+    font-family: "rajdhani-bold";
+    color: #4285f4; }
+
+.todo__registration--logo-container {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  text-align: center;
+  background: #4285f4;
+  background: -moz-linear-gradient(left, #4285f4 0%, #303f9f 100%);
+  background: -webkit-linear-gradient(left, #4285f4 0%, #303f9f 100%);
+  background: linear-gradient(to right, #4285f4 0%, #303f9f 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#4285f4", endColorstr='#303f9f',GradientType=1 );
+  padding: 6px;
+  margin-top: -25px;
+  margin-left: -25px;
+  margin-right: -25px; }
+  .todo__registration--logo-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+  .todo__registration--logo-container svg {
+    height: 35px;
+    width: 100%; }
+
+.todo__registration--heading {
+  font-family: "fjallaone-regular";
+  color: #333333;
+  font-size: 28px;
+  margin: 12px 0 0; }
+
+.todo__registration--form-container {
+  margin-top: 6px;
+  border: 1px solid #ededed;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: rgba(237, 237, 237, 0.2);
+  padding: 24px;
+  box-shadow: 0px 0px 4px #cfcfcf; }
+
+.todo__registration--form {
+  padding: 12px; }
+
+.todo__registration--line {
+  margin: 12px 0; }
+
 @media print {
   *:before, *:after {
     background: transparent !important;

@@ -1,0 +1,51 @@
+.todo__registration--container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+  label{
+    margin-bottom: 0;
+    color: $mine-shaft;
+    font-family: $font-primary-bold;
+  }
+  p{
+    text-align: center;
+    font-family: $font-primary-bold;
+    color:$cornflower-blue;
+  }
+
+}
+.todo__registration--logo-container{
+  div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  text-align: center;
+  @include todo__blue-gradient;
+  padding: 6px;
+  margin-top: -25px;
+  margin-left: -25px;
+  margin-right: -25px;
+  svg{height: 35px; width:100%;}
+}
+.todo__registration--heading{
+  font-family: $font-secondary;
+  color: $mine-shaft;
+  font-size: 28px;
+  margin: 12px 0 0;
+}
+.todo__registration--form-container{
+  margin-top: 6px;
+  border: 1px solid $gallery;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: rgba( $gallery, .2);
+  padding: 24px;
+  box-shadow: 0px 0px 4px $alto;
+}
+.todo__registration--form{
+  padding: 12px;
+}
+.todo__registration--line{ margin:12px 0; }

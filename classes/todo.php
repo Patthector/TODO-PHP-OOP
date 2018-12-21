@@ -260,13 +260,14 @@ class Todo
 		return $id;
 	}
 
-	public static function searchTodoByName( $name ){
+	public static function searchTodoByName( $name, $user_id ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
-		$sql = "SELECT id, name,description FROM todo_app_todos WHERE name LIKE ?";
+		$sql = "SELECT id, name,description FROM todo_app_todos WHERE name LIKE ? AND id_user = ?";
 		try{
 			$results = $db->prepare( $sql );
 			$results->bindValue(1, '%'.$name.'%', PDO::PARAM_STR);
+			$results->bindParam(2, $user_id, PDO::PARAM_INT);
 			$results->execute();
 		} catch (Exception $e){
 			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();

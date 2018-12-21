@@ -25,13 +25,15 @@
 class Collection
 {
 	private $name;
+	private $user_id;
 	private $description;
 	private $todoList = array();
 	private $fatherCollection_id;
 
-	function __construct( $name, $description = null, $fatherCollection_id = null )
+	function __construct( $name, $user_id, $description = null, $fatherCollection_id = null )
 	{
 		$this->name = $name;
+		$this->user_id = $user_id;
 		$this->description = $description;
 		if(empty($fatherCollection_id)){
 			$this->fatherCollection_id = 1;//the collection UNKONWN is the main father/collection
@@ -44,6 +46,9 @@ class Collection
 	public function getName( ){
 		return $this->name;
 	}
+	public function getUserId( ){
+		return $this->user_id;
+	}
 	public function getDescription( ){
 		return $this->description;
 	}
@@ -51,21 +56,21 @@ class Collection
 		return $this->fatherCollection_id;
 	}
 
-	public function addCollection( $name, $description = null, $fatherCollection_id = null, $user = 1 ){
-
+	public function addCollection( $name, $user_id, $description = null, $fatherCollection_id = null ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		# this method could be use to add either a new collection or subcollection, if a subcollection is added $fatherCollection_id will be filled.
 
 		#--------------------------------#
 		# JSON approch needs to be check #
 		#--------------------------------#
-		$sql = "INSERT INTO todo_app_collections VALUES (NULL, ?, ?, 1, CURRENT_TIMESTAMP(), ?, NULL)";
+		$sql = "INSERT INTO todo_app_collections VALUES (NULL, ?, ?, ?, CURRENT_TIMESTAMP(), ?, NULL)";
 
 		try{
 			$result = $db->prepare( $sql );
 			$result-> bindParam( 1, $name, PDO::PARAM_STR );
 			$result-> bindParam( 2, $description, PDO::PARAM_STR );
-			$result-> bindParam( 3, $fatherCollection_id, PDO::PARAM_INT );
+			$result-> bindParam( 3, $user_id, PDO::PARAM_INT );
+			$result-> bindParam( 4, $fatherCollection_id, PDO::PARAM_INT );
 			$result->execute();
 
 		} catch(Exception $e){
@@ -77,7 +82,7 @@ class Collection
 		return $id_collection["id"];
 	}
 
-	public static function getCollection($id){
+	public static function getCollection( $id ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
 		$sql = "SELECT * FROM todo_app_collections WHERE id = ?";
@@ -111,6 +116,7 @@ class Collection
 		}
 		return $result->fetch(PDO::FETCH_ASSOC);
 	}
+
 	public static function getCollections($limit = null, $offset = null){
 
 		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
@@ -126,25 +132,8 @@ class Collection
 		}
 		return $collections->fetchAll(PDO::FETCH_ASSOC);
 	}
-  /*
-	public static function getCollections($limit = null, $offset = null){
-
-		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
-
-		$sql = "SELECT * FROM todo_app_collections ORDER BY name ASC";
-		try{
-			$collections = $db->prepare( $sql );
-			$collections->execute();
-
-		} catch(Exception $e){
-			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
-			return false;
-		}
-		return $collections->fetchAll(PDO::FETCH_ASSOC);
-	}*/
 
 	public static function getSubcollections( $id ){
-
 		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
 
 		$sql = "SELECT * FROM todo_app_collections WHERE id_fatherCollection = ?";
@@ -159,6 +148,7 @@ class Collection
 		}
 		return $subCollections->fetchAll(PDO::FETCH_ASSOC);
 	}
+
 	public static function moveCollection($id, $id_collection){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
@@ -176,6 +166,7 @@ class Collection
 		}
 		return true;
 	}
+
 	public static function updateCollection($id, $name = null, $description = null, $fatherCollection_id = null ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
@@ -321,13 +312,14 @@ class Collection
 		return $new_collection;
 	}
 
-	public static function searchCollectionByName( $name ){
+	public static function searchCollectionByName( $name, $user_id ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
-		$sql = "SELECT id, name, description FROM todo_app_collections WHERE name LIKE ?";
+		$sql = "SELECT id, name, description FROM todo_app_collections WHERE name LIKE ? AND id_user = ?";
 		try{
 			$results = $db->prepare( $sql );
-			$results->bindValue(1, '%'.$name.'%', PDO::PARAM_STR);
+			$results->bindValue(1, '%'.$name.'%', PDO::PARAM_STR );
+			$results->bindParam(2, $user_id, PDO::PARAM_INT );
 			$results->execute();
 		} catch (Exception $e){
 			echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();

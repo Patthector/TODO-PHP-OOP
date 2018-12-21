@@ -1,6 +1,6 @@
 <div class = "empty-front-page">
   <h2 class = "empty-front-page--heading">myTODOs</h2>
-  <p class = "welcome-message">Hello <?php if(isset($name)) echo $name; ?>. Welcome to <span class = "">Make<i>it</i>Stick.</span> This is temporarily empty. Type what's next on your TODO-List!</p>
+  <p class = "welcome-message">Hello <?php if( isset( $_SESSION["username"] ) ) echo $_SESSION["username"]; ?>. Welcome to <span class = "">Make<i>it</i>Stick.</span> This is temporarily empty. Type what's next on your TODO-List!</p>
   <div class = "container-buttons">
     <div class = "left" id = "todo__createlibrary" onclick = "createLibraryClicked()">
       <h2 class = "button-heading">create library</h2>

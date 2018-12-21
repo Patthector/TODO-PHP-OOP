@@ -274,7 +274,7 @@ class Tag
 	public static function searchTagByName( $name ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
-		$sql = "SELECT id, name FROM todo_app_tags WHERE name LIKE ? OR name = ?";
+		$sql = "SELECT id, name FROM todo_app_tags WHERE (name LIKE ? OR name = ?) ";
 		try{
 			$results = $db->prepare( $sql );
 			$results->bindValue(1, '%'.$name.'%', PDO::PARAM_STR);

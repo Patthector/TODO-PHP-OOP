@@ -7,6 +7,7 @@ class CollectionLogic extends Collection{
   private static $msg;
   private static $state;
   private $collection_id;
+  private $user_id;
   private $collection_name;
   private $collection_descripiton;
   private $collection_created_date;
@@ -25,6 +26,7 @@ class CollectionLogic extends Collection{
 
    if( !empty( $this->collection_id ) ){ // => if we have collection, let's finish building it
      $this->collection_name = $aux["name"];
+     $this->user_id = $aux["id_user"];
 
      if( !empty( $get_full_library ) && $get_full_library ){
        $this->set__collection_father_id( $aux["id_fatherCollection"] );
@@ -42,6 +44,9 @@ class CollectionLogic extends Collection{
   //*******SETTERS & GETTERS*******
   public function get__collection_id(){
     return $this->collection_id;
+  }
+  public function get__user_id(){
+    return $this->user_id;
   }
   public function get__collection_father_id(){
     return $this->collection_father_id;
@@ -129,14 +134,16 @@ class CollectionLogic extends Collection{
     self::$msg = $msg;
   }
 
-  public static function collection_createCollection( $array_post ){
+  public static function collection_createCollection( $array_post, $array_session ){
 
     $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
     $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
     $fatherCollection_id = filter_input(INPUT_POST, "collection", FILTER_SANITIZE_STRING);
+    $user_id = filter_var( $_SESSION[ "user_id" ], FILTER_SANITIZE_STRING );
 
-    $collection = new Collection($name, $description, $fatherCollection_id);
+    $collection = new Collection($name, $user_id, $description, $fatherCollection_id);
     $id = $collection->addCollection($collection->getName(),
+                                     $collection->getUserId(),
                                      $collection->getDescription(),
                                      $collection->getfatherCollection_id());
     if(!empty($id)){

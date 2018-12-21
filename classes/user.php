@@ -36,7 +36,7 @@ class User{
     include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
     $username = strtolower( $username );
 
-    $query = "SELECT id FROM todo_app_users WHERE user_name = ?";
+    $query = "SELECT * FROM todo_app_users WHERE user_name = ?";
 
     try{
       $result = $db->prepare( $query );
@@ -47,7 +47,7 @@ class User{
       echo "Bad query in " .__METHOD__. ", " . $e->getMessage();
       exit;
     }
-    return $result->fetchAll( PDO::FETCH_ASSOC );
+    return $result->fetch( PDO::FETCH_ASSOC );
   }
 
   public function getUser ( $user_id ){
