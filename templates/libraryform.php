@@ -44,7 +44,7 @@
 							<select id = "collection_library" name = "collection" class="form-control custom-select custom-select-m todo__input-form"><!--.todo__input-form-->
 								<option value = "">Main Library</option>
 								<?php
-								$collections = CollectionLogic::get__full_list_collections();
+								$collections = CollectionLogic::get__full_list_collections( $_SESSION[ "user_id" ] );
 
 								if( isset( $collection ) && !empty($collection->get__collection_father_id()) ){
 									$fatherCollection = $collection->get__collection_father_id();

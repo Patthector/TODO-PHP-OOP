@@ -6,6 +6,7 @@ class TodoLogic extends Todo{
   private $msg;
   private static $state;
   private $todo_id;
+  private $user_id;
   private $todo_father_id;
   private $todo_name;
   private $todo_descripiton;
@@ -15,12 +16,13 @@ class TodoLogic extends Todo{
   private $todo_level;
   private static $todo_full_list_collections;
 
-  function __construct( $todo_id ){
+  function __construct( $todo_id, $user_id ){
 
     $aux = parent::getTodo( $todo_id );
 
     if( !empty( $aux["id"] ) ){
       $this->set__todo_id( $todo_id );
+      $this->set__user_id( $user_id );
       $this->set__todo_name( $aux["name"] );
       $this->set__todo_father_id( $aux["id_collection"] );
       $this->set__todo_description( $aux["description"] );
@@ -31,13 +33,16 @@ class TodoLogic extends Todo{
         $this->set__todo_tags( $aux["tags"] );
       }
 
-      self::$todo_full_list_collections = Collection::getCollections();
+      self::$todo_full_list_collections = Collection::getCollections( $this->get__user_id() );
     }
   }
 
   //*******SETTERS & GETTERS*******
   public function get__todo_id(){
     return $this->todo_id;
+  }
+  public function get__user_id(){
+    return $this->user_id;
   }
   public function get__todo_father_id(){
     return $this->todo_father_id;
@@ -72,6 +77,9 @@ class TodoLogic extends Todo{
 ////////////////////////////////////////////////
   private function set__todo_id( $todo_id ){
     $this->todo_id = $todo_id;
+  }
+  private function set__user_id( $user_id ){
+    $this->user_id = $user_id;
   }
   private function set__todo_name( $todo_name ){
     $this->todo_name = $todo_name;

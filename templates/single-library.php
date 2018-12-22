@@ -69,7 +69,7 @@
           echo "<p style = \"text-align:center\">There are not todos available. Do you want to create a <a href = \"../views/todo.php\"><b>new todo?</b></a></p>";
         } else{
           foreach( $todosCollection as $item){
-            $item_todo = new TodoLogic( $item["id"] );
+            $item_todo = new TodoLogic( $item["id"], $_SESSION[ "user_id" ] );
             if( !empty($collection->get__select_elements()) && $collection->get__select_elements()){
               echo "<label class = \" checkbox-container checkbox-container--todo todo__collection-body-todo-container\" for = 'delete-todo-" . $item_todo->get__todo_id() ."'>
                       <span class=\"checkmark checkmark--todo\"></span>

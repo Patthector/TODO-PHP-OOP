@@ -45,7 +45,7 @@
               <option value=''>Select One Library</option>
               <?php
 
-              $collections = CollectionLogic::get__full_list_collections();
+              $collections = CollectionLogic::get__full_list_collections( $_SESSION["user_id"] );
 
               foreach($collections as $item){
 

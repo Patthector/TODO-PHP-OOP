@@ -67,7 +67,7 @@
 								echo "<p style = \"text-align:center\">There are not todos available. Do you want to create a <a href = \"../views/todo.php\"><b>new todo?</b></a></p>";
 							} else{
 								foreach( $todosCollection as $item ){
-									$item_todo = new TodoLogic( $item[ "id" ] );
+									$item_todo = new TodoLogic( $item[ "id" ], $_SESSION[ "user_id" ] );
 									echo "<div class = \"todo__collection-body-todo-container\">
 													<div class = \"todo__todo-title\">
 														<h4 class = \"todo__todo-title-collection\"><span>";

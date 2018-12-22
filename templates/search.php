@@ -35,12 +35,13 @@
     }
     if( isset( $todo_table ) && $todo_table ){
 
+
       echo "<div ><h3 class = \"todo__mytodos-search--subheading\">Search result(s) by Todo:</h3>";
 
       if( !empty( $searchResults["todos"] ) ){
         echo "<ul>";
         foreach( $searchResults["todos"] as $item_todo ){
-
+//var_dump($searchResults["todos"]);exit;
           echo "<div>
                   <h4 class = \"todo__mytodos-search--subheading-item todo__mytodos-search--result-item\"><a href = \"./todo.php?id=" .$item_todo["id"]. "\">" .$item_todo["name"]. "</a></h4>
                   <p>" .$item_todo["description"]. "</p>
@@ -59,12 +60,13 @@
       if( !empty( $searchResults["tags"] ) ){
         echo "<ul>";
         foreach( $searchResults["tags"] as $item_tag ){
+          
           echo "<li class = \"todo__mytodos-search--subheading-item\">#" .$item_tag["name"]. "</li>";
           echo "<ul class = \"todo__mytodos-search--sublist-todo\">";
           foreach( $item_tag["todos"] as $item_todo ){
             echo "<div>
-                    <h4 class = \"todo__mytodos-search--result-item\"><a href = './todo.php?id=" .$item_todo["itself"]["id"]. "'>" .$item_todo["itself"]["name"]. "</a></h4>
-                    <p>" .$item_todo["itself"]["description"]. "</p>
+                    <h4 class = \"todo__mytodos-search--result-item\"><a href = './todo.php?id=" .$item_todo["id"]. "'>" .$item_todo["name"]. "</a></h4>
+                    <p>" .$item_todo["description"]. "</p>
                   </div>";
           }
           echo "</ul>";

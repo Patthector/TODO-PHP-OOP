@@ -117,13 +117,14 @@ class Collection
 		return $result->fetch(PDO::FETCH_ASSOC);
 	}
 
-	public static function getCollections($limit = null, $offset = null){
+	public static function getCollections( $user_id, $limit = null, $offset = null){
 
 		include($_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php");
 
-		$sql = "SELECT id FROM todo_app_collections ORDER BY name ASC";
+		$sql = "SELECT id FROM todo_app_collections WHERE id_user = ? ORDER BY name ASC";
 		try{
 			$collections = $db->prepare( $sql );
+			$collections->bindParam( 1, $user_id, PDO::PARAM_INT );
 			$collections->execute();
 
 		} catch(Exception $e){
@@ -328,7 +329,114 @@ class Collection
 		return $results->fetchAll( PDO::FETCH_ASSOC );
 }
 
+	public static function preparingSearchResult( $name, $user_id ){
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
+		$sql = "SELECT id, name FROM todo_app_collections WHERE id_user = ?";
+
+		try{
+			$user_collections = $db->prepare( $sql );
+			$user_collections->bindParam( 1, $user_id, PDO::PARAM_INT);
+			$user_collections->execute();
+		} catch( Exception $e ){
+			echo "Bad query in ".__METHOD__.", ".$e->getMessage();
+			exit;
+		}
+		//=>
+		//the user's collections
+		while( $row = $user_collections->fetch( PDO::FETCH_ASSOC ) ){
+
+			//$row["collections"]
+			//$row["todos"]
+			//$row["tags"]
+
+			$id_collection = $row["id"];
+			//check the $search_name === $collection_name------------------------------------
+			$sql = "SELECT id, name, description FROM todo_app_collections WHERE (id = ?) AND (name LIKE ? OR name = ?)";
+			try{
+				$user_search_collection = $db->prepare( $sql );
+				$user_search_collection->bindParam( 1, $id_collection, PDO::PARAM_INT );
+				$user_search_collection->bindValue( 2, "%" . $name . "%", PDO::PARAM_STR );
+				$user_search_collection->bindParam( 3,  $name, PDO::PARAM_STR );
+				$user_search_collection->execute();
+			} catch ( Exception $e ){
+				echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+				exit;
+			}
+			//=> the collection_name is equal to $search_name-----------------------------------
+			$aux_collection = $user_search_collection->fetch( PDO::FETCH_ASSOC );
+			if( !empty($aux_collection) ){
+				$search_results["collections"][] = $aux_collection;
+			}
+
+			//----------------------------------------------------------------------------------
+			//TODOS
+			$row["todos"] = self::getTodosByFatherId( $id_collection );
+			foreach( $row["todos"] as $item_todo ){
+
+				$sql = "SELECT id, name, description FROM todo_app_todos WHERE (id = ?) AND (name LIKE ? OR name = ?)";
+				try{
+					$user_search_todo = $db->prepare( $sql );
+					$user_search_todo->bindParam( 1, $item_todo["id"], PDO::PARAM_INT );
+					$user_search_todo->bindValue( 2, "%" . $name . "%", PDO::PARAM_STR );
+					$user_search_todo->bindParam( 3,  $name, PDO::PARAM_STR );
+					$user_search_todo->execute();
+				} catch ( Exception $e ){
+					echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+					exit;
+				}
+				//=> the todo_name is equal to $search_name-----------------------------------
+				$aux_todo = $user_search_todo->fetch( PDO::FETCH_ASSOC );
+				if( !empty( $aux_todo ) ){
+					$search_results["todos"][] = $aux_todo;
+				}
+				//----------------------------------------------------------------------------------
+				//TAGS
+				$sql = "SELECT id_tag, id_todo FROM todo_app_todo_tag WHERE (id_todo = ?)";
+				try{
+					$user_tags = $db->prepare( $sql );
+					$user_tags->bindParam( 1, $item_todo["id"], PDO::PARAM_INT );
+					$user_tags->execute();
+				} catch ( Exception $e ){
+					echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+					exit;
+				}
+				while( $tags = $user_tags->fetch( PDO::FETCH_ASSOC ) ){
+					$sql = "SELECT id, name FROM todo_app_tags WHERE ( name LIKE ? OR name = ?) AND id = ?";
+					try{
+						$user_search_tag = $db->prepare( $sql );
+						$user_search_tag->bindValue( 1, "%" . $name . "%", PDO::PARAM_STR );
+						$user_search_tag->bindValue( 2, "%" . $name . "%", PDO::PARAM_STR );
+						$user_search_tag->bindParam( 3, $tags["id_tag"], PDO::PARAM_INT );
+						$user_search_tag->execute();
+					} catch ( Exception $e ){
+						echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+						exit;
+					}
+					//=> the tag_name is equal to $search_name-----------------------------------
+					$aux_tag = $user_search_tag->fetch( PDO::FETCH_ASSOC );
+
+					if( !empty($aux_tag) ){
+						$search_results["tags"][$tags["id_tag"]] = $aux_tag;
+
+						$sql = "SELECT id, name, description FROM todo_app_todos WHERE id = ?";
+						try{
+							$user_search_tag_todo = $db->prepare( $sql );
+							$user_search_tag_todo->bindParam( 1, $tags["id_todo"], PDO::PARAM_INT );
+							$user_search_tag_todo->execute();
+						} catch ( Exception $e ){
+							echo "Bad query in " . __METHOD__ . ", " . $e->getMessage();
+							exit;
+						}
+						$search_results["tags"][$tags["id_tag"]]["todos"][] = $user_search_tag_todo->fetch(PDO::FETCH_ASSOC);
+					}
+				}
+			}
+		}
+// what should i return where there are not solutions
+		if(isset($search_results)){return $search_results;}
+		else{return false;}
+	}
 
 
 

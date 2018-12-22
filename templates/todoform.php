@@ -58,7 +58,7 @@
 									<select id = "todo_library" name = "library" class="form-control custom-select custom-select-m todo__input-form">
 										<?php
 									//	if(!isset($collection)){$collection = "Unknow";}
-									$collections = CollectionLogic::get__full_list_collections();
+									$collections = CollectionLogic::get__full_list_collections( $_SESSION["user_id"] );
 										foreach($collections as $item){
 											$item_collection = new CollectionLogic( $item["id"] );
 											if( isset( $todo ) && $todo->get__todo_father_id() === $item_collection->get__collection_id() ){

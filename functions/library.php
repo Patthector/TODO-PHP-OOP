@@ -15,7 +15,7 @@ class CollectionLogic extends Collection{
   private $collection_subcollections;
   private $collection_path;
   private $collection_todos;
-  private static $collection_full_list_collections;
+  //private static $collection_full_list_collections;
   //
   private $select_elements = false;
 
@@ -84,8 +84,8 @@ class CollectionLogic extends Collection{
   public static function get__msg(){
     return self::$msg;
   }
-  public static function get__full_list_collections(){
-    return parent::getCollections();
+  public static function get__full_list_collections( $user_id ){
+    return parent::getCollections( $user_id );
   }
 //////////////////////////////////////////////////////
   protected function set__collection_id( $collection_id ){
