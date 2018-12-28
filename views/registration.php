@@ -4,11 +4,23 @@ include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/user.php";
 $title_page = "Stick it | Home";
 
 if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
+  if( isset( $_GET[ "action" ] ) ){
+    $action = trim( filter_input( INPUT_GET, "action", FILTER_SANITIZE_STRING ) );
 
-  if( isset( $_GET[ "valid-username" ] ) ){
-    $username = trim( filter_input( INPUT_GET, "valid-username", FILTER_SANITIZE_STRING ) );
-    $valid_user = User::userExist( $username );
-    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/signUp.php";
+    if( $action == "user_verification" ){
+      $username = trim( filter_input( INPUT_GET, "username", FILTER_SANITIZE_STRING ) );
+      if( !empty( $username ) ){
+        $createAccount = true;
+        $password = trim( filter_input( INPUT_GET, "password", FILTER_SANITIZE_STRING ) );
+        $password_confirmation = trim( filter_input( INPUT_GET, "password_confirmation", FILTER_SANITIZE_STRING ) );
+        if( !empty( User::userExist( $username ) ) ){
+          $user_exists = true;
+        } else{
+          $user_exists = false;
+        }
+        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/signUp.php";
+      }// empty username
+    }// the action !== "user_verification"
     exit;
   }
   else if( isset( $_GET[ "switch-to-sign-in" ] ) ){//the user switch to sign in as an old user

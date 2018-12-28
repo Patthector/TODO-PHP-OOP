@@ -20,28 +20,56 @@
 
         <div class="form-group row">
           <label for = "user-name">Username</label>
-          <input class="form-control" type = "text" name = "user-name" id = "user-name" placeholder = "Username" />
-
+          <input class="form-control <?php if( isset( $user_exists ) && $user_exists ){ echo "is-invalid"; } else if( isset( $user_exists ) && empty( $user_exists ) ){echo "is-valid"; } ?> "
+            type = "text" name = "user-name" id = "<?php if( isset( $createAccount ) && $createAccount ){echo "new-user-name";}else{ echo "user-name";} ?>"
+            value = "<?php if( isset( $username ) )echo $username; ?>" placeholder = "Username" />
+          <div class="valid-feedback">
+            Valid username [<?php echo $username; ?>].
+          </div>
+          <div class="invalid-feedback">
+            Unfortunately this username is taken! Please try a different one.
+          </div>
         </div>
         <div class="form-group row">
           <label for = "user-password">Password</label>
-          <input class="form-control" type = "password" name = "user-password" id = "user-password" placeholder = "Password" />
-
+          <input class="form-control" type = "password" name = "user-password"
+          <?php
+          if( isset( $password ) && !empty( $password ) ){
+            echo "value=\"$password\"";
+          }
+          ?>
+           id = "user-password" placeholder = "Password" />
+          <div class="valid-feedback">
+            All good!
+          </div>
+          <div class="invalid-feedback">
+            Unfortunately this is an invalid password! See if your password follows all the rules.
+          </div>
         </div>
         <?php
         if( isset( $createAccount ) && $createAccount ){
           echo "<div class=\"form-group row\">
             <label for = \"password-confirmation\">Confirm Password</label>
-            <input class=\"form-control\" type = \"password\" name = \"password-confirmation\" id = \"password-confirmation\" placeholder = \"Confirm password\" />
+            <input class=\"form-control\" type = \"password\" name = \"password-confirmation\" ";
+            if( isset( $password_confirmation ) && !empty( $password_confirmation ) ){
+              echo "value=\"$password_confirmation\"";
+            }
+          echo "id = \"password-confirmation\" placeholder = \"Confirm password\" disabled />
+            <div class=\"valid-feedback\">
+              All good!
+            </div>
+            <div class=\"invalid-feedback\">
+              The passwords don't match, please verify again.
+            </div>
           </div>";
         }
         ?>
-        <button class = "btn todo__btn-modal todo__btn-modal--info btn-block ml-0" type = "submit" name =
+        <button id = "todo__registration--submit" class = "btn todo__btn-modal todo__btn-modal--info btn-block ml-0" type = "submit" name =
         <?php
         if( isset( $createAccount ) && $createAccount ){
-          echo "\"sign-up\" value = \"sign-up\" > Create Account";
+          echo "\"sign-up\" value = \"sign-up\" disabled> Create Account";
         } else{
-          echo "\"log-in\" value = \"log-in\" > Sign In";
+          echo "\"log-in\" value = \"log-in\" disabled> Sign In";
         }
          ?> </button>
       </form>
