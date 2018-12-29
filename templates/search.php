@@ -60,7 +60,7 @@
       if( !empty( $searchResults["tags"] ) ){
         echo "<ul>";
         foreach( $searchResults["tags"] as $item_tag ){
-          
+
           echo "<li class = \"todo__mytodos-search--subheading-item\">#" .$item_tag["name"]. "</li>";
           echo "<ul class = \"todo__mytodos-search--sublist-todo\">";
           foreach( $item_tag["todos"] as $item_todo ){
@@ -79,6 +79,6 @@
 
  </div>
  <div class = "container todo__mytodos-search--container-buttons">
-   <button type = "button" onclick = "./mytodos.php" class = "btn todo__btn-modal todo__btn-modal--default">Search again</button>
-   <button type = "button" onclick = "./mytodos.php" class = "btn todo__btn-modal todo__btn-modal--info">Go to myTODOs</button>
+   <button type = "button" onclick = "goToMyTodos()" class = "btn todo__btn-modal todo__btn-modal--default">Search again</button>
+   <button type = "button" onclick = "goToMyTodos()" class = "btn todo__btn-modal todo__btn-modal--info">Go to myTODOs</button>
  </div>

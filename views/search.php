@@ -18,11 +18,11 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
     exit;
   }
   else if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ){
-    //questa e una chiamata de elementi venuta di
+    //questa `e una chiamata de elementi venuta di
     // mytodos.php search-bar
     $searchResults = [];
 
-    if( !empty( $_POST["search-bar--submit"] ) ){
+    if( isset( $_POST["search-bar--submit"] ) ){
       if( !empty( $_POST["search-bar--input"] ) ){
         $search_name = trim( filter_input( INPUT_POST, "search-bar--input", FILTER_SANITIZE_STRING ) );
         $user_id = $_SESSION["user_id"];

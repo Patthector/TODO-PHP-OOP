@@ -361,6 +361,24 @@ div.todo__box-message {
   font-size: 18px;
   font-weight: bold; }
 
+.todo__registration--tooltips-svg svg {
+  height: 15px;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 2px 3px;
+  border-radius: 10px;
+  position: absolute;
+  top: 5px;
+  right: -20px; }
+
+.todo__registration--collapse-msg {
+  padding: 6px;
+  font-size: 14px;
+  color: #444444;
+  font-weight: bold;
+  background-color: #ededed;
+  box-shadow: inset 0px 0px 1px #333333; }
+
 .todo__todo_title_container {
   background-color: #fff;
   border-radius: 10px 10px 0 0; }
@@ -563,6 +581,8 @@ div.todo__box-message {
   background-color: #dc3545; }
 .todo__modal-info {
   background-color: #303f9f; }
+.todo__modal-primary {
+  background-color: #4285f4; }
 .todo__modal h4 {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -1156,11 +1176,11 @@ footer {
 .todo__btn-search-bar:visited,
 .todo__btn-search-bar:hover,
 .todo__btn-search-bar:active {
-  background-color: #ededed !important;
-  color: #303f9f !important;
+  background-color: #303f9f;
+  color: #ededed;
   font-family: "fjallaone-regular";
   text-transform: uppercase;
-  border-color: #ededed;
+  border-color: #303f9f;
   box-shadow: 0 0px 4px #808080;
   font-size: 18px; }
 
@@ -1169,13 +1189,14 @@ footer {
 .todo__btn-search-bar--inverse:visited,
 .todo__btn-search-bar--inverse:hover,
 .todo__btn-search-bar--inverse:active {
-  background-color: #303f9f !important;
-  border-color: #303f9f !important;
-  color: white;
+  background-color: #303f9f;
+  border-color: #303f9f;
+  color: #ededed;
   box-shadow: 0 0px 4px #212121;
   font-family: "fjallaone-regular";
   text-transform: uppercase;
-  font-size: 18px; }
+  font-size: 18px;
+  border-radius: 0 5px 5px 0 !important; }
   .todo__btn-search-bar--inverse span,
   .todo__btn-search-bar--inverse:link span,
   .todo__btn-search-bar--inverse:visited span,
@@ -1187,6 +1208,27 @@ footer {
   background-color: #ededed;
   box-shadow: inset 1px -1px 4px rgba(128, 128, 128, 0.6);
   border-radius: 12px; }
+
+.todo__search-by--menu-container {
+  position: absolute;
+  display: none;
+  top: 24px;
+  left: 0;
+  margin-top: 24px;
+  background-color: #ededed;
+  width: 200px;
+  padding: 12px;
+  z-index: 2000;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: #cfcfcf 2px 3px 2px inset; }
+  .todo__search-by--menu-container div.todo__custom-control {
+    padding-bottom: 6px; }
+    .todo__search-by--menu-container div.todo__custom-control label {
+      font-weight: bold;
+      color: #303f9f; }
+  .todo__search-by--menu-container div.todo__custom-control:hover label {
+    color: #303f9f; }
 
 .todo__mytodos-search--container ul {
   list-style: none;

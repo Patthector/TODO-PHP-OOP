@@ -1,0 +1,20 @@
+.todo__registration--tooltips-svg{
+  svg{
+    height: 15px;
+    color: $tomato;
+    border: 1px solid $tomato;
+    padding: 2px 3px;
+    border-radius: 10px;
+    position: absolute;
+    top: 5px;
+    right: -20px;
+  }
+}
+.todo__registration--collapse-msg{
+  padding: 6px;
+  font-size: 14px;
+  color:$tundora;
+  font-weight: bold;
+  background-color: $gallery;
+  box-shadow: inset 0px 0px 1px $mine-shaft;
+}

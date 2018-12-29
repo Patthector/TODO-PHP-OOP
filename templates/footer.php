@@ -58,6 +58,7 @@
     <script src = "/TODO-PHP-OOP/vendor/js/action-menu.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/tags.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/registration.js"></script>
+    <script src = "/TODO-PHP-OOP/vendor/js/search.js"></script>
 
   </body>
 </html>

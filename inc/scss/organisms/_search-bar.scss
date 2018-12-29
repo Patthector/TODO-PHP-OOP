@@ -5,18 +5,19 @@
   margin-bottom:0;
   label{
     margin-bottom: 0;
-  } 
+  }
 }
 .todo__btn-search-bar,
 .todo__btn-search-bar:link,
 .todo__btn-search-bar:visited,
 .todo__btn-search-bar:hover,
 .todo__btn-search-bar:active{
-  background-color: rgba($gallery,1) !important;
-  color:$sapphire !important;
+
+  background-color: $sapphire ;
+  color: $gallery;
   font-family: $font-secondary;
   text-transform: uppercase;
-  border-color: $gallery;
+  border-color: $sapphire;
   box-shadow: 0 0px 4px $gray;
   //FONT
   font-size:18px;
@@ -26,18 +27,45 @@
 .todo__btn-search-bar--inverse:visited,
 .todo__btn-search-bar--inverse:hover,
 .todo__btn-search-bar--inverse:active{
-  background-color: $sapphire !important;
-  border-color:$sapphire !important;
-  color:white;
-  span{color:$tomato;}
+  background-color: $sapphire;
+  border-color: $sapphire;
+  color: $gallery;
   box-shadow: 0 0px 4px $dark-night;
   font-family: $font-secondary;
   text-transform: uppercase;
   font-size:18px;
+  span{color: $tomato;}
+  border-radius: 0 5px 5px 0 !important;
 }
 .todo__input-search{
   background-color:rgba($gallery,1);
-  //@include todo__white-form-gradient;
   box-shadow:inset 1px -1px 4px rgba($gray,.6);
   border-radius:12px;
+}
+
+.todo__search-by--menu-container{
+  position: absolute;
+  display: none;
+  top: 24px;
+  left: 0;
+  margin-top: 24px;
+  background-color:  $gallery;
+  width: 200px;
+  padding: 12px;
+  z-index:2000;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: $alto 2px 3px 2px inset;
+
+  div.todo__custom-control{
+    padding-bottom: 6px;
+    label{
+      font-weight: bold;
+      color: $sapphire;
+    }
+  }
+  div.todo__custom-control:hover label{
+    color:$sapphire;
+
+  }
 }

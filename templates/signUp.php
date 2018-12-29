@@ -18,20 +18,44 @@
         ?></h3>
       <form class = " todo__registration--form " action = "registration.php" method = "POST">
 
-        <div class="form-group row">
-          <label for = "user-name">Username</label>
+        <div class="form-group  row">
+          <!-- Helper & Collapse BLOCK-->
+          <label class="position-relative" for = "user-name">Username
+            <span class = "todo__registration--tooltips-svg" type="button" data-toggle="collapse" data-target="#todo__username--collapse" aria-expanded="false" aria-controls="usernameCollapse" alt = "Click for help"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/question-mark.svg"; ?></span>
+          </label>
+          <div class="collapse" id="todo__username--collapse">
+            <div class="card card-body mb-3 todo__registration--collapse-msg">
+              The right formating for username is a combination of letters and numbers. More than 6 characters.
+            </div>
+          </div>
+          <!--end Helper & Collapse BLOCK-->
+
+          <!--INPUT Username-->
           <input class="form-control <?php if( isset( $user_exists ) && $user_exists ){ echo "is-invalid"; } else if( isset( $user_exists ) && empty( $user_exists ) ){echo "is-valid"; } ?> "
             type = "text" name = "user-name" id = "<?php if( isset( $createAccount ) && $createAccount ){echo "new-user-name";}else{ echo "user-name";} ?>"
             value = "<?php if( isset( $username ) )echo $username; ?>" placeholder = "Username" />
+          <!--INPUT Feedback Username-->
           <div class="valid-feedback">
             Valid username [<?php echo $username; ?>].
           </div>
           <div class="invalid-feedback">
             Unfortunately this username is taken! Please try a different one.
           </div>
+          <!--end INPUT Feedback Username-->
         </div>
-        <div class="form-group row">
-          <label for = "user-password">Password</label>
+        <div class="form-group  row">
+          <!-- Helper & Collapse BLOCK-->
+          <label class="position-relative" for = "user-password">Password
+            <span class = "todo__registration--tooltips-svg" type="button" data-toggle="collapse" data-target="#todo__password--collapse" aria-expanded="false" aria-controls="passwordCollapse" alt = "Click for help" ><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/question-mark.svg"; ?></span>
+          </label>
+          <div class="collapse" id="todo__password--collapse">
+            <div class="card card-body mb-3 todo__registration--collapse-msg">
+              The right formating for password is a combination of letters and numbers. More than 6 characters.
+            </div>
+          </div>
+          <!--end Helper & Collapse BLOCK-->
+
+          <!--INPUT Password-->
           <input class="form-control" type = "password" name = "user-password"
           <?php
           if( isset( $password ) && !empty( $password ) ){
@@ -39,6 +63,7 @@
           }
           ?>
            id = "user-password" placeholder = "Password" />
+          <!--INPUT Feedback Password-->
           <div class="valid-feedback">
             All good!
           </div>
@@ -46,6 +71,7 @@
             Unfortunately this is an invalid password! See if your password follows all the rules.
           </div>
         </div>
+        <!--end INPUT Feedback Password-->
         <?php
         if( isset( $createAccount ) && $createAccount ){
           echo "<div class=\"form-group row\">
@@ -64,7 +90,7 @@
           </div>";
         }
         ?>
-        <button id = "todo__registration--submit" class = "btn todo__btn-modal todo__btn-modal--info btn-block ml-0" type = "submit" name =
+        <button id = "todo__registration--submit" class = "btn todo__btn-modal todo__modal-info btn-block ml-0" type = "submit" name =
         <?php
         if( isset( $createAccount ) && $createAccount ){
           echo "\"sign-up\" value = \"sign-up\" disabled> Create Account";
