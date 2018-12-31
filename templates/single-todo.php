@@ -1,5 +1,5 @@
 <main role = "main">
-<div id = "todo_single-todo" class = "todo__general-container first-container">
+<div id = "todo_single-todo" class = "col-12 col-md-8 todo__general-container first-container">
   <?php
     //.todo__general-container=> is a class that will center the content from top/bottom and left/right
   ?>
@@ -49,18 +49,11 @@
   </div>
 
   <div class = "todo__library-footer">
-    <p>Created be <span>@username</span> on <span>
+    <p>Created be <span><?php echo $_SESSION["username"]; ?></span> on <span>
       <?php
       if( isset( $todo ) && !empty( $todo->get__todo_created_date() ) ) echo $todo->get__todo_created_date();?>
-    </span>. Last update on <span>
-      <?php if( isset( $todo ) && !empty( $todo->get__todo_updated_date() ) ) echo $todo->get__todo_updated_date();?>
     </span>
+      <?php if( isset( $todo ) && !empty( $todo->get__todo_updated_date() ) ) echo ". Last update on <span>". $todo->get__todo_updated_date() ."</span>" ?>
   </p>
   </div>
 </div>
-
-<?php
-//include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/update-todo-modal.php";
-//include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/delete-todo-modal.php";
-//include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
-?>

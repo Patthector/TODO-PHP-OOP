@@ -7,6 +7,7 @@
 // 5-) the results by tags [IF that was requested]
 // 6-) a button sending to mytodos.php
 
+
  ?>
 
  <div class = "container todo__mytodos-search--container">
@@ -21,7 +22,7 @@
 
       echo "<div><h3 class = \"todo__mytodos-search--subheading\">Search result(s) by Collection:</h3>";
 
-      if( !empty( $searchResults["collections"] ) ){
+      if( isset( $searchResults["collections"] ) && !empty( $searchResults["collections"] ) ){
         echo "<ul>";
         foreach( $searchResults["collections"] as $item_collection ){
           echo "<div>
@@ -29,35 +30,39 @@
                   <p>" .$item_collection["description"]. "</p>
                 </div>";
         }
+        echo "</ul>";
+
+      } else{
+        echo "<p class = \"todo__mytodos-search--no-results\">There is nothing to show in Collections.</p>";
       }
-      echo "</ul></div>";
+      echo "</div>";
       echo "<hr>";
     }
     if( isset( $todo_table ) && $todo_table ){
 
-
       echo "<div ><h3 class = \"todo__mytodos-search--subheading\">Search result(s) by Todo:</h3>";
 
-      if( !empty( $searchResults["todos"] ) ){
+      if(isset( $searchResults["todos"] ) && !empty( $searchResults["todos"] ) ){
         echo "<ul>";
         foreach( $searchResults["todos"] as $item_todo ){
-//var_dump($searchResults["todos"]);exit;
+
           echo "<div>
                   <h4 class = \"todo__mytodos-search--subheading-item todo__mytodos-search--result-item\"><a href = \"./todo.php?id=" .$item_todo["id"]. "\">" .$item_todo["name"]. "</a></h4>
                   <p>" .$item_todo["description"]. "</p>
                 </div>";
         }
-      } else{
-        echo "There is nothing to show!";
+      echo "</ul>";
+      }else{
+        echo "<p class = \"todo__mytodos-search--no-results\">There is nothing to show in Todos</p>";
       }
-      echo "</ul></div>";
+      echo "</div>";
       echo "<hr>";
     }
     if( isset( $tag_table ) && $tag_table ){
 
       echo "<div><h3 class = \"todo__mytodos-search--subheading\">Search result(s) by Tag:</h3>";
 
-      if( !empty( $searchResults["tags"] ) ){
+      if(isset( $searchResults["tags"] ) && !empty( $searchResults["tags"] ) ){
         echo "<ul>";
         foreach( $searchResults["tags"] as $item_tag ){
 
@@ -71,8 +76,11 @@
           }
           echo "</ul>";
         }
-      }
-      echo "</ul></div>";
+      echo "</ul>";
+    }else{
+      echo "<p class = \"todo__mytodos-search--no-results\">There is nothing to show in Tags.</p>";
+    }
+      echo "</div>";
     }
 
     ?>

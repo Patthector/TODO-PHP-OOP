@@ -1,8 +1,15 @@
+main{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
 .todo__general-container{
-  @include todo__center-flex;
+  //@include todo__center-flex;
   position: relative;
-  margin-left: 264px;
-  margin-right: 264px;
+  //margin-left: 264px;
+  //margin-right: 264px;
   margin-top: 90px;//66+24
   background-color:$white;
   box-shadow:0 0 5px $gray;
@@ -10,14 +17,21 @@
   padding-right:24px;
   border-radius: 12px;
 
-  .todo__todo-body{ 
+  .todo__todo-body{
     @include separator;
+    @media(max-width:576px){
+      margin-bottom: 12px;
+    }
   }
   .todo__todo-title {
       h2{
       font-family: $font-secondary;
       color:$sapphire;
       margin-bottom: 6px;
+      @media(max-width: 576px){
+        font-size: 18px;
+        margin-top: 24px;
+      }
     }
   }
 
@@ -32,6 +46,9 @@
       padding-bottom: 12px;
       margin-bottom: 0;
       color:$black;
+      @media(max-width: 576px){
+        font-size: 13px;
+      }
     }
   }
 }
@@ -43,6 +60,10 @@
 }
 .todo__item-category-name{
   margin:12px;
+  @media(max-width: 576px){
+    margin: 6px;
+    margin-top: 2px;
+  }
   span{
     background-color: $sapphire;
     border-top-left-radius: 12px;
@@ -51,6 +72,9 @@
     font-family: $font-secondary;
     padding: 3px 6px;
     text-transform: uppercase;
+    @media(max-width: 576px){
+      font-size: 11px;
+    }
   }
   a{
     color:$black;
@@ -62,6 +86,9 @@
     border-bottom-right-radius: 12px;
     border:1px solid $sapphire;
     margin-left:-5px;
+    @media(max-width: 576px){
+      font-size: 11px;
+    }
   }
 }
 ///TAGS
@@ -71,12 +98,18 @@
     flex-wrap: wrap;
     @include reset-list;
     @include separator;
+    @media(max-width: 576px){
+      margin-bottom: 12px;
+    }
   }
   li a{
     font-family:$font-secondary;
     color: $sapphire;
     font-weight: bold;
     padding: 6px;
+    @media(max-width: 576px){
+      font-size: 12px;
+    }
   }
 }
 
@@ -85,12 +118,17 @@
   @include todo__blue-gradient;
   margin-left:-24px;
   margin-right:-24px;
+  padding-left: 6px;
+  padding-right: 6px;
   @include todo__inline-flex;
 
   p{
     color:$white;
     margin-bottom: 6px;
     margin-top:6px;
+    @media(max-width: 576px){
+      font-size: 12px;
+    }
     span{
       font-family: $font-primary-bold;
     }

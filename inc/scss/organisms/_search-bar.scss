@@ -1,5 +1,8 @@
 .todo__search-bar-container{
   margin:48px 10% 0px 10%;
+  @media(max-width:576px){
+    margin:48px -6px 0px -6px;
+  }
 }
 .todo__search-bar-input-container{
   margin-bottom:0;
@@ -21,6 +24,10 @@
   box-shadow: 0 0px 4px $gray;
   //FONT
   font-size:18px;
+  @media(max-width:576px){
+    font-size: 14px;
+    padding-right: 24px;
+   }
 }
 .todo__btn-search-bar--inverse,
 .todo__btn-search-bar--inverse:link,
@@ -47,10 +54,16 @@
   position: absolute;
   display: none;
   top: 24px;
+  @media(max-width:575px){
+    top: 16px;
+  }
   left: 0;
   margin-top: 24px;
   background-color:  $gallery;
   width: 200px;
+  @media(max-width:575px){
+    width: 180px;
+  }
   padding: 12px;
   z-index:2000;
   border-bottom-left-radius: 10px;

@@ -11,14 +11,25 @@
 .header__logo{
   margin: 0 12px;
   svg{
-    width: 300px;
-    height: 70px;
+    @media(max-width: 576px) {
+      width: 135px;
+      height: 50px;
+    }
+    @media(min-width: 576px) {
+      width: 300px;
+      height: 70px;
+    }
   }
 }
 .header__menu-item{
   align-self:flex-end;
   font-family: "fjallaone-regular";
-  font-size:24px; 
+  @media(max-width: 576px) {
+    font-size:16px;
+  }
+  @media(min-width: 576px) {
+    font-size:24px;
+  }
   a{
     color:$white;
     text-decoration: underline;
@@ -26,6 +37,11 @@
   }
   a:hover{
     color:$alto;
+  }
+  span{
+    font-size:14px;
+    color:$tomato;
+    text-decoration: none !important;
   }
 }
 

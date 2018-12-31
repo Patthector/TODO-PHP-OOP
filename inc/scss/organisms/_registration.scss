@@ -1,6 +1,20 @@
+.todo__registration--box{
+  @media(max-width: 576px) {
+    min-width: 290px;
+    max-width: 360px;
+  }
+  @media(min-width: 576px) {
+    min-width: 320px;
+    max-width: 380px;
+  }
+
+}
 .todo__registration--container{
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
   margin-top: 48px;
   label{
     margin-bottom: 0;

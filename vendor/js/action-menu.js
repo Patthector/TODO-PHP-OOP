@@ -117,14 +117,14 @@ function selectingCollectionElements(e){
       $("#todo_collection-button-delete").css("display","none");
       var parent = $(e.target).parent().parent();
       $( ".dropdown-menu" ).removeClass("show");
-      $( parent ).append("<button id = \"todo__collection-button-delete\" class = \"todo__btn-collection--selected\" data-toggle=\"modal\" data-target=\"#delete-todo-modal\">"+ innerVal +"</button>");
+      $( parent ).append("<button id = \"todo__collection-button-delete\" class = \"todo__btn-collection todo__btn-collection--selected\" data-toggle=\"modal\" data-target=\"#delete-todo-modal\">"+ innerVal +"</button>");
     }
     else{//MOVING
       var innerVal = $("#todo_collection-button-move").html();
       $("#todo_collection-button-move").css("display","none");
       var parent = $(e.target).parent().parent();
       $( ".dropdown-menu" ).removeClass("show");
-      $( parent ).append("<button id = \"todo__collection-button-move\" class = \"todo__btn-collection--selected\" data-toggle=\"modal\" data-target=\"#move-todo-modal\">"+ innerVal +"</button>");
+      $( parent ).append("<button id = \"todo__collection-button-move\" class = \"todo__btn-collection todo__btn-collection--selected\" data-toggle=\"modal\" data-target=\"#move-todo-modal\">"+ innerVal +"</button>");
     }
   }
   // 1-Add the styles to all the elements to be clicked

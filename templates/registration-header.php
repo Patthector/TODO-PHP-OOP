@@ -17,5 +17,4 @@
   </head>
 
   <body>
-    <div id = "main" class = "container-fluid todo__main-background">
-    
+    <div id = "main" class = "container-fluid col-12 col-md-6 todo__main-background">

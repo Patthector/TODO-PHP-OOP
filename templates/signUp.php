@@ -1,6 +1,6 @@
-<div id = "todo__registration--box" class = "container">
+<div id = "todo__registration--box" class = "container todo__registration--box">
   <div class = "row todo__registration--container">
-    <div class = "offset-4 col-sm-4 todo__registration--form-container">
+    <div class = "todo__registration--form-container">
       <div class = "todo__registration--logo-container">
         <div>
           <?php

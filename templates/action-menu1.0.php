@@ -2,19 +2,11 @@
   if( isset( $todo ) && !empty( $todo::get__state()) && ($todo::get__state() == "readTodo") ){
     echo "<div id = \"action-menu\" class = \"todo__action-menu-container\">
             <div class = \"todo__action-menu-container--aux\">
-              <ul class = \"todo__action-menu\">";
-                //
-    echo      "<div class = \"dropdown\">
-                  <li id = \"todo_collection-button-create\" class = \"todo__btn-collection\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" >";
-                    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/plus-solid.svg";
-      echo          "<span>Create</span></li>
-                  <div class=\"dropdown-menu\" aria-labelledby=\"todo_collection-button-create\">
-                    <button class=\"dropdown-item todo__collection-elements\" onclick = \"window.location = 'http://localhost/TODO-PHP-OOP/views/library.php'\">Create Collection</button>
-                    <button class=\"dropdown-item todo__collection-elements\" onclick = \"window.location = 'http://localhost/TODO-PHP-OOP/views/todo.php'\">Create Todo</button>
-                  </div>
-              </div>";
-
-    echo            "<li class = \"todo__btn-todo\" data-toggle=\"modal\" data-target=\"#delete-todo-modal\">";
+              <ul class = \"todo__action-menu\">
+                <li class = \"todo__btn-todo\">";
+                include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/plus-solid.svg";
+      echo      "<span>Create</span></li>
+                <li class = \"todo__btn-todo\" data-toggle=\"modal\" data-target=\"#delete-todo-modal\">";
                 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/trash-alt-solid.svg";
       echo      "<span>Delete</span></li>
                 <li id = \"todo_todo-button-edit\" class = \"todo__btn-todo\">";
@@ -28,24 +20,11 @@
           </div>";
 
   } else{
-?>
-
+?> 
     <div id = "action-menu" class = "todo__action-menu-container">
       <div class = "todo__action-menu-container--aux">
-        <!--<a id = "todo__btn-menu--cancel" class = "btn todo__btn-cancel">CANCEL</a>-->
+        <a id = "todo__btn-menu--cancel" class = "btn todo__btn-cancel">CANCEL</a>
           <ul id = "todo__action-menu-list" class = "todo__action-menu">
-            <!--CANCEL BUTTON-->
-            <?php
-            echo "<button id = \"todo__btn-menu--cancel\" class = \"todo__btn-collection todo__btn-cancel\">";
-                  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/times-solid.svg";
-            echo    "<span>CANCEL</span></button>";
-            ?>
-            <!--CLEAR BUTTON-->
-            <?php
-            echo "<button id = \"todo__action-menu-btn-clear\" class = \"todo__btn-collection todo__btn-clear\">";
-                  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/redo-alt-solid.svg";
-            echo    "<span>CLEAR</span></button>";
-            ?>
             <!--CREATE BUTTON-->
             <?php
             echo "<div class = \"dropdown\">
@@ -62,13 +41,13 @@
                   //--DELETE BUTTON--
                   //EITHER DROPDOWN OR THE SINGLE-BUTTON
                   if( isset($collection) && !empty($collection->get__select_elements()) && ($collection->get__select_elements() === true) ){
-                    echo "<label id = \"todo_collection-button-delete\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class = \" todo__btn-collection\">";
+                    echo "<label id = \"todo_collection-button-delete\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class = \"border-bottom-right-radius todo__btn-collection\">";
                              include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/trash-alt-solid.svg";
                     echo      "<span>Delete</span>
                           </label>";
                   } else{
                     echo "<div class = \"dropdown\">
-                            <li id = \"todo_collection-button-delete\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class = \" todo__btn-collection \">";
+                            <li id = \"todo_collection-button-delete\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class = \"border-bottom-right-radius todo__btn-collection \">";
                              include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/trash-alt-solid.svg";
                     echo      "<span>Delete</span></li>
                             <div class=\"dropdown-menu\" aria-labelledby=\"todo_collection-button-delete\">
@@ -79,7 +58,7 @@
                   }
             ?>
             <!--EDIT BUTTON-->
-            <li id = "todo_collection-button-edit" class = " todo__btn-collection">
+            <li id = "todo_collection-button-edit" class = "border-bottom-left-radius todo__btn-collection">
               <?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/edit-regular.svg"; ?>
               <span>Edit</span>
             </li>
@@ -87,7 +66,7 @@
             <?php
               //EITHER DROPDOWN OR THE SINGLE-BUTTON
               if( isset($collection) && !empty($collection->get__select_elements()) && ($collection->get__select_elements() === true) ){
-                echo "<label id = \"todo_collection-button-move\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class = \" todo__btn-collection\">";
+                echo "<label id = \"todo_collection-button-move\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" class = \"border-bottom-right-radius todo__btn-collection\">";
                          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/exchange-alt-solid.svg";
                 echo      "<span>Move</span>
                       </label>";
@@ -103,8 +82,8 @@
                       </div>";
               }
             ?>
-
           </ul>
+          <button id = "todo__action-menu-btn-clear" class = "btn btn-danger todo__btn-clear">Clear Selection</button>
         </div>
       </div>
 <?php

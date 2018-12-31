@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <div id = "main" class = "container-fluid todo__main-background">
+    <div id = "main" class = "container-fluid col-12 todo__main-background">
       <header id="header" class="header__blue-gradient
       <?php
       if( class_exists( "TodoLogic" ) && !empty( TodoLogic::get__state() ) ){
@@ -112,7 +112,9 @@
           <li class="header__menu-item">
             <?php
             if( isset( $_SESSION[ "user_id" ] ) ){
-              echo "<a id = \"todo__logout-button\" href=\"#\">Log out</a>";
+
+              $session_username = $_SESSION[ "username" ];
+              echo "<a id = \"todo__logout-button\" href=\"#\">Log out <span>(as $session_username)</span></a>";
               //LOGOUT will trigger an AJAX request to call the registration GET method and log you out
             } else{
               echo "<a href=\"" ."views/registration.php". "\">Log in</a>";

@@ -14,6 +14,9 @@
     &--heading{
       font-family:$font-secondary;
       font-size: 20px;
+      @media(max-width:576px){
+        font-size: 18px;
+      }
       color:$dark-night;
       margin:0;
       padding: 10px 0;
@@ -31,6 +34,19 @@
       text-transform: uppercase;
       font-weight: bold;
       color:$black;
+      @media(max-width:576px){
+        font-size: 11px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+      }
+      span svg{
+        @media(max-width:576px){
+          width: 11px;
+        }
+      }
     }
   }
 }

@@ -10,6 +10,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
   //require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/todo.php";
   //require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/library.php";
 
+  $title_page = "Make It Stick | Search";
   //GET
   if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
     //qualcuno a voluto vedere un po' di pui
@@ -29,18 +30,23 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 
         $aux_search_results = Collection::preparingSearchResult( $search_name, $user_id );
 
-        if( !empty( $_POST["todo__form-radio--todo-name"] ) && isset( $aux_search_results["todos"] ) ){
+        if( !empty( $_POST["todo__form-radio--todo-name"] ) ){
           $todo_table = true;
-          $searchResults["todos"] = $aux_search_results["todos"];
+          if( isset( $aux_search_results["todos"] ) ){
+            $searchResults["todos"] = $aux_search_results["todos"];
+          }
         }
-        if( !empty( $_POST["todo__form-radio--collection-name"] ) && isset( $aux_search_results["collections"] ) ){
+        if( !empty( $_POST["todo__form-radio--collection-name"] ) ){
           $collection_table = true;
-          $searchResults["collections"] = $aux_search_results["collections"];
+          if( isset( $aux_search_results["collections"] ) ){
+            $searchResults["collections"] = $aux_search_results["collections"];
+          }
         }
-        if( !empty( $_POST["todo__form-radio--tag-name"] ) && isset( $aux_search_results["tags"] ) ){
-          //we have problems here. There is no way so far to say the user
+        if( !empty( $_POST["todo__form-radio--tag-name"] ) ){
           $tag_table = true;
-          $searchResults["tags"] = $aux_search_results["tags"];
+          if( isset( $aux_search_results["tags"] )  ){
+            $searchResults["tags"] = $aux_search_results["tags"];
+          }
         }
       }
       include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";

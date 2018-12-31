@@ -1,13 +1,13 @@
 
-<main>
-	<!-- MESSAGE-STATUS -->
+<main class = "col-12">
+
 	<div class = "full-container">
 		<h2 class = "todo__main-heading">myTODOs</h2>
 		<?php
 		foreach($libraries as $item_id){
 			$item_collection = new CollectionLogic( $item_id["id"], true );//REMEMBER TO CHANGE THIS TO $ITEM_ID
 			?>
-			<div class = "todo__general-container first-container">
+			<div class = "todo__general-container first-container col-12 col-lg-8">
 				<div class = "todo__collection-header">
 					<div class = "todo__collection-header-path top-right-absolute">
 			      <ul class = "todo__collection-header-path-list">

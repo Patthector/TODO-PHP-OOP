@@ -348,6 +348,9 @@ html, body {
   font-family: "fjallaone-regular";
   font-size: 36px;
   margin-bottom: -50px; }
+  @media (max-width: 576px) {
+    .todo__main-heading {
+      font-size: 28px; } }
 
 div.todo__box-message {
   display: block;
@@ -383,13 +386,15 @@ div.todo__box-message {
   background-color: #fff;
   border-radius: 10px 10px 0 0; }
 
-.todo__general-container {
+main {
   display: flex;
-  flex-flow: column wrap;
-  align-content: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center; }
+
+.todo__general-container {
   position: relative;
-  margin-left: 264px;
-  margin-right: 264px;
   margin-top: 90px;
   background-color: #fff;
   box-shadow: 0 0 5px #808080;
@@ -398,10 +403,17 @@ div.todo__box-message {
   border-radius: 12px; }
   .todo__general-container .todo__todo-body {
     margin-bottom: 24px; }
+    @media (max-width: 576px) {
+      .todo__general-container .todo__todo-body {
+        margin-bottom: 12px; } }
   .todo__general-container .todo__todo-title h2 {
     font-family: "fjallaone-regular";
     color: #303f9f;
     margin-bottom: 6px; }
+    @media (max-width: 576px) {
+      .todo__general-container .todo__todo-title h2 {
+        font-size: 18px;
+        margin-top: 24px; } }
   .todo__general-container .todo__todo-description-container {
     background-color: #ededed;
     margin-left: -24px;
@@ -413,6 +425,9 @@ div.todo__box-message {
       padding-bottom: 12px;
       margin-bottom: 0;
       color: #000; }
+      @media (max-width: 576px) {
+        .todo__general-container .todo__todo-description-container p {
+          font-size: 13px; } }
 
 .top-right-absolute {
   position: absolute;
@@ -421,6 +436,10 @@ div.todo__box-message {
 
 .todo__item-category-name {
   margin: 12px; }
+  @media (max-width: 576px) {
+    .todo__item-category-name {
+      margin: 6px;
+      margin-top: 2px; } }
   .todo__item-category-name span {
     background-color: #303f9f;
     border-top-left-radius: 12px;
@@ -429,6 +448,9 @@ div.todo__box-message {
     font-family: "fjallaone-regular";
     padding: 3px 6px;
     text-transform: uppercase; }
+    @media (max-width: 576px) {
+      .todo__item-category-name span {
+        font-size: 11px; } }
   .todo__item-category-name a {
     color: #000;
     background-color: #ededed;
@@ -439,6 +461,9 @@ div.todo__box-message {
     border-bottom-right-radius: 12px;
     border: 1px solid #303f9f;
     margin-left: -5px; }
+    @media (max-width: 576px) {
+      .todo__item-category-name a {
+        font-size: 11px; } }
 
 .todo__library-tags .todo__library-tags-list {
   display: flex;
@@ -451,11 +476,17 @@ div.todo__box-message {
   margin: 0;
   padding: 0;
   margin-bottom: 24px; }
+  @media (max-width: 576px) {
+    .todo__library-tags .todo__library-tags-list {
+      margin-bottom: 12px; } }
 .todo__library-tags li a {
   font-family: "fjallaone-regular";
   color: #303f9f;
   font-weight: bold;
   padding: 6px; }
+  @media (max-width: 576px) {
+    .todo__library-tags li a {
+      font-size: 12px; } }
 
 .todo__library-footer {
   background: #4285f4;
@@ -465,6 +496,8 @@ div.todo__box-message {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#4285f4", endColorstr='#303f9f',GradientType=1 );
   margin-left: -24px;
   margin-right: -24px;
+  padding-left: 6px;
+  padding-right: 6px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
@@ -474,104 +507,238 @@ div.todo__box-message {
     color: #fff;
     margin-bottom: 6px;
     margin-top: 6px; }
+    @media (max-width: 576px) {
+      .todo__library-footer p {
+        font-size: 12px; } }
     .todo__library-footer p span {
       font-family: "rajdhani-bold"; }
 
+/*.todo__action-menu-container{
+  position: relative;
+  &--aux{
+    position: absolute;
+    top: 0;
+    right: 24px;
+    @include todo__center-flex;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    box-shadow: 0px 0px 8px $gray;
+  }
+  .todo__action-menu{
+    @include todo__inline-flex;
+    @include reset-list;
+  }
+  .todo__btn-collection,.todo__btn-todo{
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    svg{
+      width: 24px;
+      height: 24px;
+      margin-bottom: -6px;
+      color:$sapphire;
+      transition: color 1s;
+    }
+    span{
+      display: block;
+      text-transform: uppercase;
+      color:$sapphire;
+      font-family: $font-secondary;
+      font-size:12px;
+      transition: color 1s;
+    }
+    &:hover{
+      svg{
+        color:$tomato;
+      }
+      span{
+        color:$tomato;
+      }
+    }
+    &--selected{
+      background-color: $white;
+      border:none;
+      width: 100%;
+      padding: 6px;
+      transition: color 1.5s;
+      svg{
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin:auto;
+        color:$tomato;
+        transition: color .6s;
+      }
+      span{
+        font-family:$font-secondary;
+        text-transform: uppercase;
+        font-size: 12px;
+        color:$tomato;
+        transition: color .6s;
+      }
+      &:hover{
+        //background-color: $tomato;
+        svg{
+          //color:$white;
+          text-shadow:1px 1px 2px $gray;
+        }
+        span{
+          //color:$white;
+        }
+      }
+    }
+    &--disabled{
+      cursor:not-allowed;
+      pointer-events: none;
+      svg{
+        color:$alto;
+      }
+      span{
+        color:$alto;
+      }
+    }
+  }
+  //BUTTON CANCEL
+  .todo__btn-cancel{
+    display: none;
+    color:$white !important;
+    font-family:$font-secondary;
+    background-color: rgba($tomato,.85);
+    transition: background-color 1s;
+    border:2.5px solid rgba($tomato,1);
+    font-size: 16px;
+    letter-spacing: 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    &:hover{
+      //background-color:rgba($tomato,1);
+      //color: $white !important;
+      text-shadow:1px 1px 2px $gray;
+    }
+  }
+  //BUTTON CLEAR
+
+  .todo__btn-clear{
+    display: none;//inline-block
+    background-color:$gallery;
+    color:$sapphire;
+    padding: 3px 6px;
+    font-weight: bold;
+    border:1px solid $sapphire;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    transition: background-color 1s;
+    &:hover{
+      //color:$white;
+      //background-color:$sapphire;
+      text-shadow:1px 1px 2px $gray;
+    }
+  }
+}
+*/
 .todo__action-menu-container {
   position: relative; }
   .todo__action-menu-container--aux {
     position: absolute;
-    top: 0;
-    right: 24px;
+    top: -12px;
+    left: 50%;
+    right: 50%;
     display: flex;
-    flex-flow: column wrap;
-    align-content: center;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
-    box-shadow: 0px 0px 8px #808080; }
-  .todo__action-menu-container .todo__action-menu {
-    display: flex;
-    flex-wrap: nowrap;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center; }
+  .todo__action-menu-container .todo__action-menu {
     list-style: none;
     margin: 0;
-    padding: 0; }
-  .todo__action-menu-container .todo__btn-collection, .todo__action-menu-container .todo__btn-todo {
-    padding: 12px;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center; }
+  .todo__action-menu-container .todo__btn-collection,
+  .todo__action-menu-container .todo__btn-todo {
+    padding: 6px 12px;
     text-align: center;
-    cursor: pointer; }
-    .todo__action-menu-container .todo__btn-collection svg, .todo__action-menu-container .todo__btn-todo svg {
+    cursor: pointer;
+    border-radius: 100%;
+    margin: 6px;
+    background: rgba(237, 237, 237, 0.5);
+    box-shadow: 1px 2px 2px #cfcfcf;
+    transition: background-color 1s; }
+    .todo__action-menu-container .todo__btn-collection svg,
+    .todo__action-menu-container .todo__btn-todo svg {
       width: 24px;
       height: 24px;
       margin-bottom: -6px;
-      color: #303f9f;
+      color: #333333;
       transition: color 1s; }
-    .todo__action-menu-container .todo__btn-collection span, .todo__action-menu-container .todo__btn-todo span {
+    .todo__action-menu-container .todo__btn-collection span,
+    .todo__action-menu-container .todo__btn-todo span {
       display: block;
       text-transform: uppercase;
-      color: #303f9f;
+      color: #333333;
       font-family: "fjallaone-regular";
       font-size: 12px;
-      transition: color 1s; }
-    .todo__action-menu-container .todo__btn-collection:hover svg, .todo__action-menu-container .todo__btn-todo:hover svg {
-      color: #dc3545; }
-    .todo__action-menu-container .todo__btn-collection:hover span, .todo__action-menu-container .todo__btn-todo:hover span {
-      color: #dc3545; }
-    .todo__action-menu-container .todo__btn-collection--selected, .todo__action-menu-container .todo__btn-todo--selected {
-      background-color: #fff;
+      transition: color 1s;
+      padding-top: 1.5px; }
+    .todo__action-menu-container .todo__btn-collection:hover,
+    .todo__action-menu-container .todo__btn-todo:hover {
+      background-color: rgba(207, 207, 207, 0.6); }
+    .todo__action-menu-container .todo__btn-collection--selected,
+    .todo__action-menu-container .todo__btn-todo--selected {
+      background-color: #303f9f;
       border: none;
       width: 100%;
       padding: 6px;
-      transition: color 1.5s; }
-      .todo__action-menu-container .todo__btn-collection--selected svg, .todo__action-menu-container .todo__btn-todo--selected svg {
+      transition: box-shadow 0.5s; }
+      .todo__action-menu-container .todo__btn-collection--selected svg,
+      .todo__action-menu-container .todo__btn-todo--selected svg {
         display: block;
         width: 24px;
         height: 24px;
         margin: auto;
-        color: #dc3545;
+        color: #ededed;
         transition: color .6s; }
-      .todo__action-menu-container .todo__btn-collection--selected span, .todo__action-menu-container .todo__btn-todo--selected span {
+      .todo__action-menu-container .todo__btn-collection--selected span,
+      .todo__action-menu-container .todo__btn-todo--selected span {
         font-family: "fjallaone-regular";
         text-transform: uppercase;
         font-size: 12px;
-        color: #dc3545;
+        color: #ededed;
         transition: color .6s; }
-      .todo__action-menu-container .todo__btn-collection--selected:hover svg, .todo__action-menu-container .todo__btn-todo--selected:hover svg {
-        text-shadow: 1px 1px 2px #808080; }
-    .todo__action-menu-container .todo__btn-collection--disabled, .todo__action-menu-container .todo__btn-todo--disabled {
+      .todo__action-menu-container .todo__btn-collection--selected:hover,
+      .todo__action-menu-container .todo__btn-todo--selected:hover {
+        background-color: #303f9f;
+        box-shadow: -1px 1px 2px #575757; }
+    .todo__action-menu-container .todo__btn-collection--disabled,
+    .todo__action-menu-container .todo__btn-todo--disabled {
+      display: none !important;
       cursor: not-allowed;
       pointer-events: none; }
-      .todo__action-menu-container .todo__btn-collection--disabled svg, .todo__action-menu-container .todo__btn-todo--disabled svg {
+      .todo__action-menu-container .todo__btn-collection--disabled svg,
+      .todo__action-menu-container .todo__btn-todo--disabled svg {
         color: #cfcfcf; }
-      .todo__action-menu-container .todo__btn-collection--disabled span, .todo__action-menu-container .todo__btn-todo--disabled span {
+      .todo__action-menu-container .todo__btn-collection--disabled span,
+      .todo__action-menu-container .todo__btn-todo--disabled span {
         color: #cfcfcf; }
   .todo__action-menu-container .todo__btn-cancel {
     display: none;
-    color: #fff !important;
-    font-family: "fjallaone-regular";
-    background-color: rgba(220, 53, 69, 0.85);
-    transition: background-color 1s;
-    border: 2.5px solid #dc3545;
-    font-size: 16px;
-    letter-spacing: 4px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0; }
-    .todo__action-menu-container .todo__btn-cancel:hover {
-      text-shadow: 1px 1px 2px #808080; }
+    border-style: none;
+    transition: background-color 1s; }
+    .todo__action-menu-container .todo__btn-cancel svg {
+      color: #dc3545; }
+    .todo__action-menu-container .todo__btn-cancel span {
+      color: #dc3545;
+      padding-top: 3px; }
   .todo__action-menu-container .todo__btn-clear {
     display: none;
-    background-color: #ededed;
-    color: #303f9f;
-    padding: 3px 6px;
-    font-weight: bold;
-    border: 1px solid #303f9f;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
+    border-style: none;
     transition: background-color 1s; }
-    .todo__action-menu-container .todo__btn-clear:hover {
-      text-shadow: 1px 1px 2px #808080; }
+    .todo__action-menu-container .todo__btn-clear svg {
+      color: #333333; }
+    .todo__action-menu-container .todo__btn-clear span {
+      color: #333333;
+      padding-top: 3px; }
 
 .todo__delete-message,
 .todo__move-message {
@@ -624,6 +791,12 @@ div.todo__box-message {
   .todo__btn-modal--info {
     background-color: #303f9f; }
 
+.full-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center; }
+
 .todo__collection-header {
   background-color: #3658bd;
   margin-left: -24px;
@@ -633,6 +806,10 @@ div.todo__box-message {
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
   box-shadow: -1px 3px 4px #808080; }
+  @media (max-width: 576px) {
+    .todo__collection-header {
+      padding-left: 12px;
+      padding-right: 12px; } }
 
 .todo__collection-header-path {
   margin: 12px; }
@@ -649,6 +826,9 @@ div.todo__box-message {
 
 .todo__collection-header-path-item {
   text-transform: uppercase; }
+  @media (max-width: 576px) {
+    .todo__collection-header-path-item {
+      font-size: 12px; } }
   .todo__collection-header-path-item a {
     color: #cfcfcf; }
   .todo__collection-header-path-item--selected {
@@ -661,14 +841,20 @@ div.todo__box-message {
   font-family: "fjallaone-regular";
   font-weight: bold;
   font-size: 36px;
-  margin-top: 24px;
+  margin-top: 36px;
   margin-bottom: 0px; }
+  @media (max-width: 576px) {
+    .todo__collection-header-title {
+      font-size: 22px; } }
   .todo__collection-header-title--link, .todo__collection-header-title--link:hover, .todo__collection-header-title--link:visited, .todo__collection-header-title--link:focus {
     color: #fff; }
 
 .todo__collection-header-description {
   color: #ededed;
   font-size: 18px; }
+  @media (max-width: 576px) {
+    .todo__collection-header-description {
+      font-size: 14px; } }
 
 .todo__collection-body--heading {
   text-transform: uppercase;
@@ -677,6 +863,9 @@ div.todo__box-message {
   font-family: "fjallaone-regular";
   font-size: 24px;
   margin-bottom: 12px; }
+  @media (max-width: 576px) {
+    .todo__collection-body--heading {
+      font-size: 18px; } }
 
 .todo__collection-body-subcategory-list {
   list-style: none;
@@ -702,6 +891,9 @@ div.todo__box-message {
   font-size: 18px;
   margin-top: 0px;
   margin-bottom: 0; }
+  @media (max-width: 576px) {
+    .todo__todo-title-collection {
+      font-size: 16px; } }
   .todo__todo-title-collection a, .todo__todo-title-collection :hover, .todo__todo-title-collection a:visited, .todo__todo-title-collection a:focus {
     color: black; }
 
@@ -710,18 +902,19 @@ div.todo__box-message {
 
 footer {
   margin-left: -15px;
-  margin-right: -15px; }
+  margin-right: -15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-top: 24px; }
   footer p.coder-message {
     text-align: center;
-    margin-left: 132px;
-    margin-right: 132px;
     border-top: 1px solid #808080;
     border-top-style: dashed;
-    padding-top: 12px; }
+    padding-top: 24px; }
   footer div.inner {
-    display: flex;
-    flex-flow: column wrap;
-    align-content: center;
+    width: 100%;
     background: #4285f4;
     background: -moz-linear-gradient(left, #4285f4 0%, #303f9f 100%);
     background: -webkit-linear-gradient(left, #4285f4 0%, #303f9f 100%);
@@ -759,20 +952,34 @@ footer {
 
 .header__logo {
   margin: 0 12px; }
-  .header__logo svg {
-    width: 300px;
-    height: 70px; }
+  @media (max-width: 576px) {
+    .header__logo svg {
+      width: 135px;
+      height: 50px; } }
+  @media (min-width: 576px) {
+    .header__logo svg {
+      width: 300px;
+      height: 70px; } }
 
 .header__menu-item {
   align-self: flex-end;
-  font-family: "fjallaone-regular";
-  font-size: 24px; }
+  font-family: "fjallaone-regular"; }
+  @media (max-width: 576px) {
+    .header__menu-item {
+      font-size: 16px; } }
+  @media (min-width: 576px) {
+    .header__menu-item {
+      font-size: 24px; } }
   .header__menu-item a {
     color: #fff;
     text-decoration: underline;
     transition: color 1s; }
   .header__menu-item a:hover {
     color: #cfcfcf; }
+  .header__menu-item span {
+    font-size: 14px;
+    color: #dc3545;
+    text-decoration: none !important; }
 
 .white-header {
   box-shadow: -1px 3px 4px #cfcfcf;
@@ -1145,6 +1352,9 @@ footer {
       color: #212121;
       margin: 0;
       padding: 10px 0; }
+      @media (max-width: 576px) {
+        .todo__container-level-bar--header--heading {
+          font-size: 18px; } }
   .todo__container-level-bar--body {
     width: 80%;
     margin-left: 10%; }
@@ -1162,9 +1372,23 @@ footer {
       text-transform: uppercase;
       font-weight: bold;
       color: #000; }
+      @media (max-width: 576px) {
+        .todo__container-level-bar--body li {
+          font-size: 11px;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          justify-content: center;
+          align-items: center; } }
+      @media (max-width: 576px) {
+        .todo__container-level-bar--body li span svg {
+          width: 11px; } }
 
 .todo__search-bar-container {
   margin: 48px 10% 0px 10%; }
+  @media (max-width: 576px) {
+    .todo__search-bar-container {
+      margin: 48px -6px 0px -6px; } }
 
 .todo__search-bar-input-container {
   margin-bottom: 0; }
@@ -1183,6 +1407,14 @@ footer {
   border-color: #303f9f;
   box-shadow: 0 0px 4px #808080;
   font-size: 18px; }
+  @media (max-width: 576px) {
+    .todo__btn-search-bar,
+    .todo__btn-search-bar:link,
+    .todo__btn-search-bar:visited,
+    .todo__btn-search-bar:hover,
+    .todo__btn-search-bar:active {
+      font-size: 14px;
+      padding-right: 24px; } }
 
 .todo__btn-search-bar--inverse,
 .todo__btn-search-bar--inverse:link,
@@ -1222,6 +1454,12 @@ footer {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: #cfcfcf 2px 3px 2px inset; }
+  @media (max-width: 575px) {
+    .todo__search-by--menu-container {
+      top: 16px; } }
+  @media (max-width: 575px) {
+    .todo__search-by--menu-container {
+      width: 180px; } }
   .todo__search-by--menu-container div.todo__custom-control {
     padding-bottom: 6px; }
     .todo__search-by--menu-container div.todo__custom-control label {
@@ -1267,9 +1505,25 @@ footer {
 .todo__mytodos-search--container-buttons {
   text-align: center; }
 
+.todo__mytodos-search--no-results {
+  color: #dc3545;
+  font-size: 18px; }
+
+@media (max-width: 576px) {
+  .todo__registration--box {
+    min-width: 290px;
+    max-width: 360px; } }
+@media (min-width: 576px) {
+  .todo__registration--box {
+    min-width: 320px;
+    max-width: 380px; } }
+
 .todo__registration--container {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
   margin-top: 48px; }
   .todo__registration--container label {
     margin-bottom: 0;

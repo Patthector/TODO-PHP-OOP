@@ -4,4 +4,7 @@
   font-family: $font-secondary;
   font-size: 36px;
   margin-bottom: -50px;
+  @media(max-width:576px){
+    font-size: 28px;
+  }
 }

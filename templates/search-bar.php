@@ -2,20 +2,27 @@
   <form id = "todo__search-bar--form" action = "../views/search.php" method = "POST" class = "input-group">
       <div class="input-group-prepend position-relative">
         <!--<button class="btn btn-outline-secondary dropdown-toggle todo__btn-search-bar" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search BY</button>-->
-        <button id = "todo__btn--searchBy" class="btn dropdown-toggle todo__btn-search-bar" type="button">Search BY</button>
+        <button id = "todo__btn--searchBy" class="btn dropdown-toggle todo__btn-search-bar" type="button"><?php
+        if ( $detect->isMobile() ) {
+          echo "<span>";
+          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/filter-solid.svg";
+          echo "</span>";
+        } else{ echo 'Search BY'; }
+         ?>
+       </button>
 
         <div class="todo__search-by--menu-container" id="searchByMenuContainer">
-          <div class="">
+          <div>
             <div class="custom-control custom-checkbox todo__custom-control">
-              <input type="checkbox" id="todo__form-radio--collection-name" name="todo__form-radio--collection-name" class="custom-control-input">
+              <input type="checkbox" id="todo__form-radio--collection-name" name="todo__form-radio--collection-name" class="custom-control-input" checked>
               <label class="custom-control-label" for="todo__form-radio--collection-name">Collection Name</label>
             </div>
             <div class="custom-control custom-checkbox todo__custom-control">
-              <input type="checkbox" id="todo__form-radio--todo-name" name="todo__form-radio--todo-name" class="custom-control-input">
+              <input type="checkbox" id="todo__form-radio--todo-name" name="todo__form-radio--todo-name" class="custom-control-input" checked>
               <label class="custom-control-label" for="todo__form-radio--todo-name">Todo Name</label>
             </div>
             <div class="custom-control custom-checkbox todo__custom-control">
-              <input type="checkbox" id="todo__form-radio--tag-name" name="todo__form-radio--tag-name" class="custom-control-input">
+              <input type="checkbox" id="todo__form-radio--tag-name" name="todo__form-radio--tag-name" class="custom-control-input" checked>
               <label class="custom-control-label" for="todo__form-radio--tag-name">Tag Name</label>
             </div>
           </div>

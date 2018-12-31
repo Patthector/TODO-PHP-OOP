@@ -9,10 +9,12 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
 	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/todo.php";
 	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/library.php";
-
+	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/Mobile_Detect.php";
 	# Variables
 	# ---------
 	$title_page = "Stick it | myTodos";
+	
+	$detect = new Mobile_Detect;
 
 		if($_SERVER["REQUEST_METHOD"] == "GET"){
 			 if(count($_GET)>0){ #we have query, but seems to be a wrong one

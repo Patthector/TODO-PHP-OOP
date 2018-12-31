@@ -1,8 +1,7 @@
     </main>
-  </div>
-  <footer class="mastfoot mt-auto dotted-border
+
+  <footer class="mastfoot dotted-border
   <?php
-  //var_dump($todo);exit;
   if( class_exists( "TodoLogic" ) && !empty( TodoLogic::get__state() ) ){
     switch ( TodoLogic::get__state()) {
       case "createTodo":
@@ -42,7 +41,7 @@
   }
   ?>
   ">
-    <p class="coder-message">This application has been created by <a href = "#"  class = "high-sapphire">@patthector</a> as an example project. The objective of this project is to put in practice some konwlegde, as the following: Photoshop, Illustrator, PHP, OOP, mySQL. This app is free to use for everybody.</p>
+    <p class="col-10 col-md-8 coder-message">This application has been created by <a href = "#"  class = "high-sapphire">@patthector</a> as an example project. The objective of this project is to put in practice some konwlegde, as the following: Photoshop, Illustrator, PHP, OOP, mySQL. This app is free to use for everybody.</p>
     <div class="inner">
       <p>All Rights Reserved.  <a href="https://getbootstrap.com/">by Pattor</a>, <?php echo date("Y");?>.</p>
     </div>
@@ -59,6 +58,7 @@
     <script src = "/TODO-PHP-OOP/vendor/js/tags.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/registration.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/search.js"></script>
-
+    <script src = "/TODO-PHP-OOP/vendor/js/viewport.js"></script>
+  </div>
   </body>
 </html>

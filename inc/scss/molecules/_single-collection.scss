@@ -1,9 +1,19 @@
+.full-container{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
 .todo__collection-header{
   background-color:#3658bd;
   margin-left: -24px;
   margin-right: -24px;
   padding-left: 24px;
   padding-right: 24px;
+  @media(max-width: 576px){
+    padding-left: 12px;
+    padding-right: 12px;
+  }
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
   box-shadow:-1px 3px 4px $gray;
@@ -11,12 +21,15 @@
 .todo__collection-header-path{
   margin: 12px;
 }
-.todo__collection-header-path-list{ 
+.todo__collection-header-path-list{
   @include reset-list;
   @include todo__inline-flex;
 }
 .todo__collection-header-path-item{
   text-transform: uppercase;
+  @media(max-width: 576px){
+    font-size: 12px;
+  }
   a{
     color: $alto;
   }
@@ -31,7 +44,10 @@
   font-family:$font-secondary;
   font-weight: bold;
   font-size:36px;
-  margin-top: 24px;
+  @media(max-width: 576px){
+    font-size: 22px;
+  }
+  margin-top: 36px;
   margin-bottom: 0px;
   &--link,&--link:hover,&--link:visited,&--link:focus{
     color:$white;
@@ -40,6 +56,9 @@
 .todo__collection-header-description{
   color:$gallery;
   font-size:18px;
+  @media(max-width: 576px){
+    font-size: 14px;
+  }
 }
 
 .todo__collection-body{
@@ -49,6 +68,9 @@
     font-weight: lighter;
     font-family: $font-secondary;
     font-size:24px;
+    @media(max-width: 576px){
+      font-size: 18px;
+    }
     margin-bottom: 12px;
   }
 }
@@ -68,6 +90,9 @@
   font-family: $font-primary-bold;
   color:$black;
   font-size:18px;
+  @media(max-width: 576px){
+    font-size: 16px;
+  }
   margin-top: 0px;
   margin-bottom: 0;
   a,:hover,a:visited, a:focus{
