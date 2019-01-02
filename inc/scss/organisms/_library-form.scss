@@ -1,19 +1,21 @@
 .todo__form{
 background-color:$white;
+@media(max-width: 576px){ margin-top: -45px;}
 //JUMBOTRON
   .jumbotron_container{
     background-color:$sapphire;
     @include todo__inline-flex;
+    flex-wrap: wrap;
     @include clean-fluid;
     margin-top:-24px;
-    padding-left:264px;
-    padding-right:264px;
+    //padding-left:264px;
+    //padding-right:264px;
     padding-top: 24px;
     padding-bottom: 84px;
     box-shadow: inset 0px 4px 8px #2c325d;
 
     h1{
-      width:50%;
+      //width:50%;
       margin: 0;
       font-family:"fjallaone-regular";
       text-transform: uppercase;
@@ -22,14 +24,25 @@ background-color:$white;
       letter-spacing: 3px;
       text-align:right;
       align-self: flex-start;
+      @media(max-width: 576px){
+        text-align: left;
+        font-size: 36px;
+        letter-spacing: 2px;
+      }
     }
     .guidelines_container{
-      width:50%;
       ul{
         @include reset-list;
         border-left:1px solid $alto;
         margin-left:24px;
         padding-left:24px;
+        @media(max-width: 576px){
+          list-style: circle;
+          border-style: none;
+          //border-top:1px solid $alto;
+          margin-left:24px;
+          padding-left:0px;
+        }
         li{
           font-family:$font-primary;
           font-size:16px;
@@ -37,19 +50,25 @@ background-color:$white;
           &:nth-child(n+1){
             margin-top:6px;
           }
+          @media(max-width: 576px){
+            font-size:14px;
+          }
         }
       }
     }
   }
 //FORM
   .todo_container{
+
     background-color:$white;
-    margin: -60px 264px 24px 264px;
+
+    margin-top: -60px;
+    //margin: -60px 264px 24px 264px;
     box-shadow: 0 0 4px $gray;
-    padding-left: 132px;
-    padding-right: 132px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 12px 132px 12px 132px;
+    @media(max-width: 576px){
+      padding:12px;
+    }
 
     .todo__input-form{
       background-color:rgba( $gallery, .5 );
@@ -65,9 +84,7 @@ background-color:$white;
       color: $sapphire;
       padding-top: 24px;
       font-family:$font-primary-bold;
-
     }
-
     .todo__form-separator{
       margin-bottom: 12px;
     }
@@ -86,6 +103,14 @@ background-color:$white;
       margin-top:24px;
       margin-bottom:24px;
       margin-left: 0;
+      @media(max-width: 576px){
+        margin: auto;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+        border-style: none;
+        border-bottom: 1px solid $alto;
+      }
       border-left:1px solid $alto;
       p{margin:0;}
     }
@@ -168,6 +193,13 @@ background-color:$white;
       text-align: center;
       font-size:24px;
       padding: 6px 72px;
+      @media(max-width: 576px){
+        padding: 8px 25px;
+        font-size:18px;
+        width: 120px;
+        max-width: 120px;
+        margin-top: 12px;
+      }
       border-radius: 0;
 
       &--blue{

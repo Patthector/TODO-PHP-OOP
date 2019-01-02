@@ -1,31 +1,64 @@
+header{
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 9999;
+  .navbar{padding: 0; position:relative;}
+}
 .header__blue-gradient{
   @include clean-fluid;
   @include todo__blue-gradient;
   @include separator;
-  box-shadow:-1px 3px 4px $gray;
+  box-shadow:-1px 3px 4px rgba($sapphire,.5);
 }
 .header__menu{
   @include todo__inline-flex;
-  padding:24px 0 16px 0;
+  //padding:24px 0 16px 0;
+    padding:12px 0 0px 0;
+    @media(max-width: 576px){
+      padding: 0;
+      margin: 0;
+    }
 }
 .header__logo{
   margin: 0 12px;
+  @media(max-width:576px){
+    padding: 0;
+    margin:0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
   svg{
+    transition: all 0.5s ease;
     @media(max-width: 576px) {
-      width: 135px;
-      height: 50px;
+      width: 150px;
     }
     @media(min-width: 576px) {
-      width: 300px;
-      height: 70px;
+      width: 275px;
     }
   }
+}
+.todo__header-button--mobile{
+  position: absolute;
+  right: 0;
+  //top: 5px;
+  svg{
+    color: $tomato;
+    width: 8px;
+  }
+}
+.todo__navbar-collapse{
+  justify-content: center;
 }
 .header__menu-item{
   align-self:flex-end;
   font-family: "fjallaone-regular";
   @media(max-width: 576px) {
-    font-size:16px;
+    font-size:14px;
+    margin: 0 12px;
+    padding-bottom: 12px;
   }
   @media(min-width: 576px) {
     font-size:24px;
@@ -34,19 +67,25 @@
     color:$white;
     text-decoration: underline;
     transition: color 1s;
+    position: relative;
+    @media(max-width: 576px) {padding: 0;}
   }
   a:hover{
     color:$alto;
   }
   span{
-    font-size:14px;
+    position: absolute;
+    top:10px;
+    left: 110%;
+    font-size:13px;
     color:$tomato;
     text-decoration: none !important;
+    @media(max-width: 576px){font-size: 12px;}
   }
 }
 
 .white-header{
-  box-shadow:-1px 3px 4px $alto;
+  box-shadow:-1px 2px 3px $tundora;
   @include todo__white-gradient;
   .header__menu-item{
     a{

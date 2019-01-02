@@ -1,7 +1,9 @@
 <?php
 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/user.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/Mobile_Detect.php";
 
 $title_page = "Stick it | Home";
+$detect = new Mobile_Detect;
 
 if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
   if( isset( $_GET[ "action" ] ) ){
@@ -14,7 +16,7 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
         $password = trim( filter_input( INPUT_GET, "password", FILTER_SANITIZE_STRING ) );
         $password_confirmation = trim( filter_input( INPUT_GET, "password_confirmation", FILTER_SANITIZE_STRING ) );
         if( !empty( User::userExist( $username ) ) ){
-           $user_exists = true; 
+           $user_exists = true;
         } else{
           $user_exists = false;
         }

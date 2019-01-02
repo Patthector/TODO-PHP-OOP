@@ -8,9 +8,11 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we are logged in
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/library.php";
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/todo.php";
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/library.php";
+	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/Mobile_Detect.php";
 	# Variables
 	# ---------
 	$title_page = "TODO | Stick it";
+	$detect = new Mobile_Detect;
 	# Requests
 	# ---------
 	if($_SERVER["REQUEST_METHOD"] == "GET"){

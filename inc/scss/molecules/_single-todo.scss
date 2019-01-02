@@ -15,7 +15,7 @@ main{
   box-shadow:0 0 5px $gray;
   padding-left:24px;
   padding-right:24px;
-  border-radius: 12px;
+  border-radius: 12px; 
 
   .todo__todo-body{
     @include separator;

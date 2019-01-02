@@ -47,7 +47,8 @@
   @media(max-width: 576px){
     font-size: 22px;
   }
-  margin-top: 36px;
+  padding-top: 36px;
+  margin-top: 0;
   margin-bottom: 0px;
   &--link,&--link:hover,&--link:visited,&--link:focus{
     color:$white;
@@ -56,6 +57,7 @@
 .todo__collection-header-description{
   color:$gallery;
   font-size:18px;
+  padding-bottom: 6px;
   @media(max-width: 576px){
     font-size: 14px;
   }

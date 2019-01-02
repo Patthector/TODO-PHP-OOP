@@ -81,4 +81,17 @@
     color:$sapphire;
 
   }
+  .todo__search-by--mobile-heading{
+    text-align: center;
+    span{
+      color: $dark-night;
+      font-weight: bold;
+      font-family: $font-primary-bold;
+      text-transform: uppercase;
+    }
+    hr{
+      margin-top:3px;
+      margin-bottom:3px;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-<div class = "todo__general-container first-container">
+<div class = "todo__general-container first-container col-12 col-md-8">
   <div class = "todo__collection-header">
     <div class = "todo__collection-header-path top-right-absolute">
       <ul class = "todo__collection-header-path-list">

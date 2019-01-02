@@ -9,8 +9,10 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
   require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/tag.php";
   //require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/todo.php";
   //require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/library.php";
+  require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/Mobile_Detect.php";
 
   $title_page = "Make It Stick | Search";
+  $detect = new Mobile_Detect;
   //GET
   if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
     //qualcuno a voluto vedere un po' di pui
