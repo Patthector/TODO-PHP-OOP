@@ -13,7 +13,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 	# Variables
 	# ---------
 	$title_page = "Stick it | myTodos";
-	
+
 	$detect = new Mobile_Detect;
 
 		if($_SERVER["REQUEST_METHOD"] == "GET"){
@@ -38,6 +38,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/search-bar.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/mytodos.php";
+					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/bubble-creators.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 				}
 			}

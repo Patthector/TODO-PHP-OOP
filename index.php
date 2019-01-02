@@ -8,7 +8,8 @@ $detect = new Mobile_Detect;
 
 if( isset( $_SESSION[ "user_id" ] ) ){// we are logged in
 	include "templates/header.php";
-	include "templates/empty-front-page.php";
+	include "templates/front-page.php";
+	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/bubble-creators.php";
 	include "templates/footer.php";
 }
 else {// NOT user logged in

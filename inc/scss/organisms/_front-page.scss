@@ -1,24 +1,33 @@
 .front-page{
   background-color: $white;
-  @include clean-fluid;
+  //@include clean-fluid;
   @include todo__center-flex;
   @include separator;
 }
 .front-page__first-block,.front-page__second-block{
   @include todo__inline-flex;
   @include separator;
+  @media(max-width:576px){
+    flex-wrap: wrap;
+  }
 }
 //////FIRST-BLOCK
 .front-page__first-block{
-  @include master-margin;
+  //@include master-margin;
   .left, .right{
     @include todo__center-flex;
+    width: 80%;
+    @media(max-width: 576px){
+      width: 100%;
+      margin-top: -24px;
+    }
   }
   .left{
-    padding-left: 132px;
-  } 
+    margin-left: auto;
+  }
   .right{
     align-items:center;
+    margin-right: auto;
   }
   .introduction-list{
     list-style: none;
@@ -27,6 +36,9 @@
       position: relative;
       p{
         font-size:18px;
+        @media(max-width: 576px){
+          font-size: 16px;
+        }
       }
     }
   }
@@ -40,26 +52,40 @@
 .front-page__second-block{
   background-color:$gallery;
   box-shadow: inset  0 0 5px $gray;
-  padding: 0 264px 24px 264px;
+  //padding: 0 264px 24px 264px;
   color:$black;
-  @include clean-fluid;
+  //@include clean-fluid;
   .left{
-    padding-right: 60px;
+    width: 80%;
+    margin-left: auto;
+    @media(max-width:576px){
+      width: 100%;
+    }
   }
   .right{
-    padding-left: 60px;
+    width: 80%;
+    margin-right: auto;
+    @media(max-width:576px){
+      width: 100%;
+    }
   }
 }
 .front-page__heading-3{
   font-family: "fjallaone-regular";
   color:$cornflower-blue;
   font-size:24px;
+  @media(max-width: 576px){
+    font-size: 18px;
+  }
 }
 //CREATE LIBRARY -- CREATE TODO
 .front-page__button-library,
 .front-page__button-todo{
   font-family:"fjallaone-regular";
   font-size:48px;
+  @media(max-width: 576px){
+    font-size: 32px;
+  }
   text-transform: uppercase;
   text-align: center;
   margin:0.43em 0 0.23em;
@@ -82,19 +108,31 @@
   list-style: none;
   li{
     margin:12px 0;
+    @media(max-width: 576px){
+      font-size: 14px;
+    }
   }
   @extend .padding-list-off;
 }
 ////THIRD-BLOCK----------
 .front-page__third-block{
   text-align: center;
-  @include master-margin;
+  //@include master-margin;
   @include separator;
   h3{
     font-family:"fjallaone-regular";
     color:$cornflower-blue;
     font-size:36px;
+    @media(max-width: 576px){
+      font-size: 24px;
+    }
     margin-top:12px;
     margin-bottom: 12px;
+  }
+  svg{
+    width: 100%;
+    @media(max-width:576px ){
+      height: auto;
+    }
   }
 }

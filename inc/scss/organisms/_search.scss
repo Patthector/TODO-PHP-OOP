@@ -1,5 +1,10 @@
 .todo__mytodos-search--container{
   ul{@include reset-list;}
+  p{
+    @media(max-width: 576px){
+      font-size: 12px;
+    }
+  }
 }
 .todo__main-heading--mytodos-search{
   margin-bottom: 0;
@@ -8,21 +13,36 @@
     color: $cornflower-blue;
     text-decoration: underline;
   }
+  @media(max-width: 576px){
+    font-size: 20px;
+    margin: 24px 0;
+  }
 }
 .todo__mytodos-search--subheading{
   font-size: 24px;
   font-family: $font-secondary;
   color:$code-gray;
+  @media(max-width: 576px){
+    font-size: 14px;
+  }
 }
 .todo__mytodos-search--subheading-item{
   font-size: 18px;
   color: $tundora;
   font-family:$font-secondary;
-  //text-decoration: underline;
+  @media(max-width: 576px){
+    font-size: 13px;
+  }
 }
 .todo__mytodos-search--result-item{
-  a{color:$cornflower-blue;}
+  a{
+    color:$cornflower-blue;
+    text-decoration: underline;
+  }
   font-size: 18px;
+  @media(max-width: 576px){
+    font-size: 14px;
+  }
   font-family:$font-primary;
   font-weight: bold;
   margin-bottom: 3px;
@@ -33,8 +53,23 @@
 }
 .todo__mytodos-search--container-buttons{
   text-align: center;
+  margin-top: 36px;
+  @media(max-width: 576px){
+
+    button{
+      width: 120px;
+      max-width: 120px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
 }
 .todo__mytodos-search--no-results{
   color: $tomato;
   font-size: 18px;
+  @media(max-width: 576px){
+    font-size: 12px;
+    font-weight: bold;
+  }
 }

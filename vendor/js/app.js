@@ -82,3 +82,12 @@ function deletingMessageBox( selector ){
 		});
 	}, 3000);
 }
+
+
+function createTodoClicked(){
+  window.location = "http://localhost/TODO-PHP-OOP/views/todo.php";
+
+}
+function createLibraryClicked(){
+  window.location = "http://localhost/TODO-PHP-OOP/views/library.php";
+}

@@ -414,10 +414,10 @@ class Collection
 						exit;
 					}
 					//=> the tag_name is equal to $search_name-----------------------------------
-					$aux_tag = $user_search_tag->fetch( PDO::FETCH_ASSOC );
+					$aux_tag = $user_search_tag->fetch( PDO::FETCH_ASSOC )["name"];
 
 					if( !empty($aux_tag) ){
-						$search_results["tags"][$tags["id_tag"]] = $aux_tag;
+						$search_results["tags"][$tags["id_tag"]]["name"] = $aux_tag;
 
 						$sql = "SELECT id, name, description FROM todo_app_todos WHERE id = ?";
 						try{

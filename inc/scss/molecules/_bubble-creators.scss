@@ -1,0 +1,54 @@
+.todo__bubble-creator--outer-container{
+  position: fixed;
+  top:80%;
+  right: 12px;
+  .todo__bubble-creator--inner-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .todo__bubble-creator--collection-container,
+    .todo__bubble-creator--todo-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      a{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+      }
+      border-radius: 100%;
+      box-shadow: 2px 2px 2px $tundora;
+      //
+      width: 60px;
+      height: 60px;
+      margin: 3px 12px 3px 12px;
+      padding: 3px;
+      //
+      span{
+        font-family: $font-secondary;
+        font-size: 10px;
+        text-transform: uppercase;
+        color: white;
+      }
+      span.todo__bubble--logo{
+        svg{
+          width: 24px;
+          height: auto;
+          color: white;
+        }
+      }
+    }
+    .todo__bubble-creator--collection-container{
+      background-color: rgba($sapphire, .85);
+
+    }
+    .todo__bubble-creator--todo-container{
+      background-color: rgba($level-2, .8);
+
+    }
+
+  }
+}
