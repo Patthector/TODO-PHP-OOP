@@ -795,7 +795,8 @@ main {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: center; }
+  align-items: center;
+  width: 100%; }
 
 .todo__collection-header {
   background-color: #3658bd;
@@ -879,12 +880,16 @@ main {
   justify-content: center;
   align-items: center;
   justify-content: flex-start; }
+  @media (max-width: 576px) {
+    .todo__collection-body-subcategory-list li {
+      font-size: 13px; } }
 
 .todo__collection-body-subcategory-list-item {
   padding: 6px 12px;
   margin: 0 3px;
   border: 1px solid #303f9f;
   border-radius: 24px;
+  margin-right: 18px;
   font-family: "fjallaone-regular"; }
 
 .todo__todo-title-collection {
@@ -913,6 +918,7 @@ main {
     align-items: center; }
     .todo__bubble-creator--outer-container .todo__bubble-creator--inner-container .todo__bubble-creator--collection-container,
     .todo__bubble-creator--outer-container .todo__bubble-creator--inner-container .todo__bubble-creator--todo-container {
+      z-index: 9999;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -944,6 +950,44 @@ main {
       background-color: rgba(48, 63, 159, 0.85); }
     .todo__bubble-creator--outer-container .todo__bubble-creator--inner-container .todo__bubble-creator--todo-container {
       background-color: rgba(0, 126, 51, 0.8); }
+
+.carousel {
+  overflow: hidden;
+  position: relative;
+  height: 48px; }
+
+.todo__inner--carousel {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  transition: all .4s ease-out; }
+
+.arrow {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 55%;
+  z-index: 5;
+  border-top: 3px solid #000;
+  border-right: 3px solid #000;
+  cursor: pointer;
+  transition: border-color 0.3s ease-out;
+  color: black; }
+
+.arrow:hover {
+  border-color: #93278f; }
+
+.arrow-left {
+  left: -15px;
+  transform: rotate(225deg); }
+
+.arrow-right {
+  right: -15px;
+  transform: rotate(45deg); }
 
 footer {
   margin-left: -15px;
@@ -1717,6 +1761,9 @@ header {
   @media (max-width: 576px) {
     .todo__mytodos-search--result-item {
       font-size: 14px; } }
+
+.todo__mytodos-search--description {
+  font-size: 14px; }
 
 .todo__mytodos-search--sublist-todo {
   margin-left: 12px !important; }

@@ -13,9 +13,11 @@
         <?php if( isset( $todo ) && !empty( $todo->get__todo_father_id() ) ){
           echo "<a href='";
           echo "/TODO-PHP-OOP/views/library.php?id=" . $todo->get__todo_father_id() . "\"";
-          echo "'>";
+          echo "' title = \"";
+          echo $todo_collection->get__collection_name();
+          echo "\">";
           if( isset( $todo_collection ) ){
-            echo $todo_collection->get__collection_name();
+            echo $excerpt->excerpt( $todo_collection->get__collection_name(), $excerpt->get__collection_todo_category() );
           }
           echo "</a>";
         }

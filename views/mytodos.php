@@ -9,11 +9,12 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
 	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/todo.php";
 	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/library.php";
+	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/excerpt.php";
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/Mobile_Detect.php";
 	# Variables
 	# ---------
 	$title_page = "Stick it | myTodos";
-
+	$excerpt = new Excerpt();
 	$detect = new Mobile_Detect;
 
 		if($_SERVER["REQUEST_METHOD"] == "GET"){
@@ -33,6 +34,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/empty-front-page.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 				} else{
+
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/levels-of-imp-bar.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";

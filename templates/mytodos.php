@@ -15,9 +15,9 @@
 			        $pathCollection = $item_collection->get__collection_path();
 			        for( $i = ( count($pathCollection) - 1); $i >=0; $i-- ){
 			          if( $pathCollection[$i]["name"] == $item_collection->get__collection_name() ){
-			            echo "<li class=\"todo__collection-header-path-item todo__collection-header-path-item--selected\">" . $pathCollection[$i]["name"] . "</li>";
+			            echo "<li class=\"todo__collection-header-path-item todo__collection-header-path-item--selected\">" . $excerpt->excerpt( $pathCollection[$i]["name"], $excerpt->get__collection_path() ) . "</li>";
 			          } else{
-			              echo "<li class=\"todo__collection-header-path-item\"><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >" . $pathCollection[$i]["name"] . "</a></li>";
+			              echo "<li class=\"todo__collection-header-path-item\"><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >" . $excerpt->excerpt( $pathCollection[$i]["name"], $excerpt->get__collection_path() ) . "</a></li>";
 			          }
 			          if($i != 0){
 			            echo "<li class=\"todo__collection-header-path-item \">//<span>";
@@ -28,12 +28,12 @@
 				    </div>
 					<div>
 						<h2 id = <?php echo $item_collection->get__collection_id(); ?> class = "todo__collection-header-title">
-							<a class = "todo__collection-header-title--link" href = "<?php echo '/TODO-PHP-OOP/views/library.php?id=' . $item_collection->get__collection_id() ?> "> <?php echo $item_collection->get__collection_name(); ?>
+							<a class = "todo__collection-header-title--link" href = "<?php echo '/TODO-PHP-OOP/views/library.php?id=' . $item_collection->get__collection_id() ?> "> <?php echo $excerpt->excerpt( $item_collection->get__collection_name(), $excerpt->get__collection_name() ); ?>
 							</a>
 						</h2>
 					</div>
 					<div>
-						<p class = "todo__collection-header-description"><?php if( !empty( $item_collection->get__collection_description() ) ){echo $item_collection->get__collection_description();} ?></p>
+						<p class = "todo__collection-header-description"><?php if( !empty( $item_collection->get__collection_description() ) ){echo $excerpt->excerpt( $item_collection->get__collection_description(), $excerpt->get__collection_description() ); } ?></p>
 					</div>
 				</div>
 					<div class = "todo__collection-body">
@@ -53,7 +53,7 @@
 									foreach($subcollections as $item){
 										$item_subbcollection = new CollectionLogic( $item[ "id" ] );
 										echo "<li><a class = \"todo__collection-body-subcategory-list-item\" href = \"./library.php?id=" . $item_subbcollection->get__collection_id() . "\">
-										". $item_subbcollection->get__collection_name() ."</a></li>";
+										". $excerpt->excerpt( $item_subbcollection->get__collection_name(), $excerpt->get__collection_subcollection() )."</a></li>";
 									}
 								}
 								?>
@@ -72,13 +72,13 @@
 													<div class = \"todo__todo-title\">
 														<h4 class = \"todo__todo-title-collection\"><span>";
 														include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/levelsOfImportance/12x12/level-".$item_todo->get__todo_level().".svg";
-														?></span><a href = "<?php echo "/TODO-PHP-OOP/views/todo.php?id=" . $item_todo->get__todo_id() ?>"><?php if( !empty( $item_todo->get__todo_name() ) )echo ucfirst( $item_todo->get__todo_name() );
+														?></span><a href = "<?php echo "/TODO-PHP-OOP/views/todo.php?id=" . $item_todo->get__todo_id() ?>"><?php if( !empty( $item_todo->get__todo_name() ) )echo ucfirst( $excerpt->excerpt( $item_todo->get__todo_name(), $excerpt->get__collection_todo_name() ) );
 									echo      "</a></h4>
 													</div>
 													<div class = \"todo__todo-description-container\">
 														<p class = \"todo__todo-description\">";
 														if( !empty( $item_todo->get__todo_description() ) ){
-															echo $item_todo->get__todo_description();
+															echo $excerpt->excerpt( $item_todo->get__todo_description(), $excerpt->get__collection_todo_description() );
 														}
 									echo    "</p>
 													</div>

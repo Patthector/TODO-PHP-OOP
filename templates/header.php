@@ -14,6 +14,7 @@
 	<link href =" <?php echo "/TODO-PHP-OOP/vendor/css/bootstrap.min.css"; ?>" rel="stylesheet" crossorigin="anonymous">
 	<link href = "<?php echo "/TODO-PHP-OOP/inc/css/styles.css"; ?>" rel="stylesheet" crossorigin="anonymous">
   <link href = "<?php echo "/TODO-PHP-OOP/inc/css/styles.css.map"; ?>" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
   </head>
 
   <body>

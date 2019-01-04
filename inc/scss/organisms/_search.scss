@@ -48,6 +48,10 @@
   margin-bottom: 3px;
   margin-top: 6px;
 }
+.todo__mytodos-search--description{
+  font-size: 14px;
+   
+}
 .todo__mytodos-search--sublist-todo{
   margin-left: 12px !important;
 }
@@ -63,7 +67,6 @@
       padding-right: 0;
     }
   }
-
 }
 .todo__mytodos-search--no-results{
   color: $tomato;

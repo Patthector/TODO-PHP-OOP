@@ -27,7 +27,7 @@
         foreach( $searchResults["collections"] as $item_collection ){
           echo "<div>
                   <h4 class = \"todo__mytodos-search--subheading-item todo__mytodos-search--result-item\"><a href = \"./library.php?id=" .$item_collection["id"]. "\">" .$item_collection["name"].  "</a></h4>
-                  <p>" .$item_collection["description"]. "</p>
+                  <p class = \"todo__mytodos-search--description\">" .$item_collection["description"]. "</p>
                 </div>";
         }
         echo "</ul>";
@@ -48,7 +48,7 @@
 
           echo "<div>
                   <h4 class = \"todo__mytodos-search--subheading-item todo__mytodos-search--result-item\"><a href = \"./todo.php?id=" .$item_todo["id"]. "\">" .$item_todo["name"]. "</a></h4>
-                  <p>" .$item_todo["description"]. "</p>
+                  <p class = \"todo__mytodos-search--description\">" .$item_todo["description"]. "</p>
                 </div>";
         }
       echo "</ul>";
@@ -72,7 +72,7 @@
           foreach( $item_tag["todos"] as $item_todo ){
             echo "<div>
                     <h4 class = \"todo__mytodos-search--result-item\"><a href = './todo.php?id=" .$item_todo["id"]. "'>" .$item_todo["name"]. "</a></h4>
-                    <p>" .$item_todo["description"]. "</p>
+                    <p class = \"todo__mytodos-search--description\">" .$item_todo["description"]. "</p>
                   </div>";
           }
           echo "</ul>";

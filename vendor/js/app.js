@@ -26,6 +26,7 @@ $( document ).ready(function() {
 		$( "#todo__message" ).show( function(){
 			deletingMessageBox( "#todo__message" );
 		});
+		
 });
 
 //AUXILIAR FUNCTIONS

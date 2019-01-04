@@ -9,6 +9,7 @@
     align-items: center;
     .todo__bubble-creator--collection-container,
     .todo__bubble-creator--todo-container{
+      z-index:9999;
       display: flex;
       flex-direction: column;
       justify-content: center;

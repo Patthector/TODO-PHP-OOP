@@ -8,6 +8,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/library.php";
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/todo.php";
+	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/excerpt.php";
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/Mobile_Detect.php";
 	# Variables
 	# ---------
@@ -25,6 +26,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 			# the user will be sent to 'myTodos.php' with an err feedback.
 			$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 			$collection = new CollectionLogic( $id, true );
+			$excerpt = new Excerpt();
 
 			if( !empty( $collection->get__collection_id() )){# if we have a collection, set the title heading with the Collection's name
 

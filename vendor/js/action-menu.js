@@ -1,6 +1,7 @@
 'use strict';
 
 $( document ).ready(function() {
+
   //EVENTS
   //========
   // 1-DELETE BUTTON ACTION MENU SELECTED
@@ -100,6 +101,12 @@ $( document ).ready(function() {
         $("#delete-todo-modal").remove();
         $("main").append(data);
         deletingMessageBox( "#todo__message" );
+        $(document).Zippy(".carousel",{
+          arrowRight : ".arrow-right",
+          arrowLeft : ".arrow-left",
+          speed : 100,
+          slideDuration : 1000
+        });
       }
     });
   }
@@ -140,6 +147,12 @@ function selectingCollectionElements(e){
       $("#delete-todo-modal").remove();
       $("main").append(data);
       deletingMessageBox( "#todo__message" );
+      $(".carousel").Zippy({
+        arrowRight : ".arrow-right",
+        arrowLeft : ".arrow-left",
+        speed : 100,
+        slideDuration : 1000
+      });
     }
   });
 }
@@ -168,6 +181,12 @@ function actionCollectionElements(a, id, fatherCollection = null){
     success : function(data){
       $(".first-container").remove();
       $("main").append(data);
+      $(document).Zippy(".carousel",{
+        arrowRight : ".arrow-right",
+        arrowLeft : ".arrow-left",
+        speed : 100,
+        slideDuration : 1000
+      });
     },
     complete : function(jq,s){
       rewind();

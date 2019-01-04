@@ -3,6 +3,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
+  width: 100%;
 }
 .todo__collection-header{
   background-color:#3658bd;
@@ -80,12 +81,18 @@
   @include reset-list;
   @include todo__inline-flex;
   justify-content: flex-start;
+  li{
+    @media(max-width:576px){
+      font-size: 13px;
+    }
+  }
 }
 .todo__collection-body-subcategory-list-item{
   padding: 6px 12px;
   margin: 0 3px;
   border:1px solid $sapphire;
   border-radius: 24px;
+  margin-right: 18px;
   font-family: $font-secondary;
 }
 .todo__todo-title-collection{
