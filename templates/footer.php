@@ -55,7 +55,10 @@
     <script src="/TODO-PHP-OOP/vendor/js/bootstrap.min.js"></script>
     <script src="/TODO-PHP-OOP/vendor/js/carousel.js"></script>
     <script src="/TODO-PHP-OOP/vendor/js/app.js"></script>
-    <script src = "/TODO-PHP-OOP/vendor/js/action-menu.js"></script>
+    <!--<script src = "/TODO-PHP-OOP/vendor/js/action-menu.js"></script>-->
+    <!--TEST-->
+    <script src = "/TODO-PHP-OOP/vendor/js/action_menu_oop.js"></script>
+    <!-- -->
     <script src = "/TODO-PHP-OOP/vendor/js/tags.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/registration.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/search.js"></script>

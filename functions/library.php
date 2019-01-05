@@ -188,7 +188,8 @@ class CollectionLogic extends Collection{
         self::set__msg( "Select the elements you want to move/delete and the click in the menu icon to proceed with the action." );
         $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
         $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
-        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
+        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/delete-collection-elements.php";
+        $output[3] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
         break;
       //---REWIND COLLECTION
       case "reReadCollection":

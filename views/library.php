@@ -88,32 +88,33 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 			$collection->collection_moveCollection( $id_collection, $id_placer_collection, $collection->get__collection_name() );
 		}
 		else if(!empty($_POST["action"])){
-			$state = filter_input(INPUT_POST, "action", FILTER_SANITIZE_STRING);
 
-			if($state == "createCollection"){
-				CollectionLogic::collection_createCollection( $_POST, $_SESSION );
-			}
-			else if($state == "deleteElements"){
-				$id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
+				$state = filter_input(INPUT_POST, "action", FILTER_SANITIZE_STRING);
 
-				$collection = new CollectionLogic( $id );
-				$files = $collection->collection_deleteElements( $_POST );
-				foreach( $files as $file){
-					include $file;
+				if($state == "createCollection"){
+					CollectionLogic::collection_createCollection( $_POST, $_SESSION );
 				}
-				exit;
-			}
-			else if($state == "moveElements"){//****moveElements****
-				$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-				$id_fatherCollection = filter_input(INPUT_POST, "fatherCollection", FILTER_SANITIZE_NUMBER_INT);
+				else if($state == "deleteElements"){
+					$id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
 
-				$collection = new CollectionLogic( $id );
-				$files = $collection->collection_moveElements( $_POST, $id_fatherCollection );
-				foreach( $files as $file){
-					include $file;
+					$collection = new CollectionLogic( $id );
+					$files = $collection->collection_deleteElements( $_POST );
+					foreach( $files as $file){
+						include $file;
+					}
+					exit;
 				}
-				exit;
-			}
+				else if($state == "moveElements"){//****moveElements****
+					$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+					$id_fatherCollection = filter_input(INPUT_POST, "fatherCollection", FILTER_SANITIZE_NUMBER_INT);
+
+					$collection = new CollectionLogic( $id );
+					$files = $collection->collection_moveElements( $_POST, $id_fatherCollection );
+					foreach( $files as $file){
+						include $file;
+					}
+					exit;
+				}
 		}
 	}
 } else{

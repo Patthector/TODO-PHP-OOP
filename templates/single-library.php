@@ -3,7 +3,6 @@
     <div class = "todo__collection-header-path top-right-absolute">
       <ul class = "todo__collection-header-path-list">
       <?php
-        //$pathCollection = $collection["path"];
         $pathCollection = $collection->get__collection_path();
         for( $i = ( count($pathCollection) - 1); $i >=0; $i-- ){
           if( $pathCollection[$i]["name"] == $collection->get__collection_name() ){

@@ -120,8 +120,9 @@ function selectingCollectionElements(e){
   } );
   if(e.target.tagName === "BUTTON"){
     if(e.target.id === "collection-delete"){//DELETING
-      var innerVal = $("#todo_collection-button-delete").html();
-      $("#todo_collection-button-delete").css("display","none");
+      var innerVal = $("#todo_collection-button-delete").html();//1-svg
+
+      $("#todo_collection-button-delete").css("display","none");//NO
       var parent = $(e.target).parent().parent();
       $( ".dropdown-menu" ).removeClass("show");
       $( parent ).append("<button id = \"todo__collection-button-delete\" class = \"todo__btn-collection todo__btn-collection--selected\" data-toggle=\"modal\" data-target=\"#delete-todo-modal\">"+ innerVal +"</button>");
@@ -145,6 +146,7 @@ function selectingCollectionElements(e){
       $(".first-container").remove();
       $("#move-todo-modal").remove();
       $("#delete-todo-modal").remove();
+
       $("main").append(data);
       deletingMessageBox( "#todo__message" );
       $(".carousel").Zippy({

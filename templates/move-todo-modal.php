@@ -79,7 +79,8 @@
           if( ( isset( $todo ) && !empty( TodoLogic::get__state() ) ) || ( isset( $collection ) && !empty( CollectionLogic::get__state() ) ) ){// if we have an $state variable we are on readTODO || readCollection
             echo "<label class=\"btn todo__btn-modal todo__btn-modal--info\" for = \"move-todo-submit\">Move</label>";
           }else{// we are selectingElements
-            echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--info\" data-dismiss=\"modal\">Move</button>";
+            //echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--info\" data-dismiss=\"modal\">Move</button>";
+            echo "<button id = \"todo__move-modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--info\" data-dismiss=\"modal\">Move</button>";
           }
          ?>
       </div><!--end-modal-footer-->
@@ -116,7 +117,8 @@
         if( !empty( TodoLogic::get__state() ) || !empty( CollectionLogic::get__state() ) ){// if we have an $state variable we are on readTODO || readCollection
           echo "<label class=\"btn todo__btn-modal todo__btn-modal--danger\" for = \"delete-todo-submit\">Yes, delete</label>";
         } else{// we are selectingElements
-          echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--danger\" data-dismiss=\"modal\">Yes, delete</button";
+          //echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--danger\" data-dismiss=\"modal\">Yes, delete</button";
+          echo "<button id = \"todo__delete-modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--danger\" data-dismiss=\"modal\">Yes, delete</button";
         }
         ?>
       </div>

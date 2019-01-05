@@ -689,7 +689,6 @@ main {
       background-color: #303f9f;
       border: none;
       width: 100%;
-      padding: 6px;
       transition: box-shadow 0.5s; }
       .todo__action-menu-container .todo__btn-collection--selected svg,
       .todo__action-menu-container .todo__btn-todo--selected svg {
@@ -722,7 +721,7 @@ main {
       .todo__action-menu-container .todo__btn-todo--disabled span {
         color: #cfcfcf; }
   .todo__action-menu-container .todo__btn-cancel {
-    display: none;
+    display: block;
     border-style: none;
     transition: background-color 1s; }
     .todo__action-menu-container .todo__btn-cancel svg {
@@ -731,7 +730,7 @@ main {
       color: #dc3545;
       padding-top: 3px; }
   .todo__action-menu-container .todo__btn-clear {
-    display: none;
+    display: block;
     border-style: none;
     transition: background-color 1s; }
     .todo__action-menu-container .todo__btn-clear svg {

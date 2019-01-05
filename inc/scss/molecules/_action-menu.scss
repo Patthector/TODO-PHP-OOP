@@ -183,9 +183,9 @@
     }
     &--selected{
       background-color: $sapphire;
-      border:none;
+      border:none; 
       width: 100%;
-      padding: 6px;
+      //padding: 6px;
       transition: box-shadow 0.5s;
       svg{
         display: block;
@@ -228,7 +228,7 @@
   }
   //BUTTON CANCEL
   .todo__btn-cancel{
-    display: none;
+    display: block;
     border-style: none;
     //font-family:$font-secondary;
     //background-color: rgba($tomato,.85);
@@ -253,7 +253,7 @@
   //BUTTON CLEAR
 
   .todo__btn-clear{
-    display: none;//inline-block
+    display: block;//inline-block
     border-style: none;
     //background-color:$gallery;
     //color:$sapphire;

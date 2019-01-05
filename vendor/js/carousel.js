@@ -44,8 +44,6 @@
       $.extend( this, this.initials );
 
       this.$el = $(element);
-      console.log(element);
-      console.log(this.$el);
       this.$inner = $(".carousel .todo__inner--carousel");
 
       this.changeSlide = $.proxy( this.changeSlide, this );

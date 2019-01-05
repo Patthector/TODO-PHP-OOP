@@ -36,15 +36,17 @@
           <ul id = "todo__action-menu-list" class = "todo__action-menu">
             <!--CANCEL BUTTON-->
             <?php
+            /*
             echo "<button id = \"todo__btn-menu--cancel\" class = \"todo__btn-collection todo__btn-cancel\">";
                   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/times-solid.svg";
-            echo    "<span>CANCEL</span></button>";
+            echo    "<span>CANCEL</span></button>";*/
             ?>
             <!--CLEAR BUTTON-->
             <?php
+            /*
             echo "<button id = \"todo__action-menu-btn-clear\" class = \"todo__btn-collection todo__btn-clear\">";
                   include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/redo-alt-solid.svg";
-            echo    "<span>CLEAR</span></button>";
+            echo    "<span>CLEAR</span></button>";*/
             ?>
             <!--CREATE BUTTON-->
             <?php
