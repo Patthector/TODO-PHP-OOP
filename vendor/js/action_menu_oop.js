@@ -27,7 +27,13 @@
       };
       this.$obj = $.extend( {}, this, this.targets, settings );
 
-
+      /*
+        ___Form Ghost Obj___
+          *form ghost is a display:none form that will hold all the information
+          *related with the selected elements for move/delete actions
+      */
+      this.$formGhost = $(this.$obj.formGhostId);
+      console.log(this.$formGhost);
       this.ajaxActionMenu = $.proxy( this.ajaxActionMenu, this );
       this.init();
     }
@@ -52,10 +58,13 @@
     this.ajaxActionMenu)
         .on("click", "#todo__btn-menu--cancel", {action:"cancelSelection"},
     this.ajaxActionMenu)
-        .on("click", "#todo__move-modal-btn-submit",{action:"modal-move"},
-    this.ajaxActionMenu)
         .on("click", "#todo__delete-modal-btn-submit",{action:"modal-delete"},
     this.ajaxActionMenu)
+        .on("click", "#todo__move-modal-btn-submit", {action:"modal-move"},
+        this.ajaxActionMenu)
+/*
+    $("#todo__move-modal-btn-submit").bind("click",{action:"modal-move"},
+    this.ajaxActionMenu);*/
 
   }
 /*
@@ -63,68 +72,108 @@
   2- Receive the response from the DB
 */
   ActionMenu.prototype.ajaxActionMenu = function(e){
+
     var menu_action = ( typeof e !== "undefined" ? e.data["action"]: "undefined" );
     var $am = this;
+
     switch( true ){
-
-      case ( menu_action === "selectionForDelete" ):
-        this._AJAXsetter(menu_action, "selectElements");
+      case ( (menu_action === "selectionForDelete" || menu_action === "selectionForMove" ) ):
+        var ajaxObjMenu = {
+            url: "./actionMenu.php",
+            method: "GET",
+            data: { action: menu_action }
+          };
+        var ajaxObjMain = {
+          url: "",
+          method: "GET",
+          data: { action: "selectElements" }
+        };
+        this.invokeAction( ajaxObjMenu, ajaxObjMain );
       break;
-
-      case ( menu_action === "selectionForMove" ):
-        this._AJAXsetter(menu_action, "selectElements");
-      break
 
       case ( menu_action === "clearSelection" ):
         $( "."+this.$obj.clearSelectionClass ).removeClass( this.$obj.clearSelectionClass );
       break
 
       case ( menu_action === "cancelSelection" ):
-        this._AJAXsetter(menu_action, "reReadCollection");
+        var ajaxObjMenu = {
+            url: "./actionMenu.php",
+            method: "GET",
+            data: { action: menu_action }
+          };
+        var ajaxObjMain = {
+          url: "",
+          method: "GET",
+          data: { action: "reReadCollection" }
+        };
+        this.invokeAction( ajaxObjMenu, ajaxObjMain );
       break
 
       case ( menu_action === "modal-move" ):
-        //set var modal-move = true;
-        //_formingData();
+        var ajaxObjMenu = {
+            url: "./actionMenu.php",
+            method: "GET",
+            data: { action: menu_action }
+          };
+        var ajaxObjMain = {
+          url: "",
+          method: "POST",
+          data: $am._formingData({
+            action: "moveElements",
+            fatherCollection: $("#todo__modal-move-select").val()
+          })
+        };
+        this.invokeAction( ajaxObjMenu, ajaxObjMain );
       break
 
       case ( menu_action === "modal-delete" ):
-
+        var ajaxObjMenu = {
+            url: "./actionMenu.php",
+            method: "GET",
+            data: { action: menu_action }
+          };
+        var ajaxObjMain = {
+          url: "",
+          method: "POST",
+          data: $am._formingData({
+            action: "deleteElements"
+          })
+        };
+        this.invokeAction( ajaxObjMenu, ajaxObjMain );
       break
     }
     return;
   };
 
-  ActionMenu.prototype._AJAXsetter = function( menu_action, main_action, method="GET"){
+  ActionMenu.prototype.invokeAction = function( ajaxObjMenu, ajaxObjMain ){
     var $am = this;
-    //1-detach the action menu && the main content
+    //1-DETACH the action menu && the main content
     this.detach({
-      detachViaEmpty: $am.$main,
-      detachViaDelete: $am.$el
+      detachViaEmpty: this.$main,
+      detachViaDelete: this.$el
     });
-    //2-make the AJAX call--for main
-    this.AJAXloader({
-      method: method,
-      data: { action: main_action },
-      success: function(data){
-        $am.attach({
-          attachViaAppend: data
-        });
+    //2-AJAX call
+    $.when( $am._AJAXsetter( ajaxObjMenu ),$am._AJAXsetter( ajaxObjMain ) )
+     .done(
+   //3-ATTACH the response
+        function( _AJAXresponseActionMenu, _AJAXresponseActionMain ){
+          $am.attach({ attachViaAppend: _AJAXresponseActionMain[0] });
+          $am.attach({ attachViaAfter: _AJAXresponseActionMenu[0] });
+    //4-UPDATE MAIN OBJ [ACTIONMENU]
+    //after you attach anything you should update your object
+          $am.updateActionMenu();
       }
-    });
-    //3-make the AJAX call--for action-menu
-    this.AJAXloader({
-      url: "./actionMenu.php",
-      data: { action: menu_action },
-      success: function(data){
-          $am.attach({
-          attachViaAfter: data
-        });
-        //$am.updateActionMenu();
-      }
-    });
-
+    );
     return;
+  }
+
+  ActionMenu.prototype._AJAXsetter = function( ajaxObj ){
+    //1-url, 2-method, 3-data {}
+    return $.ajax({
+      url : ajaxObj.url,
+      method: ajaxObj.method,
+      data: ajaxObj.data
+                        });
   }
 
   ActionMenu.prototype.AJAXloader = function( ajaxObj ){
@@ -132,28 +181,15 @@
     return;
   };
 
-  ActionMenu.prototype._formingData = function( menu_action, modal_move = false){
-    /*
-    // NEED SOME WORK HERE!!
-    */
-    var arrayForm = $("#delete-form").serializeArray();
-    var id = $(".todo__collection-header-title").attr("id");
-    var data = {};
-    if(modal_move){
-      var fatherCollection = $("#todo__modal-move-select").val();
-      var action = "moveElements";
-      data = {"action":action,"id": id, "fatherCollection":fatherCollection};
-    }
-    else{
-      var action = "deleteElements";
-      data = {"action":action,"id": id};
-    }
-    for(var i = 0; i<a.length; i++){
-      data[a[i]["name"]] = a[i]["value"];
+  ActionMenu.prototype._formingData = function( data ){
+
+    var arrayForm = this.$formGhost.serializeArray();
+
+    for(var i = 0; i < arrayForm.length; i++){
+      data[arrayForm[i]["name"]] = arrayForm[i]["value"];
     }
 
-    //this._AJAXsetter( menu_action, );
-
+    return data;
   };
 
   ActionMenu.prototype.detach = function( obj ){
@@ -197,8 +233,6 @@
         break;
       }
     }
-    //after you attach anything you should update your object
-    this.updateActionMenu();
     return;
   };
   ActionMenu.prototype._attachViaAppend = function( data ){
@@ -215,6 +249,8 @@
     this.$el = $(this.$obj.actionMenuId);
     //variable reference body == main
     this.$main = $(this.$obj.consequenceResponse);
+    //variable reference form ghost
+    this.$formGhost = $(this.$obj.formGhostId);
     return;
   };
 
@@ -230,7 +266,9 @@
 $("#action-menu").ActionMenu({
   clearSelectionClass: "label--selected",
   actionMenuId: "#action-menu",
-  consequenceResponse: "main"
+  consequenceResponse: "main",
+  formGhostId: "#delete-form",
+
 });
 
 console.log("Ciao a tutti");

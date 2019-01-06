@@ -27,5 +27,7 @@ if(!(count($todosCollection) == 0)){
   }
 }
 //<input type = "submit" id = "action-menu_collection" name = "submit"/>
+
  ?>
+  <input type = "hidden" name = "id" value = "<?php echo $id;?>"/>
 </form>

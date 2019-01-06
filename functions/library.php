@@ -261,11 +261,12 @@ class CollectionLogic extends Collection{
 
         if($cleanKey == "todo"){
           $id_item = filter_input(INPUT_POST, $key, FILTER_SANITIZE_NUMBER_INT);
-
           Todo::moveTodo($id_item, $id_fatherCollection);
+
         } else{// => SUBCOLLECTION
           $id_item = filter_input(INPUT_POST, $key, FILTER_SANITIZE_NUMBER_INT);
           self::moveCollection($id_item, $id_fatherCollection);
+                   
         }
       }
     }

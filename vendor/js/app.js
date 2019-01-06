@@ -23,10 +23,10 @@ $( document ).ready(function() {
 		editForm(e);
 	});
 	//DELETING THE BOX MESSAGE AFTER 10SEC
-		$( "#todo__message" ).show( function(){
-			deletingMessageBox( "#todo__message" );
-		});
-		
+	$( "#todo__message" ).show( function(){
+		deletingMessageBox( "#todo__message" );
+	});
+
 });
 
 //AUXILIAR FUNCTIONS

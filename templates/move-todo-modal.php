@@ -1,8 +1,6 @@
-<!--MOVE MESSAGE -->
-
 <!--********************MOVE MODAL************************-->
 
-<div class="modal fade todo__modal" id="move-todo-modal" tabindex="-1" role="dialog" aria-labelledby="todo__modal-move" aria-hidden="true">
+<div class="modal todo__modal " id="move-todo-modal" tabindex="-1" role="dialog" aria-labelledby="todo__modal-move" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header todo__modal-info">
@@ -80,7 +78,7 @@
             echo "<label class=\"btn todo__btn-modal todo__btn-modal--info\" for = \"move-todo-submit\">Move</label>";
           }else{// we are selectingElements
             //echo "<button id = \"todo__modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--info\" data-dismiss=\"modal\">Move</button>";
-            echo "<button id = \"todo__move-modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--info\" data-dismiss=\"modal\">Move</button>";
+            echo "<button type = \"button\" id = \"todo__move-modal-btn-submit\" class=\"btn todo__btn-modal todo__btn-modal--info\" data-dismiss=\"modal\">Move</button>";
           }
          ?>
       </div><!--end-modal-footer-->
@@ -91,7 +89,7 @@
 
 <!--**********************DELETE MODAL*********************-->
 
-<div class="modal fade todo__modal" id="delete-todo-modal" tabindex="-1" role="dialog" aria-labelledby="todo__modal-delete" aria-hidden="true">
+<div class="modal todo__modal" id="delete-todo-modal" tabindex="-1" role="dialog" aria-labelledby="todo__modal-delete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header todo__modal-danger">

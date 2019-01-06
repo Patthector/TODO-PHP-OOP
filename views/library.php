@@ -14,6 +14,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 	# ---------
 	$title_page = "Library | Stick it";
 	$detect = new Mobile_Detect;
+	$excerpt = new Excerpt();
 	# Requests
 	# ---------
 	if($_SERVER["REQUEST_METHOD"] == "GET"){
@@ -26,7 +27,6 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 			# the user will be sent to 'myTodos.php' with an err feedback.
 			$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 			$collection = new CollectionLogic( $id, true );
-			$excerpt = new Excerpt();
 
 			if( !empty( $collection->get__collection_id() )){# if we have a collection, set the title heading with the Collection's name
 
@@ -105,11 +105,13 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 					exit;
 				}
 				else if($state == "moveElements"){//****moveElements****
-					$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+					$id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
 					$id_fatherCollection = filter_input(INPUT_POST, "fatherCollection", FILTER_SANITIZE_NUMBER_INT);
 
 					$collection = new CollectionLogic( $id );
 					$files = $collection->collection_moveElements( $_POST, $id_fatherCollection );
+					//updeting collection...
+					$collection = new CollectionLogic( $id, true );
 					foreach( $files as $file){
 						include $file;
 					}
