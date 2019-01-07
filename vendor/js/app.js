@@ -15,17 +15,20 @@ $( document ).ready(function() {
 	//---- AJAX --
 	//------------
 	// 7-EDIT TODO FORM
-	$(document).on("click", "#todo_todo-button-edit",function(e){
+	/*$(document).on("click", "#todo_todo-button-edit",function(e){
 		editForm(e);
 	});
 	// 8-EDIT COLLECTION FORM
 	$( document ).on("click", "#todo_collection-button-edit", function(e){
 		editForm(e);
-	});
+	});*/
 	//DELETING THE BOX MESSAGE AFTER 10SEC
 	$( "#todo__message" ).show( function(){
 		deletingMessageBox( "#todo__message" );
 	});
+
+	//LOGGING OUT THE USER
+	  $( "#todo__logout-button" ).on( "click",function( e ){ loggingOutUser(); });
 
 });
 
@@ -53,7 +56,7 @@ function editForm(e){
 			deletingMessageBox( "#todo__message" );
 		},
 		complete : function(){
-			$("#logo-svg").empty();
+			//$("#logo-svg").empty();
 			$("header").addClass("white-header");
 			$("footer").removeClass("footer-absolute");
 			$("#action-menu").css("display","none");
@@ -84,6 +87,21 @@ function deletingMessageBox( selector ){
 	}, 3000);
 }
 
+function loggingOutUser(){
+  var url = window.location.origin + "/TODO-PHP-OOP/views/registration.php";
+
+ //AJAX sending the user to registration.php
+ $.ajax({
+   url : url,
+   data : { "log-out" : true },
+   method : "GET",
+   success : function( data ){
+     window.location.href = window.location.origin + "/TODO-PHP-OOP/index.php?msg=LoggedOut";
+     //why dont i send the user to this page above via php?
+   }
+ });
+ return;
+}
 
 function createTodoClicked(){
   window.location = "http://localhost/TODO-PHP-OOP/views/todo.php";

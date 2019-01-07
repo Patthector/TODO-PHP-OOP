@@ -15,7 +15,6 @@ class CollectionLogic extends Collection{
   private $collection_subcollections;
   private $collection_path;
   private $collection_todos;
-  //private static $collection_full_list_collections;
   //
   private $select_elements = false;
 
@@ -175,12 +174,13 @@ class CollectionLogic extends Collection{
     $output = [];
     switch($action){
       //---EDIT COLLECTION---
-      case "editItem":
+      case "editCollection":
         $this->set__page_heading( "edit collection" );
         self::set__state( "editCollection" );
         self::set__msg( "Update all the fields that you wish!" );
         $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
         $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
+        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
         break;
       //---SELECT ELEMENTS---
       case "selectElements":
@@ -266,7 +266,7 @@ class CollectionLogic extends Collection{
         } else{// => SUBCOLLECTION
           $id_item = filter_input(INPUT_POST, $key, FILTER_SANITIZE_NUMBER_INT);
           self::moveCollection($id_item, $id_fatherCollection);
-                   
+
         }
       }
     }

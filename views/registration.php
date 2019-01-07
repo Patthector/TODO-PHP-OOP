@@ -12,15 +12,11 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
     if( $action == "user_verification" ){
       $username = trim( filter_input( INPUT_GET, "username", FILTER_SANITIZE_STRING ) );
       if( !empty( $username ) ){
-        $createAccount = true;
-        $password = trim( filter_input( INPUT_GET, "password", FILTER_SANITIZE_STRING ) );
-        $password_confirmation = trim( filter_input( INPUT_GET, "password_confirmation", FILTER_SANITIZE_STRING ) );
         if( !empty( User::userExist( $username ) ) ){
-           $user_exists = true;
+           echo "true"; exit;
         } else{
-          $user_exists = false;
+          echo "false"; exit;
         }
-        include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/signUp.php";
       }// empty username
     }// the action !== "user_verification"
     exit;

@@ -16,7 +16,7 @@
           echo "Sign In";
         }
         ?></h3>
-      <form class = " todo__registration--form " action = "registration.php" method = "POST">
+      <form id = "todo__registration--form" class = " todo__registration--form " action = "registration.php" method = "POST">
 
         <div class="form-group  row">
           <!-- Helper & Collapse BLOCK-->
@@ -36,7 +36,7 @@
             value = "<?php if( isset( $username ) )echo $username; ?>" placeholder = "Username" />
           <!--INPUT Feedback Username-->
           <div class="valid-feedback">
-            Valid username [<?php echo $username; ?>].
+            Valid username.
           </div>
           <div class="invalid-feedback">
             Unfortunately this username is taken! Please try a different one.
@@ -58,11 +58,13 @@
           <!--INPUT Password-->
           <input class="form-control" type = "password" name = "user-password"
           <?php
-          if( isset( $password ) && !empty( $password ) ){
-            echo "value=\"$password\"";
+          if( isset( $createAccount ) && $createAccount ){
+            echo "id = \"new-user-password\"";
+          }else{
+            echo "id = \"user-password\"";
           }
           ?>
-           id = "user-password" placeholder = "Password" />
+            placeholder = "Password" />
           <!--INPUT Feedback Password-->
           <div class="valid-feedback">
             All good!
@@ -93,9 +95,9 @@
         <button id = "todo__registration--submit" class = "btn todo__btn-modal todo__modal-info btn-block ml-0" type = "submit" name =
         <?php
         if( isset( $createAccount ) && $createAccount ){
-          echo "\"sign-up\" value = \"sign-up\" disabled> Create Account";
+          echo "\"sign-up\" value = \"sign-up\"> Create Account";
         } else{
-          echo "\"log-in\" value = \"log-in\" disabled> Sign In";
+          echo "\"log-in\" value = \"log-in\"> Sign In";
         }
          ?> </button>
       </form>
@@ -110,9 +112,9 @@
       <button class = "btn todo__btn-modal todo__btn-modal--default btn-block ml-0"
       <?php
         if( isset( $createAccount ) && $createAccount ){
-          echo " id = \"todo__registration--switch-sign-in\"> Sign in";
+          echo " id = \"todo__registration--sign-in-switcher\"> Sign in";
         } else{
-          echo " id = \"todo__registration--switch-new-user\"> Create Account";
+          echo " id = \"todo__registration--new-user-switcher\"> Create Account";
         }
        ?>
       </button>

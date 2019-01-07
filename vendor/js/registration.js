@@ -36,6 +36,7 @@ function loggingOutUser(){
    method : "GET",
    success : function( data ){
      window.location.href = window.location.origin + "/TODO-PHP-OOP/index.php?msg=LoggedOut";
+     //why dont i send the user to this page above via php?
    }
  });
  return;
@@ -97,6 +98,7 @@ function userVerification( username, id){
   }
   //if new username is back to empty value, dont do the call
   if( userValidation( username, id ) ){
+
       var request = $.ajax({
       url: window.location.href,
       method: "GET",
@@ -157,7 +159,7 @@ function passwordMatch( password_confirmation, last_check=null ){
       enableButtonSubmit();
     }
   }
-
+  return;
 }
 
 function enableButtonSubmit(){

@@ -23,7 +23,8 @@
       //object targets => 1- header, 2- main
       this.targets = {
         header : $("header"),
-        main : this.$main
+        main : this.$main,
+        body : $("#main")
       };
       this.$obj = $.extend( {}, this, this.targets, settings );
 
@@ -51,6 +52,8 @@
         .on("click", "#collection-delete", {action:"selectionForDelete"},
     this.ajaxActionMenu)
         .on("click",  "#collection-move", {action:"selectionForMove"},
+    this.ajaxActionMenu)
+        .on("click",  "#todo_collection-button-edit", {action:"editCollection"},
     this.ajaxActionMenu)
         .on("click",  ".checkbox-container",
         function(e){ $(e.currentTarget).toggleClass("label--selected"); })
@@ -89,6 +92,15 @@
           data: { action: "selectElements" }
         };
         this.invokeAction( ajaxObjMenu, ajaxObjMain );
+      break;
+
+      case ( menu_action === "editCollection" ):
+        var ajaxEditObj = {
+          url: "",
+          method: "GET",
+          data: { action: "editCollection" }
+        };
+        this._specialActionEdit(ajaxEditObj);
       break;
 
       case ( menu_action === "clearSelection" ):
@@ -166,7 +178,6 @@
     );
     return;
   }
-
   ActionMenu.prototype._AJAXsetter = function( ajaxObj ){
     //1-url, 2-method, 3-data {}
     return $.ajax({
@@ -175,6 +186,27 @@
       data: ajaxObj.data
                         });
   }
+
+  ActionMenu.prototype._specialActionEdit = function( ajaxObjEdit ){
+    var $am = this;
+    //1-DETACH the action menu && the main content
+    this.detach({
+      detachViaEmpty: $("#main")
+    });
+    //2-AJAX call
+    $.when( $am._AJAXsetter( ajaxObjEdit ) )
+     .done(
+   //3-ATTACH the response
+        function( _AJAXresponseEdited ){
+          console.log(_AJAXresponseEdited);
+          $am.attach({ attachViaAppendBody: _AJAXresponseEdited });
+    //4-UPDATE MAIN OBJ [ACTIONMENU]
+    //after you attach anything you should update your object
+          $am.updateActionMenu();
+      }
+    );
+    return;
+  };
 
   ActionMenu.prototype.AJAXloader = function( ajaxObj ){
     $.ajax(ajaxObj);
@@ -231,12 +263,16 @@
         case( i === "attachViaAfter" ):
           this._attachViaAfter( obj[i] );
         break;
+
+        case( i === "attachViaAppendBody" ):
+          this._attachViaAppend( obj[i], this.$obj.targets.body );
+        break;
       }
     }
     return;
   };
-  ActionMenu.prototype._attachViaAppend = function( data ){
-    $(this.$obj.targets.main).append( data );
+  ActionMenu.prototype._attachViaAppend = function( data, target = this.$obj.targets.main ){
+    $(target).append( data );
     return;
   }
   ActionMenu.prototype._attachViaAfter = function( data ){
@@ -260,17 +296,14 @@
     });
   };
 
+  $("#action-menu").ActionMenu({
+    clearSelectionClass: "label--selected",
+    actionMenuId: "#action-menu",
+    consequenceResponse: "main",
+    formGhostId: "#delete-form",
 
+  });
 
-
-$("#action-menu").ActionMenu({
-  clearSelectionClass: "label--selected",
-  actionMenuId: "#action-menu",
-  consequenceResponse: "main",
-  formGhostId: "#delete-form",
-
-});
-
-console.log("Ciao a tutti");
+  console.log("Ciao a tutti");
 
 });
