@@ -7,13 +7,16 @@
 	position: absolute;
 	top:6px;
 	left: 0;
-	display: flex;
+	/*display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: flex-start;
+	justify-content: flex-start;*/
+  display:flex;
 	transition: all .4s ease-out;
 }
-
+.slide{
+  white-space: nowrap;
+}
 .arrow{
   width: 10px;
   height: 10px;

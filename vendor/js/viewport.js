@@ -25,7 +25,7 @@ function mediaQueryMatches(x) {
 
         $("#search-bar--input").removeClass( "form-control-lg" );
         $("#search-bar--input").addClass( "form-control-sm" );
-    }
+    } 
   }
   else {//--PC--
     if ( $(window).scrollTop() >= distance ) {

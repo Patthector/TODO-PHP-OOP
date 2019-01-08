@@ -63,3 +63,22 @@
   padding: 12px;
 }
 .todo__registration--line{ margin:12px 0; }
+
+.todo__registration--user-message{
+  display: block;
+  position: relative;
+  margin: 6px 0;
+  padding: 3px 24px 3px 6px;
+  background-color: rgba($tomato, .85);
+  border: 2px solid $tomato;
+  p{
+    color:$gallery;
+    font-family: $font-primary-bold;
+    text-align: left;
+    margin-bottom: 0;
+  }
+  .close{
+    padding: 3px 6px 24px 24px;
+    span{color:$dark-night;}
+  }
+}

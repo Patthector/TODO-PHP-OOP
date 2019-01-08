@@ -16,6 +16,7 @@
     var instanceUid = 0;
 
     function _Zippy( element, settings ){
+
       this.defaults = {
         slideDuration : "3000",
         speed : 500,
@@ -24,12 +25,12 @@
       };
 
       this.innerSettings = {
-        currSlideMaxWidth : 0,
+        width_currSlide : 0,
         leftCoordenate : 0,
-        rightCoordenate : 0,
-        innerMaxWidth : 0,
-        carouselMaxWidth : 0,
-        prevSlideMaxWidth : 0
+        width_inner : 0,
+        width_carousel : 0,
+        width_prevSlide : 0,
+        move_carousel: false
       };
 
       this.settings = $.extend( {}, this, this.defaults, this.innerSettings, settings );
@@ -44,7 +45,9 @@
       $.extend( this, this.initials );
 
       this.$el = $(element);
-      this.$inner = $(".carousel .todo__inner--carousel");
+      this.el = element;
+      var formation = "#" + this.el.id + " .todo__inner--carousel";
+      this.$inner = $(formation);
 
       this.changeSlide = $.proxy( this.changeSlide, this );
 
@@ -68,7 +71,9 @@
 
     this.events();
 
-    this.activate();
+    this.activate();// <<-- we may not need this func
+
+    this.showArrows();
 
     //this.initTimer();
   };
@@ -104,39 +109,54 @@
   };
 
   Zippy.prototype.build = function(){
-    //var $indicators = this.$el.append("<ul class = \"indicators\">").find(".indicators");
-    this.totalSlides = this.$el.find(".slide").length;
-    this.innerSettings.currSlideMaxWidth = this.$el.find(".slide").eq(this.currSlide).width();
-    this.innerSettings.carouselMaxWidth = this.$el.width();
-    this.innerSettings.innerMaxWidth = this.$inner.width();
-    //for( var i = 0; i < this.totalSlides; i++ ) $indicators.append("<li data-index="+i+">");
+
+    this.settings.width_currSlide = this.$el.find(".slide").eq(this.currSlide).width();
+    this.settings.width_carousel = this.$el.width();
+    this.settings.width_inner = this.$inner.width();
+
   };
 
   Zippy.prototype.activate = function(){
-    this.$currSlide = this.$el.find(".slide").eq(0);
+    //this.$currSlide = this.$el.find(".slide").eq(0);
     //this.$el.find(".indicators li").eq(0).addClass("active");
   };
 
   Zippy.prototype.events = function(){
     $("body")
-      .on("click",this.settings.arrowRight,
-    {direction:"right"},this.changeSlide)
-      .on("click",this.settings.arrowLeft,
-    {direction:"left"},this.changeSlide)
-      .on("click",".indicators li",this.changeSlide);
+      .on( "click", this.settings.arrowRight,
+    { direction:"right" }, this.changeSlide)
+      .on( "click", this.settings.arrowLeft,
+    { direction:"left" }, this.changeSlide)
+      .on( "click", ".indicators li", this.changeSlide);
   };
 
-  Zippy.prototype.clearTimer = function(){
-    if(this.timer) clearInterval(this.timer);
-  };
+  Zippy.prototype.showArrows = function(){
+    // 1- get the ul width
+    // 2- get the inner div width
+    // 3- compare the two of them
+        // 3.1- if ||==>> inner is bigger, that mean we need to use the carousel
+        // 3.2- else ||==>> innner is smalles and we need to hide the arrows
+    ////
+    var inner__class = "#" + this.el.id + " .todo__inner--carousel";
+    var arrowLeft = "#" + this.el.id;
+    arrowLeft = $(arrowLeft).siblings( this.settings.arrowLeft );
+    var arrowRight = "#" + this.el.id;
+    arrowRight = $(arrowRight).siblings( this.settings.arrowRight );
 
-  Zippy.prototype.initTimer = function(){
-    this.timer = setInterval(this.changeSlide, this.settings.slideDuration);
-  };
+    if( this.settings.width_carousel >= this.settings.width_inner ){
+      $( arrowLeft ).css("display","none");
+      $( arrowRight ).css("display","none");
+    } else{
+      $( arrowLeft ).css("display","block");
+      $( arrowRight ).css("display","block");
+    }
+
+    return;
+  }
 
   Zippy.prototype.startTimer = function(){
     //this.initTimer();
-    this.throttle = false;
+    this.throttle = false;//<<------ OCHIO
   };
 
   Zippy.prototype.changeSlide = function(e){
@@ -144,28 +164,21 @@
     if(this.throttle) return;
     this.throttle = true;
 
-    this.clearTimer();
-
     var direction = this._direction(e);
 
-    this.innerSettings.currSlideMaxWidth = this.$el.find(".slide").eq(this.currSlide).width();
-    if(this.currSlide > 0){
+    this.settings.width_currSlide = this.$el.find(".slide").eq(this.currSlide).width();
+    if( this.currSlide > 0 ){
       var aux = this.currSlide-1;
-      this.innerSettings.prevSlideMaxWidth = this.$el.find(".slide").eq(aux).width();
+      this.settings.width_prevSlide = this.$el.find(".slide").eq(aux).width();
     }
 
-    var animate = this._next(e,direction);
+    var animate = this._next( e,direction );
     if(!animate) return;
 
-    //var $nextSlide = this.$el.find(".slide").eq(this.currSlide).addClass(direction+" active");
-    var $nextSlide = this.$el.find(".slide").eq(this.currSlide).addClass(direction);
-    //this.innerSettings.currSlideMaxWidth = this.$el.find(".active").width();
-
-
     if(!this.csstransitions){
-      this._jsAnimation($nextSlide,direction);
+      this._jsAnimation(direction);
     } else {
-      this._cssAnimation($nextSlide,direction);
+      this._cssAnimation(direction);
     }
   };
 
@@ -181,134 +194,67 @@
   };
 
   Zippy.prototype._canMove = function(direction){
-    console.log("currSlide",this.currSlide);
-
-    if( direction == "left"){
-
-      if( (this.currSlide) !== 0 )return true;
-
-    } else if( direction == 'right'){
-
-      if( (this.innerSettings.leftCoordenate+this.innerSettings.innerMaxWidth) > this.innerSettings.carouselMaxWidth )
-      { //TEST
-
-      console.log("leftCoordenate",this.innerSettings.leftCoordenate);
-      console.log("currSlideW",this.innerSettings.currSlideMaxWidth);
-      console.log("innerW",this.innerSettings.innerMaxWidth);
-      console.log("theSuM",(this.innerSettings.leftCoordenate + this.innerSettings.innerMaxWidth));
-      console.log("carouselW",this.innerSettings.carouselMaxWidth);
-
-        return true;
-      }
+    if( direction === "left"){
+      return this.currSlide > 0;
+    } else if( direction === 'right'){
+        return (this.settings.leftCoordenate + this.settings.width_inner) > this.settings.width_carousel;
     }
     return false;
   }
   Zippy.prototype._next = function(e,direction){
 
-    //var index = (typeof e !== "undefined" ? $(e.currentTarget).data("index") : undefined );
-    console.log(this._canMove(direction));
     switch( true ){
 
-      /*case( typeof index !== "undefined" ):
-        if( this.currSlide == index ){
-          this.startTimer();
-          return false;
-        }
-        this.currSlide = index;
-        break;*/
-
-      //case( direction == "right" && ( this.currSlide < (this.totalSlides - 1)) ):
       case( (this._canMove(direction)) && direction == "right" ):
-        this.currSlide++;
-          console.log("MOVING");
-        break;
-
-      /*case( direction == "right" ):
-        this.currSlide = 0;
-          console.log("MOVING");
-        break;*/
-
-      case(direction == "left" && this.currSlide === 0 ):
-        //this.currSlide = (this.totalSlides - 1);
-        this.currSlide = 0;
-          console.log("MOVING");
+        this.settings.move_carousel = true;
+        this.currSlide++;console.log("current Slide",this.currSlide);
         break;
 
       case( (this._canMove(direction)) && direction == "left"):
         this.currSlide--;
-          console.log("MOVING");
+        this.settings.move_carousel = true;console.log("true",this.currSlide);
         break;
+
+      default:
+        this.settings.move_carousel = false;console.log("false",this.currSlide);
+      break;
 
     }
     return true;
-
   };
 
   Zippy.prototype._moveCarousel = function( direction ){
 
-    if( direction == "right" ){// >
+    if( this.settings.move_carousel && direction == "right" ){// >
       //we can MOVE to the left
-
-      //TEST
-      /*
-      console.log("leftCoordenate",this.innerSettings.leftCoordenate);
-      console.log("currSlideW",this.innerSettings.currSlideMaxWidth);
-      console.log("innerW",this.innerSettings.innerMaxWidth);
-      console.log("theSuM",(this.innerSettings.leftCoordenate + this.innerSettings.innerMaxWidth));
-      console.log("carouselW",this.innerSettings.carouselMaxWidth);*/
-      //
-
-
-      if( (this.innerSettings.leftCoordenate + this.innerSettings.innerMaxWidth) > this.innerSettings.carouselMaxWidth  ){
-        console.log("to the LEFT");
-        this.innerSettings.leftCoordenate -= this.innerSettings.currSlideMaxWidth;
-        $(this.$inner).css("left", this.innerSettings.leftCoordenate);
-
-      }
+      this.settings.leftCoordenate -= this.settings.width_currSlide;
+      $( this.$inner ).css( "left", this.settings.leftCoordenate );
     }
-    else if( direction == "left" ){// <
+    else if( direction == "left" && this.settings.move_carousel ){// <
       //we can MOVE to the right
-      //TEST
-      /*
-      console.log("leftCoordenate",this.innerSettings.leftCoordenate);
-      console.log("currSlideW",this.innerSettings.currSlideMaxWidth);
-      console.log("innerW",this.innerSettings.innerMaxWidth);
-      console.log("theSuM",(this.innerSettings.leftCoordenate + this.innerSettings.innerMaxWidth));
-      console.log("carouselW",this.innerSettings.carouselMaxWidth);
-      */
-      //
+      this.settings.leftCoordenate += this.settings.width_prevSlide;
+      $(this.$inner).css("left", this.settings.leftCoordenate);
 
-      if( this.innerSettings.leftCoordenate < 0 ){
-
-      this.innerSettings.leftCoordenate += this.innerSettings.prevSlideMaxWidth;
-      $(this.$inner).css("left", this.innerSettings.leftCoordenate);
-
-     }
     }
-
   };
 
-  Zippy.prototype._cssAnimation = function($nextSlide, direction){
+  Zippy.prototype._cssAnimation = function( direction ){
 
     setTimeout(function(){
       this.$el.addClass("transition");
       this.addCSSDuration();
-      //this.$currSlide.addClass("shift-"+direction);
       this._moveCarousel( direction );
-    }.bind(this),100);
+    }.bind(this),50);
 
     setTimeout(function(){
       this.$el.removeClass("transition");
       this.removeCSSDuration();
-      //this.$currSlide.removeClass("active shift-left shift-right");
-      this.$currSlide = $nextSlide.removeClass(direction);
-      //this._updateIndicators();
       this.startTimer();
-    }.bind(this),100 + this.settings.speed);
+    }.bind(this),50 + this.settings.speed);
 
   };
 
-  Zippy.prototype._jsAnimation = function($nextSlide,direction){
+  Zippy.prototype._jsAnimation = function(direction){
     //Cache this reference for use inside animate functions
     var _ = this;
 
@@ -323,21 +269,8 @@
 
     //Animation: Current slide
     this.$currSlide.animate(animationPrev,this.settings.speed);
-
-    //Animation: Next slide
-    $nextSlide.animate(animation,this.settings.speed,'swing',function(){
-        //Get rid of any JS animation residue
-        _.$currSlide.removeClass('active js-reset-left').attr('style','');
-        //Cache the next slide after classes and inline styles have been removed
-        _.$currSlide = $nextSlide.removeClass(direction).attr('style','');
-        _._updateIndicators();
-        _.startTimer();
-      });
     };
 
-  Zippy.prototype._updateIndicators = function(){
-      //this.$el.find(".indicators li").removeClass("active").eq(this.currSlide).addClass("active");
-    };
 
   $.fn.Zippy = function(options){
     return this.each(function(index,el){
@@ -349,9 +282,11 @@
     arrowRight : ".arrow-right",
     arrowLeft : ".arrow-left",
     speed : 100,
-    slideDuration : 1000
+    slideDuration : 1000,
+    arrowRight_class: ".arrow-right",
+    arrowLeft_class: ".arrow-left"
   };
-
-  $(".carousel").Zippy(args);
-  console.log("hello carousel");
+  $("#path-carousel").Zippy(args);
+  $("#subcollection-carousel").Zippy(args);
+  console.log("CAROUSEL ON");
 });

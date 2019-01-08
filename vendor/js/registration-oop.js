@@ -66,7 +66,9 @@
       this.invokeAction)
         .on( "keyup", this.$obj.id_inputNewUser, {action: "user-clean-input"},
       this.invokeAction)
-        .on( "blur", this.$obj.id_inputUser, {action: "user-validation"},
+        .on( "keyup", this.$obj.id_inputUser, {action: "user-validation"},
+      this.invokeAction)
+        .on( "blur", this.$obj.id_inputUser, {action: "user-validation--last"},
       this.invokeAction)
         .on( "keyup", "#new-user-password", {action: "new-password-validation"},
       this.invokeAction)
@@ -86,7 +88,6 @@
   }
 
   RegistrationForm.prototype.invokeAction = function(e){
-    e.preventDefault();
    var action = (typeof e !== "undefined" ? e.data["action"]  : undefined );
 
     switch( true ){
@@ -116,8 +117,18 @@
 //---USER---
       case ( action === "user-validation" ):
         var username = e.currentTarget.value;
-        if( this._userValidation( username, this.$obj.id_inputUser )) this.$obj._isValidUsername = true;
+        if( this._userValidation( username, this.$obj.id_inputUser ))this.$obj._isValidUsername = true;
         else this.$obj._isValidUsername = false;
+
+        this.formSubmitionValidation();
+      break;
+
+      case ( action === "user-validation--last" ):
+        var username = e.currentTarget.value;
+        if( this._userValidation( username, this.$obj.id_inputUser, true ))this.$obj._isValidUsername = true;
+        else this.$obj._isValidUsername = false;
+
+        this.formSubmitionValidation();
       break;
 
 //---PASWORD---
@@ -129,6 +140,7 @@
       case ( action === "password-validation" ):
         var password = e.currentTarget.value;
         if(this.passwordValidation( password, this.$obj.id_inputPassword ))this.$obj._isValidPassword = true;
+        else this.$obj._isValidPassword = false;
       break;
 
       case ( action === "new-password-validation" ):
@@ -139,32 +151,38 @@
 
       case ( action === "new-password-validation--last" ):
         var password = e.currentTarget.value;
-        this.passwordValidation( password, "#new-user-password", true );
-        this.passwordMatch( password, $(this.$obj.id_inputConfirmPassword).val() );
+        if( this.passwordValidation( password, "#new-user-password", true ))this.passwordMatch( password, $(this.$obj.id_inputConfirmPassword).val() );
+
+        this.formSubmitionValidation();
       break;
 
 //---PASWORD-CONFIRMATION---
       case ( action === "password-confirmation--last" ):
         var password_confirmation = e.currentTarget.value;
         this.passwordMatch( $("#new-user-password").val(), password_confirmation, true );
+
+        this.formSubmitionValidation();
       break;
 
       case ( action === "password-confirmation" ):
         var password_confirmation = e.currentTarget.value;
         this.passwordMatch( $("#new-user-password").val(), password_confirmation );
+
+        this.formSubmitionValidation();
       break;
 
 //---FORM VALIDATION
       case ( action === "form-validation" ):
-        console.log(this.$obj._isValidSubmition);
-        //this.formValidation();
+        this.formSubmitionValidation();
+          //console.log(this.$obj._isValidSubmition);
         if( !(this.$obj._isValidSubmition) ){
           e.preventDefault();
-          console.log("FORM VALIDATION-->WRITE THE FUNCTION ;).");
+          //console.log("FORM VALIDATION-->WRITE THE FUNCTION ;).");
         }
       break;
 
     }
+    this.formSubmitionValidation();
     return;
   };
 
@@ -176,8 +194,8 @@
     $.when( $r.AJAXloader( ajaxObj ) )
       .done( function( response ){
         //3-ATTACH
-        console.log(response);
         $r.attach( response, $r.$target );
+        $r._updatingObj();
       } );
       return;
   };
@@ -191,39 +209,54 @@
 
   RegistrationForm.prototype.userVerification = function( username, id ){
     $r = this;
-    if( this._userValidation( username, id )){
-      var ajaxObj = {
-        url: "./registration.php",
-        method: "GET",
-        data:
-          {
-            action: "user_verification",
-            username: username
-          }
-      };
-      this._cleanFeedback( id );
-      $.when(this.AJAXloader( ajaxObj ))
-        .done(function(data){
-          if( !(data === "true") ) {
-            $r.$obj._isValidUsername = true;
-            $($r.$obj.id_inputNewUser).addClass("is-valid");
-          }
-          else {
-            $r.$obj._isValidUsername = false;
-            $($r.$obj.id_inputNewUser).addClass("is-invalid");
-          }
-        });
+    if( username !== "" ){
+      if( this._userValidation( username, id )){
+        var ajaxObj = {
+          url: "./registration.php",
+          method: "GET",
+          data:
+            {
+              action: "user_verification",
+              username: username
+            }
+        };
+        this._cleanFeedback( id );
+        $.when(this.AJAXloader( ajaxObj ))
+          .done(function(data){
+            if( !(data === "true") ) {
+              $r.$obj._isValidUsername = true;
+              $($r.$obj.id_inputNewUser).addClass("is-valid");
+              $r.formSubmitionValidation();
+            }
+            else {
+              $r.$obj._isValidUsername = false;
+              $($r.$obj.id_inputNewUser).addClass("is-invalid");
+              $r.formSubmitionValidation();
+            }
+          });
+      } else {
+        $r.$obj._isValidUsername = false;
+        this._cleanFeedback( id );
+        $($r.$obj.id_inputNewUser).addClass("is-invalid");
+      }
     }
     return;
   };
-  RegistrationForm.prototype._userValidation = function( username, id ){
-    var regex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g;
-    if( username.match( regex ) ){// it is a valid username, we can proceed
-      return true;
-    }//
-    //if username doesn't match with the rules
-    if( !( $( id ).hasClass( "is-invalid" ) ) ){ $( id ).addClass( "is-invalid" ); }
-    $( id ).siblings(".invalid-feedback").text( "Wrong formation in the username. Please check the rules of formation." );
+  RegistrationForm.prototype._userValidation = function( username, id, last_check = false ){
+    this._cleanFeedback( id );
+    if( (username !== "") ){
+      var regex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g;
+      if( username.match( regex ) ){// it is a valid username, we can proceed
+        $( id ).siblings(".invalid-feedback").text( "Unfortunately this username is taken! Please try a different one." );
+        return true;
+      }//
+      //if username doesn't match with the rules
+      if( last_check && (username !== "") ){
+        if( !( $( id ).hasClass( "is-invalid" ) ) ){ $( id ).addClass( "is-invalid" ); }
+      }
+
+      $( id ).siblings(".invalid-feedback").text( "Wrong formation in the username. For more info check the question mark above." );
+    }
     return false;
   };
   RegistrationForm.prototype._cleanFeedback = function( id ){
@@ -253,15 +286,21 @@
         }
       }
     }
+    else{
+      this._cleanFeedback(this.$obj.id_inputConfirmPassword);
+      $( this.$obj.id_inputConfirmPassword ).attr( "disabled", "disabled" );
+      $( this.$obj.id_inputConfirmPassword ).val( "" );
+    }
     return false;
   };
   RegistrationForm.prototype.passwordMatch = function( password, password_confirmation, last_check = false ){
-    if( (password_confirmation !== password) && last_check ){
+    this._cleanFeedback( this.$obj.id_inputConfirmPassword );
+    if( (password_confirmation !== password) && last_check && password_confirmation !== "" ){
       //passwords dont match
       $( this.$obj.id_inputConfirmPassword ).removeClass( "is-valid" );
       $( this.$obj.id_inputConfirmPassword ).addClass( "is-invalid" );
       this.$obj._isValidPassword = false;
-    }else if( password_confirmation === password ){
+    }else if( password_confirmation === password && password !== "" ){
       //passwords are equal
       $( this.$obj.id_inputConfirmPassword ).addClass( "is-valid" );
       $( this.$obj.id_inputConfirmPassword ).removeClass( "is-invalid" );
@@ -274,10 +313,12 @@
     if( this.$obj._isValidUsername && this.$obj._isValidPassword )
     {
       this.$obj._isValidSubmition = true;
+      $("#todo__registration--submit").prop("disabled", false);
     }
     else
     {
       this.$obj._isValidSubmition = false;
+      $("#todo__registration--submit").prop("disabled", true);
     }
     return this.$obj._isValidSubmition;
   };
@@ -288,7 +329,13 @@
   RegistrationForm.prototype.detach = function( target ){
     $(target).empty();
   };
-
+  RegistrationForm.prototype._updatingObj = function(){
+    this.$obj._isValidUsername = false;
+    this.$obj._isValidPassword = false;
+    this.$obj._isValidSubmition = false;
+    console.log(this);
+    return;
+  };
 
   $.fn.RegistrationForm = function(options){
     return this.each(function(index,el){

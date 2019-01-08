@@ -19,6 +19,14 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
         }
       }// empty username
     }// the action !== "user_verification"
+    else if( $action == "wrongInitials" ){
+
+      $wrongInitials = true;
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/registration-header.php";
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/signUp.php";
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/registration-footer.php";
+      exit;
+    }// the action !== "wrongInitials"
     exit;
   }
   else if( isset( $_GET[ "switch-to-sign-in" ] ) ){//the user switch to sign in as an old user
@@ -74,7 +82,6 @@ else if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ){
   else if( isset( $_POST[ "log-in" ] ) ){
     $username = trim(filter_input( INPUT_POST, "user-name" , FILTER_SANITIZE_STRING ));
     $password = trim(filter_input( INPUT_POST, "user-password" , FILTER_SANITIZE_EMAIL ));
-    //$hashedPassword = password_hash( $password, PASSWORD_DEFAULT );
     $user_exist = User::userExist( $username );
 
     if( !empty( $user_exist ) ){
@@ -86,14 +93,10 @@ else if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ){
         $_SESSION[ "username" ] = $todo__user->get__username();
 
         header("Location: /TODO-PHP-OOP/views/mytodos.php");exit;
-      }else {
-        header( "Location: ./registration.php?msg=wrongPassword" );exit;
       }
     }
-     else{
-      //the passwords didnt match or the user does not exist
-      header( "Location:./registration.php?msg=wrongInitials" );exit;
-    }
+    //the passwords didnt match or the user does not exist
+    header( "Location:./registration.php?action=wrongInitials" );exit;    
   }
 
 } else{

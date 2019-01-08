@@ -1,5 +1,5 @@
     </main>
-
+  </div>
   <footer class="mastfoot dotted-border
   <?php
   if( class_exists( "TodoLogic" ) && !empty( TodoLogic::get__state() ) ){
@@ -66,6 +66,6 @@
     <!-- -->
     <script src = "/TODO-PHP-OOP/vendor/js/search.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/viewport.js"></script>
-  </div>
+
   </body>
 </html>

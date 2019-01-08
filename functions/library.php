@@ -178,9 +178,9 @@ class CollectionLogic extends Collection{
         $this->set__page_heading( "edit collection" );
         self::set__state( "editCollection" );
         self::set__msg( "Update all the fields that you wish!" );
-        $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
-        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
+        $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/pre-body.php";
+        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
+        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
         break;
       //---SELECT ELEMENTS---
       case "selectElements":

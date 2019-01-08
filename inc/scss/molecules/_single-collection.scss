@@ -20,7 +20,12 @@
   box-shadow:-1px 3px 4px $gray;
 }
 .todo__collection-header-path{
-  margin: 12px;
+  margin: 6px 12px 12px;
+  height: 30px;
+  width: 500px;
+  @media(max-width:576px){
+    width: 250px;
+  }
 }
 .todo__collection-header-path-list{
   @include reset-list;

@@ -16,6 +16,17 @@
           echo "Sign In";
         }
         ?></h3>
+        <?php
+        if( isset($wrongInitials) && $wrongInitials ){
+          echo "<div class=\"alert alert-danger alert-dismissible fade show todo__registration--user-message\" role=\"alert\">
+                  <p>There is <strong>something worng</strong> with your initials. Please try again.</p>
+                  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">&times;</span>
+                  </button>
+                </div>";
+        }
+        ?>
+
       <form id = "todo__registration--form" class = " todo__registration--form " action = "registration.php" method = "POST">
 
         <div class="form-group  row">
@@ -70,7 +81,7 @@
             All good!
           </div>
           <div class="invalid-feedback">
-            Unfortunately this is an invalid password! See if your password follows all the rules.
+            Unfortunately this is an invalid password! For more info check the question mark above.
           </div>
         </div>
         <!--end INPUT Feedback Password-->
@@ -95,9 +106,9 @@
         <button id = "todo__registration--submit" class = "btn todo__btn-modal todo__modal-info btn-block ml-0" type = "submit" name =
         <?php
         if( isset( $createAccount ) && $createAccount ){
-          echo "\"sign-up\" value = \"sign-up\"> Create Account";
+          echo "\"sign-up\" value = \"sign-up\" disabled> Create Account";
         } else{
-          echo "\"log-in\" value = \"log-in\"> Sign In";
+          echo "\"log-in\" value = \"log-in\" disabled> Sign In";
         }
          ?> </button>
       </form>

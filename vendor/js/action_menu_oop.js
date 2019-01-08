@@ -24,7 +24,7 @@
       this.targets = {
         header : $("header"),
         main : this.$main,
-        body : $("#main")
+        body : $("body")
       };
       this.$obj = $.extend( {}, this, this.targets, settings );
 
@@ -34,7 +34,6 @@
           *related with the selected elements for move/delete actions
       */
       this.$formGhost = $(this.$obj.formGhostId);
-      console.log(this.$formGhost);
       this.ajaxActionMenu = $.proxy( this.ajaxActionMenu, this );
       this.init();
     }
@@ -65,9 +64,6 @@
     this.ajaxActionMenu)
         .on("click", "#todo__move-modal-btn-submit", {action:"modal-move"},
         this.ajaxActionMenu)
-/*
-    $("#todo__move-modal-btn-submit").bind("click",{action:"modal-move"},
-    this.ajaxActionMenu);*/
 
   }
 /*
@@ -191,7 +187,7 @@
     var $am = this;
     //1-DETACH the action menu && the main content
     this.detach({
-      detachViaEmpty: $("#main")
+      detachViaDelete: $("#main")
     });
     //2-AJAX call
     $.when( $am._AJAXsetter( ajaxObjEdit ) )
@@ -199,7 +195,7 @@
    //3-ATTACH the response
         function( _AJAXresponseEdited ){
           console.log(_AJAXresponseEdited);
-          $am.attach({ attachViaAppendBody: _AJAXresponseEdited });
+          $am.attach({ "attachViaAppendBody": _AJAXresponseEdited });
     //4-UPDATE MAIN OBJ [ACTIONMENU]
     //after you attach anything you should update your object
           $am.updateActionMenu();
@@ -272,7 +268,7 @@
     return;
   };
   ActionMenu.prototype._attachViaAppend = function( data, target = this.$obj.targets.main ){
-    $(target).append( data );
+    $(target).prepend( data );
     return;
   }
   ActionMenu.prototype._attachViaAfter = function( data ){

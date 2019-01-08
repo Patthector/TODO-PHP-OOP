@@ -2,21 +2,25 @@
 <div class = "todo__general-container first-container col-12 col-md-8">
   <div class = "todo__collection-header">
     <div class = "todo__collection-header-path top-right-absolute">
-      <ul class = "todo__collection-header-path-list">
+      <ul id = "path-carousel" class = "todo__collection-header-path-list carousel">
+        <div class = "todo__inner--carousel">
       <?php
         $pathCollection = $collection->get__collection_path();
         for( $i = ( count($pathCollection) - 1); $i >=0; $i-- ){
           if( $pathCollection[$i]["name"] == $collection->get__collection_name() ){
-            echo "<li class=\"todo__collection-header-path-item todo__collection-header-path-item--selected\">" . $excerpt->excerpt( $collection->get__collection_name(), $excerpt->get__collection_path() ) . "</li>";
+            echo "<li class=\"slide todo__collection-header-path-item todo__collection-header-path-item--selected\"><p>" . $excerpt->excerpt( $collection->get__collection_name(), $excerpt->get__collection_path() ) . "</p></li>";
           } else{
-              echo "<li class=\"todo__collection-header-path-item\"><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >" . $excerpt->excerpt( $pathCollection[$i]["name"], $excerpt->get__collection_path() ) . "</a></li>";
+              echo "<li class=\"slide todo__collection-header-path-item\"><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >" . $excerpt->excerpt( $pathCollection[$i]["name"], $excerpt->get__collection_path() ) . "</a></li>";
           }
           if($i != 0){
             echo "<li class=\"todo__collection-header-path-item \">//<span>";
           }
         }
       ?>
+        </div>
       </ul>
+      <div class="arrow arrow-left"></div>
+      <div class="arrow arrow-right"></div>
     </div>
     <div>
       <h2 id = <?php echo $collection->get__collection_id(); ?> class = "todo__collection-header-title"><?php echo $collection->get__collection_name(); ?></h2>
@@ -32,7 +36,7 @@
       <h3 class = "todo__collection-body--heading">
         Subcategory(s)
       </h3>
-      <ul class = "todo__collection-body-subcategory-list carousel">
+      <ul id = "subcollection-carousel" class = "todo__collection-body-subcategory-list carousel">
         <div class = "todo__inner--carousel">
           <?php
           //if there are not subcategories echo a message that explain that and
