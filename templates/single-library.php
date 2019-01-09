@@ -2,25 +2,33 @@
 <div class = "todo__general-container first-container col-12 col-md-8">
   <div class = "todo__collection-header">
     <div class = "todo__collection-header-path top-right-absolute">
-      <ul id = "path-carousel" class = "todo__collection-header-path-list carousel">
+      <ul id = "path-carousel" class = "carousel todo__collection-header-path-list">
         <div class = "todo__inner--carousel">
       <?php
         $pathCollection = $collection->get__collection_path();
         for( $i = ( count($pathCollection) - 1); $i >=0; $i-- ){
+
           if( $pathCollection[$i]["name"] == $collection->get__collection_name() ){
-            echo "<li class=\"slide todo__collection-header-path-item todo__collection-header-path-item--selected\"><p>" . $excerpt->excerpt( $collection->get__collection_name(), $excerpt->get__collection_path() ) . "</p></li>";
-          } else{
-              echo "<li class=\"slide todo__collection-header-path-item\"><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >" . $excerpt->excerpt( $pathCollection[$i]["name"], $excerpt->get__collection_path() ) . "</a></li>";
+
+            echo "<li class=\"slide todo__collection-header-path-item todo__collection-header-path-item--selected\"><span>";
+            include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/grip-lines-vertical-solid.svg";
+            echo "</span>";
+            echo  $excerpt->excerpt( $collection->get__collection_name(), $excerpt->get__collection_path() );
+            echo "</li>";
           }
-          if($i != 0){
-            echo "<li class=\"todo__collection-header-path-item \">//<span>";
+          else{
+
+              echo "<li class=\"slide todo__collection-header-path-item\"><span>";
+              include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/grip-lines-vertical-solid.svg";
+              echo "</span><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >";
+              echo $excerpt->excerpt( $pathCollection[$i]["name"], $excerpt->get__collection_path() ) . "</a></li>";
           }
         }
       ?>
         </div>
       </ul>
-      <div class="arrow arrow-left"></div>
-      <div class="arrow arrow-right"></div>
+      <div class="arrow arrow-left arrow--path"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/arrow-left-solid.svg"; ?></div>
+      <div class="arrow arrow-right arrow--path"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/arrow-right-solid.svg"; ?></div>
     </div>
     <div>
       <h2 id = <?php echo $collection->get__collection_id(); ?> class = "todo__collection-header-title"><?php echo $collection->get__collection_name(); ?></h2>
@@ -32,7 +40,7 @@
 
   <div class = "todo__collection-body">
     <?php //SUBCATEGORIES ?>
-    <div class = "todo__collection-body-category position-relative">
+    <div class = "todo__collection-body-category">
       <h3 class = "todo__collection-body--heading">
         Subcategory(s)
       </h3>
@@ -66,8 +74,8 @@
           ?>
         </div>
       </ul>
-      <div class="arrow arrow-left"></div>
-      <div class="arrow arrow-right"></div>
+      <div class="arrow arrow-left arrow--subcategory"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/arrow-left-solid.svg"; ?></div>
+      <div class="arrow arrow-right arrow--subcategory"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/arrow-right-solid.svg"; ?></div>
     </div>
     <?php //TODOS ?>
     <div class = "todo__collection-body-todo">

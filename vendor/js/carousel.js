@@ -147,8 +147,8 @@
       $( arrowLeft ).css("display","none");
       $( arrowRight ).css("display","none");
     } else{
-      $( arrowLeft ).css("display","block");
-      $( arrowRight ).css("display","block");
+      $( arrowLeft ).css("display","flex");
+      $( arrowRight ).css("display","flex");
     }
 
     return;

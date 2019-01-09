@@ -255,7 +255,7 @@ class Collection
 		return true;
 	}
 
-	public static function getFullPath( $id, $path = null){
+	public static function getFullPath( $id, $pathCollection = null){
 
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		# This function will generate a full path of a particular Collection
@@ -270,7 +270,7 @@ class Collection
 
 		if(is_null( $id )){
 			# if ID is NULL it means we found the Main Collection
-			return $path;
+			return $pathCollection;
 		}
 
 		# retrive the collection from the DB base on the ID
@@ -284,13 +284,14 @@ class Collection
 			return false;
 		}
 		# save the collection into an auxiliar array
-		$path[] = $result->fetch(PDO::FETCH_ASSOC);
+		$pathCollection[] = $result->fetch(PDO::FETCH_ASSOC);
 		# get the father ID of the collection to add it to the path
-		$new_id = $path[count($path) - 1]["id_fatherCollection"];
+		$new_id = $pathCollection[count($pathCollection) - 1]["id_fatherCollection"];
 		# restart the whole process again with the new ID
-		$path = self::getFullPath($new_id , $path);
+		//$pathCollection = self::getFullPath($new_id , $pathCollection);
+		$pathCollection = self::getFullPath($new_id , $pathCollection);
 
-		return $path;
+		return $pathCollection;
 	}
 
 	public static function generationCollectionSchema( $id, $name = null, $description = null, $fatherCollection_id = null ){

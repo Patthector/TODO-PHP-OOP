@@ -170,6 +170,22 @@ class CollectionLogic extends Collection{
     return $output;
   }
 
+  public static function collection_editCollection( ){
+
+    $id = filter_input(INPUT_POST, "editCollection", FILTER_SANITIZE_NUMBER_INT);
+    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+    $description = filter_input(INPUT_POST, "collection_description", FILTER_SANITIZE_STRING);
+    $fatherCollection = filter_input(INPUT_POST, "father_collection", FILTER_SANITIZE_NUMBER_INT);
+
+    if( parent::updateCollection( $id, $name, $description, $fatherCollection ) ){
+      $msg = "Collection: '$name', successfully edited!";
+    } else{
+      $msg = "Unable to edit Collection: '$name'";
+    }
+    header("Location:/TODO-PHP-OOP/views/library.php?id=$id&msg=$msg");
+    exit;
+  }
+
   public function collection_determineAction( $action ){
     $output = [];
     switch($action){
@@ -177,7 +193,7 @@ class CollectionLogic extends Collection{
       case "editCollection":
         $this->set__page_heading( "edit collection" );
         self::set__state( "editCollection" );
-        self::set__msg( "Update all the fields that you wish!" );
+        self::set__msg( "Update all the fields that you wish in your collection!" );
         $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/pre-body.php";
         $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
         $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";

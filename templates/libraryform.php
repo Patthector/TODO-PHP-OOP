@@ -32,7 +32,7 @@
 				<div class = "col-12">
 					<label for = "collection_description">Description</label>
 					<!--.todo__input-form-->
-					<textarea name = "description" id = "collection_description" class="form-control todo__input-form" placeholder = "Type a reminder"><?php if( isset( $collection ) && !empty($collection->get__collection_description())) echo $collection->get__collection_description();?></textarea>
+					<textarea name = "collection_description" id = "collection_description" class="form-control todo__input-form" placeholder = "Type a reminder"><?php if( isset( $collection ) && !empty($collection->get__collection_description())) echo $collection->get__collection_description();?></textarea>
 				</div>
 			</div>
 			<span class = "form-subheading">Additional Information</span>
@@ -41,7 +41,7 @@
 					<div class = "row">
 						<div class = "col-12 col-md-6">
 							<label for = "collection_library">Library</label>
-							<select id = "collection_library" name = "collection" class="form-control custom-select custom-select-m todo__input-form"><!--.todo__input-form-->
+							<select id = "collection_library" name = "father_collection" class="form-control custom-select custom-select-m todo__input-form"><!--.todo__input-form-->
 								<option value = "">Main Library</option>
 								<?php
 								$collections = CollectionLogic::get__full_list_collections( $_SESSION[ "user_id" ] );
@@ -49,8 +49,8 @@
 								if( isset( $collection ) && !empty($collection->get__collection_father_id()) ){
 									$fatherCollection = $collection->get__collection_father_id();
 
-									foreach($collections as $id){
-										$item_collection = new CollectionLogic( $id["id"] );
+									foreach($collections as $item_id){
+										$item_collection = new CollectionLogic( $item_id["id"] );
 										if( $fatherCollection === $item_collection->get__collection_id() ){
 												echo "<option value='" . $item_collection->get__collection_id() . "' selected>" . $item_collection->get__collection_name() . "</option>";
 										} else{
@@ -58,8 +58,8 @@
 										}
 									}
 								} else{
-									foreach( $collections as $id ){
-										$item_collection = new CollectionLogic( $id["id"] );
+									foreach( $collections as $item_id ){
+										$item_collection = new CollectionLogic( $item_id["id"] );
 										if( isset( $fatherCollection ) && ( $fatherCollection == $item_collection->get__collection_id() ) ){
 											echo "<option value='" . $item_collection->get__collection_id() . "' selected>" . $item_collection->get__collection_name() . "</option>";
 										} else{
@@ -82,7 +82,12 @@
 					<a class = "btn todo__btn-form todo__btn-form--dark" href = "./mytodos.php">Cancel</a>
 				</div>
 				<div class = "col-6">
-					<input type = "hidden" value = "createCollection" name = "action" />
+					<?php if( isset( $collection ) && !empty( CollectionLogic::get__state() ) && CollectionLogic::get__state() == "editCollection" ){
+								echo "<input type = \"hidden\" name = \"editCollection\" value ='" . $collection->get__collection_id() . "'/>";
+						} else{
+									echo "<input type = \"hidden\" name = \"action\" value = \"createCollection\" />";
+						}
+					?>
 					<input class = "btn todo__btn-form todo__btn-form--blue" type = "submit" value = "DONE" />
 				</div>
 			</div>

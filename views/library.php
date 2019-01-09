@@ -87,6 +87,16 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 			$collection = new CollectionLogic( $id_collection );
 			$collection->collection_moveCollection( $id_collection, $id_placer_collection, $collection->get__collection_name() );
 		}
+		else if(!empty($_POST["editCollection"])){
+			CollectionLogic::collection_editCollection( $_POST );
+			/*
+			$id_collection = filter_input(INPUT_POST, "editCollection", FILTER_SANITIZE_NUMBER_INT);
+			$id_placer_collection = filter_input(INPUT_POST, "collectionSelected", FILTER_SANITIZE_NUMBER_INT);
+
+			$collection = new CollectionLogic( $id_collection );
+			$collection->collection_moveCollection( $id_collection, $id_placer_collection, $collection->get__collection_name() );
+			*/
+		}
 		else if(!empty($_POST["action"])){
 
 				$state = filter_input(INPUT_POST, "action", FILTER_SANITIZE_STRING);
