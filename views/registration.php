@@ -22,9 +22,9 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
     else if( $action == "wrongInitials" ){
 
       $wrongInitials = true;
-      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/registration-header.php";
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/registration-header.php";
       include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/signUp.php";
-      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/registration-footer.php";
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/registration-footer.php";
       exit;
     }// the action !== "wrongInitials"
     exit;
@@ -46,9 +46,9 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
     exit;
   }
   else{
-    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/registration-header.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/registration-header.php";
     include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/signUp.php";
-    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/registration-footer.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/registration-footer.php";
     exit;
   }
 
@@ -96,7 +96,7 @@ else if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ){
       }
     }
     //the passwords didnt match or the user does not exist
-    header( "Location:./registration.php?action=wrongInitials" );exit;    
+    header( "Location:./registration.php?action=wrongInitials" );exit;
   }
 
 } else{

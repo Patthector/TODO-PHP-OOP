@@ -19,10 +19,9 @@
 
       this.defaults = {
         slideDuration : "3000",
-        speed : 500,
-        arrowRight : "arrow-right",
-        arrowLeft : "arrow-left"
+        speed : 500
       };
+
 
       this.innerSettings = {
         width_currSlide : 0,
@@ -33,7 +32,23 @@
         move_carousel: false
       };
 
-      this.settings = $.extend( {}, this, this.defaults, this.innerSettings, settings );
+      this.$el = $(element);
+      this.el = element;
+      var formation = "#" + this.el.id + " .todo__inner--carousel";
+      this.$inner = $(formation);
+
+
+      var auxArrowLeft = "#" + this.el.id + "~ .arrow-left";
+      //auxArrowLeft = $( auxArrowLeft ).siblings( settings.arrowLeft_class );
+      var auxArrowRight = "#" + this.el.id + "~ .arrow-right";
+      //auxArrowRight = $( auxArrowRight ).siblings( settings.arrowRight_class );
+      this.arrows = {
+        arrowRight : auxArrowRight,
+        arrowLeft : auxArrowLeft
+      };
+
+
+      this.settings = $.extend( {}, this, this.defaults, this.innerSettings, this.arrows, settings );
 
       this.initials = {
         currSlide : 0,
@@ -42,19 +57,10 @@
         csstransitions : false
       };
 
-      $.extend( this, this.initials );
-
-      this.$el = $(element);
-      this.el = element;
-      var formation = "#" + this.el.id + " .todo__inner--carousel";
-      this.$inner = $(formation);
-
+      $.extend( this, this.initials);
       this.changeSlide = $.proxy( this.changeSlide, this );
-
       this.init();
-
       this.inistanceUid = instanceUid++;
-
     }
 
     return _Zippy;
@@ -70,7 +76,7 @@
     this.build();
 
     this.events();
-
+console.log("errore");
     this.activate();// <<-- we may not need this func
 
     this.showArrows();
@@ -138,17 +144,17 @@
         // 3.2- else ||==>> innner is smalles and we need to hide the arrows
     ////
     var inner__class = "#" + this.el.id + " .todo__inner--carousel";
-    var arrowLeft = "#" + this.el.id;
-    arrowLeft = $(arrowLeft).siblings( this.settings.arrowLeft );
-    var arrowRight = "#" + this.el.id;
-    arrowRight = $(arrowRight).siblings( this.settings.arrowRight );
+    //var arrowLeft = "#" + this.el.id;
+    //arrowLeft = $(arrowLeft).siblings( this.arrows.arrowLeft );
+    //var arrowRight = "#" + this.el.id;
+    //arrowRight = $(arrowRight).siblings( this.arrows.arrowRight );
 
     if( this.settings.width_carousel >= this.settings.width_inner ){
-      $( arrowLeft ).css("display","none");
-      $( arrowRight ).css("display","none");
+      $( this.settings.arrowLeft ).css("display","none");
+      $( this.settings.arrowRight ).css("display","none");
     } else{
-      $( arrowLeft ).css("display","flex");
-      $( arrowRight ).css("display","flex");
+      $( this.settings.arrowLeft ).css("display","flex");
+      $( this.settings.arrowRight ).css("display","flex");
     }
 
     return;
@@ -279,8 +285,8 @@
   };
 
   var args = {
-    arrowRight : ".arrow-right",
-    arrowLeft : ".arrow-left",
+    //arrowRight : ".arrow-right",
+    //arrowLeft : ".arrow-left",
     speed : 100,
     slideDuration : 1000,
     arrowRight_class: ".arrow-right",

@@ -1,7 +1,7 @@
 <!--********************MOVE MODAL************************-->
 
 <div class="modal todo__modal " id="move-todo-modal" tabindex="-1" role="dialog" aria-labelledby="todo__modal-move" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header todo__modal-info">
         <h4 class="modal-title " id="todo__modal-move">Access Permission</h4>
@@ -87,7 +87,7 @@
 </div><!--modal-->
 
 
-<!--**********************DELETE MODAL*********************-->
+<!--**********************DELETE MODAL*********************
 
 <div class="modal todo__modal" id="delete-todo-modal" tabindex="-1" role="dialog" aria-labelledby="todo__modal-delete" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -127,4 +127,4 @@
   <input type = "hidden" value = <?php if( isset($todo) ){echo $todo->get__todo_id();}else if(isset($collection)){echo $collection->get__collection_id();}else{echo 1;} ?>
     name = <?php if(TodoLogic::get__state() === "readTodo"){echo "deleteTodo";} else if(CollectionLogic::get__state() === "readCollection"){echo "deleteCollection";} ?> />
   <input type = "submit" id = "delete-todo-submit" />
-</form>
+</form>-->

@@ -20,7 +20,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 		if($_SERVER["REQUEST_METHOD"] == "GET"){
 			 if(count($_GET)>0){ #we have query, but seems to be a wrong one
 
-				header("Location: /TODO-PHP-OOP/mytodos.php");exit;
+				header("Location: /TODO-PHP-OOP/views/mytodos.php");exit;
 
 			} else{
 				if(!empty($_GET["msg"])){
@@ -36,11 +36,11 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 				} else{
 
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/levels-of-imp-bar.php";
+					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/levels-of-imp-bar.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/search-bar.php";
+					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/search-bar.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/mytodos.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/bubble-creators.php";
+					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/bubble-creators.php";
 					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 				}
 			}
@@ -65,9 +65,9 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 				}
 			}
 			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
-			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/levels-of-imp-bar.php";
+			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/levels-of-imp-bar.php";
 			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/search-bar.php";
+			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/search-bar.php";
 			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/mytodos.php";
 			include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 			 exit;

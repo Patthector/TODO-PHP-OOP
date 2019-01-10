@@ -32,23 +32,7 @@
 
     <div id = "action-menu" class = "todo__action-menu-container">
       <div class = "todo__action-menu-container--aux">
-        <!--<a id = "todo__btn-menu--cancel" class = "btn todo__btn-cancel">CANCEL</a>-->
           <ul id = "todo__action-menu-list" class = "todo__action-menu">
-            <!--CANCEL BUTTON-->
-            <?php
-            /*
-            echo "<button id = \"todo__btn-menu--cancel\" class = \"todo__btn-collection todo__btn-cancel\">";
-                  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/times-solid.svg";
-            echo    "<span>CANCEL</span></button>";*/
-            ?>
-            <!--CLEAR BUTTON-->
-            <?php
-            /*
-            echo "<button id = \"todo__action-menu-btn-clear\" class = \"todo__btn-collection todo__btn-clear\">";
-                  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/redo-alt-solid.svg";
-            echo    "<span>CLEAR</span></button>";*/
-            ?>
-            <!--CREATE BUTTON-->
             <?php
             echo "<div class = \"dropdown\">
                     <li id = \"todo_collection-button-create\" class = \"todo__btn-collection\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" >";

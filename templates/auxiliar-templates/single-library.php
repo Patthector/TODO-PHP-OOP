@@ -1,4 +1,4 @@
-<?php //var_dump($collection);?>
+
 <div class = "todo__general-container first-container col-12 col-md-8">
   <div class = "todo__collection-header">
     <div class = "todo__collection-header-path top-right-absolute">
@@ -6,7 +6,7 @@
         <div class = "todo__inner--carousel">
       <?php
         $pathCollection = $collection->get__collection_path();
-        for( $i = ( count($pathCollection) - 1); $i >=0; $i-- ){
+        for( $i = 0; $i < count($pathCollection); $i++ ){
 
           if( $pathCollection[$i]["name"] == $collection->get__collection_name() ){
 

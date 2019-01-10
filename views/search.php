@@ -52,11 +52,11 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
         }
       }
       include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
-      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/levels-of-imp-bar.php";
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/levels-of-imp-bar.php";
       include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-      //include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/search-bar.php";
+      //include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/search-bar.php";
       include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/search.php";
-      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/bubble-creators.php";
+      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/bubble-creators.php";
       include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
     }
   }

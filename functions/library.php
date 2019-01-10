@@ -194,7 +194,7 @@ class CollectionLogic extends Collection{
         $this->set__page_heading( "edit collection" );
         self::set__state( "editCollection" );
         self::set__msg( "Update all the fields that you wish in your collection!" );
-        $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/pre-body.php";
+        $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/pre-body.php";
         $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/libraryform.php";
         $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
         break;
@@ -203,17 +203,19 @@ class CollectionLogic extends Collection{
         $this->set__select_elements(true);
         self::set__msg( "Select the elements you want to move/delete and the click in the menu icon to proceed with the action." );
         $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
-        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/delete-collection-elements.php";
-        $output[3] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
+        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/single-library.php";
+        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/delete-collection-elements.php";
+        $output[3] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/move-todo-modal.php";
+        $output[4] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/delete-todo-modal.php";
         break;
       //---REWIND COLLECTION
       case "reReadCollection":
         self::set__state( "readCollection" );
         self::set__msg( "Don't worry. Everything is back to normal." );
         $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
-        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/move-todo-modal.php";
+        $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/single-library.php";
+        $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/move-todo-modal.php";
+        $output[3] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/delete-todo-modal.php";
         break;
     }
     return $output;
@@ -229,7 +231,7 @@ class CollectionLogic extends Collection{
 		} else{
 			$msg = "Unable to delete Library";
 		}
-    header("Location:/TODO-PHP-OOP/views/mytodos.php");
+    header("Location:/TODO-PHP-OOP/views/mytodos.php?msg=$msg");
     exit;
   }
 
@@ -243,7 +245,7 @@ class CollectionLogic extends Collection{
 		}else{
 			$msg = "Unable to moved TODO";
 		}
-		header("Location:/TODO-PHP-OOP/views/library.php?id=". $id_collection);
+		header("Location:/TODO-PHP-OOP/views/library.php?id=". $id_collection ."&msg=".$msg);
     exit;
   }
 
@@ -264,7 +266,7 @@ class CollectionLogic extends Collection{
     $this->set__page_heading( $this->get__collection_name() );
     self::set__state( "readCollection" );
     $msg = "Elements deleted successfully";
-    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/single-library.php";
     $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
     return $output;
   }
@@ -290,7 +292,7 @@ class CollectionLogic extends Collection{
     $this->set__page_heading( $this->get__collection_name() );
     self::set__state( "readCollection" );
     self::set__msg( "Elements moved successfully" );
-    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/single-library.php";
+    $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/single-library.php";
     $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
     return $output;
   }

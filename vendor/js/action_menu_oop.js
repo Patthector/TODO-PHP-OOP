@@ -170,6 +170,23 @@
     //4-UPDATE MAIN OBJ [ACTIONMENU]
     //after you attach anything you should update your object
           $am.updateActionMenu();
+          
+          $("#path-carousel").Zippy({
+            arrowRight : ".arrow-right",
+            arrowLeft : ".arrow-left",
+            speed : 100,
+            slideDuration : 1000,
+            arrowRight_class: ".arrow-right",
+            arrowLeft_class: ".arrow-left"
+          });
+          $("#subcollection-carousel").Zippy({
+            arrowRight : ".arrow-right",
+            arrowLeft : ".arrow-left",
+            speed : 100,
+            slideDuration : 1000,
+            arrowRight_class: ".arrow-right",
+            arrowLeft_class: ".arrow-left"
+          });
       }
     );
     return;

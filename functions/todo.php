@@ -152,15 +152,17 @@ class TodoLogic extends Todo{
 
     if(!empty( $todo_id )){
 			if( parent::deleteTodo( $todo_id ) ){
-				$msg = "TODO with ID: '$todo_id' was deleted succesfully!";
+				$msg = "TODO with ID: $todo_id was deleted succesfully";
+        $msg = "success";
 			} else{
-				$msg = "Unable to delete TODO: # '$todo_id'!";
+				$msg = "Unable to delete TODO: # $todo_id";
 			}
 		} else{
-			$msg = "Unable to delete TODO. Invalid \"ID\"";
+			$msg = "Unable to delete TODO. Invalid ID";
 		}
-		header("Location:/TODO-PHP-OOP/views/mytodos.php?msg=$msg");
-    exit;
+
+		header("Location:/TODO-PHP-OOP/views/mytodos.php?msg=$msg"); exit();
+
   }
 
   function moveTodo_logic( $todo_id, $todo_name, $collection_id ){

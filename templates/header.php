@@ -18,5 +18,5 @@
   </head>
 
   <?php
-  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/pre-body.php";
+  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/pre-body.php";
   ?>

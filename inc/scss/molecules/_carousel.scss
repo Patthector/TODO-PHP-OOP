@@ -1,7 +1,7 @@
 .carousel{
   overflow: hidden;
   position: relative;
-  height: 48px;
+  height: 42px;
 }
 .todo__inner--carousel{
 	position: absolute;
@@ -47,7 +47,7 @@
   }
 }
 .arrow--subcategory{
-  bottom:18%;
+  bottom:10%;
   padding: 6px;
   @media(max-width: 576px){
     padding: 3px;
@@ -69,10 +69,6 @@
   left:0px;
   //transform:rotate(225deg);
 }
-.arrow-left--subcategory{
-  bottom:0;
-}
-
 .arrow-right{
   right:0px;
   //transform:rotate(45deg);

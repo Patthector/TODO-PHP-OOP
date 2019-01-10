@@ -44,6 +44,7 @@
 }
 .todo__collection-header-path-item{
   text-transform: uppercase;
+  font-size: 14px;
   @media(max-width: 576px){
     font-size: 12px;
   }
@@ -112,11 +113,15 @@
   @include reset-list;
   @include todo__inline-flex;
   justify-content: flex-start;
+  font-size: 14px;
   li{
     @media(max-width:576px){
       font-size: 13px;
     }
   }
+}
+.todo__mytodos--subcollection-list{
+  width: 100%;
 }
 .todo__collection-body-subcategory-list-item{
   padding: 6px 12px;
@@ -125,6 +130,16 @@
   border-radius: 24px;
   margin-right: 8px;
   font-family: $font-secondary;
+}
+.todo__subcollection--viewmore{
+  color: $tomato;
+  padding: 3px;
+  font-size: 14px;
+  font-family: $font-primary-bold;
+  text-transform: lowercase;
+  text-decoration: underline;
+
+
 }
 .todo__todo-title-collection{
   font-family: $font-primary-bold;

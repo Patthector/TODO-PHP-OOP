@@ -109,6 +109,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 
 					$collection = new CollectionLogic( $id );
 					$files = $collection->collection_deleteElements( $_POST );
+					$collection = new CollectionLogic( $id, true );
 					foreach( $files as $file){
 						include $file;
 					}

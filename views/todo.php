@@ -67,7 +67,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we are logged in
 
 		if(!empty($_POST["deleteTodo"])){//DELETE TODO
 			$id_todo = filter_input(INPUT_POST, "deleteTodo", FILTER_SANITIZE_NUMBER_INT);
-			TodoLogic::deleteTodo_logic( $id_todo );
+			return TodoLogic::deleteTodo_logic( $id_todo );
 		}
 
 		else if(!empty($_POST["moveTodo"])){//MOVE TODO
