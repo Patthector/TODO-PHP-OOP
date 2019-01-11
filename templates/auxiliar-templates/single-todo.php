@@ -1,4 +1,4 @@
-<main role = "main">
+
 <div id = "todo_single-todo" class = "col-12 col-md-8 todo__general-container first-container">
   <?php
     //.todo__general-container=> is a class that will center the content from top/bottom and left/right
@@ -51,7 +51,7 @@
   </div>
 
   <div class = "todo__library-footer">
-    <p>Created be <span><?php echo $_SESSION["username"]; ?></span> on <span>
+    <p>Created be <span><?php echo $user->get__username(); ?></span> on <span>
       <?php
       if( isset( $todo ) && !empty( $todo->get__todo_created_date() ) ) echo $todo->get__todo_created_date();?>
     </span>

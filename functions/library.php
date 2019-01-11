@@ -133,12 +133,12 @@ class CollectionLogic extends Collection{
     self::$msg = $msg;
   }
 
-  public static function collection_createCollection( $array_post, $array_session ){
+  public static function collection_createCollection( $array_post, $user ){
 
     $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
-    $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
-    $fatherCollection_id = filter_input(INPUT_POST, "collection", FILTER_SANITIZE_STRING);
-    $user_id = filter_var( $_SESSION[ "user_id" ], FILTER_SANITIZE_STRING );
+    $description = filter_input(INPUT_POST, "collection_description", FILTER_SANITIZE_STRING);
+    $fatherCollection_id = filter_input(INPUT_POST, "father_collection", FILTER_SANITIZE_STRING);
+    $user_id = filter_var( $user->get__userId(), FILTER_SANITIZE_STRING );
 
     $collection = new Collection($name, $user_id, $description, $fatherCollection_id);
     $id = $collection->addCollection($collection->getName(),
@@ -229,7 +229,7 @@ class CollectionLogic extends Collection{
 				$msg = "Unable to delete Library";
 			}
 		} else{
-			$msg = "Unable to delete Library";
+			$msg = "Unable to delete Library. Invalid ID.";
 		}
     header("Location:/TODO-PHP-OOP/views/mytodos.php?msg=$msg");
     exit;
@@ -265,7 +265,7 @@ class CollectionLogic extends Collection{
     }
     $this->set__page_heading( $this->get__collection_name() );
     self::set__state( "readCollection" );
-    $msg = "Elements deleted successfully";
+    self::set__msg( "Elements deleted successfully" );
     $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/single-library.php";
     $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
     return $output;

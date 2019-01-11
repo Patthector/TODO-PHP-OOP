@@ -1,6 +1,12 @@
 <?php
 session_start();
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/user.php";
+
 if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
+	$user = new User( $_SESSION[ "user_id" ] );
+}
+
+if( !empty( $user ) ){
   //CLASSES
   //----------
   require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
@@ -28,7 +34,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
     if( isset( $_POST["search-bar--submit"] ) ){
       if( !empty( $_POST["search-bar--input"] ) ){
         $search_name = trim( filter_input( INPUT_POST, "search-bar--input", FILTER_SANITIZE_STRING ) );
-        $user_id = $_SESSION["user_id"];
+        $user_id = $user->get__userId();
 
         $aux_search_results = Collection::preparingSearchResult( $search_name, $user_id );
 

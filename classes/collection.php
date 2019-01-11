@@ -32,13 +32,13 @@ class Collection
 
 	function __construct( $name, $user_id, $description = null, $fatherCollection_id = null )
 	{
-		$this->name = $name;
-		$this->user_id = $user_id;
-		$this->description = $description;
-		if(empty($fatherCollection_id)){
-			$this->fatherCollection_id = 1;//the collection UNKONWN is the main father/collection
+		$this->set__collectionName( $name );
+		$this->set__userId( $user_id );
+		$this->set__description( $description );
+		if( empty($fatherCollection_id) ){
+			$this->set__fatherCollection_id( 1);//the collection UNKONWN is the main father/collection
 		}else {
-			$this->fatherCollection_id = $fatherCollection_id;
+			$this->set__fatherCollection_id( $fatherCollection_id);
 		}
 
 	}
@@ -54,6 +54,19 @@ class Collection
 	}
 	public function getfatherCollection_id( ){
 		return $this->fatherCollection_id;
+	}
+
+	private function set__collectionName( $name ){
+		$this->name = $name;
+	}
+	private function  set__userId( $id ){
+		$this->user_id = $id;
+	}
+	private function  set__description( $description ){
+		$this->description = $description;
+	}
+	private function  set__fatherCollection_id( $father_id ){
+		$this->fatherCollection_id = $father_id;
 	}
 
 	public function addCollection( $name, $user_id, $description = null, $fatherCollection_id = null ){

@@ -1,7 +1,12 @@
 <?php
 session_start();
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/user.php";
 
-if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
+	if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
+		$user = new User( $_SESSION[ "user_id" ] );
+	}
+
+if( !empty( $user ) ){
 	# includes
 	#--------------
 	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/collection.php";
@@ -18,31 +23,29 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 	$detect = new Mobile_Detect;
 
 		if($_SERVER["REQUEST_METHOD"] == "GET"){
-			 if(count($_GET)>0){ #we have query, but seems to be a wrong one
 
+			if( !empty($_GET["msg"]) ){
+				$msg = trim(filter_input(INPUT_GET, "msg", FILTER_SANITIZE_STRING));
+			}
+			else if( count($_GET) > 0 ){ #we have query, but seems to be a wrong one
 				header("Location: /TODO-PHP-OOP/views/mytodos.php");exit;
+			}
+			$libraries = Library::retriveFullLibrary( $user->get__userId() );
 
-			} else{
-				if(!empty($_GET["msg"])){
-					$msg = trim(filter_input(INPUT_GET, "msg", FILTER_SANITIZE_STRING));
-				}
-				$libraries = Library::retriveFullLibrary( $_SESSION[ "user_id" ] );
-
-				if( empty( $libraries ) ){
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/empty-front-page.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
-				} else{
-
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/levels-of-imp-bar.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/search-bar.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/mytodos.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/bubble-creators.php";
-					include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
-				}
+			if( empty( $libraries ) ){
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/empty-front-page.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
+			}
+			else{
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/levels-of-imp-bar.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/search-bar.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/mytodos.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/bubble-creators.php";
+				include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
 			}
 		}
 		if($_SERVER["REQUEST_METHOD"] == "POST"){

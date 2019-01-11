@@ -154,8 +154,7 @@ class TodoLogic extends Todo{
 
     if(!empty( $todo_id )){
 			if( parent::deleteTodo( $todo_id ) ){
-				$msg = "TODO with ID: $todo_id was deleted succesfully";
-        $msg = "success";
+				$msg = "TODO deleted succesfully";
 			} else{
 				$msg = "Unable to delete TODO: # $todo_id";
 			}
@@ -172,7 +171,7 @@ class TodoLogic extends Todo{
     if( !empty($todo_id) && !empty($collection_id) ){
       if(parent::moveTodo($todo_id, $collection_id)){
         $name_collection = Collection::getCollection($collection_id)["name"];
-        $msg = "TODO: '$todo_name' has been successfully moved to COLLECTION: '$name_collection'" ;
+        $msg = "TODO has been moved successfully";
       }
     }else{
       $msg = "Unable to moved TODO";

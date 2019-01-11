@@ -1,6 +1,12 @@
 <?php
 session_start();
-if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
+include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/user.php";
+
+if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
+	$user = new User( $_SESSION[ "user_id" ] );
+}
+
+if( !empty( $user ) ){
 	# Includes
 	# ---------
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/collection.php";
@@ -33,6 +39,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 				if(!empty($_GET["action"])){
 					$action = filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
 					$files = $collection->collection_determineAction( $action );
+					$msg = CollectionLogic::get__msg();
 					foreach( $files as $file ){
 						include $file;
 					}
@@ -64,6 +71,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 			$library_heading = "create library";
 			CollectionLogic::set__state( "createCollection" );
 			$files = CollectionLogic::collection_formCollection();
+			$msg = "Editing Collection. Change all the fields you wish!";
 			foreach( $files as $file ){
 				include $file;
 			}
@@ -102,7 +110,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 				$state = filter_input(INPUT_POST, "action", FILTER_SANITIZE_STRING);
 
 				if($state == "createCollection"){
-					CollectionLogic::collection_createCollection( $_POST, $_SESSION );
+					CollectionLogic::collection_createCollection( $_POST, $user );
 				}
 				else if($state == "deleteElements"){
 					$id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
@@ -110,6 +118,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 					$collection = new CollectionLogic( $id );
 					$files = $collection->collection_deleteElements( $_POST );
 					$collection = new CollectionLogic( $id, true );
+					$msg = CollectionLogic::get__msg();
 					foreach( $files as $file){
 						include $file;
 					}
@@ -123,6 +132,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){ // we have a user
 					$files = $collection->collection_moveElements( $_POST, $id_fatherCollection );
 					//updeting collection...
 					$collection = new CollectionLogic( $id, true );
+					$msg = CollectionLogic::get__msg();
 					foreach( $files as $file){
 						include $file;
 					}

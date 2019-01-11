@@ -108,7 +108,7 @@
 							?>
 						</div>
 					<div class = "todo__library-footer">
-						<p>Created be <span>@username</span> on <span><?php if( !empty( $item_collection->get__collection_created_date() ) ) echo $item_collection->get__collection_created_date(); ?></span>. Last update on <span><?php if( !empty( $item_collection->get__collection_updated_date() ) ) echo $item_collection->get__collection_updated_date(); ?></span></p>
+						<p>Created be <span><?php echo $user->get__username(); ?></span> on <span><?php if( !empty( $item_collection->get__collection_created_date() ) ) echo $item_collection->get__collection_created_date(); ?></span>. Last update on <span><?php if( !empty( $item_collection->get__collection_updated_date() ) ) echo $item_collection->get__collection_updated_date(); ?></span></p>
 					</div>
 				</div>
 			</div>

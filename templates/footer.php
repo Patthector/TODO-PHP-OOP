@@ -13,7 +13,7 @@
         break;
 
       case "readTodo":
-        echo "footer-absolute";
+        echo "";
         break;
 
       default:

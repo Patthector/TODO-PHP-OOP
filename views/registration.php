@@ -71,7 +71,7 @@ else if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ){
       }
       header( "Location:./mytodos.php" );exit;
     }
-    else{header( "Location:./registration.php?msg=error" );exit;}
+    else{header( "Location:./registration.php?msg=There+had+been+an+error+with+the+registration" );exit;}
 
     //---------------------------------------------------------------
     //TODO- LIST

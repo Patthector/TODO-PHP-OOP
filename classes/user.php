@@ -5,11 +5,19 @@ class User{
   private $username;
   private $password;
 
-  function __construct( $user_id, $username, $password )
+  function __construct( $user_id, $username = null, $password = null )
 	{
     $this->set__userId( $user_id );
-    $this->set__username( $username );
-    $this->set__password( $password );
+
+    if( empty($username) && empty($password) ){
+      $this->set__username( $this->getUser( $this->get__userId() )["user_name"] );
+    }
+    else{
+      $this->set__username( $username );
+      $this->set__password( $password );
+    }
+
+    return;
 	}
 
   function get__userId(){
@@ -53,7 +61,7 @@ class User{
   public function getUser ( $user_id ){
     include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
-    $query = "SELECT * FROM todo_app_users WHERE id = ?";
+    $query = "SELECT id, user_name FROM todo_app_users WHERE id = ?";
 
     try{
       $result = $db->prepare( $query );
@@ -65,7 +73,7 @@ class User{
       echo "Bad query in" . __METHOD__ . ", " . $e->getMessage();
       exit;
     }
-    return $result->fetchAll( PDO::FETCH_ASSOC );
+    return $result->fetch( PDO::FETCH_ASSOC );
 
   }
 

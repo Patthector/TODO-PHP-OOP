@@ -6,16 +6,13 @@ main{
   align-items: center;
 }
 .todo__general-container{
-  //@include todo__center-flex;
   position: relative;
-  //margin-left: 264px;
-  //margin-right: 264px;
   margin-top: 90px;//66+24
   background-color:$white;
   box-shadow:0 0 5px $gray;
   padding-left:24px;
   padding-right:24px;
-  border-radius: 12px; 
+  border-radius: 12px;
 
   .todo__todo-body{
     @include separator;
