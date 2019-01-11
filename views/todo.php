@@ -18,6 +18,7 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we are logged in
 	# Requests
 	# ---------
 	if($_SERVER["REQUEST_METHOD"] == "GET"){
+
 		if(!empty($_GET["id"])){// TODO
 			# this section of the code is getting an ID as possible todo's ID
 			# and retriving from the database.
@@ -28,22 +29,22 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we are logged in
 
 			if( !empty( $todo->get__todo_id() )){ # if we have a todo, set the title heading with the TODO's name
 				$todo_collection = new CollectionLogic( $todo->get__todo_father_id() );
-				//HERE WE DECIDE IF WE ARE IN READ TODO OR EDIT TODO
-				if(!empty($_GET["action"])){// EDIT TODO
-					$action = filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
-					$files = $todo->readTodo_logic( $todo->get__todo_id(), $action );
+					//HERE WE DECIDE IF WE ARE IN READ TODO OR EDIT TODO
+					if(!empty($_GET["action"])){// EDIT TODO
+						$action = filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
+						$files = $todo->readTodo_logic( $todo->get__todo_id(), $action );
 
-					foreach( $files as $file ){
-						include $file;
-					}exit;
-				}
-				else{//READ TODO
-					$files = $todo->readTodo_logic( $todo->get__todo_id() );
+						foreach( $files as $file ){
+							include $file;
+						}exit;
+					}
+					else{//READ TODO
+						$files = $todo->readTodo_logic( $todo->get__todo_id() );
 
-					foreach( $files as $file ){
-						include $file;
-					}exit;
-				}
+						foreach( $files as $file ){
+							include $file;
+						}exit;
+					}
 			} else{
 				$message = "TODO with ID: $id was not found on the DataBase!";
 				header("Location: /TODO-PHP-OOP/views/mytodos.php?msg=" . $message);exit;

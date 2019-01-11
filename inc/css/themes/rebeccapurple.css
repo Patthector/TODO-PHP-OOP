@@ -353,7 +353,7 @@ html, body {
       font-size: 28px; } }
 
 div.todo__box-message {
-  display: block;
+  display: none;
   position: fixed;
   bottom: 0;
   left: 10px;
@@ -362,7 +362,11 @@ div.todo__box-message {
   background-color: #444444;
   color: #ededed;
   font-size: 18px;
-  font-weight: bold; }
+  font-weight: bold;
+  transition: display 2s; }
+
+.todo__message--transition {
+  display: block !important; }
 
 .todo__registration--tooltips-svg svg {
   height: 15px;

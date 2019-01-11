@@ -1,5 +1,5 @@
 div.todo__box-message{
-  display: block;
+  display: none;
   position: fixed;
   bottom: 0;
   left: 10px;
@@ -9,4 +9,9 @@ div.todo__box-message{
   color:$gallery;
   font-size:18px;
   font-weight: bold;
+  transition: display 2s;
+}
+
+.todo__message--transition{
+  display: block !important;
 }

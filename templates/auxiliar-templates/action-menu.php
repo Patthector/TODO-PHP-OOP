@@ -17,7 +17,7 @@
     echo            "<li class = \"todo__btn-todo\" data-toggle=\"modal\" data-target=\"#delete-todo-modal\">";
                 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/trash-alt-solid.svg";
       echo      "<span>Delete</span></li>
-                <li id = \"todo_todo-button-edit\" class = \"todo__btn-todo\">";
+                <li id = \"todo_todo-button-edit\" class = \"todo__btn-todo\" value = \" " . $todo->get__todo_id() ."\" >";
                 include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/edit-regular.svg";
       echo      "<span>Edit</span></li>
                 <li class = \"todo__btn-todo\" data-toggle=\"modal\" data-target=\"#move-todo-modal\">";

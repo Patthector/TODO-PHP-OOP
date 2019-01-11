@@ -53,6 +53,7 @@
     <script>window.jQuery || document.write('<script src="vendor/jquery.js"><\/script>')</script>
     <script src="/TODO-PHP-OOP/vendor/popper.js"></script>
     <script src="/TODO-PHP-OOP/vendor/js/bootstrap.min.js"></script>
+    <script src="/TODO-PHP-OOP/vendor/js/message.js"></script>
     <script src="/TODO-PHP-OOP/vendor/js/carousel.js"></script>
     <script src="/TODO-PHP-OOP/vendor/js/app.js"></script>
     <!--<script src = "/TODO-PHP-OOP/vendor/js/action-menu.js"></script>-->

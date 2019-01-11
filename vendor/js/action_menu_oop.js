@@ -54,6 +54,8 @@
     this.ajaxActionMenu)
         .on("click",  "#todo_collection-button-edit", {action:"editCollection"},
     this.ajaxActionMenu)
+        .on("click",  "#todo_todo-button-edit", {action:"editTodo"},
+    this.ajaxActionMenu)
         .on("click",  ".checkbox-container",
         function(e){ $(e.currentTarget).toggleClass("label--selected"); })
         .on("click", "#todo__action-menu-btn-clear", {action:"clearSelection"},
@@ -91,10 +93,22 @@
       break;
 
       case ( menu_action === "editCollection" ):
+
         var ajaxEditObj = {
           url: "",
           method: "GET",
           data: { action: "editCollection" }
+        };
+        this._specialActionEdit(ajaxEditObj);
+      break;
+
+      case ( menu_action === "editTodo" ):
+
+        var ajaxEditObj = {
+          url: "./todo.php",
+          method: "GET",
+          data: { action: "edit_todo",
+                  id : e.currentTarget.value }
         };
         this._specialActionEdit(ajaxEditObj);
       break;
@@ -170,7 +184,10 @@
     //4-UPDATE MAIN OBJ [ACTIONMENU]
     //after you attach anything you should update your object
           $am.updateActionMenu();
-          
+          //MESSAGE
+          $( "#todo__message" ).Message();
+
+          //CAROUSEL
           $("#path-carousel").Zippy({
             arrowRight : ".arrow-right",
             arrowLeft : ".arrow-left",
@@ -216,6 +233,8 @@
     //4-UPDATE MAIN OBJ [ACTIONMENU]
     //after you attach anything you should update your object
           $am.updateActionMenu();
+          //MESSAGE
+          $( "#todo__message" ).Message();
       }
     );
     return;

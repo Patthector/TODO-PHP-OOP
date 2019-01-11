@@ -114,10 +114,12 @@ class TodoLogic extends Todo{
 
   function readTodo_logic( $todo_id, $action=null ){
     $output = [];
-    if( isset( $action ) && ($action === "editItem") ){//EDIT TODO
+    if( isset( $action ) && ($action === "edit_todo") ){//EDIT TODO
       self::set__page_heading( "edit todo" );
       self::set__state( "editTodo" );
-      $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
+      $output[0] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/pre-body.php";
+      $output[1] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/todoform.php";
+      $output[2] = $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
     }
     else{
       self::set__page_heading( $this->get__todo_name() );
