@@ -77,7 +77,7 @@
 				</div>
 
 					<div class = "col-12 col-md-4">
-						<label id = "label-tag" for = todo_tags>Tags</label>
+						<label id = "label-tag" for = todo__input-tags>Tags</label>
 						<div id = "todo__tags-container" class = "todo__tags-container">
 							<div class = "container-tag-buttons top-center-absolute">
 								<button id = "todo__tag-remove" class = "btn todo__btn-sm todo__btn-outline-tomato disable">Remove</button>
@@ -95,9 +95,12 @@
 								?>
 							</ul>
 						</div>
-						<div class = "todo__tags-input">
+						<div class = "form-group todo__tags-input">
 							<input id = "todo__input-tag" class = "form-control todo__input-form" type = "text" placeholder="#newtag" data-toggle="popover" data-title = "Invalid tag"/>
 							<button id = "todo__add-tag" class = "btn btn-sm todo__btn-tag todo__btn-tag--add">Add</button>
+							<div class="invalid-feedback">
+		            Invalid tag
+		          </div>
 						</div>
 						<textarea style = "display:none;" type = "hidden" name = "tags" id = "todo_todo-tags-textarea"></textarea>
 				</div>

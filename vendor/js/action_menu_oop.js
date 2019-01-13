@@ -233,6 +233,8 @@
     //4-UPDATE MAIN OBJ [ACTIONMENU]
     //after you attach anything you should update your object
           $am.updateActionMenu();
+          //TAGS
+          $( "#todo__tags-container" ).Tags();
           //MESSAGE
           $( "#todo__message" ).Message();
       }

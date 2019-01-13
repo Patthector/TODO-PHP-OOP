@@ -26,7 +26,7 @@ main{
       color:$sapphire;
       margin-bottom: 6px;
       @media(max-width: 576px){
-        font-size: 18px;
+        font-size: 16px;
         margin-top: 24px;
       }
     }
@@ -56,16 +56,17 @@ main{
   right: 0;
 }
 .todo__item-category-name{
-  margin:12px;
+  margin: 6px 12px;
   @media(max-width: 576px){
     margin: 6px;
-    margin-top: 2px;
+    margin-top: 3px;
   }
   span{
     background-color: $sapphire;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
     color:$white;
+    font-size: 12px;
     font-family: $font-secondary;
     padding: 3px 6px;
     text-transform: uppercase;
@@ -75,6 +76,7 @@ main{
   }
   a{
     color:$black;
+    font-size: 12px;
     background-color: $gallery;
     font-family: $font-secondary;
     padding: 2px 4px;

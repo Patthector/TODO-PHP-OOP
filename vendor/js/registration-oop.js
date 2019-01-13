@@ -259,6 +259,7 @@
     }
     return false;
   };
+
   RegistrationForm.prototype._cleanFeedback = function( id ){
     if( $( id ).hasClass( "is-valid" ) )$( id ).removeClass( "is-valid" );
     if( $( id ).hasClass( "is-invalid" ) )$( id ).removeClass( "is-invalid" );

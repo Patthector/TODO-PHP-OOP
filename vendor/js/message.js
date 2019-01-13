@@ -46,7 +46,6 @@
   }
 
   Message.prototype.displayMessage = function(){
-    //$( this.$el ).css("display","block");
     $( this.$el ).fadeIn( 500 ).addClass( "todo__message--transition" );
     return;
   }

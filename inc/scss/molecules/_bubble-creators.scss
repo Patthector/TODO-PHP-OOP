@@ -1,6 +1,6 @@
 .todo__bubble-creator--outer-container{
   position: fixed;
-  top:80%;
+  top:84%;
   right: 12px;
   .todo__bubble-creator--inner-container{
     display: flex;
@@ -20,34 +20,27 @@
         justify-content: center;
         align-items: center;
       }
-      border-radius: 100%;
-      box-shadow: 2px 2px 2px $tundora;
+      border-radius: 24px;
+      box-shadow: 2px 2px 2px $gray;
       //
-      width: 60px;
-      height: 60px;
-      margin: 3px 12px 3px 12px;
-      padding: 3px;
+      width: 70px;
+      height: 40px;
+      margin: 6px 12px;
+      //padding: 3px;
       //
       span{
         font-family: $font-secondary;
-        font-size: 10px;
+        font-size: 12px;
         text-transform: uppercase;
         color: white;
       }
-      span.todo__bubble--logo{
-        svg{
-          width: 24px;
-          height: auto;
-          color: white;
-        }
-      }
     }
     .todo__bubble-creator--collection-container{
-      background-color: rgba($sapphire, .85);
+      background-color: $cornflower-blue;
 
     }
     .todo__bubble-creator--todo-container{
-      background-color: rgba($level-2, .8);
+      background-color: $tomato;
 
     }
 
