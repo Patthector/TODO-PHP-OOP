@@ -189,16 +189,12 @@
 
           //CAROUSEL
           $("#path-carousel").Zippy({
-            arrowRight : ".arrow-right",
-            arrowLeft : ".arrow-left",
             speed : 100,
             slideDuration : 1000,
             arrowRight_class: ".arrow-right",
             arrowLeft_class: ".arrow-left"
           });
           $("#subcollection-carousel").Zippy({
-            arrowRight : ".arrow-right",
-            arrowLeft : ".arrow-left",
             speed : 100,
             slideDuration : 1000,
             arrowRight_class: ".arrow-right",
@@ -228,11 +224,25 @@
      .done(
    //3-ATTACH the response
         function( _AJAXresponseEdited ){
-          console.log(_AJAXresponseEdited);
           $am.attach({ "attachViaAppendBody": _AJAXresponseEdited });
     //4-UPDATE MAIN OBJ [ACTIONMENU]
     //after you attach anything you should update your object
           $am.updateActionMenu();
+          //TODO_FORM
+          $("#todo__library-form").TodoForm({
+            element_id : "#todo__library-form",
+            input_name: "#collection_name",
+            input_description: "#collection_description",
+            span_name: "#todo__library-form--chars-name span",
+            span_description: "#todo__library-form--chars-description span"
+          });
+          $("#todo_todo-form").TodoForm({
+            element_id : "#todo_todo-form",
+            input_name: "#todo_name",
+            input_description: "#todo_description",
+            span_name: "#todo__todo-form--chars-name span",
+            span_description: "#todo__todo-form--chars-description span"
+          });
           //TAGS
           $( "#todo__tags-container" ).Tags();
           //MESSAGE
@@ -338,6 +348,6 @@
 
   });
 
-  console.log("Ciao a tutti");
+  console.log("ACTION MENU ON");
 
 });

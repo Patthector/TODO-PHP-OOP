@@ -37,11 +37,20 @@
 
       }
     return _TodoForm;
+
     })();
 
    TodoForm.prototype.init = function(){
 
+     this.activate();
+
      this.events();
+   };
+
+   TodoForm.prototype.activate = function(){
+     this._countChars( $( this.$obj.input_name ).val().length, this.$obj.span_name, this.$obj.chars_for_name, this.$obj.input_name );
+     this._countChars( $( this.$obj.input_description ).val().length, this.$obj.span_description, this.$obj.chars_for_description, this.$obj.input_description );
+     return;
    };
 
    TodoForm.prototype.events = function(){
@@ -73,11 +82,13 @@
 
         case (action === "leave_input_name"):
           $( this.$obj.input_name ).val( this._cleanHTML( $(this.$obj.input_name).val() ) );
+          this._countChars( $( this.$obj.input_name ).val().length, this.$obj.span_name, this.$obj.chars_for_name, this.$obj.input_name  );
           this.$obj._isValidName = true;
         break;
 
         case (action === "leave_input_description"):
           $( this.$obj.input_description ).val( this._cleanHTML( $(this.$obj.input_description).val() ) );
+          this._countChars( $( this.$obj.input_description ).val().length, this.$obj.span_description, this.$obj.chars_for_description, this.$obj.input_description  );
           this.$obj._isValidDescription = true;
         break;
 
@@ -91,12 +102,14 @@
     TodoForm.prototype._countChars = function( totalChars, target, limit, input ){
 
       var rest = limit - totalChars;
-      var auxVal;
+
       if( (rest >= 0) && (rest <= limit) ){
         $( target ).text(rest);
         this.$obj.name_value = $(input).val();
       }
       else{
+        $( target ).text(0);
+        this.$obj.name_value = $(input).val().substr(0,limit);
         $( input ).val(this.$obj.name_value);
       }
       return;
@@ -114,14 +127,12 @@
       if( this.$obj._isValidName )
       {
         this.$obj._isValidSubmition = true;
-        //$("#todo__registration--submit").prop("disabled", false);
       }
       else
       {
         e.preventDefault();
         console.log("Prevent default");
         this.$obj._isValidSubmition = false;
-        //$("#todo__registration--submit").prop("disabled", true);
       }
       return this.$obj._isValidSubmition;
     };
@@ -139,6 +150,13 @@
       input_description: "#collection_description",
       span_name: "#todo__library-form--chars-name span",
       span_description: "#todo__library-form--chars-description span"
+    });
+    $("#todo_todo-form").TodoForm({
+      element_id : "#todo_todo-form",
+      input_name: "#todo_name",
+      input_description: "#todo_description",
+      span_name: "#todo__todo-form--chars-name span",
+      span_description: "#todo__todo-form--chars-description span"
     });
     console.log("FORM ON");
 

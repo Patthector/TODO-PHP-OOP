@@ -15,10 +15,13 @@
       justify-content: center;
       a{
         display: flex;
-        flex-direction: column;
+        flex-direction: column; 
         flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
+        &:hover{
+          text-decoration: none;
+        }
       }
       border-bottom-left-radius: 24px;
       border-top-left-radius: 24px;

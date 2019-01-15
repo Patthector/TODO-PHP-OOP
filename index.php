@@ -1,7 +1,7 @@
 <?php
 # variables
 # ---------
-require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/Mobile_Detect.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/php/Mobile_Detect.php";
 session_start();
 $title_page = "Stick it | Home";
 $detect = new Mobile_Detect;

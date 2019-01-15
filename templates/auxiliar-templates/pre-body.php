@@ -43,44 +43,38 @@
     }
     ?>
     ">
-    <nav class="navbar navbar-expand-lg">
-      <?php if ( $detect->isMobile() ) {
-          echo "<a id = \"logo-svg\" class=\"navbar-brand header__logo\" href=\"/TODO-PHP-OOP/index.php\">";
-            include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/temp-include/header-logo.php";
-          echo "</a>";
-        }
-      ?>
-      <button class="navbar-toggler todo__header-button--mobile" type="button" data-toggle="collapse" data-target="#todonavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/ellipsis-v-solid.svg"; ?></span>
-      </button>
-      <div class="collapse navbar-collapse todo__navbar-collapse" id="todonavbarNav">
-        <ul class="navbar-nav header__menu">
-          <li class="nav-item header__menu-item">
-            <a class="nav-link" href="/TODO-PHP-OOP/views/mytodos.php">myTODOs</a>
-          </li>
-          <?php
-            if (!($detect->isMobile()) ) {
-              echo "<li class = \"nav-item header__logo\"  >";
-              echo "<a id = \"logo-svg\" class=\"h1\" href=\"/TODO-PHP-OOP/index.php\">";
-              include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/temp-include/header-logo.php";
-            }
-            ?>
-          <li class="nav-item header__menu-item">
-            <?php
-            if( isset( $_SESSION[ "user_id" ] ) ){
+      <nav class="navbar navbar-expand-lg">
+        <a id = "logo-svg--mobile" class="navbar-brand header__logo" href="/TODO-PHP-OOP/index.php">
+          <?php  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/temp-include/header-logo.php"; ?>
+        </a>
+        <button class="navbar-toggler todo__header-button--mobile" type="button" data-toggle="collapse" data-target="#todonavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/ellipsis-v-solid.svg"; ?></span>
+        </button>
+        <div class="collapse navbar-collapse todo__navbar-collapse" id="todonavbarNav">
+          <ul class="navbar-nav header__menu">
+            <li class="nav-item header__menu-item">
+              <a class="nav-link" href="/TODO-PHP-OOP/views/mytodos.php">myTODOs</a>
+            </li>
+            <li id="logo-svg--pc" class="nav-item header__logo">
+              <a class="h1" href="/TODO-PHP-OOP/index.php">
+                <?php  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/temp-include/header-logo.php"; ?>
+              </a>
+            </li>
+            <li class="nav-item header__menu-item">
+              <?php
+              if( isset( $_SESSION[ "user_id" ] ) ){
 
-              $session_username = $_SESSION[ "username" ];
-              echo "<a class=\"nav-link\" id = \"todo__logout-button\" href=\"#\">Log out <span>($session_username)</span></a>";
-              //LOGOUT will trigger an AJAX request to call the registration GET method and log you out
-            } else{
-              echo "<a class=\"nav-link\" href=\"" ."views/registration.php". "\">Log in</a>";
-            }
-            ?>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
+                $session_username = $_SESSION[ "username" ];
+                echo "<a class=\"nav-link\" id = \"todo__logout-button\" href=\"#\">Log out <span>($session_username)</span></a>";
+                //LOGOUT will trigger an AJAX request to call the registration GET method and log you out
+              } else{
+                echo "<a class=\"nav-link\" href=\"" ."views/registration.php". "\">Log in</a>";
+              }
+              ?>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </header>
     <div id = "todo__main-menu-size"></div>
     <style>

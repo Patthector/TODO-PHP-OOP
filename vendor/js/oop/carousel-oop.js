@@ -76,7 +76,7 @@
     this.build();
 
     this.events();
-console.log("errore");
+
     this.activate();// <<-- we may not need this func
 
     this.showArrows();
@@ -285,8 +285,6 @@ console.log("errore");
   };
 
   var args = {
-    //arrowRight : ".arrow-right",
-    //arrowLeft : ".arrow-left",
     speed : 100,
     slideDuration : 1000,
     arrowRight_class: ".arrow-right",

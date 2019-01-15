@@ -60,11 +60,7 @@
 								} else{
 									foreach( $collections as $item_id ){
 										$item_collection = new CollectionLogic( $item_id["id"] );
-										if( isset( $fatherCollection ) && ( $fatherCollection == $item_collection->get__collection_id() ) ){
-											echo "<option value='" . $item_collection->get__collection_id() . "' selected>" . $item_collection->get__collection_name() . "</option>";
-										} else{
-											echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
-										}
+										echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";										
 									}
 								}
 								?>

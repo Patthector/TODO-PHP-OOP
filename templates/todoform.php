@@ -17,14 +17,14 @@
 			<span class = "form-subheading">General Information</span>
 			<div class = "row todo__form-separator">
 				<div class = "col-12 col-md-9">
-					<label for = "todo_name">Title</label>
+					<label for = "todo_name">Title <span id = "todo__todo-form--chars-name">[Characters availability: <span>50]</span></span></label>
 					<input type = "text" name = "name" id = "todo_name" class = "form-control todo__input-form" placeholder="Give a name to your TODO"
 					<?php
 					if( isset( $todo ) && !empty( $todo->get__todo_name() )){
 						echo "value='" . $todo->get__todo_name() ."'";
 					}
 					?>
-					/>
+					required/>
 				 </div>
 				<div class = "col-12 col-md-3">
 					<label for = "level_of_importance">Levels</label>
@@ -45,7 +45,7 @@
 			</div>
 			<div class = "row todo__form-separator">
 				<div class = "col-12">
-					<label for = "todo_description">Description</label>
+					<label for = "todo_description">Description <span id = "todo__todo-form--chars-description">[Characters availability: <span>500</span>]</span></label>
 					<textarea name = "description" id = "todo_description" class = "form-control todo__input-form" placeholder = "Type a short description [optional]"><?php if( isset( $todo ) && !empty( $todo->get__todo_description() )) echo trim( $todo->get__todo_description() );?></textarea>
 				</div>
 			</div>

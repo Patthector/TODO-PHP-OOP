@@ -20,9 +20,20 @@ header{
       margin: 0;
     }
 }
+#logo-svg--mobile{
+  @media(min-width: 993px){
+    display: none;
+  }
+}
+#logo-svg--pc{
+  display: block;;
+  @media(max-width: 993px){
+    display: none;
+  }
+}
 .header__logo{
   margin: 0 12px;
-  @media(max-width:576px){
+  @media(max-width:993px){
     padding: 0;
     margin:0;
     width: 100%;
