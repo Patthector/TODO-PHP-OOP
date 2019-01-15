@@ -13,11 +13,11 @@
 	</div>
 <div class = "row justify-content-center">
 	<div class = "todo_container  col-11 col-md-8">
-		<form action = "library.php" method = "POST">
+		<form id = "todo__library-form" action = "library.php" method = "POST">
 			<span class = "form-subheading">General Information</span>
 			<div class = "row todo__form-separator">
 				<div class = "col-12">
-					<label for = "collection_name">Title</label>
+					<label for = "collection_name">Title <span id = "todo__library-form--chars-name">[Characters Availability: <span> 50 </span>]</span></label>
 					<!--.todo__input-form-->
 					<input type = "text" name = "name" id = "collection_name" class="form-control todo__input-form" placeholder="Default LIBRARY"
 					<?php
@@ -25,12 +25,12 @@
 						echo "value='" . $collection->get__collection_name() ."'";
 					}
 					?>
-					 />
+					 required/>
 			 </div>
 	 		</div>
 			 <div class = "row todo__form-separator">
 				<div class = "col-12">
-					<label for = "collection_description">Description</label>
+					<label for = "collection_description">Description <span id = "todo__library-form--chars-description">[Characters Availability: <span> 500 </span>]</span></label>
 					<!--.todo__input-form-->
 					<textarea name = "collection_description" id = "collection_description" class="form-control todo__input-form" placeholder = "Type a reminder"><?php if( isset( $collection ) && !empty($collection->get__collection_description())) echo $collection->get__collection_description();?></textarea>
 				</div>
@@ -42,9 +42,9 @@
 						<div class = "col-12 col-md-6">
 							<label for = "collection_library">Library</label>
 							<select id = "collection_library" name = "father_collection" class="form-control custom-select custom-select-m todo__input-form"><!--.todo__input-form-->
-								<option value = "">Main Library</option>
+								<option value = "1">Root Library</option>
 								<?php
-								$collections = CollectionLogic::get__full_list_collections( $_SESSION[ "user_id" ] );
+								$collections = CollectionLogic::get__full_list_collections( $user->get__userId() );
 
 								if( isset( $collection ) && !empty($collection->get__collection_father_id()) ){
 									$fatherCollection = $collection->get__collection_father_id();

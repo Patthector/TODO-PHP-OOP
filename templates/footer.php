@@ -60,6 +60,7 @@
     <!--TEST-->
     <script src = "/TODO-PHP-OOP/vendor/js/action_menu_oop.js"></script>
     <!-- -->
+    <script src = "/TODO-PHP-OOP/vendor/js/todoForm-oop.js"></script>
     <script src = "/TODO-PHP-OOP/vendor/js/tags-oop.js"></script>
     <!--<script src = "/TODO-PHP-OOP/vendor/js/registration.js"></script>-->
     <!--TEST-->

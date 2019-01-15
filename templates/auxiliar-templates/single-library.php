@@ -6,6 +6,7 @@
         <div class = "todo__inner--carousel">
       <?php
         $pathCollection = $collection->get__collection_path();
+
         for( $i = 0; $i < count($pathCollection); $i++ ){
 
           if( $pathCollection[$i]["name"] == $collection->get__collection_name() ){
@@ -17,13 +18,14 @@
             echo "</li>";
           }
           else{
+            echo "<li class=\"slide todo__collection-header-path-item\"><span>";
+            include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/grip-lines-vertical-solid.svg";
+            echo "</span><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >";
+            echo $excerpt->excerpt( $pathCollection[$i]["name"], $excerpt->get__collection_path() ) . "</a></li>";
 
-              echo "<li class=\"slide todo__collection-header-path-item\"><span>";
-              include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/grip-lines-vertical-solid.svg";
-              echo "</span><a href = ./library.php?id=" . $pathCollection[$i]["id"] . " >";
-              echo $excerpt->excerpt( $pathCollection[$i]["name"], $excerpt->get__collection_path() ) . "</a></li>";
           }
         }
+        echo "<li class=\"slide todo__collection-header-path-item\"><a href =' ./mytodos.php' >myTodos</a></li>";
       ?>
         </div>
       </ul>

@@ -39,8 +39,9 @@
           </div><!--end-form-group-->
 
           <div class = "form-group">
+            <label for = "todo__modal-move-select">Select Library</label>
             <select id = "todo__modal-move-select" class = "form-control custom-select custom-select-lg" name = "collectionSelected" required>
-              <option value=''>Select One Library</option>
+              <option value='1'>Root</option>
               <?php
 
               $collections = CollectionLogic::get__full_list_collections( $_SESSION["user_id"] );
@@ -49,7 +50,6 @@
 
                 $item_collection = new CollectionLogic( $item["id"] );
                 if( isset( $todo ) ){//=> we are on readTODO
-                  //var_dump($todo);exit;
                   if( !( $item_collection->get__collection_id() === $todo->get__todo_father_id() ) ){
                       echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
                   }

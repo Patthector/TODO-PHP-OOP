@@ -952,7 +952,7 @@ main {
 .todo__bubble-creator--outer-container {
   position: fixed;
   top: 84%;
-  right: 12px; }
+  right: 0px; }
   .todo__bubble-creator--outer-container .todo__bubble-creator--inner-container {
     display: flex;
     flex-direction: column;
@@ -964,11 +964,12 @@ main {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-radius: 24px;
-      box-shadow: 2px 2px 2px #808080;
-      width: 70px;
+      border-bottom-left-radius: 24px;
+      border-top-left-radius: 24px;
+      box-shadow: -2px 2px 2px #808080;
+      width: 80px;
       height: 40px;
-      margin: 6px 12px; }
+      margin: 6px 0 6px 12px; }
       .todo__bubble-creator--outer-container .todo__bubble-creator--inner-container .todo__bubble-creator--collection-container a,
       .todo__bubble-creator--outer-container .todo__bubble-creator--inner-container .todo__bubble-creator--todo-container a {
         display: flex;
@@ -1530,6 +1531,13 @@ header {
       text-transform: uppercase;
       color: #444444;
       font-family: "rajdhani-bold"; }
+      .todo__form .todo_container label span {
+        color: #808080;
+        font-family: "rajdhani-regular";
+        font-size: 12px;
+        text-transform: lowercase; }
+        .todo__form .todo_container label span span {
+          color: #dc3545; }
     .todo__form .todo_container .todo__form-main-category-message {
       margin: 3px 24px 12px; }
     .todo__form .todo_container .todo-message {

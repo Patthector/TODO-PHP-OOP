@@ -59,11 +59,8 @@ background-color:$white;
   }
 //FORM
   .todo_container{
-
     background-color:$white;
-
     margin-top: -60px;
-    //margin: -60px 264px 24px 264px;
     box-shadow: 0 0 4px $gray;
     padding: 12px 132px 12px 132px;
     @media(max-width: 576px){
@@ -94,6 +91,15 @@ background-color:$white;
       text-transform: uppercase;
       color:$tundora;
       font-family:$font-primary-bold;
+      span{
+        color:$gray;
+        font-family: $font-primary;
+        font-size: 12px;
+        text-transform: lowercase;
+        span{
+          color: $tomato;
+        }
+      }
     }
 
     .todo__form-main-category-message {

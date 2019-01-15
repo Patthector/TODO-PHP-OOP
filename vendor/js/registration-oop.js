@@ -174,10 +174,8 @@
 //---FORM VALIDATION
       case ( action === "form-validation" ):
         this.formSubmitionValidation();
-          //console.log(this.$obj._isValidSubmition);
         if( !(this.$obj._isValidSubmition) ){
           e.preventDefault();
-          //console.log("FORM VALIDATION-->WRITE THE FUNCTION ;).");
         }
       break;
 
@@ -334,7 +332,7 @@
     this.$obj._isValidUsername = false;
     this.$obj._isValidPassword = false;
     this.$obj._isValidSubmition = false;
-    console.log(this);
+
     return;
   };
 

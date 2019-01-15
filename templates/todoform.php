@@ -29,9 +29,9 @@
 				<div class = "col-12 col-md-3">
 					<label for = "level_of_importance">Levels</label>
 					<select name = "level" id = "level_of_importance" class = "form-control custom-select custom-select-m todo__input-form">
-						<option value = "">Select level</option>
+						<option value = "1">Level 1</option>
 						<?php
-						foreach(array(1,2,3,4,5) as $i){
+						foreach(array(2,3,4,5) as $i){
 							if( isset( $todo ) && !empty( $todo->get__todo_level() ) && $i == $todo->get__todo_level() ){//SELECTED
 								echo "<option value = $i selected>Level $i</option>";
 							} else{
