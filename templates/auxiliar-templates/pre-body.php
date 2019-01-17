@@ -11,14 +11,6 @@
         case "editTodo":
           echo "white-header";
           break;
-
-        case "readTodo":
-          echo "";
-          break;
-
-        default:
-          echo "";
-          break;
       }
     } else if( class_exists( "CollectionLogic" ) && !empty( CollectionLogic::get__state() ) ){
       switch ( CollectionLogic::get__state()) {
@@ -29,23 +21,15 @@
         case "editCollection":
           echo "white-header";
           break;
-
-        case "readCollection":
-          echo "";
-          break;
-
-        default:
-          echo "";
-          break;
       }
-    } else{
-      echo "";
     }
+
     ?>
-    ">
+     "><!-- end of HEADER classes closing tag -->
+
       <nav class="navbar navbar-expand-lg">
         <a id = "logo-svg--mobile" class="navbar-brand header__logo" href="/TODO-PHP-OOP/index.php">
-          <?php  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/temp-include/header-logo.php"; ?>
+          <?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/temp-include/header-logo.php"; ?>
         </a>
         <button class="navbar-toggler todo__header-button--mobile" type="button" data-toggle="collapse" data-target="#todonavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/ellipsis-v-solid.svg"; ?></span>
@@ -55,9 +39,9 @@
             <li class="nav-item header__menu-item">
               <a class="nav-link" href="/TODO-PHP-OOP/views/mytodos.php">myTODOs</a>
             </li>
-            <li id="logo-svg--pc" class="nav-item header__logo">
-              <a class="h1" href="/TODO-PHP-OOP/index.php">
-                <?php  include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/temp-include/header-logo.php"; ?>
+            <li id="logo-svg--pc" class="nav-item">
+              <a class="header__logo" href="/TODO-PHP-OOP/index.php">
+                <?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/temp-include/header-logo.php"; ?>
               </a>
             </li>
             <li class="nav-item header__menu-item">
@@ -79,6 +63,12 @@
     <div id = "todo__main-menu-size"></div>
     <style>
       #todo__main-menu-size{
-        margin-top: 100px;
+        margin-top: 60px;
       }
+      @media (min-width: 992px) {
+        #todo__main-menu-size{
+          margin-top: 80px;
+        }
+      }
+
     </style>

@@ -13,48 +13,48 @@ header{
 }
 .header__menu{
   @include todo__inline-flex;
-  //padding:24px 0 16px 0;
-    padding:12px 0 0px 0;
-    @media(max-width: 576px){
-      padding: 0;
-      margin: 0;
-    }
-}
-#logo-svg--mobile{
-  @media(min-width: 993px){
-    display: none;
-  }
-}
-#logo-svg--pc{
-  display: block;;
-  @media(max-width: 993px){
-    display: none;
+  @media(min-width: 992px){//--PC--
+    padding: 6px 0;
+    margin: 0;
   }
 }
 .header__logo{
-  margin: 0 12px;
-  @media(max-width:993px){
     padding: 0;
-    margin:0;
+    margin: 0px;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+  @media(min-width: 992px){//--PC--
+    margin: 3px 12px 6px 12px;
+    width: auto;
   }
   svg{
     transition: all 0.5s ease;
-    @media(max-width: 576px) {
-      width: 150px;
+    width: 200px;
+    @media(min-width: 992px) {//--PC--
+      width: 300px;
     }
-    @media(min-width: 576px) {
-      width: 275px;
-    }
+  }
+}
+#logo-svg--mobile{
+  position: relative;
+  opacity: 1;
+  @media(min-width: 992px){//--PC--
+    position: absolute;
+    opacity: 0;
+  }
+}
+#logo-svg--pc{
+  display: none;
+  @media(min-width: 992px){//--PC--
+    display: block;
   }
 }
 .todo__header-button--mobile{
   position: absolute;
   right: 10px;
-  //top: 5px;
   svg{
     color: $tomato;
     width: 8px;
@@ -66,12 +66,11 @@ header{
 .header__menu-item{
   align-self:flex-end;
   font-family: "fjallaone-regular";
-  @media(max-width: 576px) {
-    font-size:14px;
-    margin: 0 12px;
-    padding-bottom: 12px;
-  }
-  @media(min-width: 576px) {
+  font-size:16px;
+  margin: 0 12px;
+  padding-bottom: 12px;
+  @media(min-width: 576px){font-size: 18px;}
+  @media(min-width: 992px) {//--PC--
     font-size:24px;
   }
   a{
@@ -79,7 +78,7 @@ header{
     text-decoration: underline;
     transition: color 1s;
     position: relative;
-    @media(max-width: 576px) {padding: 0;}
+    @media(min-width: 992px) {padding: 0;}
   }
   a:hover{
     color:$alto;
@@ -88,10 +87,11 @@ header{
     position: absolute;
     top:10px;
     left: 110%;
-    font-size:13px;
+    font-size:10px;
     color:$tomato;
     text-decoration: none !important;
-    @media(max-width: 576px){font-size: 12px;}
+
+    @media(min-width: 992px){font-size: 11px;}
   }
 }
 

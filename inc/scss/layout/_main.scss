@@ -1,11 +1,13 @@
 html,body{
   margin: 0;
   padding: 0;
-  //height: 100%;
   background-color: $white;
 }
 .todo__main-background{
   background-color: $white;
-  min-height: calc( 100vh - 270px );
+  min-height: calc( 100vh - 269px );
+  @media(min-width: 992px){
+    min-height: calc( 100vh - 249px );
+  }
   position: relative;
 }

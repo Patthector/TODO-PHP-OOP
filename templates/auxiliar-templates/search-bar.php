@@ -3,13 +3,8 @@
       <div class="input-group-prepend position-relative">
         <!--<button class="btn btn-outline-secondary dropdown-toggle todo__btn-search-bar" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search BY</button>-->
         <button id = "todo__btn--searchBy" class="btn dropdown-toggle todo__btn-search-bar" type="button">
-          <?php
-        if ( $detect->isMobile() ) {
-          echo "<span>";
-          include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/filter-solid.svg";
-          echo "</span>";
-        } else{ echo 'Search BY'; }
-         ?>
+          <span class = "todo__btn-search-bar--svg"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/filter-solid.svg";?></span>
+          <span class = "todo__btn-search-bar--text">Search BY</span>
        </button>
 
         <div class="todo__search-by--menu-container" id="searchByMenuContainer">

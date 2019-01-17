@@ -21,10 +21,34 @@ if( !empty( $user ) ){
   $detect = new Mobile_Detect;
   //GET
   if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ){
-    //qualcuno a voluto vedere un po' di pui
-    // e debi andare via da qui
-    header( "location:./mytodos.php" );
-    exit;
+		if( $_GET["tag"] ){
+			$tag = filter_input( INPUT_GET, "tag", FILTER_SANITIZE_STRING );
+			$query = filter_input( INPUT_GET, "query", FILTER_SANITIZE_STRING );
+			if( $tag === "on" && !empty($query) ){
+				$aux_search_results = Collection::preparingSearchResult( $query, $user->get__userId() );
+
+        if( isset( $aux_search_results["tags"] )  ){
+					$tag_table = true;
+					$search_name = $query;
+          $searchResults["tags"] = $aux_search_results["tags"];
+        }
+				//FILES
+	      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/header.php";
+	      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/levels-of-imp-bar.php";
+	      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/message.php";
+	      //include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/search-bar.php";
+	      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/search.php";
+	      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/auxiliar-templates/bubble-creators.php";
+	      include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/templates/footer.php";
+				exit;
+			}
+		}
+		else{
+	    //qualcuno a voluto vedere un po' di pui
+	    // e debi andare via da qui
+	    header( "location:./mytodos.php" );
+	    exit;
+		}
   }
   else if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ){
     //questa `e una chiamata de elementi venuta di

@@ -1,13 +1,12 @@
 .todo__container-level-bar{
   //for the header fixed position
-  margin-top: -20px;
-  @media(max-width: 576px){
-    margin-top: -40px;
+  //margin-top: -40px;
+  @media(min-width: 992px){
+    //margin-top: -20px;
   }
   //
   background-color:rgba($gallery,.5);
   @include clean-fluid;
-  //margin-top:-24px;
   padding-bottom: 8px;
   font-family: $font-secondary;
   //border

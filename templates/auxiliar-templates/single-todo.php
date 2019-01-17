@@ -43,7 +43,9 @@
       if( isset( $todo ) && !empty( $todo->get__todo_tags() ) ){
         $tags = $todo->get__todo_tags();
         foreach($tags as $t){
-          echo "<li><a href = \"#\">#$t</a></li>";
+          echo "<li><a href = \"";
+          echo "./search.php?tag=on&query=$t";
+          echo "\">#$t</a></li>";
         }
       }
        ?>

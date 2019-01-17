@@ -127,7 +127,7 @@
   &--aux{
     position: absolute;
     //position: fixed;
-    top: -12px;
+    top: 12px;
     left: 50%;
     right: 50%;
     //
@@ -183,7 +183,7 @@
     }
     &--selected{
       background-color: $sapphire;
-      border:none; 
+      border:none;
       width: 100%;
       //padding: 6px;
       transition: box-shadow 0.5s;

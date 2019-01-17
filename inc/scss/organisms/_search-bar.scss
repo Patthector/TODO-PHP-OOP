@@ -23,11 +23,24 @@
   border-color: $sapphire;
   box-shadow: 0 0px 4px $gray;
   //FONT
-  font-size:18px;
-  @media(max-width:576px){
-    font-size: 14px;
-    padding-right: 24px;
+  font-size: 14px;
+  padding-right: 24px;  
+  @media(min-width:992px){
+    font-size:18px;
    }
+}
+
+.todo__btn-search-bar--svg{
+  display: inline;
+  @media(min-width:992px){
+    display: none;
+  }
+}
+.todo__btn-search-bar--text{
+  display: none;
+  @media(min-width:992px){
+    display: inline;
+  }
 }
 .todo__btn-search-bar--inverse,
 .todo__btn-search-bar--inverse:link,
