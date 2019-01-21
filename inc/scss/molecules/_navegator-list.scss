@@ -1,0 +1,24 @@
+.todo__mytodos--navegator-list{
+  @include reset-list;
+  width:250px;
+  max-width: 250px;
+  height: 75px;
+  margin: 12px 24px;
+  position: relative;
+  overflow: hidden;
+  @media(min-width: 576px){
+    width: 500px;
+    max-width: 500px;
+  }
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.todo__mytodos--navegator-item{
+  margin: 6px;
+  padding: 6px;
+  font-size: 18px;
+
+}

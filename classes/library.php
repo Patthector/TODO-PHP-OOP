@@ -2,7 +2,7 @@
 
 class Library
 {
-	public static function retriveFullLibrary( $user_id, $limit = 12, $offset = null ){
+	public static function retriveFullLibrary( $user_id, $limit, $offset ){
 
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 		require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/collection.php";
@@ -11,12 +11,13 @@ class Library
 		# 1-) get collections
 		$sql = "SELECT * FROM todo_app_collections
 						WHERE id_user = ?
-						ORDER BY created_date, updated_date LIMIT ?";
+						ORDER BY created_date, updated_date LIMIT ? OFFSET ?";
 
 		try{
 			$collections = $db->prepare( $sql );
 			$collections->bindParam( 1, $user_id, PDO::PARAM_INT);
 			$collections->bindParam( 2, $limit, PDO::PARAM_INT);
+			$collections->bindParam( 3, $offset, PDO::PARAM_INT);
 			$collections->execute();
 		} catch (Exception $e){
 			echo "Bad Query selecting collection in " . __METHOD__ . " ," . $e->getMessage();
@@ -25,13 +26,14 @@ class Library
 
 		# 2-) get subcollectionS where each of the collections retrived are their fathers
 
-		while($row = $collections->fetch(PDO::FETCH_ASSOC)){
+		/*while($row = $collections->fetch(PDO::FETCH_ASSOC)){
 
 			$id_row_collection = $row["id"];
 			//creationg full path
+			/*
 			$row["path"] = Collection::getFullPath($id_row_collection);
 			//
-			$sql = "SELECT * FROM todo_app_collections WHERE id_fatherCollection = ? ORDER BY name LIMIT 6 ";
+			$sql = "SELECT * FROM todo_app_collections WHERE id_fatherCollection = ? ORDER BY name";
 
 			try{
 				$subcollections = $db->prepare($sql);
@@ -47,11 +49,15 @@ class Library
 
 
 			# 4-) get at least [if exists] 6 TODO's for each COLLECTION
-			$sql = "SELECT * FROM todo_app_todos WHERE id_collection = ? LIMIT 6 ";
+
+			$sql = "SELECT * FROM todo_app_todos
+							WHERE id_collection = ?
+							LIMIT 2 ";
 
 			try{
 				$todos = $db->prepare($sql);
 				$todos->bindParam( 1, $id_row_collection, PDO::PARAM_INT );
+				//$todos->bindParam( 2, 3, PDO::PARAM_INT );
 				$todos->execute();
 			} catch (Exception $e){
 				echo "Bad Query selecting todos in " . __METHOD__ . " ," . $e->getMessage();
@@ -64,22 +70,28 @@ class Library
 
 		}
 		if( isset( $library ) )return $library;
-		return false;
+		return false;*/
+		return $collections;
 
 	}
 
-	public static function renderFullPath($fullPath){
-		$path = "<ul>";
-		$fullPath = array_reverse($fullPath);
-		foreach($fullPath as $key=>$collection){
-			if( $key == (count($fullPath) - 1 ) ){
-				$path .= "<li>" . $collection["name"] . "</li>";
-			} else{
-				$path .= "<li><a href ='" . $collection["id"] . "'>" . $collection["name"] . "</a></li>";
-			}
+	public static function totalLibraries( $user_id ){
+
+		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
+
+		$sql = "SELECT COUNT(*) AS 'total_libraries' FROM todo_app_collections
+						WHERE id_user = ?";
+
+		try{
+			$total_libraries = $db->prepare( $sql );
+			$total_libraries->bindParam(1, $user_id, PDO::PARAM_INT);
+			$total_libraries->execute();
+
+		} catch (Exception $e){
+			echo "Bad query  counting collections in ". __METHOD__ . ", " . $e->getMessage();
+			return false;
 		}
-		$path .= "</ul>";
-		return $path;
-	}
+		return $total_libraries->fetch()['total_libraries'];
 
+	}
 }

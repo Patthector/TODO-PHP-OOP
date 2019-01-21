@@ -116,8 +116,9 @@
 
   Zippy.prototype.build = function(){
 
-    this.settings.width_currSlide = this.$el.find(".slide").eq(this.currSlide).width();
+    this.settings.width_currSlide = this.$el.find(".slide").eq(this.currSlide).outerWidth(true);
     this.settings.width_carousel = this.$el.width();
+    //this.settings.width_carousel = this.$inner.width();
     this.settings.width_inner = this.$inner.width();
 
   };
@@ -148,10 +149,11 @@
     //arrowLeft = $(arrowLeft).siblings( this.arrows.arrowLeft );
     //var arrowRight = "#" + this.el.id;
     //arrowRight = $(arrowRight).siblings( this.arrows.arrowRight );
-
+    //
     if( this.settings.width_carousel >= this.settings.width_inner ){
       $( this.settings.arrowLeft ).css("display","none");
       $( this.settings.arrowRight ).css("display","none");
+      this.$el.width(this.$inner.width());
     } else{
       $( this.settings.arrowLeft ).css("display","flex");
       $( this.settings.arrowRight ).css("display","flex");
@@ -172,10 +174,10 @@
 
     var direction = this._direction(e);
 
-    this.settings.width_currSlide = this.$el.find(".slide").eq(this.currSlide).width();
+    this.settings.width_currSlide = this.$el.find(".slide").eq(this.currSlide).outerWidth(true);
     if( this.currSlide > 0 ){
       var aux = this.currSlide-1;
-      this.settings.width_prevSlide = this.$el.find(".slide").eq(aux).width();
+      this.settings.width_prevSlide = this.$el.find(".slide").eq(aux).outerWidth(true);
     }
 
     var animate = this._next( e,direction );
@@ -230,7 +232,7 @@
   };
 
   Zippy.prototype._moveCarousel = function( direction ){
-
+    console.log("currSlideWidth",this.settings.width_currSlide);
     if( this.settings.move_carousel && direction == "right" ){// >
       //we can MOVE to the left
       this.settings.leftCoordenate -= this.settings.width_currSlide;
@@ -292,5 +294,6 @@
   };
   $("#path-carousel").Zippy(args);
   $("#subcollection-carousel").Zippy(args);
+  $("#navegator-carousel").Zippy(args);
   console.log("CAROUSEL ON");
 });

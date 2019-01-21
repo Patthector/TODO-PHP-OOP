@@ -18,7 +18,7 @@ class CollectionLogic extends Collection{
   //
   private $select_elements = false;
 
-  function __construct( $collection_id, $get_full_library =  null ){
+  function __construct( $collection_id, $get_full_library =  null, $get_all_todos = null ){
 
    $aux = self::getCollection( $collection_id );
    $this->set__collection_id( $aux["id"] );
@@ -34,7 +34,8 @@ class CollectionLogic extends Collection{
        $this->set__collection_updated_date( $aux["updated_date"] );
        $this->set__collection_subcollections( self::getSubcollections( $this->get__collection_id() ) );
        $this->set__collection_path( self::getFullPath( $this->get__collection_id() ) );
-       $this->set__collection_todos( self::getTodosByFatherId( $this->get__collection_id() ) );
+       if( !empty($get_all_todos) ){ $this->set__collection_todos( self::getTodosByFatherId( $this->get__collection_id() ) ); }
+       else{ $this->set__collection_todos( self::getTodosByFatherId( $this->get__collection_id(), 2 ) ); }
        $this->set__title_heading( $this->get__collection_name() );
      }
     }

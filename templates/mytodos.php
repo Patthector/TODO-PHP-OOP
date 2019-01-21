@@ -5,7 +5,8 @@
 		<h2 class = "todo__main-heading">myTODOs</h2>
 		<?php
 		foreach($libraries as $item_id){
-			$item_collection = new CollectionLogic( $item_id["id"], true );//REMEMBER TO CHANGE THIS TO $ITEM_ID
+			$item_collection = new CollectionLogic( $item_id["id"], true, false );
+
 			?>
 			<div class = "todo__general-container first-container col-12 col-md-10 col-lg-8">
 				<div class = "todo__collection-header">
@@ -104,6 +105,9 @@
 												</div>";
 
 								}
+								echo "<div class = 'todo__library--viewTodos '><a href = '";
+							  echo "/TODO-PHP-OOP/views/library.php?id=" . $item_collection->get__collection_id();
+								echo "' role = 'button' class = 'btn btn-danger btn-sm'>See All TODOs</a></div>";
 							}
 							?>
 						</div>
@@ -115,4 +119,21 @@
 <?php
 		}
 ?>
+	<div class = "row position-relative">
+		<ul id = "navegator-carousel" class = "carousel todo__mytodos--navegator-list">
+			<div class = "todo__inner--carousel">
+				<?php
+					for( $i = 1; $i <= $total_pages; $i++ ){
+						if( $i == $page ){
+							echo "<li class = 'slide todo__mytodos--navegator-item' >$i</li>";
+						} else{
+								echo "<li class = 'slide todo__mytodos--navegator-item' ><a href = './myTodos.php?pg=$i' >$i</a></li>";
+						}
+					}
+				?>
+			</div>
+		</ul>
+		<div class="arrow arrow-left arrow--path"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/arrow-left-solid.svg"; ?></div>
+		<div class="arrow arrow-right arrow--path"><?php include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/arrow-right-solid.svg"; ?></div>
+	</div>
 </div>

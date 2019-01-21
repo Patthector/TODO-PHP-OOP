@@ -32,7 +32,7 @@ if( !empty( $user ) ){
 			# If that action is impossible cuz the ID is invalid or any other ERR!
 			# the user will be sent to 'myTodos.php' with an err feedback.
 			$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-			$collection = new CollectionLogic( $id, true );
+			$collection = new CollectionLogic( $id, true, true );
 
 			if( !empty( $collection->get__collection_id() )){# if we have a collection, set the title heading with the Collection's name
 
@@ -117,7 +117,7 @@ if( !empty( $user ) ){
 
 					$collection = new CollectionLogic( $id );
 					$files = $collection->collection_deleteElements( $_POST );
-					$collection = new CollectionLogic( $id, true );
+					$collection = new CollectionLogic( $id, true, true );
 					$msg = CollectionLogic::get__msg();
 					foreach( $files as $file){
 						include $file;
@@ -130,8 +130,8 @@ if( !empty( $user ) ){
 
 					$collection = new CollectionLogic( $id );
 					$files = $collection->collection_moveElements( $_POST, $id_fatherCollection );
-					//updeting collection...
-					$collection = new CollectionLogic( $id, true );
+					//updating collection...
+					$collection = new CollectionLogic( $id, true, true );
 					$msg = CollectionLogic::get__msg();
 					foreach( $files as $file){
 						include $file;

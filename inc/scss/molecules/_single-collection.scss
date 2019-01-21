@@ -23,24 +23,31 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: flex-end;
   align-items: flex-start;
   margin: 6px 12px 12px;
   height: 30px;
-  width: 250px;
+  //width: 250px;
+  //max-width: 250px;
   padding: 0 18px;
 
   @media(min-width:576px){
-    width: 500px;
+    //width: 500px;
+    //max-width: 500px;
     padding: 0 24px;
   }
 }
 .todo__collection-header-path-list{
   @include reset-list;
   @include todo__inline-flex;
-  width: 100%;
+  width: 500px;
+  max-width: 500px;
   @media(max-width: 576px){
     height: 24px;
+    width: 250px;
+    max-width: 250px;
   }
+  .todo__inner--carousel{right: 0px; left:unset;}
 }
 .todo__collection-header-path-item{
   text-transform: uppercase;
@@ -139,7 +146,6 @@
   text-transform: lowercase;
   text-decoration: underline;
 
-
 }
 .todo__todo-title-collection{
   font-family: $font-primary-bold;
@@ -156,4 +162,11 @@
 }
 .todo__collection-body-todo-container{
   margin-bottom: 24px;
+}
+.todo__library--viewTodos{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-bottom: 12px;
 }

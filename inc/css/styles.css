@@ -822,14 +822,13 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: flex-end;
   align-items: flex-start;
   margin: 6px 12px 12px;
   height: 30px;
-  width: 250px;
   padding: 0 18px; }
   @media (min-width: 576px) {
     .todo__collection-header-path {
-      width: 500px;
       padding: 0 24px; } }
 
 .todo__collection-header-path-list {
@@ -841,10 +840,16 @@ main {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100%; }
+  width: 500px;
+  max-width: 500px; }
   @media (max-width: 576px) {
     .todo__collection-header-path-list {
-      height: 24px; } }
+      height: 24px;
+      width: 250px;
+      max-width: 250px; } }
+  .todo__collection-header-path-list .todo__inner--carousel {
+    right: 0px;
+    left: unset; }
 
 .todo__collection-header-path-item {
   text-transform: uppercase;
@@ -952,6 +957,13 @@ main {
 .todo__collection-body-todo-container {
   margin-bottom: 24px; }
 
+.todo__library--viewTodos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-bottom: 12px; }
+
 .todo__bubble-creator--outer-container {
   position: fixed;
   top: 84%;
@@ -1016,6 +1028,7 @@ main {
   transition: border-color 0.3s ease-out; }
 
 .arrow--path {
+  display: none;
   top: 30%;
   padding: 2px;
   border: 1px solid white;
@@ -1036,6 +1049,7 @@ main {
         height: 8px; } }
 
 .arrow--subcategory {
+  display: none;
   bottom: 10%;
   padding: 6px; }
   @media (max-width: 576px) {
@@ -1059,6 +1073,31 @@ main {
 
 .arrow-right {
   right: 0px; }
+
+.todo__mytodos--navegator-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  max-width: 250px;
+  height: 75px;
+  margin: 12px 24px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center; }
+  @media (min-width: 576px) {
+    .todo__mytodos--navegator-list {
+      width: 500px;
+      max-width: 500px; } }
+
+.todo__mytodos--navegator-item {
+  margin: 6px;
+  padding: 6px;
+  font-size: 18px; }
 
 footer {
   display: flex;

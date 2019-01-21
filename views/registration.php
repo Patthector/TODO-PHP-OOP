@@ -92,7 +92,7 @@ else if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ){
         $_SESSION[ "user_id" ] = $todo__user->get__userId();
         $_SESSION[ "username" ] = $todo__user->get__username();
 
-        header("Location: /TODO-PHP-OOP/views/mytodos.php");exit;
+        header("Location: /TODO-PHP-OOP/views/mytodos.php?pg=1");exit;
       }
     }
     //the passwords didnt match or the user does not exist

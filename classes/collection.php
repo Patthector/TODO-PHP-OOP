@@ -221,14 +221,22 @@ class Collection
 		return true;
 	}
 
-	public static function getTodosByFatherId( $id ){
+	public static function getTodosByFatherId( $id, $limit = null ){
 		include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/inc/connection.php";
 
-		$sql = "SELECT * FROM todo_app_todos WHERE id_collection = ?";
+		if( !empty($limit) ){
+			$sql = "SELECT * FROM todo_app_todos WHERE id_collection = ? LIMIT ?";
+		} else{
+			$sql = "SELECT * FROM todo_app_todos WHERE id_collection = ?";
+		}
+
 
 		try{
 			$result = $db->prepare($sql);
 			$result->bindParam(1, $id, PDO::PARAM_INT);
+			if( !empty($limit) ){
+				$result->bindParam(2, $limit, PDO::PARAM_INT);
+			}
 			$result->execute();
 
 		} catch(Exception $e){

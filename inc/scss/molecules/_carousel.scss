@@ -26,6 +26,7 @@
   }
 }
 .arrow--path{
+  display: none;
   top:30%;
   padding: 2px;
   border: 1px solid white;
@@ -47,6 +48,7 @@
   }
 }
 .arrow--subcategory{
+  display: none;
   bottom:10%;
   padding: 6px;
   @media(max-width: 576px){
