@@ -38,8 +38,8 @@ if( !empty( $user ) ){
 					$msg = trim(filter_input(INPUT_GET, "msg", FILTER_SANITIZE_STRING));
 				}
 				//VARIABLES
-				//$total_libraries = Library::totalLibraries( $user->get__userId() ); //this should be a function call ==> Library::totalLibraries( $user->get__userId() );
-				$total_libraries = 100;
+				$total_libraries = Library::totalLibraries( $user->get__userId() ); //this should be a function call ==> Library::totalLibraries( $user->get__userId() );
+
 				if( $total_libraries > 0 ){
 					$libraries_per_page = 6; // a fixed amount the could be change al vostro parere
 					$total_pages = ( ceil( $total_libraries / $libraries_per_page) );

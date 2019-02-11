@@ -112,7 +112,7 @@
 						if( isset( $todo ) && !empty( TodoLogic::get__state() ) && TodoLogic::get__state() == "editTodo" ){
 							echo "todo.php?id=$id";
 						 } else{
-							 echo "mytodos.php";
+							 echo "mytodos.php?pg=1";
 						 }
 					 ?>
 					 ">Cancel</a>

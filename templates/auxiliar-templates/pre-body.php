@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse todo__navbar-collapse" id="todonavbarNav">
           <ul class="navbar-nav header__menu">
             <li class="nav-item header__menu-item">
-              <a class="nav-link" href="/TODO-PHP-OOP/views/mytodos.php">myTODOs</a>
+              <a class="nav-link" href="/TODO-PHP-OOP/views/mytodos.php?pg=1">myTODOs</a>
             </li>
             <li id="logo-svg--pc" class="nav-item">
               <a class="header__logo" href="/TODO-PHP-OOP/index.php">

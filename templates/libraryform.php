@@ -60,7 +60,7 @@
 								} else{
 									foreach( $collections as $item_id ){
 										$item_collection = new CollectionLogic( $item_id["id"] );
-										echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";										
+										echo "<option value='" . $item_collection->get__collection_id() . "'>" . $item_collection->get__collection_name() . "</option>";
 									}
 								}
 								?>
@@ -75,7 +75,7 @@
 
 			<div class = "row todo__form-separator todo__form-container-buttons">
 				<div class = "col-6 left">
-					<a class = "btn todo__btn-form todo__btn-form--dark" href = "./mytodos.php">Cancel</a>
+					<a class = "btn todo__btn-form todo__btn-form--dark" href = "./mytodos.php?pg=1">Cancel</a>
 				</div>
 				<div class = "col-6">
 					<?php if( isset( $collection ) && !empty( CollectionLogic::get__state() ) && CollectionLogic::get__state() == "editCollection" ){

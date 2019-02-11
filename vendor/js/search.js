@@ -29,5 +29,5 @@ function searchByAction(){
   return;
 }
 function goToMyTodos(){
-  window.location.href = "/TODO-PHP-OOP/views/mytodos.php"
+  window.location.href = "/TODO-PHP-OOP/views/mytodos.php?pg=1";
 }

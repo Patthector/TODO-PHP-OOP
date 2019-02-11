@@ -6,8 +6,6 @@
 // 4-) the results by todos [IF that was requested]
 // 5-) the results by tags [IF that was requested]
 // 6-) a button sending to mytodos.php
-
-//var_dump($searchResults);exit;
  ?>
 
  <div class = "container todo__mytodos-search--container">
@@ -64,7 +62,6 @@
 
       if(isset( $searchResults["tags"] ) && !empty( $searchResults["tags"] ) ){
         echo "<ul>";
-        //var_dump($searchResults["tags"]);exit;
         foreach( $searchResults["tags"] as $item_tag ){
 
           echo "<li class = \"todo__mytodos-search--subheading-item\">#" .$item_tag["name"]. "</li>";
