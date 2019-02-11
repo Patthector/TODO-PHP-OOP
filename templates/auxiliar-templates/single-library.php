@@ -25,7 +25,7 @@
 
           }
         }
-        echo "<li class=\"slide todo__collection-header-path-item\"><a href =' ./mytodos.php' >myTodos</a></li>";
+        echo "<li class=\"slide todo__collection-header-path-item\"><a href =' ./mytodos.php?pg=1' >myTodos</a></li>";
       ?>
         </div>
       </ul>

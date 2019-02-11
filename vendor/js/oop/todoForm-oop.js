@@ -50,6 +50,12 @@
    TodoForm.prototype.activate = function(){
      this._countChars( $( this.$obj.input_name ).val().length, this.$obj.span_name, this.$obj.chars_for_name, this.$obj.input_name );
      this._countChars( $( this.$obj.input_description ).val().length, this.$obj.span_description, this.$obj.chars_for_description, this.$obj.input_description );
+
+     if( $(this.$obj.input_name).val().length > 0){
+       console.log("we have a name");
+       this.$obj._isValidName = true;
+     }
+
      return;
    };
 

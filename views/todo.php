@@ -9,13 +9,13 @@ if( !empty( $_SESSION[ "user_id" ] ) ){// we have a user
 if( !empty( $user ) ){
 	# Includes
 	# ---------
-	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
-	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/collection.php";
-	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/library.php";
-	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/todo.php";
-	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/library.php";
+	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/todo.php";
+	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/collection.php";
+	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/classes/library.php";
+	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/todo.php";
+	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/library.php";
 	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/functions/excerpt.php";
-	require_once $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/php/Mobile_Detect.php";
+	include $_SERVER["DOCUMENT_ROOT"] . "/TODO-PHP-OOP/vendor/php/Mobile_Detect.php";
 	# Variables
 	# ---------
 	$title_page = "TODO | Stick it";
