@@ -1,6 +1,6 @@
 .todo__bubble-creator--outer-container{
   position: fixed;
-  top:84%;
+  top:50%;
   right: 0px;
   .todo__bubble-creator--inner-container{
     display: flex;
@@ -15,7 +15,7 @@
       justify-content: center;
       a{
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
         flex-wrap: nowrap;
         justify-content: center;
         align-items: center;

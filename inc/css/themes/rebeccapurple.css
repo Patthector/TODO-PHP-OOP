@@ -966,7 +966,7 @@ main {
 
 .todo__bubble-creator--outer-container {
   position: fixed;
-  top: 84%;
+  top: 50%;
   right: 0px; }
   .todo__bubble-creator--outer-container .todo__bubble-creator--inner-container {
     display: flex;
@@ -1254,7 +1254,9 @@ header {
   display: flex;
   flex-flow: column wrap;
   align-content: center;
-  margin-bottom: 24px; }
+  margin-bottom: 24px;
+  margin-left: -15px;
+  margin-right: -15px; }
 
 .front-page__first-block, .front-page__second-block {
   display: flex;
@@ -1267,38 +1269,42 @@ header {
     .front-page__first-block, .front-page__second-block {
       flex-wrap: wrap; } }
 
-.front-page__first-block .left, .front-page__first-block .right {
-  display: flex;
-  flex-flow: column wrap;
-  align-content: center;
-  width: 80%; }
-  @media (max-width: 576px) {
-    .front-page__first-block .left, .front-page__first-block .right {
-      width: 100%;
-      margin-top: -24px; } }
-.front-page__first-block .left {
-  margin-left: auto; }
-.front-page__first-block .right {
-  align-items: center;
-  margin-right: auto; }
-.front-page__first-block .introduction-list {
-  list-style: none;
-  padding-left: 12px; }
-  .front-page__first-block .introduction-list li {
-    position: relative; }
-    .front-page__first-block .introduction-list li p {
-      font-size: 18px; }
-      @media (max-width: 576px) {
-        .front-page__first-block .introduction-list li p {
-          font-size: 16px; } }
-.front-page__first-block span.red-dot {
-  position: absolute;
-  top: -2px;
-  left: -12px; }
+.front-page__first-block {
+  margin-top: 24px; }
+  .front-page__first-block .left, .front-page__first-block .right {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    width: 80%; }
+    @media (max-width: 576px) {
+      .front-page__first-block .left, .front-page__first-block .right {
+        width: 100%;
+        margin-top: -24px; } }
+  .front-page__first-block .left {
+    margin-left: auto; }
+  .front-page__first-block .right {
+    align-items: center;
+    margin-right: auto; }
+  .front-page__first-block .introduction-list {
+    list-style: none;
+    padding-left: 12px; }
+    .front-page__first-block .introduction-list li {
+      position: relative; }
+      .front-page__first-block .introduction-list li p {
+        font-size: 18px; }
+        @media (max-width: 576px) {
+          .front-page__first-block .introduction-list li p {
+            font-size: 16px; } }
+  .front-page__first-block span.red-dot {
+    position: absolute;
+    top: -2px;
+    left: -12px; }
 
 .front-page__second-block {
   background-color: #ededed;
   box-shadow: inset 0 0 5px #808080;
+  padding-top: 24px;
+  padding-bottom: 48px;
   color: #000; }
   .front-page__second-block .left {
     width: 80%;
@@ -1324,7 +1330,7 @@ header {
 .front-page__button-library,
 .front-page__button-todo {
   font-family: "fjallaone-regular";
-  font-size: 48px;
+  font-size: 36px;
   text-transform: uppercase;
   text-align: center;
   margin: 0.43em 0 0.23em; }
@@ -1511,7 +1517,7 @@ header {
   background-color: #fff; }
   @media (max-width: 576px) {
     .todo__form {
-      margin-top: -45px; } }
+      margin-top: 0px; } }
   .todo__form .jumbotron_container {
     background-color: #303f9f;
     display: flex;
@@ -1520,26 +1526,28 @@ header {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin-left: -15px;
-    margin-right: -15px;
-    margin-top: -24px;
+    margin-top: -6px;
     padding-top: 24px;
     padding-bottom: 84px;
     box-shadow: inset 0px 4px 8px #2c325d; }
+    @media (min-width: 576px) {
+      .todo__form .jumbotron_container {
+        margin-left: -15px;
+        margin-right: -15px;
+        margin-top: -24px; } }
     .todo__form .jumbotron_container h1 {
       margin: 0;
       font-family: "fjallaone-regular";
       text-transform: uppercase;
       color: #fff;
-      font-size: 56px;
-      letter-spacing: 3px;
-      text-align: right;
-      align-self: flex-start; }
+      font-size: 48px;
+      letter-spacing: 2px;
+      text-align: right; }
       @media (max-width: 576px) {
         .todo__form .jumbotron_container h1 {
-          text-align: left;
-          font-size: 36px;
-          letter-spacing: 2px; } }
+          text-align: center;
+          font-size: 24px;
+          letter-spacing: 1.5px; } }
     .todo__form .jumbotron_container .guidelines_container ul {
       list-style: none;
       margin: 0;

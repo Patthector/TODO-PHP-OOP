@@ -3,6 +3,8 @@
   //@include clean-fluid;
   @include todo__center-flex;
   @include separator;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 .front-page__first-block,.front-page__second-block{
   @include todo__inline-flex;
@@ -13,7 +15,7 @@
 }
 //////FIRST-BLOCK
 .front-page__first-block{
-  //@include master-margin;
+  margin-top: 24px;
   .left, .right{
     @include todo__center-flex;
     width: 80%;
@@ -52,9 +54,9 @@
 .front-page__second-block{
   background-color:$gallery;
   box-shadow: inset  0 0 5px $gray;
-  //padding: 0 264px 24px 264px;
+  padding-top: 24px;
+  padding-bottom:48px;
   color:$black;
-  //@include clean-fluid;
   .left{
     width: 80%;
     margin-left: auto;
@@ -82,7 +84,7 @@
 .front-page__button-library,
 .front-page__button-todo{
   font-family:"fjallaone-regular";
-  font-size:48px;
+  font-size:36px;
   @media(max-width: 576px){
     font-size: 32px;
   }
