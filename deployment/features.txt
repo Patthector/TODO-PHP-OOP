@@ -1,0 +1,81 @@
+# This App "MAKE IT STICK" will have the next abilities:
+
+# Basic Objective: The creation of TODOs/Tasks that you want to get done in a sooner future.
+
+# TODOs Characteristics:
+# 1- All of then most have a title/name
+# 2- Also could have a description, for adding more meaningful information to a particular TODO
+# 3- The TODOs are also categorized by levels of importance from Level-1 to Level-5. The Level-1
+being the lowest and default level and Level-5 the highest one.
+# 4- For a deeper level of organization the TODOs will be able to be stored on Libraries/Categories
+# 5- Tags are the last feature that can be added to the TODOs, this will help the grouping task and
+also will be helpful for searching situations
+
+# Libraries Characteristics:
+# 1- All the Libraries/Categories MUST have a name/title
+# 2- Description is an optional, extra information that can be added, explaining what is the particular
+library about
+# 3- Libraries/Categories can easily become subcategories of other bigger, higher, more inclusive Category
+
+
+#####
+# BASIC VALIDATIONS
+#####
+# 1- Check ALL the fields required are fill out on each form
+# 2- Check the name that was given isn't already in the DB. This verification is either for TODOs or Libraries
+
+#####
+CLASS COLLECTION
+#####
+functions:
+----------
+getName( $name )
+getDescription( $description ) 
+getFatherIdCollection( $fatherIdCollection )
+addCollection( $name,$description,$fatherIdCollection,$user )
+getCollection( $id )
+getCollectionByName( $name )
+getCollections( $limit,$offset )
+*getSubcollections( $id ) [fatherId]
+updateCollection( $id,$name,$description,$fatherCollection_id )
+unlinkFatherCollection( $father_id )
+deleteCollection( $id )
+*getFullPath( $id,$path )
+generationCollectionSchema( $id,$name,$description,$fatherIdCollection )
+
+#####
+CLASS LIBRARY
+#####
+functions:
+----------
+retriveFullLibrary( $limit,$offset )
+*renderFullPath( $path ) => dont see necessary, probabily removed
+
+#####
+CLASS TAG
+#####
+functions:
+----------
+getName()
+addTag()
+existTag( $tag )
+getTagByName( $name )
+deleteTagById( $id )
+deleteTodoTagRelation( $id_todo )
+getIdTagByIdTodo( $id_todo )
+idTagExists( $id )
+
+#####
+CLASS TODO
+#####
+functions:
+----------
+getName()
+getDescription()
+getIdCollection()
+addTodo( $name, $description, $id_collection, $tags, $id_user, $level )
+getTodo( $id )
+getTodoByTagName( $name )
+getTodosByFatherId( $id )
+deleteTodo( $id )
+updateTodo( $name, $description, $id_collection, $tags, $id_user, $level )

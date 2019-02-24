@@ -65,9 +65,12 @@ background-color:$white;
     background-color:$white;
     margin-top: -60px;
     box-shadow: 0 0 4px $gray;
-    padding: 12px 132px 12px 132px;
-    @media(max-width: 576px){
-      padding:12px;
+    padding: 12px;
+    @media(min-width: 576px){
+      padding: 12px 64px 12px 64px;
+    }
+    @media(min-width: 1024px){
+      padding: 12px 132px 12px 132px;
     }
 
     .todo__input-form{
